@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Bodgam</h1>
+    <span class="flex-spacer"></span>
+    <button mat-button class="mr-2">
+      <mat-icon class="mr-2" aria-hidden="false" aria-label="players icon"
+        >supervised_user_circle</mat-icon
+      >
+      <span>Joueurs</span>
+    </button>
+    <button mat-button class="mx-2">
+      <mat-icon class="mr-2" aria-hidden="false" aria-label="events icon"
+        >event_note</mat-icon
+      >
+      <span>Évènements</span>
+    </button>
+    <ng-container *ngIf="user?.isAuth === false">
+      <button mat-button class="mx-2">
+        <mat-icon class="mr-2" aria-hidden="false" aria-label="log in icon"
+          >power_settings_new</mat-icon
+        >
+        <span>Connexion</span>
+      </button>
+      <button mat-button class="ml-2">
+        <span>S'inscrire</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="user?.isAuth === true">
+      <button
+        mat-button
+        class="ml-2"
+        [matMenuTriggerFor]="userMenu"
+        aria-label="icon-button with a menu"
+      >
+        {{ user.name }}
+        <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Mon profil</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>event_note</mat-icon>
+          <span>Mes évènements</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>apartment</mat-icon>
+          <span>Mes lieux</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Déconnexion</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </mat-toolbar-row>
+</mat-toolbar>
