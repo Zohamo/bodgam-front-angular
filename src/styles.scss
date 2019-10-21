@@ -1,54 +1,103 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import "~@angular/material/theming";
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$bodgam-front-primary: mat-palette($mat-lime);
-$bodgam-front-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$bodgam-front-warn: mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$bodgam-front-theme: mat-light-theme(
-  $bodgam-front-primary,
-  $bodgam-front-accent,
-  $bodgam-front-warn
-);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($bodgam-front-theme);
-
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/scss/material-theme.scss';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import 'assets/scss/variables.scss';
 
 html,
 body {
   height: 100%;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.flex-spacer {
-  flex: 1 1 auto;
-}
+/**
+ * Buttons
+ */
 
 button:focus,
 .btn:focus,
 .btn.focus {
   outline: 0;
   box-shadow: none;
+}
+
+/**
+ * Colors
+ */
+
+.color-primary {
+  color: $primary;
+}
+
+.color-accent {
+  color: $accent;
+}
+
+/**
+ * Custom
+ */
+
+.note {
+  font-size: 75%;
+  color: $warn;
+}
+
+/**
+ * Display
+ */
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.cdk-visually-hidden {
+  display: none; // fix to avoid vertical scrollbar
+}
+
+/**
+ * Links
+ */
+
+a {
+  color: #c0ca33;
+  &:hover {
+    color: #9e9d24;
+    text-decoration: none;
+  }
+}
+
+/**
+ * Lists
+ */
+
+.inline-list {
+  list-style-type: none;
+  padding-left: 0;
+  li {
+    display: inline-block;
+    margin-right: 1rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+/**
+ * Material Card
+ */
+
+.mat-card-actions {
+  display: flex !important;
+  justify-content: flex-end;
+  margin: 0 1rem 16px !important;
+}
+
+/**
+ * Material Icons
+ */
+
+.icon-size-4 {
+  font-size: 48px;
 }

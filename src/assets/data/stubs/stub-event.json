@@ -1,0 +1,28 @@
+{
+  "id": 31,
+  "title": "Euphoria",
+  "host": {
+    "id": 1,
+    "name": "Zohamo",
+    "isActive": true
+  },
+  "startDatetime": "28/09/2025",
+  "endDatetime": "29/09/2025",
+  "level": 0,
+  "minPlayers": 1,
+  "maxPlayers": 4,
+  "players": [],
+  "description": "Enfin Euphoria oui ! ça va être trooooop bieng !",
+  "location": {
+    "id": 1,
+    "name": "chez moi",
+    "isDisabled": false,
+    "isDefault": true,
+    "isPublic": false,
+    "addressDistrict": "Bonnefoy",
+    "addressCity": "Toulouse",
+    "addressCountry": "France",
+    "isAllowedSmoking": true,
+    "isAccessible": true
+  }
+}

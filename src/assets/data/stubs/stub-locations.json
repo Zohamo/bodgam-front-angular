@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "chez moi",
+    "isDisabled": false,
+    "isPublic": false,
+    "isDefault": true,
+    "addressDistrict": "Bonnefoy",
+    "addressCity": "Toulouse",
+    "addressCountry": "France",
+    "isAllowedSmoking": true,
+    "isAccessible": true
+  },
+  {
+    "id": 2,
+    "name": "Blastodice",
+    "isDisabled": false,
+    "isPublic": true,
+    "isDefault": false,
+    "addressDistrict": "Minimes",
+    "addressCity": "Toulouse",
+    "addressCountry": "France",
+    "isAllowedSmoking": true,
+    "isAccessible": false
+  },
+  {
+    "id": 3,
+    "name": "Café de la place",
+    "isDisabled": false,
+    "isPublic": true,
+    "isDefault": false,
+    "addressDistrict": "",
+    "addressCity": "Lille",
+    "addressCountry": "France",
+    "isAllowedSmoking": false,
+    "isAccessible": true
+  }
+]

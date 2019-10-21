@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "Angular.ng-template",
+    "joelday.docthis",
+    "EditorConfig.editorconfig",
+    "christian-kohler.path-intellisense",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "eamodio.gitlens",
+    "msjsdiag.debugger-for-chrome",
+    "esbenp.prettier-vscode",
+    "mikael.angular-beastcode"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "name": "chez moi",
+  "isDisabled": false,
+  "isPublic": false,
+  "isDefault": true,
+  "addressDistrict": "Bonnefoy",
+  "addressCity": "Toulouse",
+  "addressCountry": "France",
+  "isAllowedSmoking": true,
+  "isAccessible": true
+}

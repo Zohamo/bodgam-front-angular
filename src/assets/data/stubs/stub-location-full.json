@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "name": "chez moi",
+  "isDisabled": false,
+  "isDefault": true,
+  "isPublic": false,
+  "addressDistrict": "Bonnefoy",
+  "addressCity": "Toulouse",
+  "addressCountry": "France",
+  "isAllowedSmoking": true,
+  "isAccessible": true,
+  "coordsLatitude": 1538321,
+  "coordsLongitude": 18651,
+  "coordsAccuracy": 1,
+  "addressField1": "rue du colonel Toussaint",
+  "addressField2": "",
+  "addressZipCode": 31000,
+  "description": "Une ambiance feutrée mais immersive avec une sélection musicale bien choisie."
+}
