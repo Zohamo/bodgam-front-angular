@@ -1,0 +1,86 @@
+<mat-expansion-panel>
+  <!-- Header -->
+
+  <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+    <mat-panel-title>
+      <div class="startDate">
+        <div class="day">
+          <span class="day-name">{{ startDateDayName }}</span>
+          <span class="day-number">{{ startDateDayNumber }}</span>
+        </div>
+        <span class="month">{{ startDateMonth }}</span>
+      </div>
+      <h3 class="title color-primary">{{ event?.title }}</h3>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span *ngIf="event.location.addressDistrict" class="mr-2">{{ event.location.addressDistrict }},</span>
+      <strong class="mr-2">{{ event?.location.addressCity }}</strong>
+      <span class="mx-2">{{ event?.players.length + 1 }}/{{ event?.maxPlayers }} joueurs</span>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <!-- Description -->
+
+  <div class="description" [innerHTML]="event?.description"></div>
+
+  <div class="row">
+    <!-- Location -->
+
+    <div class="col-md-6 d-flex location">
+      <i class="material-icons">
+        location_city
+      </i>
+      <div>
+        <p>
+          <strong>{{ event.location.name }}</strong>
+        </p>
+        <p>
+          <ng-container *ngIf="event.location.addressDistrict !== ''">
+            {{ event.location.addressDistrict }},
+          </ng-container>
+          <strong>{{ event.location.addressCity }}</strong>
+        </p>
+        <div class="icons">
+          <i *ngIf="event.location.isAllowedSmoking" class="material-icons">
+            smoking_rooms
+          </i>
+          <i *ngIf="!event.location.isAllowedSmoking" class="material-icons">
+            smoke_free
+          </i>
+          <i *ngIf="event.location.isAccessible" class="material-icons">
+            accessible
+          </i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Players -->
+
+    <div class="col-md-6 d-flex location">
+      <i class="material-icons">
+        supervised_user_circle
+      </i>
+      <div>
+        <p>
+          <span class="color-grey">Niveau&nbsp;:</span>
+          <app-event-level [value]="event.level"></app-event-level>
+        </p>
+        <p class="mt-auto">
+          <span class="color-grey">nombre de joueurs min. requis&nbsp;:</span>
+          {{ event.minPlayers + 1 }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+
+  <div class="action-buttons">
+    <button type="button" mat-raised-button color="primary" [routerLink]="['/events', event.id]">Voir</button>
+    <button type="button" mat-raised-button color="primary" [routerLink]="['/events/edit', event.id]">
+      <i class="material-icons ml-2">
+        edit
+      </i>
+    </button>
+  </div>
+</mat-expansion-panel>

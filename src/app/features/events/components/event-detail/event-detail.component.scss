@@ -1,0 +1,19 @@
+@import 'src/assets/scss/variables.scss';
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  > * {
+    margin-bottom: 1rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  > i,
+  > h3 {
+    color: $accent;
+  }
+}

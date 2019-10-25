@@ -1,6 +1,31 @@
-::ng-deep button {
-  .mat-button-wrapper {
+@import 'src/assets/scss/variables.scss';
+
+.mat-toolbar {
+  font-size: 1rem;
+
+  .site-logo {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+
+  ::ng-deep button {
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  a {
+    margin: 0 0.5rem;
+    color: $white;
+    position: relative;
     display: flex;
     align-items: center;
+    .mat-icon {
+      margin-right: 0.5rem;
+    }
+    &:hover {
+      color: $accent;
+    }
   }
 }

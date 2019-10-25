@@ -9,7 +9,7 @@
     "addressCity": "Toulouse",
     "addressCountry": "France",
     "isAllowedSmoking": true,
-    "isAccessible": true
+    "isAccessible": false
   },
   {
     "id": 2,
@@ -20,8 +20,8 @@
     "addressDistrict": "Minimes",
     "addressCity": "Toulouse",
     "addressCountry": "France",
-    "isAllowedSmoking": true,
-    "isAccessible": false
+    "isAllowedSmoking": false,
+    "isAccessible": true
   },
   {
     "id": 3,

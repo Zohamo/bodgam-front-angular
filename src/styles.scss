@@ -35,6 +35,10 @@ button:focus,
   color: $accent;
 }
 
+.color-grey {
+  color: $grey;
+}
+
 /**
  * Custom
  */
@@ -61,9 +65,9 @@ button:focus,
  */
 
 a {
-  color: #c0ca33;
+  color: $primary;
   &:hover {
-    color: #9e9d24;
+    color: #00695c;
     text-decoration: none;
   }
 }
@@ -100,4 +104,12 @@ a {
 
 .icon-size-4 {
   font-size: 48px;
+}
+
+/**
+ * Typography
+ */
+
+em {
+  color: rgba(0, 0, 0, 0.54);
 }

@@ -1,0 +1,97 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{ event.title }}</h2>
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="event.description !== ''">{{ event.description }}</mat-card-subtitle>
+    <button mat-raised-button color="accent" class="align-self-center ml-auto mr-3">
+      Je viens !
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row px-3">
+      <!-- Time -->
+
+      <section class="col-md-4">
+        <i class="material-icons icon-size-4">
+          calendar_today
+        </i>
+        <h3>
+          {{ startDateDayName | titlecase }}
+          <br />
+          {{ startDateDayNumber }}
+          <br />
+          {{ startDateMonth | titlecase }}
+          <br />
+          {{ startDateYear }}
+        </h3>
+        <p>
+          <span class="color-grey">Ambiance&nbsp;:</span>
+          <app-event-atmosphere [value]="event.atmosphere"></app-event-atmosphere>
+        </p>
+        <p>
+          <span class="color-grey" i18n>organisé par&nbsp;:</span>
+          <br />
+          <a href="#">{{ event.host.name }}</a>
+        </p>
+      </section>
+
+      <!-- Location -->
+
+      <section class="col-md-4">
+        <i class="material-icons icon-size-4">
+          location_city
+        </i>
+        <h3>{{ event.location.name }}</h3>
+        <p>
+          <ng-container *ngIf="event.location.addressDistrict !== ''">
+            {{ event.location.addressDistrict }},
+          </ng-container>
+          <strong>{{ event.location.addressCity }}</strong>
+        </p>
+        <button *ngIf="event.location.isPublic" mat-stroked-button class="btn" color="accent">
+          Voir l'adresse exacte
+        </button>
+        <div>
+          <i *ngIf="event.location.isAllowedSmoking" class="material-icons">
+            smoking_rooms
+          </i>
+          <i *ngIf="!event.location.isAllowedSmoking" class="material-icons">
+            smoke_free
+          </i>
+          <i *ngIf="event.location.isAccessible" class="material-icons">
+            accessible
+          </i>
+        </div>
+        <p *ngIf="!event.location.isPublic" class="note mt-auto">
+          Vous ne verrez l'adresse exacte qu'une fois votre présence confirmée par l'organisateur.
+        </p>
+      </section>
+
+      <!-- Players -->
+
+      <section class="col-md-4">
+        <i class="material-icons icon-size-4">
+          supervised_user_circle
+        </i>
+        <h3>
+          {{ event.players.length + 1 }}/{{ event.maxPlayers }}
+          <ng-container>Joueurs</ng-container>
+        </h3>
+        <ul class="inline-list">
+          <li><a href="#">Alphonse</a></li>
+          <li><a href="#">Roger</a></li>
+          <li><a href="#" title="organisateur">Zohamo*</a></li>
+        </ul>
+        <p>
+          <span class="color-grey">Niveau&nbsp;:</span>
+          <app-event-level [value]="event.level"></app-event-level>
+        </p>
+        <p class="mt-auto">
+          <span class="color-grey">nombre de joueurs min. requis&nbsp;:</span>
+          {{ event.minPlayers + 1 }}
+        </p>
+      </section>
+    </div>
+  </mat-card-content>
+</mat-card>

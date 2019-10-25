@@ -8,5 +8,5 @@
   "addressCity": "Toulouse",
   "addressCountry": "France",
   "isAllowedSmoking": true,
-  "isAccessible": true
+  "isAccessible": false
 }

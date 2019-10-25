@@ -1,49 +1,38 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a [routerLink]="['/']"><h1 class="btn mr-3">Bodgam</h1></a>
-    <button mat-button class="mx-2" [routerLink]="['/players']">
-      <mat-icon class="mr-2" aria-hidden="false" aria-label="players icon"
-        >supervised_user_circle</mat-icon
-      >
+    <a class="site-logo" [routerLink]="['/']">BodGam</a>
+    <a [routerLink]="['/players']">
+      <mat-icon aria-hidden="false" aria-label="players icon">supervised_user_circle</mat-icon>
       <span>Joueurs</span>
-    </button>
-    <button mat-button class="mx-2" [routerLink]="['/events']">
-      <mat-icon class="mr-2" aria-hidden="false" aria-label="events icon"
-        >event_note</mat-icon
-      >
+    </a>
+    <a [routerLink]="['/events']">
+      <mat-icon aria-hidden="false" aria-label="events icon">event_note</mat-icon>
       <span>Évènements</span>
-    </button>
+    </a>
     <span class="flex-spacer"></span>
     <ng-container *ngIf="user?.isAuth === false">
-      <button mat-button class="mx-2">
-        <mat-icon class="mr-2" aria-hidden="false" aria-label="log in icon"
-          >power_settings_new</mat-icon
-        >
+      <a>
+        <mat-icon aria-hidden="false" aria-label="log in icon">power_settings_new</mat-icon>
         <span>Connexion</span>
-      </button>
-      <button mat-button class="ml-2">
+      </a>
+      <a>
         <span>S'inscrire</span>
-      </button>
+      </a>
     </ng-container>
     <ng-container *ngIf="user?.isAuth === true">
-      <button
-        mat-button
-        class="ml-2"
-        [matMenuTriggerFor]="userMenu"
-        aria-label="icon-button with a menu"
-      >
+      <button mat-button class="ml-2" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
         {{ user.name }}
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item>
+        <a mat-menu-item [routerLink]="['/players', user.id]">
           <mat-icon>person</mat-icon>
           <span>Mon profil</span>
-        </button>
-        <button mat-menu-item>
+        </a>
+        <a mat-menu-item [routerLink]="['/events']">
           <mat-icon>event_note</mat-icon>
           <span>Mes évènements</span>
-        </button>
+        </a>
         <button mat-menu-item>
           <mat-icon>apartment</mat-icon>
           <span>Mes lieux</span>

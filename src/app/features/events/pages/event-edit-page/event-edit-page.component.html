@@ -1,0 +1,15 @@
+<h2>
+  <i class="material-icons mr-2">
+    event
+  </i>
+  <span>Nouvel évènement</span>
+</h2>
+<app-event-form
+  *ngIf="event$ | async as event; else loading"
+  [eventEditing]="event"
+  [userLocations]="userLocations"
+></app-event-form>
+
+<ng-template #loading>
+  Loading...
+</ng-template>

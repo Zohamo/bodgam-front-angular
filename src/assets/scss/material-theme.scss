@@ -11,11 +11,11 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$bodgam-front-primary: mat-palette($mat-lime);
-$bodgam-front-accent: mat-palette($mat-indigo, A200, A100, A400);
+$bodgam-front-primary: mat-palette($mat-teal);
+$bodgam-front-accent: mat-palette($mat-amber, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$bodgam-front-warn: mat-palette($mat-pink);
+$bodgam-front-warn: mat-palette($mat-deep-orange);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $bodgam-front-theme: mat-light-theme($bodgam-front-primary, $bodgam-front-accent, $bodgam-front-warn);

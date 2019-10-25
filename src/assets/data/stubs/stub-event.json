@@ -6,9 +6,10 @@
     "name": "Zohamo",
     "isActive": true
   },
-  "startDatetime": "28/09/2025",
-  "endDatetime": "29/09/2025",
+  "startDatetime": 1632301486,
+  "endDatetime": 1632301486,
   "level": 0,
+  "atmosphere": 2,
   "minPlayers": 1,
   "maxPlayers": 4,
   "players": [],

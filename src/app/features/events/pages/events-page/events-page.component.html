@@ -1,0 +1,17 @@
+<div class="d-flex">
+  <h2>
+    <i class="material-icons mr-2">
+      event_note
+    </i>
+    <span>Évènements à venir</span>
+  </h2>
+  <button mat-raised-button color="primary" class="ml-auto" [routerLink]="['/events', 'create']">
+    <i class="material-icons mr-2">
+      event
+    </i>
+    <span>Nouvel évènement</span>
+  </button>
+</div>
+<div class="py-3" *ngIf="events$ | async as events">
+  <app-event-list [events]="events"></app-event-list>
+</div>
