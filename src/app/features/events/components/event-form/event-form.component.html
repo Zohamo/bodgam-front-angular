@@ -75,16 +75,12 @@
             color="primary"
             (click)="openLocationFormDialog(true)"
           >
-            <i class="material-icons mr-2">
-              edit
-            </i>
+            <fa-icon [icon]="faPenSquare" class="mr-2"></fa-icon>
             <span i18n>Modifier</span>
           </button>
 
           <button mat-button type="button" color="primary" (click)="openLocationFormDialog()">
-            <i class="material-icons mr-2">
-              control_point
-            </i>
+            <fa-icon [icon]="faPlusSquare" class="mr-2"></fa-icon>
             <span i18n>Nouveau</span>
           </button>
         </div>
@@ -97,15 +93,10 @@
             </ng-container>
             {{ this.eventForm.get('location').value.addressCity }}
           </span>
-          <i *ngIf="!this.eventForm.get('location').value?.isAllowedSmoking" class="material-icons">
-            smoke_free
-          </i>
-          <i *ngIf="this.eventForm.get('location').value?.isAllowedSmoking" class="material-icons">
-            smoking_rooms
-          </i>
-          <i *ngIf="this.eventForm.get('location').value?.isAccessible" class="material-icons ml-2">
-            accessible
-          </i>
+          <app-location-detail-icons
+            [isAllowedSmoking]="this.eventForm.get('location').value?.isAllowedSmoking"
+            [isAccessible]="this.eventForm.get('location').value?.isAccessible"
+          ></app-location-detail-icons>
         </div>
       </section>
 
@@ -211,6 +202,7 @@
 
     <mat-card-actions>
       <button mat-raised-button type="button" color="primary" (click)="onSubmit()">
+        <fa-icon [icon]="faCheck" class="mr-2"></fa-icon>
         <ng-container *ngIf="this.event.id === null" i18n>Créer</ng-container>
         <ng-container *ngIf="this.event.id !== null" i18n>Modifier</ng-container>
       </button>

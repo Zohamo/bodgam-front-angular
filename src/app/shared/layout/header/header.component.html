@@ -1,44 +1,44 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a class="site-logo" [routerLink]="['/']">BodGam</a>
+    <a class="site-logo" [routerLink]="['/']">
+      <fa-icon [icon]="faDungeon"></fa-icon>
+      BodGam
+    </a>
     <a [routerLink]="['/players']">
-      <mat-icon aria-hidden="false" aria-label="players icon">supervised_user_circle</mat-icon>
+      <fa-icon [icon]="faUsers"></fa-icon>
       <span>Joueurs</span>
     </a>
     <a [routerLink]="['/events']">
-      <mat-icon aria-hidden="false" aria-label="events icon">event_note</mat-icon>
+      <fa-icon [icon]="faCalendarAlt"></fa-icon>
       <span>Évènements</span>
     </a>
     <span class="flex-spacer"></span>
     <ng-container *ngIf="user?.isAuth === false">
       <a>
-        <mat-icon aria-hidden="false" aria-label="log in icon">power_settings_new</mat-icon>
+        <fa-icon class="mat-icon" [icon]="faSignInAlt"></fa-icon>
         <span>Connexion</span>
-      </a>
-      <a>
-        <span>S'inscrire</span>
       </a>
     </ng-container>
     <ng-container *ngIf="user?.isAuth === true">
-      <button mat-button class="ml-2" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
+      <button mat-button class="ml-2 h-100" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
         {{ user.name }}
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu">
         <a mat-menu-item [routerLink]="['/players', user.id]">
-          <mat-icon>person</mat-icon>
+          <fa-icon class="mat-icon" [icon]="faUser"></fa-icon>
           <span>Mon profil</span>
         </a>
         <a mat-menu-item [routerLink]="['/events']">
-          <mat-icon>event_note</mat-icon>
+          <fa-icon class="mat-icon" [icon]="faCalendarAlt"></fa-icon>
           <span>Mes évènements</span>
         </a>
         <button mat-menu-item>
-          <mat-icon>apartment</mat-icon>
+          <fa-icon class="mat-icon" [icon]="faMapMarked"></fa-icon>
           <span>Mes lieux</span>
         </button>
         <button mat-menu-item>
-          <mat-icon>power_settings_new</mat-icon>
+          <fa-icon class="mat-icon" [icon]="faSignOutAlt"></fa-icon>
           <span>Déconnexion</span>
         </button>
       </mat-menu>

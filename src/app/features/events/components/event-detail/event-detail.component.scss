@@ -1,19 +1,57 @@
 @import 'src/assets/scss/variables.scss';
+@import 'src/assets/scss/mixins.scss';
+
+/**
+ * Header
+ */
+
+.mat-card-header {
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+
+  ::ng-deep .mat-card-header-text {
+    display: none;
+  }
+  .date {
+    @include border;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/**
+ * Sections
+ */
 
 section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1rem;
-  > * {
-    margin-bottom: 1rem;
-    &:last-child {
+  @include border-top;
+  padding: 1rem 0;
+
+  .section-icon {
+    width: 150px;
+    text-align: center;
+    padding: 0 1.5rem;
+    font-size: 48px;
+    color: $accent;
+  }
+
+  .section-content {
+    flex-grow: 1;
+    p {
       margin-bottom: 0;
     }
   }
-  > i,
-  > h3 {
-    color: $accent;
+
+  .section-end {
+    align-self: center;
+    padding: 0.5rem 3rem;
+    display: flex;
+    flex-direction: column;
   }
 }

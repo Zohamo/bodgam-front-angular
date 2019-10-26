@@ -10,6 +10,7 @@ import { EventsModule } from './features/events/events.module';
 import { LocationEditPageComponent } from './features/locations/pages/location-edit-page/location-edit-page.component';
 import { LocationFormComponent } from './features/locations/components/location-form/location-form.component';
 import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { LocationDetailComponent } from './features/locations/components/location-detail/location-detail.component';
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -24,7 +25,7 @@ export const MY_FORMAT: MatDateFormats = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LocationEditPageComponent, LocationFormComponent],
+  declarations: [AppComponent, LocationEditPageComponent, LocationFormComponent, LocationDetailComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule, SharedModule, EventsModule],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }],
   bootstrap: [AppComponent]

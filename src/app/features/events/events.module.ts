@@ -31,6 +31,9 @@ import { EventLevelComponent } from './shared/components/event-level/event-level
 import { EventAtmosphereComponent } from './shared/components/event-atmosphere/event-atmosphere.component';
 import { UiSpinnerComponent } from 'src/app/shared/ui/ui-spinner/ui-spinner.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LocationDetailIconsModule } from '../locations/components/location-detail/location-detail-icons/location-detail-icons.module';
+
 @NgModule({
   declarations: [
     EventsPageComponent,
@@ -59,7 +62,9 @@ import { UiSpinnerComponent } from 'src/app/shared/ui/ui-spinner/ui-spinner.comp
     MatIconModule,
     MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    LocationDetailIconsModule
   ],
   exports: [EventsPageComponent],
   entryComponents: [LocationFormComponent, UiSpinnerComponent]

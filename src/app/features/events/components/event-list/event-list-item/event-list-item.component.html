@@ -27,9 +27,7 @@
     <!-- Location -->
 
     <div class="col-md-6 d-flex location">
-      <i class="material-icons">
-        location_city
-      </i>
+      <fa-icon [icon]="faBuilding"></fa-icon>
       <div>
         <p>
           <strong>{{ event.location.name }}</strong>
@@ -40,26 +38,17 @@
           </ng-container>
           <strong>{{ event.location.addressCity }}</strong>
         </p>
-        <div class="icons">
-          <i *ngIf="event.location.isAllowedSmoking" class="material-icons">
-            smoking_rooms
-          </i>
-          <i *ngIf="!event.location.isAllowedSmoking" class="material-icons">
-            smoke_free
-          </i>
-          <i *ngIf="event.location.isAccessible" class="material-icons">
-            accessible
-          </i>
-        </div>
+        <app-location-detail-icons
+          [isAllowedSmoking]="event.location.isAllowedSmoking"
+          [isAccessible]="event.location.isAccessible"
+        ></app-location-detail-icons>
       </div>
     </div>
 
     <!-- Players -->
 
     <div class="col-md-6 d-flex location">
-      <i class="material-icons">
-        supervised_user_circle
-      </i>
+      <fa-icon [icon]="faUsers"></fa-icon>
       <div>
         <p>
           <span class="color-grey">Niveau&nbsp;:</span>

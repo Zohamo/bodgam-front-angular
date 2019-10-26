@@ -1,19 +1,37 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from '@angular/core';
+import {
+  faDungeon,
+  faUsers,
+  faCalendarAlt,
+  faUser,
+  faMapMarked,
+  faSignInAlt,
+  faSignOutAlt,
+  faCaretDown
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  // Font Awesome
+  faDungeon = faDungeon;
+  faUsers = faUsers;
+  faCalendarAlt = faCalendarAlt;
+  faUser = faUser;
+  faMapMarked = faMapMarked;
+  faSignInAlt = faSignInAlt;
+  faSignOutAlt = faSignOutAlt;
+  faCaretDown = faCaretDown;
+
   public user: { id: number; name: string; isAuth: boolean };
 
-  constructor() {}
-
-  ngOnInit() {
+  constructor() {
     this.user = {
       id: 28,
-      name: "Zohamo",
+      name: 'Zohamo',
       isAuth: true
     };
   }

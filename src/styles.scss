@@ -1,6 +1,7 @@
 @import 'assets/scss/material-theme.scss';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import 'assets/scss/variables.scss';
+@import 'assets/scss/mixins.scss';
 
 html,
 body {
@@ -37,6 +38,14 @@ button:focus,
 
 .color-grey {
   color: $grey;
+}
+
+.success {
+  color: $success;
+}
+
+.danger {
+  color: $warn;
 }
 
 /**

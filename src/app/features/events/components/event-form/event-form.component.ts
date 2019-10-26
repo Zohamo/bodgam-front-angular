@@ -6,6 +6,8 @@ import moment from 'moment';
 import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationFormComponent } from 'src/app/features/locations/components/location-form/location-form.component';
 import { LocationRepresentation } from 'src/app/features/locations/models/location-representation.model';
+// Font Awesome
+import { faPlusSquare, faPenSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-form',
@@ -13,6 +15,11 @@ import { LocationRepresentation } from 'src/app/features/locations/models/locati
   styleUrls: ['./event-form.component.scss']
 })
 export class EventFormComponent {
+  // Font Awesome
+  faPlusSquare = faPlusSquare;
+  faPenSquare = faPenSquare;
+  faCheck = faCheck;
+
   public eventForm: FormGroup;
   public today: Date;
   public hasNoLocation: boolean;

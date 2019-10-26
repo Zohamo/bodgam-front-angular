@@ -6,14 +6,14 @@
     "name": "Zohamo",
     "isActive": true
   },
-  "startDatetime": 1632301486,
-  "endDatetime": 1632301486,
+  "startDatetime": 1590426000,
+  "endDatetime": 1590451200,
   "level": 0,
   "atmosphere": 2,
   "minPlayers": 1,
   "maxPlayers": 4,
   "players": [],
-  "description": "Enfin Euphoria oui ! ça va être trooooop bieng !",
+  "description": "<p>Vous étiez encore jeune lorsque vous avez découvert la vérité sur votre monde. Vous étiez convaincu que votre société était une utopie – le mot « dystopie » ne faisant même pas partie de votre vocabulaire, ni même de votre dictionnaire ! En apprenant la vérité, vous avez dû faire un choix : fuir ou rester pour laisser votre empreinte sur ce monde.</p><p>Vous avez choisi de rester.</p><p>C’était il y a bien des années. Aujourd’hui encore, vous vous demandez si vous avez fait le bon choix. Mais il est désormais trop tard pour faire demi-tour. Vous êtes sur le point de frapper un grand coup, de ravir le pouvoir à vos oppresseurs ! Plusieurs ouvriers ont déjà rejoint votre cause et d’autres suivront. Grâce à vos relations et à la solidité de vos allégeances envers les diverses factions, vous avez recruté des experts qui pourront vous aider dans votre grand projet. Vous êtes prêt à passer à la prochaine étape.</p><p>Qu’êtes-vous prêt à sacrifier pour rendre le futur meilleur que le passé&nbsp;?</p>",
   "location": {
     "id": 1,
     "name": "chez moi",

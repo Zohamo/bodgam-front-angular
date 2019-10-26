@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 const routes: Routes = [];
 
 @NgModule({
@@ -20,6 +22,7 @@ const routes: Routes = [];
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ],
   declarations: [HeaderComponent],

@@ -16,16 +16,25 @@
   }
 
   a {
+    height: 100%;
     margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
     color: $white;
     position: relative;
     display: flex;
     align-items: center;
-    .mat-icon {
+    .mat-icon,
+    .ng-fa-icon {
       margin-right: 0.5rem;
     }
     &:hover {
-      color: $accent;
+      background-color: #009083;
     }
   }
+}
+
+// set fa-icon the same styles that mat-icon
+.mat-menu-item .ng-fa-icon {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.54);
 }

@@ -6,6 +6,8 @@ import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationRepresentation } from 'src/app/features/locations/models/location-representation.model';
 import { EventsWebService } from '../../services/events-web.service';
 import { LocationsWebService } from 'src/app/features/locations/services/locations-web.service';
+// Font Awesome
+import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-edit-page',
@@ -13,6 +15,9 @@ import { LocationsWebService } from 'src/app/features/locations/services/locatio
   styleUrls: ['./event-edit-page.component.scss']
 })
 export class EventEditPageComponent implements OnDestroy {
+  // Font Awesome
+  faCalendarPlus = faCalendarPlus;
+
   public event$: Observable<EventRepresentation>;
   public userLocations: LocationRepresentation[];
   // public locations$: Observable<LocationRepresentation[]>;
