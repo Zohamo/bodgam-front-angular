@@ -25,6 +25,8 @@ import {
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UiSpinnerComponent } from 'src/app/shared/ui/ui-spinner/ui-spinner.component';
+import { UiDateComponent } from 'src/app/shared/ui/ui-date/ui-date.component';
+import { UiModule } from 'src/app/shared/ui/ui.module';
 
 @NgModule({
   declarations: [
@@ -40,16 +42,17 @@ import { UiSpinnerComponent } from 'src/app/shared/ui/ui-spinner/ui-spinner.comp
   imports: [
     CommonModule,
     EventsRoutingModule,
-    LocationDetailIconsModule,
     EventFormModule,
+    LocationDetailIconsModule,
     MatCardModule,
     MatExpansionModule,
     MatButtonModule,
     MatNativeDateModule,
     MatIconModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    UiModule
   ],
   exports: [EventsPageComponent],
-  entryComponents: [LocationFormComponent, UiSpinnerComponent]
+  entryComponents: [LocationFormComponent]
 })
 export class EventsModule {}

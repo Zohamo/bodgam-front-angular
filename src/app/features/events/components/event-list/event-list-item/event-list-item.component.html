@@ -4,11 +4,7 @@
   <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
     <mat-panel-title>
       <div class="startDate">
-        <div class="day">
-          <span class="day-name">{{ startDateDayName }}</span>
-          <span class="day-number">{{ startDateDayNumber }}</span>
-        </div>
-        <span class="month">{{ startDateMonth }}</span>
+        <app-ui-date [date]="event?.startDatetime"></app-ui-date>
       </div>
       <h3 class="title color-primary">{{ event?.title }}</h3>
     </mat-panel-title>

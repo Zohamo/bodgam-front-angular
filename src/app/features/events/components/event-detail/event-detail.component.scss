@@ -12,13 +12,6 @@
   ::ng-deep .mat-card-header-text {
     display: none;
   }
-  .date {
-    @include border;
-    padding: 0.5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   .title {
     padding: 0.5rem 1rem;
   }

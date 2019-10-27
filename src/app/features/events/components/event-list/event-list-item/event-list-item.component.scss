@@ -10,15 +10,9 @@
       flex-grow: 0 !important;
       align-items: center;
       .startDate {
-        display: inline-block;
-        width: 3.3rem;
+        width: 5rem;
         text-align: center;
         margin-right: 24px;
-        text-transform: uppercase;
-        .day {
-          display: flex;
-          justify-content: space-around;
-        }
       }
       .title {
         margin-bottom: 0;

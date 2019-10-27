@@ -4,12 +4,8 @@
   <mat-card-header>
     <!-- Header : Date -->
 
-    <div>
-      <div class="date">
-        <span class="day-name">{{ startDateDayNameShort | uppercase }}</span>
-        <span class="day-number">{{ startDateDayNumber }}</span>
-        <span class="month-name">{{ startDateMonthShort | uppercase }}</span>
-      </div>
+    <div class="date">
+      <app-ui-date [date]="event?.startDatetime"></app-ui-date>
     </div>
 
     <!-- Header : Title -->
