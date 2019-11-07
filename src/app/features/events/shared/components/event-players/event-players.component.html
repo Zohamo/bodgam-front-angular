@@ -1,0 +1,36 @@
+<div class="section-icon">
+  <fa-icon [icon]="faUsers"></fa-icon>
+</div>
+<div class="section-content">
+  <h3>
+    {{ event.players.length + 1 }}/{{ event.maxPlayers }}
+    <ng-container>Joueurs</ng-container>
+  </h3>
+  <p>
+    <span class="color-grey">Niveau&nbsp;:</span>
+    <app-event-level [value]="event.level"></app-event-level>
+  </p>
+  <p>
+    <span class="color-grey">
+      Nombre de joueurs min. requis&nbsp;:
+    </span>
+    <span
+      [ngClass]="{
+        success: event.players.length > event.minPlayers,
+        danger: event.players.length <= event.minPlayers
+      }"
+    >
+      {{ event.minPlayers + 1 }}
+    </span>
+  </p>
+  <ul class="inline-list">
+    <li><span class="color-grey">Participants&nbsp;:</span></li>
+    <li><a href="#" title="organisateur">Zohamo*</a></li>
+  </ul>
+</div>
+<div class="section-end">
+  <p class="color-grey">Il reste {{ event.maxPlayers - event.players.length - 1 }} places&nbsp;!</p>
+  <button mat-raised-button color="accent">
+    Je viens !
+  </button>
+</div>

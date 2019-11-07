@@ -1,7 +1,9 @@
-@import 'assets/scss/material-theme.scss';
+@import 'assets/scss/_material-theme.scss';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import 'assets/scss/variables.scss';
-@import 'assets/scss/mixins.scss';
+@import 'assets/scss/_variables.scss';
+@import 'assets/scss/_mixins.scss';
+// Content
+@import 'assets/scss/events.scss';
 
 html,
 body {

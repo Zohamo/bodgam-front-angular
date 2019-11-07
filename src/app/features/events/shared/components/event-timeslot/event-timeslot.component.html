@@ -1,0 +1,17 @@
+<div class="section-icon">
+  <fa-icon [icon]="faClock"></fa-icon>
+</div>
+<div class="section-content">
+  <h4>
+    {{ startDateDayName | titlecase }} {{ startDateDayNumber }} {{ startDateMonth | titlecase }}
+    {{ startDateYear }}
+  </h4>
+  <p>
+    <span class="color-grey">à partir de</span>
+    {{ startTimeHour }}:{{ startTimeMinutes }}
+    <ng-container *ngIf="endTimeHour && endTimeMinutes">
+      <span class="color-grey">jusqu'à</span>
+      {{ endTimeHour }}:{{ endTimeMinutes }}
+    </ng-container>
+  </p>
+</div>

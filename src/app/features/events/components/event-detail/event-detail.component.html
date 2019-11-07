@@ -21,94 +21,12 @@
   <!-- CONTENT -->
 
   <mat-card-content>
-    <!-- Content : Players -->
-
-    <section class="players">
-      <div class="section-icon">
-        <fa-icon [icon]="faUsers"></fa-icon>
-      </div>
-      <div class="section-content">
-        <h3>
-          {{ event.players.length + 1 }}/{{ event.maxPlayers }}
-          <ng-container>Joueurs</ng-container>
-        </h3>
-        <p>
-          <span class="color-grey">Niveau&nbsp;:</span>
-          <app-event-level [value]="event.level"></app-event-level>
-        </p>
-        <p>
-          <span class="color-grey">
-            Nombre de joueurs min. requis&nbsp;:
-          </span>
-          <span
-            [ngClass]="{
-              success: event.players.length > event.minPlayers,
-              danger: event.players.length <= event.minPlayers
-            }"
-          >
-            {{ event.minPlayers + 1 }}
-          </span>
-        </p>
-        <ul class="inline-list">
-          <li><span class="color-grey">Participants&nbsp;:</span></li>
-          <li><a href="#" title="organisateur">Zohamo*</a></li>
-        </ul>
-      </div>
-      <div class="section-end">
-        <p class="color-grey">Il reste {{ event.maxPlayers - event.players.length - 1 }} places&nbsp;!</p>
-        <button mat-raised-button color="accent">
-          Je viens !
-        </button>
-      </div>
-    </section>
-
-    <!-- Content : Date -->
-
-    <section class="date">
-      <div class="section-icon">
-        <fa-icon [icon]="faClock"></fa-icon>
-      </div>
-      <div class="section-content">
-        <h4>
-          {{ startDateDayName | titlecase }} {{ startDateDayNumber }} {{ startDateMonth | titlecase }}
-          {{ startDateYear }}
-        </h4>
-        <p>
-          <span class="color-grey">à partir de</span>
-          {{ startTimeHour }}:{{ startTimeMinutes }}
-          <ng-container *ngIf="event?.endDatetime">
-            <span class="color-grey">jusqu'à</span>
-            {{ endTimeHour }}:{{ endTimeMinutes }}
-          </ng-container>
-        </p>
-      </div>
-    </section>
-
-    <!-- Content : Location -->
-
-    <section class="location">
-      <div class="section-icon">
-        <fa-icon [icon]="faBuilding"></fa-icon>
-      </div>
-      <div class="section-content">
-        <h3>{{ event.location.name }}</h3>
-        <p>
-          <ng-container *ngIf="event.location.addressDistrict !== ''">
-            {{ event.location.addressDistrict }},
-          </ng-container>
-          <strong>{{ event.location.addressCity }}</strong>
-        </p>
-        <button *ngIf="event.location.isPublic" mat-stroked-button class="btn" color="accent">
-          Voir l'adresse exacte
-        </button>
-        <app-location-detail-icons
-          [isAllowedSmoking]="event.location.isAllowedSmoking"
-          [isAccessible]="event.location.isAccessible"
-        ></app-location-detail-icons>
-        <p *ngIf="!event.location.isPublic" class="note">
-          Vous ne verrez l'adresse exacte qu'une fois votre présence confirmée par l'organisateur.
-        </p>
-      </div>
-    </section>
+    <app-event-players class="event-section players" [event]="event"></app-event-players>
+    <app-event-timeslot
+      class="event-section timeslot"
+      [startDatetime]="event?.startDatetime"
+      [endDatetime]="event?.endDatetime"
+    ></app-event-timeslot>
+    <app-event-location class="event-section location" [location]="event.location"></app-event-location>
   </mat-card-content>
 </mat-card>

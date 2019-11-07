@@ -10,10 +10,11 @@ import { EventDetailComponent } from './components/event-detail/event-detail.com
 import { EventListComponent } from './components/event-list/event-list.component';
 import { EventListItemComponent } from './components/event-list/event-list-item/event-list-item.component';
 import { LocationFormComponent } from '../locations/components/location-form/location-form.component';
-import { EventLevelComponent } from './shared/components/event-level/event-level.component';
-import { EventAtmosphereComponent } from './shared/components/event-atmosphere/event-atmosphere.component';
 // Modules
 import { EventFormModule } from './components/event-form.module';
+import { EventLocationModule } from './shared/components/event-location.module';
+import { EventPlayersModule } from './shared/components/event-players.module';
+import { EventTimeslotModule } from './shared/components/event-timeslot.module';
 import { LocationDetailIconsModule } from '../locations/components/location-detail/location-detail-icons/location-detail-icons.module';
 // UI
 import {
@@ -24,8 +25,6 @@ import {
   MatIconModule
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UiSpinnerComponent } from 'src/app/shared/ui/ui-spinner/ui-spinner.component';
-import { UiDateComponent } from 'src/app/shared/ui/ui-date/ui-date.component';
 import { UiModule } from 'src/app/shared/ui/ui.module';
 
 @NgModule({
@@ -35,14 +34,15 @@ import { UiModule } from 'src/app/shared/ui/ui.module';
     EventPageComponent,
     EventDetailComponent,
     EventListItemComponent,
-    EventListComponent,
-    EventLevelComponent,
-    EventAtmosphereComponent
+    EventListComponent
   ],
   imports: [
     CommonModule,
     EventsRoutingModule,
     EventFormModule,
+    EventLocationModule,
+    EventPlayersModule,
+    EventTimeslotModule,
     LocationDetailIconsModule,
     MatCardModule,
     MatExpansionModule,

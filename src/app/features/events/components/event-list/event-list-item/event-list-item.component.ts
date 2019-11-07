@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { EventRepresentation } from '../../../models/event-representation.model';
-import { LOCALE_ID } from '@angular/core';
-import moment from 'moment';
 // Font Awesome
-import { faUsers, faBuilding } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-list-item',
@@ -12,8 +10,8 @@ import { faUsers, faBuilding } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventListItemComponent {
   // Font Awesome
-  faUsers = faUsers;
-  faBuilding = faBuilding;
+  faEye = faEye;
+  faEdit = faEdit;
 
   public startDateDayName: string;
   public startDateDayNumber: string;
@@ -22,14 +20,5 @@ export class EventListItemComponent {
   public event: EventRepresentation;
   @Input() set eventItem(eventItem: EventRepresentation) {
     this.event = eventItem;
-    this.startDateDayName = moment
-      .unix(this.event.startDatetime)
-      .locale('fr')
-      .format('ddd');
-    this.startDateDayNumber = moment.unix(this.event.startDatetime).format('D');
-    this.startDateMonth = moment
-      .unix(this.event.startDatetime)
-      .locale('fr')
-      .format('MMM');
   }
 }

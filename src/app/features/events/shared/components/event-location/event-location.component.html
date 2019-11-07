@@ -1,0 +1,20 @@
+<div class="section-icon">
+  <fa-icon [icon]="faBuilding"></fa-icon>
+</div>
+<div class="section-content">
+  <h3>{{ location.name }}</h3>
+  <p>
+    <ng-container *ngIf="location.addressDistrict !== ''">{{ location.addressDistrict }},</ng-container>
+    <strong>{{ location.addressCity }}</strong>
+  </p>
+  <button *ngIf="location.isPublic" mat-stroked-button color="accent">
+    Voir l'adresse exacte
+  </button>
+  <app-location-detail-icons
+    [isAllowedSmoking]="location.isAllowedSmoking"
+    [isAccessible]="location.isAccessible"
+  ></app-location-detail-icons>
+  <p *ngIf="!location.isPublic" class="note">
+    Vous ne verrez l'adresse exacte qu'une fois votre présence confirmée par l'organisateur.
+  </p>
+</div>

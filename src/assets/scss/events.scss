@@ -1,0 +1,34 @@
+@import 'src/assets/scss/_variables.scss';
+@import 'src/assets/scss/_mixins.scss';
+
+/**
+ * Sections
+ */
+
+.event-section {
+  display: flex;
+  @include border-top;
+  padding: 1rem 0;
+
+  .section-icon {
+    width: 150px;
+    text-align: center;
+    padding: 0 1.5rem;
+    font-size: 48px;
+    color: $accent;
+  }
+
+  .section-content {
+    flex-grow: 1;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .section-end {
+    align-self: center;
+    padding: 0.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+}

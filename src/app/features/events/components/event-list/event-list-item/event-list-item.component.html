@@ -15,57 +15,25 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
-  <!-- Description -->
+  <!-- Content -->
 
   <div class="description" [innerHTML]="event?.description"></div>
 
   <div class="row">
-    <!-- Location -->
-
-    <div class="col-md-6 d-flex location">
-      <fa-icon [icon]="faBuilding"></fa-icon>
-      <div>
-        <p>
-          <strong>{{ event.location.name }}</strong>
-        </p>
-        <p>
-          <ng-container *ngIf="event.location.addressDistrict !== ''">
-            {{ event.location.addressDistrict }},
-          </ng-container>
-          <strong>{{ event.location.addressCity }}</strong>
-        </p>
-        <app-location-detail-icons
-          [isAllowedSmoking]="event.location.isAllowedSmoking"
-          [isAccessible]="event.location.isAccessible"
-        ></app-location-detail-icons>
-      </div>
-    </div>
-
-    <!-- Players -->
-
-    <div class="col-md-6 d-flex location">
-      <fa-icon [icon]="faUsers"></fa-icon>
-      <div>
-        <p>
-          <span class="color-grey">Niveau&nbsp;:</span>
-          <app-event-level [value]="event.level"></app-event-level>
-        </p>
-        <p class="mt-auto">
-          <span class="color-grey">nombre de joueurs min. requis&nbsp;:</span>
-          {{ event.minPlayers + 1 }}
-        </p>
-      </div>
-    </div>
+    <app-event-location class="col-md-6 event-section location" [location]="event.location"></app-event-location>
+    <app-event-players class="col-md-6 event-section players" [event]="event"></app-event-players>
   </div>
 
   <!-- Action Buttons -->
 
   <div class="action-buttons">
-    <button type="button" mat-raised-button color="primary" [routerLink]="['/events', event.id]">Voir</button>
+    <button type="button" mat-raised-button color="primary" [routerLink]="['/events', event.id]">
+      <fa-icon [icon]="faEye"></fa-icon>
+      <span i18n>Voir</span>
+    </button>
     <button type="button" mat-raised-button color="primary" [routerLink]="['/events/edit', event.id]">
-      <i class="material-icons ml-2">
-        edit
-      </i>
+      <fa-icon [icon]="faEdit"></fa-icon>
+      <span i18n>Modifier</span>
     </button>
   </div>
 </mat-expansion-panel>
