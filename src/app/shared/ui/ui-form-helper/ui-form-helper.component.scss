@@ -1,0 +1,34 @@
+@import 'src/assets/scss/_variables.scss';
+
+.form-helper {
+  background-color: $accent;
+  padding: 15px 20px;
+  border-radius: 20px;
+  opacity: 0.72;
+
+  .form-helper-title {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 1rem;
+  }
+
+  .form-helper-content {
+    font-size: 0.75rem;
+    section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.25rem;
+      .icon-container {
+        min-width: 25px;
+        > * {
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      p {
+        line-height: 1rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

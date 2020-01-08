@@ -20,16 +20,18 @@
     margin: 0 0.5rem;
     padding: 0.5rem 1rem;
     color: $white;
-    position: relative;
-    display: flex;
-    align-items: center;
-    .mat-icon,
-    .ng-fa-icon {
-      margin-right: 0.5rem;
-    }
     &:hover {
-      background-color: #009083;
+      background-color: $header-back-color-hover;
     }
+  }
+}
+
+a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  .ng-fa-icon {
+    margin-right: 0.5rem;
   }
 }
 

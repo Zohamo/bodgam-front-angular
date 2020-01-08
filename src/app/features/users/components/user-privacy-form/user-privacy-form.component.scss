@@ -1,0 +1,25 @@
+@import 'src/assets/scss/_variables';
+
+::ng-deep .form-user-privacy {
+  thead {
+    color: $primary;
+  }
+
+  // Columns
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 1%;
+    text-align: center;
+  }
+
+  // Rows
+
+  th,
+  td {
+    border-top: none;
+  }
+  tbody tr:first-child td {
+    padding-top: 0.75rem;
+  }
+}

@@ -1,0 +1,18 @@
+@import 'src/assets/scss/_variables';
+
+section {
+  display: flex;
+  align-items: center;
+  color: $grey;
+  > * {
+    margin: 0.05rem 0.5rem 0.05rem 0;
+    &.ng-fa-icon {
+      width: 36px;
+      font-size: 24px;
+      text-align: center;
+    }
+    em {
+      font-size: 0.75rem;
+    }
+  }
+}

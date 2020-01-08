@@ -1,5 +1,30 @@
 {
   "id": 1,
   "name": "Zohamo",
-  "isActive": true
+  "avatar": null,
+  "isActive": true,
+  "email": "zohamo@gmail.com",
+  "gender": "OTHER",
+  "bggName": "ZohamoTzh",
+  "birthdate": 338940000,
+  "district": "Bonnefoy",
+  "city": "Toulouse",
+  "country": "FR",
+  "phoneNumber": "+33 6 47 82 49 42",
+  "website": "http://mathiasmille.fr",
+  "privacy": {
+    "showEmail": false,
+    "showPhoneNumber": true,
+    "showWebsite": true,
+    "showBirthdate": true,
+    "showBggName": true
+  },
+  "ratings": {
+    "reception": [4, 5],
+    "teaching": [3, 1, 5],
+    "liking": [3, 4, 5],
+    "humility": [5, 2, 4, 3, 5, 5, 4, 5],
+    "honesty": [5, 5],
+    "speed": [3, 4]
+  }
 }

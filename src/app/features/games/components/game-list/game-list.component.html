@@ -1,0 +1,7 @@
+<div class="imgs-container">
+  <figure *ngFor="let game of games">
+    <a [attr.href]="'https://boardgamegeek.com/boardgame/' + game.gameId">
+      <img src="{{ game.thumbnail }}" title="{{ game.name }}" alt="{{ game.name }}" />
+    </a>
+  </figure>
+</div>

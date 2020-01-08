@@ -1,0 +1,158 @@
+<mat-card class="mt-4">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <mat-card-header>
+      <mat-card-title>
+        <h2 i18n>Profil</h2>
+      </mat-card-title>
+      <app-ui-form-helper class="form-helper-container" [privacy]="true"></app-ui-form-helper>
+    </mat-card-header>
+
+    <mat-card-content class="p-3">
+      <section class="row">
+        <!-- Name -->
+        <mat-form-field class="col-md-4">
+          <input matInput placeholder="Pseudo" i18n-placeholder formControlName="name" required />
+        </mat-form-field>
+      </section>
+      <h3 i18n>Un peu de vous</h3>
+      <section class="row">
+        <!-- Gender -->
+        <mat-form-field class="col-md-4">
+          <mat-label i18n>Je suis</mat-label>
+          <mat-select matNativeControl formControlName="gender">
+            <mat-option [value]="'OTHER'" i18n>Autre</mat-option>
+            <mat-option [value]="'FEMALE'" i18n>Femme</mat-option>
+            <mat-option [value]="'MALE'" i18n>Homme</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- Birthdate -->
+        <mat-form-field class="col-md-3">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [max]="today"
+            placeholder="Date de naissance"
+            i18n-placeholder
+            formControlName="birthdate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="col-md-1 ui-visibility-container">
+          <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showBirthdate')">
+            <app-ui-visibility
+              class="ui-visibility"
+              [visible]="userForm.get('privacy').get('showBirthdate').value"
+            ></app-ui-visibility>
+          </button>
+        </div>
+      </section>
+      <h3 i18n>Contact</h3>
+      <section class="row">
+        <!-- Email -->
+        <mat-form-field class="col-md-3">
+          <input matInput type="email" placeholder="Courriel" i18n-placeholder formControlName="email" required />
+        </mat-form-field>
+        <div class="col-md-1 ui-visibility-container">
+          <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showEmail')">
+            <app-ui-visibility
+              class="ui-visibility"
+              [visible]="userForm.get('privacy').get('showEmail').value"
+            ></app-ui-visibility>
+          </button>
+        </div>
+        <!-- Phone -->
+        <mat-form-field class="col-md-3">
+          <input matInput type="phone" placeholder="Téléphone" i18n-placeholder formControlName="phoneNumber" />
+        </mat-form-field>
+        <div class="col-md-1 ui-visibility-container">
+          <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showPhoneNumber')">
+            <app-ui-visibility
+              class="ui-visibility"
+              [visible]="userForm.get('privacy').get('showPhoneNumber').value"
+            ></app-ui-visibility>
+          </button>
+        </div>
+      </section>
+      <h3 i18n>Où êtes-vous&nbsp;?</h3>
+      <section class="row">
+        <!-- District -->
+        <mat-form-field class="col-md-4">
+          <input matInput placeholder="Quartier" i18n-placeholder formControlName="district" />
+        </mat-form-field>
+        <!-- City -->
+        <mat-form-field class="col-md-4">
+          <input matInput placeholder="Ville" i18n-placeholder formControlName="city" />
+        </mat-form-field>
+        <!-- Country -->
+        <mat-form-field class="col-md-4">
+          <mat-label i18n>Pays</mat-label>
+          <mat-select matNativeControl formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country.isoCode" i18n>
+              {{ country?.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <h3 i18n>Board Game Geek</h3>
+      <p i18n>
+        Entrez votre pseudo BGG afin de pouvoir récupérer votre liste de jeux&nbsp;! Si ce n'est pas encore fait, nous
+        vous invitons à visiter
+        <a href="https://boardgamegeek.com/">boardgamegeek.com</a>
+        .
+      </p>
+      <section class="row">
+        <!-- BGG Name -->
+        <mat-form-field class="col-md-4">
+          <input matInput placeholder="Pseudo BGG" i18n-placeholder formControlName="bggName" />
+        </mat-form-field>
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          class="col-md-3"
+          (click)="onGetBggGames()"
+          [disabled]="userForm.get('bggName').value.length < 3"
+        >
+          <fa-icon [icon]="faSearch" class="mr-2"></fa-icon>
+          <span i18n>Rechercher</span>
+        </button>
+        <div class="col-md-1 ui-visibility-container">
+          <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showBggName')">
+            <app-ui-visibility
+              class="ui-visibility"
+              [visible]="userForm.get('privacy').get('showBggName').value"
+            ></app-ui-visibility>
+          </button>
+        </div>
+      </section>
+      <!-- BGG Games's list -->
+      <div *ngIf="games || isLoadingBggGames">
+        <app-ui-spinner *ngIf="isLoadingBggGames" [message]="'BoardGameGeek'"></app-ui-spinner>
+        <div *ngIf="!isLoadingBggGames">
+          <p>Liste de vos jeux&nbsp;:</p>
+          <div class="imgs-container">
+            <figure *ngFor="let game of games">
+              <a [attr.href]="'https://boardgamegeek.com/boardgame/' + game.gameId">
+                <img src="{{ game.thumbnail }}" title="{{ game.name }}" alt="{{ game.name }}" />
+              </a>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <!-- Action buttons -->
+
+    <mat-card-actions>
+      <p *ngIf="!userForm.valid" i18n>* champs obligatoires</p>
+      <button mat-raised-button type="button" color="primary" [disabled]="!userForm.valid" (click)="onSubmit()">
+        <fa-icon *ngIf="userForm.valid" [icon]="faCheck" class="mr-2"></fa-icon>
+        <fa-icon *ngIf="!userForm.valid" [icon]="faTimesCircle" class="mr-2"></fa-icon>
+        <span *ngIf="!this.user.id" i18n>Créer</span>
+        <span *ngIf="this.user.id" i18n>Modifier</span>
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -8,8 +8,8 @@ import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/
 const routes: Routes = [
   { path: 'events', component: EventsPageComponent, data: { name: 'list' } },
   { path: 'events/create', component: EventEditPageComponent, data: { name: 'create' } },
-  { path: 'events/:id', component: EventPageComponent, data: { name: 'read' } },
   { path: 'events/edit/:id', component: EventEditPageComponent, data: { name: 'edit' } },
+  { path: 'events/:id', component: EventPageComponent, data: { name: 'read' } },
   { path: 'events/**', component: PageNotFoundComponent }
 ];
 

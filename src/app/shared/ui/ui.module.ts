@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Components
 import { UiDateComponent } from './ui-date/ui-date.component';
+import { UiFormHelperComponent } from './ui-form-helper/ui-form-helper.component';
+import { UiRatingComponent } from './ui-rating/ui-rating.component';
 import { UiSpinnerComponent } from './ui-spinner/ui-spinner.component';
-// Material
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UiVisibilityComponent } from './ui-visibility/ui-visibility.component';
+// UI
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
-  imports: [CommonModule, MatProgressSpinnerModule],
-  declarations: [UiDateComponent, UiSpinnerComponent],
-  exports: [UiDateComponent, UiSpinnerComponent]
+  imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
+  declarations: [UiDateComponent, UiFormHelperComponent, UiRatingComponent, UiSpinnerComponent, UiVisibilityComponent],
+  exports: [UiDateComponent, UiFormHelperComponent, UiRatingComponent, UiSpinnerComponent, UiVisibilityComponent]
 })
 export class UiModule {}

@@ -1,16 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared/shared.module';
+
+// Modules
 import { EventsModule } from './features/events/events.module';
-import { LocationEditPageComponent } from './features/locations/pages/location-edit-page/location-edit-page.component';
-import { LocationFormComponent } from './features/locations/components/location-form/location-form.component';
+import { LocationsModule } from './features/locations/locations.module';
+import { UsersModule } from './features/users/users.module';
+import { SharedModule } from './shared/shared.module';
+
+// UI
 import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
-import { LocationDetailComponent } from './features/locations/components/location-detail/location-detail.component';
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -25,8 +27,17 @@ export const MY_FORMAT: MatDateFormats = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LocationEditPageComponent, LocationFormComponent, LocationDetailComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule, SharedModule, EventsModule],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    SharedModule,
+    EventsModule,
+    LocationsModule,
+    UsersModule
+  ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,13 @@
+<button
+  mat-icon-button
+  [color]="'accent'"
+  [ngClass]="size"
+  *ngFor="let ratingId of ratingArr; index as i"
+  [id]="'star_' + i"
+  (click)="onRate(i + 1)"
+  [disabled]="!editable"
+>
+  <mat-icon>
+    {{ showIcon(i) }}
+  </mat-icon>
+</button>

@@ -17,13 +17,7 @@ import { EventPlayersModule } from './shared/components/event-players.module';
 import { EventTimeslotModule } from './shared/components/event-timeslot.module';
 import { LocationDetailIconsModule } from '../locations/components/location-detail/location-detail-icons/location-detail-icons.module';
 // UI
-import {
-  MatCardModule,
-  MatExpansionModule,
-  MatButtonModule,
-  MatNativeDateModule,
-  MatIconModule
-} from '@angular/material';
+import { MatCardModule, MatExpansionModule, MatButtonModule, MatNativeDateModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UiModule } from 'src/app/shared/ui/ui.module';
 
@@ -48,11 +42,10 @@ import { UiModule } from 'src/app/shared/ui/ui.module';
     MatExpansionModule,
     MatButtonModule,
     MatNativeDateModule,
-    MatIconModule,
     FontAwesomeModule,
     UiModule
   ],
-  exports: [EventsPageComponent],
+  exports: [EventsPageComponent, EventListComponent],
   entryComponents: [LocationFormComponent]
 })
 export class EventsModule {}

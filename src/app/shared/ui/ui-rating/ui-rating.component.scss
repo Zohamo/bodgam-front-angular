@@ -1,0 +1,11 @@
+::ng-deep .mat-icon-button.lg {
+  width: 40px;
+  height: 40px;
+  .mat-button-wrapper,
+  .mat-icon {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 36px;
+  }
+}

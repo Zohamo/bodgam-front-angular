@@ -1,0 +1,22 @@
+@import 'src/assets/scss/_variables';
+
+section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  .section-title,
+  p {
+    margin-bottom: 0;
+  }
+  .rating-ui {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    .rating-scale {
+      display: flex;
+      justify-content: space-between;
+      color: $grey;
+      font-size: 0.75rem;
+    }
+  }
+}

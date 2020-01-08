@@ -13,7 +13,11 @@
     "host": {
       "id": 1,
       "name": "Zohamo",
-      "isActive": true
+      "avatar": null,
+      "isActive": true,
+      "district": "Bonnefoy",
+      "city": "Toulouse",
+      "country": "FR"
     },
     "location": {
       "id": 1,
@@ -42,7 +46,11 @@
     "host": {
       "id": 1,
       "name": "Herbure",
-      "isActive": true
+      "avatar": null,
+      "isActive": true,
+      "district": "Bonnefoy",
+      "city": "Toulouse",
+      "country": "FR"
     },
     "location": {
       "id": 1,
@@ -71,7 +79,11 @@
     "host": {
       "id": 1,
       "name": "Roger",
-      "isActive": true
+      "avatar": null,
+      "isActive": true,
+      "district": "Bonnefoy",
+      "city": "Toulouse",
+      "country": "FR"
     },
     "location": {
       "id": 1,
@@ -100,7 +112,11 @@
     "host": {
       "id": 1,
       "name": "Pipoulette",
-      "isActive": true
+      "avatar": null,
+      "isActive": true,
+      "district": "Bonnefoy",
+      "city": "Toulouse",
+      "country": "FR"
     },
     "location": {
       "id": 1,
@@ -129,7 +145,11 @@
     "host": {
       "id": 1,
       "name": "Mathias",
-      "isActive": true
+      "avatar": null,
+      "isActive": true,
+      "district": "Bonnefoy",
+      "city": "Toulouse",
+      "country": "FR"
     },
     "location": {
       "id": 1,

@@ -1,0 +1,17 @@
+@import 'src/assets/scss/_variables';
+
+.spinner {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    position: absolute;
+    top: calc(50% - 10px);
+    line-height: 20px;
+    font-style: italic;
+    color: $primary;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  }
+}

@@ -1,0 +1,27 @@
+.form-helper-container {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+}
+
+.ui-visibility-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .ui-visibility {
+    font-size: 20px;
+  }
+}
+
+.imgs-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  figure {
+    margin: 0.25rem;
+    img {
+      border-radius: 5px;
+    }
+  }
+}

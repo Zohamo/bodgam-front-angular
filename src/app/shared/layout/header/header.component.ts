@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import {
-  faDungeon,
-  faUsers,
   faCalendarAlt,
-  faUser,
+  faCaretDown,
+  faDungeon,
   faMapMarked,
   faSignInAlt,
   faSignOutAlt,
-  faCaretDown
+  faUser,
+  faUsers,
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -17,14 +18,15 @@ import {
 })
 export class HeaderComponent {
   // Font Awesome
-  faDungeon = faDungeon;
-  faUsers = faUsers;
   faCalendarAlt = faCalendarAlt;
-  faUser = faUser;
+  faCaretDown = faCaretDown;
+  faDungeon = faDungeon;
   faMapMarked = faMapMarked;
   faSignInAlt = faSignInAlt;
   faSignOutAlt = faSignOutAlt;
-  faCaretDown = faCaretDown;
+  faUser = faUser;
+  faUsers = faUsers;
+  faUserPlus = faUserPlus;
 
   public user: { id: number; name: string; isAuth: boolean };
 
@@ -34,5 +36,13 @@ export class HeaderComponent {
       name: 'Zohamo',
       isAuth: true
     };
+  }
+
+  onLogin() {
+    this.user.isAuth = true;
+  }
+
+  onLogout() {
+    this.user.isAuth = false;
   }
 }

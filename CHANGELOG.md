@@ -14,9 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Todo]
 
-### Fixed
-
 - EventForm : set level & atmosphere default values
+- EventForm : add isPrivate option
+- UserForm : country list > https://www.npmjs.com/package/i18n-iso-countries
+- Handle http errors : service
+- Profile : Single Page with conditionnal tabs > edit, privacy, my games, my locations, my events
+- compléter page de profil-detail
 
 ## [Unreleased]
 
@@ -25,4 +28,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - App Configuration
-- Events : create, list, details, edit
+- Events CRUD

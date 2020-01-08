@@ -1,0 +1,11 @@
+@import 'src/assets/scss/_variables.scss';
+
+tr.mat-row {
+  cursor: pointer;
+  &:hover {
+    background-color: $accent;
+  }
+  td.mat-column-name {
+    font-weight: 700;
+  }
+}

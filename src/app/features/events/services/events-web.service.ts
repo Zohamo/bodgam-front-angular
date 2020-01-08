@@ -28,8 +28,10 @@ export class EventsWebService {
    * @returns {Observable<EventRepresentation[]>}
    * @memberof EventsWebService
    */
-  public getEvents(): Observable<EventRepresentation[]> {
-    // return this.http.get<EventRepresentation[]>(`${this.api}`);
+  public getEvents(userId?: number): Observable<EventRepresentation[]> {
+    /* return userId
+      ? this.http.get<EventRepresentation[]>(`${this.api}/${userId}`)
+      : this.http.get<EventRepresentation[]>(`${this.api}`); */
     return of(events);
   }
 

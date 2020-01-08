@@ -1,0 +1,29 @@
+<div class="form-helper">
+  <div class="form-helper-title">
+    <fa-icon [icon]="faQuestion"></fa-icon>
+  </div>
+  <div class="form-helper-content">
+    <!-- Required -->
+    <section *ngIf="required">
+      <div class="icon-container">
+        <fa-icon [icon]="faAsterisk"></fa-icon>
+      </div>
+      <p i18n>champ obligatoire</p>
+    </section>
+    <!-- Privacy -->
+    <div *ngIf="privacy">
+      <section>
+        <div class="icon-container">
+          <fa-icon [icon]="faEye"></fa-icon>
+        </div>
+        <p i18n>visible par tout le monde</p>
+      </section>
+      <section *ngIf="privacy">
+        <div class="icon-container">
+          <fa-icon [icon]="faEyeSlash"></fa-icon>
+        </div>
+        <p i18n>seulement visible par vous-même</p>
+      </section>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,11 @@
   "host": {
     "id": 1,
     "name": "Zohamo",
-    "isActive": true
+    "avatar": null,
+    "isActive": true,
+    "district": "Bonnefoy",
+    "city": "Toulouse",
+    "country": "FR"
   },
   "startDatetime": 1590426000,
   "endDatetime": 1590451200,

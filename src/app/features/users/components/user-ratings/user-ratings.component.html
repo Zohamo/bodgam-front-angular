@@ -1,0 +1,84 @@
+<div class="user-ratings mx-auto">
+  <!-- Reception -->
+  <section class="rating-reception">
+    <div>
+      <h6 class="section-title" i18n>Accueil</h6>
+      <p><em i18n>en tant qu'hôte</em></p>
+    </div>
+    <div class="rating-ui">
+      <div class="rating-scale">
+        <p>mal reçu</p>
+        <p>/</p>
+        <p>chaleureux</p>
+      </div>
+      <app-ui-rating [size]="'lg'" [rating]="average(ratings.reception)"></app-ui-rating>
+    </div>
+  </section>
+  <!-- Teaching -->
+  <section class="rating-teaching">
+    <h6 class="section-title" i18n>Explication des règles</h6>
+    <div class="rating-ui">
+      <div class="rating-scale">
+        <p>confus</p>
+        <p>/</p>
+        <p>limpide</p>
+      </div>
+      <app-ui-rating [size]="'lg'" [rating]="average(ratings.teaching)"></app-ui-rating>
+    </div>
+  </section>
+  <!-- Liking -->
+  <section class="rating-liking">
+    <h6 class="section-title" i18n>Sympathie</h6>
+    <div class="rating-ui">
+      <div class="rating-scale">
+        <p>incommode</p>
+        <p>/</p>
+        <p>agréable</p>
+      </div>
+      <app-ui-rating [size]="'lg'" [rating]="average(ratings.liking)"></app-ui-rating>
+    </div>
+  </section>
+  <!-- Humility -->
+  <section class="rating-humility">
+    <h6 class="section-title" i18n>Humilité</h6>
+    <div class="rating-ui">
+      <div class="rating-scale">
+        <p>mauvais gagnant/perdant</p>
+        <p>/</p>
+        <p>humble</p>
+      </div>
+      <app-ui-rating [size]="'lg'" [rating]="average(ratings.humility)"></app-ui-rating>
+    </div>
+  </section>
+  <!-- Honesty -->
+  <section class="rating-honesty">
+    <h6 class="section-title" i18n>Honnêteté</h6>
+    <div class="rating-ui">
+      <div class="rating-scale">
+        <p>tricheur</p>
+        <p>/</p>
+        <p>honnête</p>
+      </div>
+      <app-ui-rating [size]="'lg'" [rating]="average(ratings.honesty)"></app-ui-rating>
+    </div>
+  </section>
+  <!-- Speed -->
+  <section class="rating-speed">
+    <h6 class="section-title" i18n>Vitesse de jeu</h6>
+    <div class="rating-ui">
+      <div class="rating-scale">
+        <p>lent</p>
+        <p>/</p>
+        <p>rapide</p>
+      </div>
+      <app-ui-rating [size]="'lg'" [rating]="average(ratings.speed)"></app-ui-rating>
+    </div>
+  </section>
+  <!-- Global -->
+  <section class="rating-global mt-5">
+    <h5 class="section-title align-self-center" i18n>Appréciation globale</h5>
+    <div class="rating-ui">
+      <app-ui-rating [size]="'lg'" [rating]="globalAverage(ratings)"></app-ui-rating>
+    </div>
+  </section>
+</div>
