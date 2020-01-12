@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env';
 import { LocationRepresentation } from '../models/location-representation.model';
 import { LocationFullRepresentation } from '../models/location-full-representation';
 

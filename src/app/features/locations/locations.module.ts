@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+// Modules
 import { LocationsRoutingModule } from './locations-routing.module';
-import { LocationFormModule } from './components/location-form.module';
-
-import { LocationEditPageComponent } from './pages/location-edit-page/location-edit-page.component';
-import { LocationDetailComponent } from './components/location-detail/location-detail.component';
+import { SharedModule } from '@shared/shared.module';
+// Components
+import * as fromComponents from './components';
+import * as fromPages from './pages';
 import { LocationListComponent } from './components/location-list/location-list.component';
-import { UiModule } from 'src/app/shared/ui/ui.module';
 
 @NgModule({
-  declarations: [LocationEditPageComponent, LocationDetailComponent, LocationListComponent],
-  imports: [CommonModule, LocationsRoutingModule, LocationFormModule, UiModule],
+  declarations: [...fromComponents.components, ...fromPages.components],
+  imports: [CommonModule, LocationsRoutingModule, SharedModule],
   exports: [LocationListComponent]
 })
 export class LocationsModule {}

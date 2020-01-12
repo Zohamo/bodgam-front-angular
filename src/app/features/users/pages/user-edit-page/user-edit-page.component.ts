@@ -4,10 +4,10 @@ import { Observable, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UsersWebService } from '../../services/users-web.service';
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
-import { CountriesWebService } from 'src/app/shared/services/countries-web.service';
-import { Country } from 'src/app/shared/models/country.model';
-import { BggGameRepresentation } from 'src/app/shared/models/bgg/bgg-game-representation.model';
-import { BggWebService } from 'src/app/shared/services/bgg-web.service';
+import { CountriesWebService } from '@shared/services/countries-web.service';
+import { Country } from '@shared/models/country.model';
+import { BggGameRepresentation } from '@shared/models/bgg/bgg-game-representation.model';
+import { BggWebService } from '@shared/services/bgg-web.service';
 
 @Component({
   selector: 'app-user-edit-page',

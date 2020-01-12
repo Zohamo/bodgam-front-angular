@@ -6,17 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventsModule } from '../events/events.module';
 import { GamesModule } from '../games/games.module';
 import { LocationsModule } from '../locations/locations.module';
-// Pages
-import { UserPageComponent } from './pages/user-page/user-page.component';
-import { UserEditPageComponent } from './pages/user-edit-page/user-edit-page.component';
-import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { SharedModule } from '@shared/shared.module';
 // Components
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
-import { UserFormComponent } from './components/user-form/user-form.component';
-import { UserPrivacyFormComponent } from './components/user-privacy-form/user-privacy-form.component';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserRatingsComponent } from './components/user-ratings/user-ratings.component';
-import { UserCommentListComponent } from './components/user-comment-list/user-comment-list.component';
+import * as fromComponents from './components';
+import * as fromPages from './pages';
 // UI
 import {
   MatButtonModule,
@@ -33,20 +26,9 @@ import {
   MatTabsModule
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UiModule } from 'src/app/shared/ui/ui.module';
 
 @NgModule({
-  declarations: [
-    UserPageComponent,
-    UserEditPageComponent,
-    UsersPageComponent,
-    UserDetailComponent,
-    UserFormComponent,
-    UserPrivacyFormComponent,
-    UserListComponent,
-    UserRatingsComponent,
-    UserCommentListComponent
-  ],
+  declarations: [...fromComponents.components, ...fromPages.components],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -68,7 +50,7 @@ import { UiModule } from 'src/app/shared/ui/ui.module';
     EventsModule,
     GamesModule,
     LocationsModule,
-    UiModule
+    SharedModule
   ]
 })
 export class UsersModule {}

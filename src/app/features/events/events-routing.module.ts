@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { EventPageComponent } from './pages/event-page/event-page.component';
 import { EventEditPageComponent } from './pages/event-edit-page/event-edit-page.component';
-import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from '@shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'events', component: EventsPageComponent, data: { name: 'list' } },

@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { UsersWebService } from '../../services/users-web.service';
 import { UserRepresentation } from '../../models/user-representation.model';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { CountriesWebService } from 'src/app/shared/services/countries-web.service';
-import { Country } from 'src/app/shared/models/country.model';
+import { CountriesWebService } from '@shared/services/countries-web.service';
+import { Country } from '@shared/models/country.model';
 
 @Component({
   selector: 'app-users-page',

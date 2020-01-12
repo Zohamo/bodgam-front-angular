@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BggGameRepresentation } from 'src/app/shared/models/bgg/bgg-game-representation.model';
+import { BggGameRepresentation } from '@shared/models/bgg/bgg-game-representation.model';
 
 @Component({
   selector: 'app-game-list',

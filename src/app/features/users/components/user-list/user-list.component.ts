@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 // Models
 
-import { Country } from 'src/app/shared/models/country.model';
+import { Country } from '@shared/models/country.model';
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
 import { UserRepresentation } from '../../models/user-representation.model';
 

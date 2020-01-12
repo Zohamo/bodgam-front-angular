@@ -3,7 +3,6 @@ import moment from 'moment';
 
 // Models
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
-import { BggGameRepresentation } from 'src/app/shared/models/bgg/bgg-game-representation.model';
 
 // UI
 import {

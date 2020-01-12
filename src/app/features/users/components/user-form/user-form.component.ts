@@ -4,8 +4,8 @@ import moment from 'moment';
 
 // Models
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
-import { Country } from 'src/app/shared/models/country.model';
-import { BggGameRepresentation } from 'src/app/shared/models/bgg/bgg-game-representation.model';
+import { Country } from '@shared/models/country.model';
+import { BggGameRepresentation } from '@shared/models/bgg/bgg-game-representation.model';
 
 // UI
 import { faCheck, faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
