@@ -9,10 +9,25 @@ import { UiVisibilityComponent } from './ui-visibility/ui-visibility.component';
 // UI
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
+import { UiMapComponent } from './ui-map/ui-map.component';
 
 @NgModule({
   imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
-  declarations: [UiDateComponent, UiFormHelperComponent, UiRatingComponent, UiSpinnerComponent, UiVisibilityComponent],
-  exports: [UiDateComponent, UiFormHelperComponent, UiRatingComponent, UiSpinnerComponent, UiVisibilityComponent]
+  declarations: [
+    UiDateComponent,
+    UiFormHelperComponent,
+    UiMapComponent,
+    UiRatingComponent,
+    UiSpinnerComponent,
+    UiVisibilityComponent
+  ],
+  exports: [
+    UiDateComponent,
+    UiFormHelperComponent,
+    UiMapComponent,
+    UiRatingComponent,
+    UiSpinnerComponent,
+    UiVisibilityComponent
+  ]
 })
 export class UiModule {}
