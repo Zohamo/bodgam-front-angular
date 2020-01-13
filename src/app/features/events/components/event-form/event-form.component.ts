@@ -118,10 +118,6 @@ export class EventFormComponent {
         atmosphere: this.event.atmosphere
       });
 
-      // Set select values
-      /* this.eventForm.get('level').setValue(this.event.level);
-      this.eventForm.get('atmosphere').setValue(this.event.atmosphere); */
-
       if (this.event.location && this.event.location.id) {
         this.setDefaultLocation(this.event.location.id);
       }
