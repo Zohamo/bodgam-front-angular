@@ -3,9 +3,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { EventRepresentation } from '../../models/event-representation.model';
-import { LocationRepresentation } from 'src/app/features/locations/models/location-representation.model';
+import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 import { EventsWebService } from '../../services/events-web.service';
-import { LocationsWebService } from 'src/app/features/locations/services/locations-web.service';
+import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
 // Font Awesome
 import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 

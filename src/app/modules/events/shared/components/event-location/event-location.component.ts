@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faBuilding } from '@fortawesome/free-solid-svg-icons';
-import { LocationRepresentation } from 'src/app/features/locations/models/location-representation.model';
+import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 
 @Component({
   selector: 'app-event-location',
