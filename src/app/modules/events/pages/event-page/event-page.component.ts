@@ -3,9 +3,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { EventRepresentation } from '../../models/event-representation.model';
-import { LocationFullRepresentation } from 'src/app/features/locations/models/location-full-representation';
+import { LocationFullRepresentation } from 'src/app/modules/locations/models/location-full-representation';
 import { EventsWebService } from '../../services/events-web.service';
-import { LocationsWebService } from 'src/app/features/locations/services/locations-web.service';
+import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
 
 @Component({
   selector: 'app-event-page',

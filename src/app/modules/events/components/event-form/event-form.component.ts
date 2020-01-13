@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import moment from 'moment';
 
 import { EventRepresentation } from '../../models/event-representation.model';
-import { LocationFormComponent } from 'src/app/features/locations/components/location-form/location-form.component';
-import { LocationRepresentation } from 'src/app/features/locations/models/location-representation.model';
+import { LocationFormComponent } from 'src/app/modules/locations/components/location-form/location-form.component';
+import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 // Font Awesome
 import { faPlusSquare, faPenSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 

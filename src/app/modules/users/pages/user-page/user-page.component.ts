@@ -7,17 +7,17 @@ import { switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
 import { BggGameRepresentation } from '@shared/models/bgg/bgg-game-representation.model';
-import { EventRepresentation } from 'src/app/features/events/models/event-representation.model';
-import { LocationRepresentation } from 'src/app/features/locations/models/location-representation.model';
+import { EventRepresentation } from 'src/app/modules/events/models/event-representation.model';
+import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 
 // Services
 import { UsersWebService } from '../../services/users-web.service';
 import { BggWebService } from '@shared/services/bgg-web.service';
-import { EventsWebService } from 'src/app/features/events/services/events-web.service';
+import { EventsWebService } from 'src/app/modules/events/services/events-web.service';
 
 // UI
 import { faCalendarAlt, faCogs, faDice, faMapMarked, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { LocationsWebService } from 'src/app/features/locations/services/locations-web.service';
+import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
 
 @Component({
   selector: 'app-user-page',

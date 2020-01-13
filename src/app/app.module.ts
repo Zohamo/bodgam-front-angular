@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 
 // Modules
-import { EventsModule } from './features/events/events.module';
-import { LocationsModule } from './features/locations/locations.module';
-import { UsersModule } from './features/users/users.module';
+import * as fromModules from './modules';
 import { SharedModule } from './shared/shared.module';
 
 // UI
@@ -28,16 +26,7 @@ export const MY_FORMAT: MatDateFormats = {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CoreModule,
-    SharedModule,
-    EventsModule,
-    LocationsModule,
-    UsersModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, CoreModule, SharedModule, ...fromModules.modules],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }],
   bootstrap: [AppComponent]
 })
