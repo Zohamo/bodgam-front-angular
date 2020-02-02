@@ -20,7 +20,6 @@ export class EventEditPageComponent implements OnDestroy {
 
   public event$: Observable<EventRepresentation>;
   public userLocations: LocationRepresentation[];
-  // public locations$: Observable<LocationRepresentation[]>;
 
   private routeParamSubscribe: Subscription;
 
@@ -39,9 +38,7 @@ export class EventEditPageComponent implements OnDestroy {
   ) {
     this.getEvent();
     this.event$.subscribe((event) => {
-      if (event.host) {
-        this.getLocations(event.host.id);
-      }
+      this.getLocations();
     });
   }
 
@@ -79,15 +76,18 @@ export class EventEditPageComponent implements OnDestroy {
     }
   }
 
+  public saveEvent(event: EventRepresentation): void {
+    event.id ? this.eventsWebService.updateEvent(event) : this.eventsWebService.createEvent(event);
+  }
+
   /**
    * Calls the LocationsWebService to get the user's locations
    *
    * @private
-   * @param {number} userId
    * @memberof EventEditPageComponent
    */
-  private getLocations(userId: number): void {
-    this.locationsWebService.getLocations(userId).subscribe((locations) => {
+  private getLocations(): void {
+    this.locationsWebService.getLocations().subscribe((locations) => {
       this.userLocations = locations ? locations : [];
     });
   }

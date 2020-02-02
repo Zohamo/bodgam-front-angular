@@ -73,14 +73,15 @@
             mat-button
             type="button"
             color="primary"
-            (click)="openLocationFormDialog(true)"
+            [disabled]="!eventForm.value.location"
+            (click)="openLocationFormDialog(eventForm.value.location.id)"
           >
-            <fa-icon [icon]="faPenSquare" class="mr-2"></fa-icon>
+            <fa-icon [icon]="faPenSquare"></fa-icon>
             <span i18n>Modifier</span>
           </button>
 
           <button mat-button type="button" color="primary" (click)="openLocationFormDialog()">
-            <fa-icon [icon]="faPlusSquare" class="mr-2"></fa-icon>
+            <fa-icon [icon]="faPlusSquare"></fa-icon>
             <span i18n>Nouveau</span>
           </button>
         </div>
@@ -201,8 +202,10 @@
     <!-- Action buttons -->
 
     <mat-card-actions>
-      <button mat-raised-button type="button" color="primary" (click)="onSubmit()">
-        <fa-icon [icon]="faCheck" class="mr-2"></fa-icon>
+      <p *ngIf="!eventForm.valid" i18n>* champs obligatoires</p>
+      <button mat-raised-button type="button" color="primary" [disabled]="!eventForm.valid" (click)="onSubmit()">
+        <fa-icon *ngIf="eventForm.valid" [icon]="faCheck"></fa-icon>
+        <fa-icon *ngIf="!eventForm.valid" [icon]="faTimesCircle"></fa-icon>
         <ng-container *ngIf="this.event.id === null" i18n>Créer</ng-container>
         <ng-container *ngIf="this.event.id !== null" i18n>Modifier</ng-container>
       </button>

@@ -1,6 +1,5 @@
 <mat-card class="mt-4">
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-
     <mat-card-header>
       <mat-card-title>
         <h2 i18n>Profil</h2>
@@ -115,7 +114,7 @@
           (click)="onGetBggGames()"
           [disabled]="userForm.get('bggName').value.length < 3"
         >
-          <fa-icon [icon]="faSearch" class="mr-2"></fa-icon>
+          <fa-icon [icon]="faSearch"></fa-icon>
           <span i18n>Rechercher</span>
         </button>
         <div class="col-md-1 ui-visibility-container">
@@ -148,8 +147,8 @@
     <mat-card-actions>
       <p *ngIf="!userForm.valid" i18n>* champs obligatoires</p>
       <button mat-raised-button type="button" color="primary" [disabled]="!userForm.valid" (click)="onSubmit()">
-        <fa-icon *ngIf="userForm.valid" [icon]="faCheck" class="mr-2"></fa-icon>
-        <fa-icon *ngIf="!userForm.valid" [icon]="faTimesCircle" class="mr-2"></fa-icon>
+        <fa-icon *ngIf="userForm.valid" [icon]="faCheck"></fa-icon>
+        <fa-icon *ngIf="!userForm.valid" [icon]="faTimesCircle"></fa-icon>
         <span *ngIf="!this.user.id" i18n>Créer</span>
         <span *ngIf="this.user.id" i18n>Modifier</span>
       </button>

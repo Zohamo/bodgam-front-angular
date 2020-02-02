@@ -1,0 +1,5 @@
+<div class="location-detail-icons">
+  <fa-icon *ngIf="isAllowedSmoking" [icon]="faSmoking" title="Fumeur"></fa-icon>
+  <fa-icon *ngIf="!isAllowedSmoking" [icon]="faSmokingBan" title="Non-Fumeur"></fa-icon>
+  <fa-icon *ngIf="isAccessible" [icon]="faWheelchair" title="Accessible en fauteuil roulant"></fa-icon>
+</div>

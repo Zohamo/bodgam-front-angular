@@ -2,10 +2,12 @@
   <fa-icon [icon]="faCalendarPlus" class="mr-2"></fa-icon>
   <span>Créer un évènement</span>
 </h2>
+
 <app-event-form
   *ngIf="event$ | async as event; else loading"
   [eventEditing]="event"
   [userLocations]="userLocations"
+  (saveEvent)="saveEvent($event)"
 ></app-event-form>
 
 <ng-template #loading>

@@ -10,7 +10,7 @@ import * as fromModules from './modules';
 import { SharedModule } from './shared/shared.module';
 
 // UI
-import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { MatDateFormats, MatSnackBarModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -26,7 +26,15 @@ export const MY_FORMAT: MatDateFormats = {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, CoreModule, SharedModule, ...fromModules.modules],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    MatSnackBarModule,
+    SharedModule,
+    ...fromModules.modules
+  ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }],
   bootstrap: [AppComponent]
 })

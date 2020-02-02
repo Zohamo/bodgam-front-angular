@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EventsWebService } from '../../services/events-web.service';
 import { EventRepresentation } from '../../models/event-representation.model';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-events-page',
@@ -11,6 +11,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventsPageComponent implements OnInit {
   faCalendarAlt = faCalendarAlt;
+  faCalendarPlus = faCalendarPlus;
   public events$: Observable<EventRepresentation[]>;
 
   /**

@@ -3,11 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import moment from 'moment';
 
+// Entry components
+import { LocationFormDialogComponent } from 'src/app/modules/locations/components/location-form-dialog/location-form-dialog.component';
+
+// Models
 import { EventRepresentation } from '../../models/event-representation.model';
-import { LocationFormComponent } from 'src/app/modules/locations/components/location-form/location-form.component';
 import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
-// Font Awesome
-import { faPlusSquare, faPenSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+// UI
+import { faCheck, faPlusSquare, faPenSquare, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { Country } from '@shared/models/country.model';
 
 @Component({
   selector: 'app-event-form',
@@ -16,9 +21,10 @@ import { faPlusSquare, faPenSquare, faCheck } from '@fortawesome/free-solid-svg-
 })
 export class EventFormComponent {
   // Font Awesome
+  faCheck = faCheck;
   faPlusSquare = faPlusSquare;
   faPenSquare = faPenSquare;
-  faCheck = faCheck;
+  faTimesCircle = faTimesCircle;
 
   public eventForm: FormGroup;
   public today: Date;
@@ -42,6 +48,13 @@ export class EventFormComponent {
     }
   }
 
+  public countries: Country[];
+  @Input() set countryList(countryList: Country[]) {
+    if (countryList) {
+      this.countries = countryList;
+    }
+  }
+
   // Outputs
 
   @Output() saveEvent = new EventEmitter<EventRepresentation>();
@@ -53,7 +66,7 @@ export class EventFormComponent {
    * @param {MatDialog} dialog
    * @memberof EventFormComponent
    */
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {
     this.today = new Date();
     this.createForm();
   }
@@ -149,6 +162,7 @@ export class EventFormComponent {
    * @memberof EventFormComponent
    */
   public onSubmit(): void {
+    console.log('onSubmit event', this.eventForm);
     if (this.eventForm.valid) {
       this.saveEvent.emit(this.prepareSaveEntity());
     }
@@ -186,28 +200,29 @@ export class EventFormComponent {
   /**
    * Open the dialog to edit or create a location
    *
-   * @param {boolean} [isEditing=false]
+   * @param {number} [locationId=null]
    * @memberof EventFormComponent
    */
-  public openLocationFormDialog(isEditing = false): void {
-    const dialogRef = this.dialog.open(LocationFormComponent, {
-      width: 'calc(100% - 2rem)',
-      maxWidth: '950px',
-      data: { location: isEditing ? this.eventForm.get('location').value : new LocationRepresentation() }
+  public openLocationFormDialog(locationId: number = null): void {
+    console.log('locationId', locationId);
+    const dialogRef = this.dialog.open(LocationFormDialogComponent, {
+      panelClass: 'dialog-location-form',
+      data: { id: locationId }
     });
 
-    dialogRef.afterClosed().subscribe((locationEdited: LocationRepresentation) => {
-      if (locationEdited) {
-        if (isEditing) {
+    dialogRef.afterClosed().subscribe((locationSaved: LocationRepresentation) => {
+      console.log('locationSaved', locationSaved);
+      if (locationSaved) {
+        if (locationId) {
           this.locations.map((location) => {
-            if (location.id === locationEdited.id) {
-              location = locationEdited;
+            if (location.id === locationSaved.id) {
+              location = locationSaved;
             }
           });
         } else {
-          this.locations.push(locationEdited);
+          this.locations.push(locationSaved);
           this.checkIfHasRegisteredLocation();
-          this.setDefaultLocation(locationEdited.id);
+          this.setDefaultLocation(locationSaved.id);
         }
       }
     });

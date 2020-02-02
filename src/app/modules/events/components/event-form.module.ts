@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventFormComponent } from './event-form/event-form.component';
+import { LocationsModule } from '../../locations/locations.module';
 // UI
-import { LocationDetailIconsModule } from 'src/app/modules/locations/components/location-detail/location-detail-icons/location-detail-icons.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   MatCardModule,
@@ -20,7 +20,7 @@ import {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    LocationDetailIconsModule,
+    LocationsModule,
     FontAwesomeModule,
     MatCardModule,
     MatButtonModule,

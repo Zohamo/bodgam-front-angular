@@ -26,6 +26,10 @@ button:focus,
   box-shadow: none;
 }
 
+button .ng-fa-icon {
+  margin-right: 0.5rem;
+}
+
 /**
  * Colors
  */
@@ -100,14 +104,14 @@ a {
 }
 
 /**
- * Material Card
+ * Material Actions
  */
 
-.mat-card-actions {
+.mat-card-actions,
+.mat-dialog-actions {
   display: flex !important;
   justify-content: flex-end;
   align-items: center;
-  margin: 0 1rem 16px !important;
   p {
     margin-bottom: 0;
     margin-right: auto;
@@ -115,6 +119,31 @@ a {
     font-style: italic;
     opacity: 0.54;
   }
+  button {
+    margin-left: 1rem;
+  }
+}
+
+/**
+ * Material Card
+ */
+
+.mat-card-header-icon {
+  margin-right: 24px;
+  font-size: 48px;
+  color: $accent;
+}
+
+.mat-card-actions {
+  margin: 0 1rem 16px !important;
+}
+
+/**
+ * Material Dialog
+ */
+
+.mat-dialog-actions {
+  padding: 16px 0 !important;
 }
 
 /**

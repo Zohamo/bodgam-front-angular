@@ -1,5 +1,5 @@
-import { LocationEditPageComponent } from './location-edit-page/location-edit-page.component';
+import { LocationsPageComponent } from './locations-page/locations-page.component';
 
-export const components: any[] = [LocationEditPageComponent];
+export const components: any[] = [LocationsPageComponent];
 
-export * from './location-edit-page/location-edit-page.component';
+export * from './locations-page/locations-page.component';
