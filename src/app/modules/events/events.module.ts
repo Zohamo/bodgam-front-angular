@@ -5,9 +5,10 @@ import { SharedModule } from '@shared/shared.module';
 // Components
 import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { EventListComponent } from './components/event-list/event-list.component';
-import { LocationFormComponent } from '../locations/components/location-form/location-form.component';
+// Entry Components
+import { LocationFormDialogComponent } from '../locations/components/location-form-dialog/location-form-dialog.component';
 // Modules
-import { LocationDetailIconsModule } from '../locations/components/location-detail/location-detail-icons/location-detail-icons.module';
+import { LocationsModule } from '../locations/locations.module';
 // UI
 import { MatCardModule, MatExpansionModule, MatButtonModule, MatNativeDateModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as fromComponents from './components';
 import * as fromPages from './pages';
 import * as fromSharedComponents from './shared/components';
+import { LocationDetailIconsComponent } from '../locations/components';
 export const uiModules: any[] = [
   FontAwesomeModule,
   MatCardModule,
@@ -30,11 +32,11 @@ export const uiModules: any[] = [
     EventsRoutingModule,
     ...fromComponents.modules,
     ...fromSharedComponents.modules,
-    LocationDetailIconsModule,
+    LocationsModule,
     ...uiModules,
     SharedModule
   ],
   exports: [EventsPageComponent, EventListComponent],
-  entryComponents: [LocationFormComponent]
+  entryComponents: [LocationFormDialogComponent]
 })
 export class EventsModule {}

@@ -67,7 +67,7 @@ export class UserPageComponent {
       }
       if (user.id) {
         this.getEvents(user.id);
-        this.getLocations(user.id);
+        this.getLocations();
       }
     });
   }
@@ -128,11 +128,10 @@ export class UserPageComponent {
    * Get the user's location list from the web service
    *
    * @private
-   * @param {number} userId
    * @memberof UserPageComponent
    */
-  private getLocations(userId: number): void {
-    this.locationsWebService.getLocations(userId).subscribe(
+  private getLocations(): void {
+    this.locationsWebService.getLocations().subscribe(
       (locations) => {
         this.locations = locations && locations.length > 0 ? locations : null;
         this.isLoadingLocations = false;

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocationDetailComponent } from './location-detail.component';
+import { SnackBarMessageComponent } from './snack-bar-message.component';
 
-describe('LocationDetailComponent', () => {
-  let component: LocationDetailComponent;
-  let fixture: ComponentFixture<LocationDetailComponent>;
+describe('SnackBarMessageComponent', () => {
+  let component: SnackBarMessageComponent;
+  let fixture: ComponentFixture<SnackBarMessageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationDetailComponent ]
+      declarations: [ SnackBarMessageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocationDetailComponent);
+    fixture = TestBed.createComponent(SnackBarMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

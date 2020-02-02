@@ -1,3 +1,54 @@
-<p>
-  location-list works!
-</p>
+<table mat-table [dataSource]="dataSource" class="w-100">
+  <!-- Privacy Column -->
+  <ng-container matColumnDef="privacy">
+    <td mat-cell *matCellDef="let location">
+      <app-ui-visibility [visible]="location.isPublic"></app-ui-visibility>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <td mat-cell *matCellDef="let location">
+      <button mat-button type="button" color="primary" (click)="openLocationDetailDialog(location.id)">
+        {{ location.name }}
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <td mat-cell *matCellDef="let location">
+      {{ location.addressDistrict }} {{ location.addressCity }}, {{ location.addressCountry }}
+    </td>
+  </ng-container>
+
+  <!-- Icons Column -->
+  <ng-container matColumnDef="icons">
+    <td mat-cell *matCellDef="let location" class="text-center">
+      <app-location-detail-icons
+        [isAllowedSmoking]="location.isAllowedSmoking"
+        [isAccessible]="location.isAccessible"
+      ></app-location-detail-icons>
+    </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <td mat-cell *matCellDef="let location" class="text-center">
+      <button mat-button type="button" color="primary" (click)="openLocationFormDialog(location.id)">
+        <fa-icon [icon]="faPenSquare"></fa-icon>
+      </button>
+      <button mat-button type="button" color="primary" (click)="onDeleteLocation(location.id)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr
+    mat-row
+    *matRowDef="let location; columns: displayedColumns"
+    [ngClass]="{ 'default-location': location.isDefault }"
+  ></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>

@@ -6,9 +6,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 
 import * as fromComponents from './components';
+import { SnackBarMessageComponent } from './components/snack-bar-message/snack-bar-message.component';
 
 @NgModule({
-  declarations: [...fromComponents.components],
+  declarations: [...fromComponents.components, SnackBarMessageComponent],
   imports: [CommonModule, LayoutModule, FontAwesomeModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
   exports: [LayoutModule, ...fromComponents.components]
 })

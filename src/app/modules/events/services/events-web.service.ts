@@ -5,8 +5,8 @@ import { environment } from '@env';
 import { EventRepresentation } from '../models/event-representation.model';
 
 // Stubs
-import events from 'src/assets/data/stubs/stub-events.json';
-import event from 'src/assets/data/stubs/stub-event.json';
+import eventsStub from 'src/assets/data/stubs/stub-events.json';
+import eventStub from 'src/assets/data/stubs/stub-event.json';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +29,10 @@ export class EventsWebService {
    * @memberof EventsWebService
    */
   public getEvents(userId?: number): Observable<EventRepresentation[]> {
-    /* return userId
+    return of(eventsStub);
+    return userId
       ? this.http.get<EventRepresentation[]>(`${this.api}/${userId}`)
-      : this.http.get<EventRepresentation[]>(`${this.api}`); */
-    return of(events);
+      : this.http.get<EventRepresentation[]>(`${this.api}`);
   }
 
   /**
@@ -43,7 +43,43 @@ export class EventsWebService {
    * @memberof EventsWebService
    */
   public getEvent(id: number): Observable<EventRepresentation> {
-    // return this.http.get<EventRepresentation>(`{$this.api}/{$id}`);
-    return of(event);
+    return of(eventStub);
+    return this.http.get<EventRepresentation>(`{$this.api}/{$id}`);
+  }
+
+  /**
+   * Call the BackEnd to create a new event
+   *
+   * @param {EventRepresentation} event
+   * @returns {Observable<EventRepresentation>}
+   * @memberof EventsWebService
+   */
+  public createEvent(event: EventRepresentation): Observable<EventRepresentation> {
+    return of(eventStub);
+    return this.http.post<EventRepresentation>(`${this.api}`, event);
+  }
+
+  /**
+   * Call the BackEnd to edit an event's data
+   *
+   * @param {EventRepresentation} event
+   * @returns {Observable<EventRepresentation>}
+   * @memberof EventsWebService
+   */
+  public updateEvent(event: EventRepresentation): Observable<EventRepresentation> {
+    return of(eventStub);
+    return this.http.patch<EventRepresentation>(`${this.api}/${event.id}`, event);
+  }
+
+  /**
+   * Call the BackEnd to delete an event
+   *
+   * @param {number} eventId
+   * @returns {Observable<EventRepresentation>}
+   * @memberof EventsWebService
+   */
+  public deleteLocation(eventId: number): Observable<EventRepresentation> {
+    return of(eventStub);
+    return this.http.delete<EventRepresentation>(`${this.api}/${eventId}`);
   }
 }

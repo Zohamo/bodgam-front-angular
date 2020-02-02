@@ -1,0 +1,13 @@
+<ng-container [ngSwitch]="data">
+  <!-- Geocode -->
+  <p *ngSwitchCase="'fail-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
+  <p *ngSwitchCase="'fail-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
+
+  <!-- Location -->
+  <p *ngSwitchCase="'success-save-location'" i18n="">Votre lieu a été sauvegardé avec succès.</p>
+  <p *ngSwitchCase="'fail-save-location'" i18n="">Un problème est survenu lors de la sauvegarde votre lieu.</p>
+
+  <!-- Default -->
+  <p *ngSwitchCase="'fail'" i18n="">Raté !</p>
+  <p *ngSwitchDefault i18n="">Effectué</p>
+</ng-container>

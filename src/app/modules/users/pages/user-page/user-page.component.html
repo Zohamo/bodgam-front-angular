@@ -1,6 +1,6 @@
 <ng-container *ngIf="user$ | async as user">
   <h2 class="color-primary mx-3 mb-3">
-    <fa-icon *ngIf="!user?.avatar" [icon]="faUserCircle" class="mr-2"></fa-icon>
+    <fa-icon *ngIf="!user?.avatar" [icon]="faUserCircle"></fa-icon>
     {{ user?.name }}
   </h2>
 

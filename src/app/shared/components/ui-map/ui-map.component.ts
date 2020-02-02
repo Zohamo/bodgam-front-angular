@@ -1,12 +1,13 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { AppConfig } from 'src/app/config/app.config';
 import * as L from 'leaflet';
 
 // Models
 import { NavigatorGeolocationPosition } from '../../models/navigator/navigator-geolocation-position.model';
+import { GeoCoordinates } from '@shared/models/geo-coordinates.model';
 
 // Services
 import { GeolocationService } from '../../services/geolocation.service';
-import { AppConfig } from 'src/app/config/app.config';
 
 @Component({
   selector: 'app-ui-map',
@@ -15,18 +16,77 @@ import { AppConfig } from 'src/app/config/app.config';
 })
 export class UiMapComponent implements AfterViewInit {
   public isGeolocated = false;
+
   // Leaflet
   private map: any;
   public circle: any;
   public marker: any;
-  // Position
-  private position: NavigatorGeolocationPosition;
-  public latitude: number;
-  public longitude: number;
-  public accuracy: number;
+
   // UI
   public circleColor = AppConfig.MAP_CIRCLE_COLOR;
   public circleOpacity = AppConfig.MAP_CIRCLE_OPACITY;
+
+  // Inputs
+
+  @Input() isEditable = false;
+
+  private coords: GeoCoordinates = new GeoCoordinates();
+  @Input() set coordinates(coordinates: GeoCoordinates) {
+    console.log('coordinates', coordinates);
+    if (coordinates) {
+      this.coords = coordinates;
+      if (this.map) {
+        this.resetViewMap();
+        this.draw();
+      }
+    }
+  }
+
+  @Input() set autoGeolocate(autoGeolocate: boolean) {
+    if (autoGeolocate) {
+      this.geolocationService.getPosition().then((position: NavigatorGeolocationPosition) => {
+        if (position && position.coords) {
+          this.isGeolocated = true;
+          this.coords = new GeoCoordinates(position.coords);
+          this.sendPositionCoords.emit(this.coords);
+          this.map ? this.resetViewMap() : this.createMap();
+        }
+      });
+    }
+  }
+
+  private displayMarker = false;
+  @Input() set dMarker(dMarker: boolean) {
+    if (dMarker !== null) {
+      this.displayMarker = dMarker;
+      if (this.circle) {
+        this.map.removeLayer(this.circle);
+        this.circle = null;
+      }
+      if (this.marker) {
+        this.map.removeLayer(this.marker);
+        this.marker = null;
+      }
+      this.draw();
+    }
+  }
+
+  @Input() set circleRadius(circleRadius: number) {
+    if (circleRadius) {
+      this.coords.accuracy = circleRadius;
+      this.drawCircle(this.coords.latitude, this.coords.longitude, this.coords.accuracy);
+    }
+  }
+
+  @Input() set centerMap(centerMap: boolean) {
+    if (this.map) {
+      this.resetViewMap();
+    }
+  }
+
+  // Outputs
+
+  @Output() sendPositionCoords = new EventEmitter<GeoCoordinates>();
 
   /**
    * Creates an instance of UiMapComponent.
@@ -34,9 +94,7 @@ export class UiMapComponent implements AfterViewInit {
    * @param {GeolocationService} geolocationService
    * @memberof UiMapComponent
    */
-  constructor(private geolocationService: GeolocationService) {
-    this.setPosition();
-  }
+  constructor(private geolocationService: GeolocationService) {}
 
   /**
    * Called after Angular has fully initialized a component's view.
@@ -45,28 +103,7 @@ export class UiMapComponent implements AfterViewInit {
    */
   ngAfterViewInit(): void {
     this.createMap();
-
-    this.geolocationService.getPosition().then((position: NavigatorGeolocationPosition) => {
-      this.isGeolocated = true;
-      this.setPosition(position);
-      if (this.map) {
-        this.map.setView([this.latitude, this.longitude], this.setZoom(this.accuracy));
-      }
-    });
-  }
-
-  /**
-   * Populate this component position's values
-   *
-   * @private
-   * @param {NavigatorGeolocationPosition} [position]
-   * @memberof UiMapComponent
-   */
-  private setPosition(position?: NavigatorGeolocationPosition): void {
-    this.position = position || new NavigatorGeolocationPosition();
-    this.latitude = position && position.coords ? position.coords.latitude : this.position.coords.latitude;
-    this.longitude = position && position.coords ? position.coords.longitude : this.position.coords.longitude;
-    this.accuracy = position && position.coords ? position.coords.accuracy : this.position.coords.accuracy;
+    this.draw();
   }
 
   /**
@@ -76,19 +113,64 @@ export class UiMapComponent implements AfterViewInit {
    * @memberof UiMapComponent
    */
   private createMap(): void {
-    if (!this.map) {
+    if (!this.map && this.coords && this.coords.latitude && this.coords.longitude) {
+      console.log('create coords', this.coords);
+      // Map creation
       this.map = L.map('map', {
-        center: [this.latitude, this.longitude],
-        zoom: this.setZoom(this.accuracy)
+        center: [this.coords.latitude, this.coords.longitude],
+        zoom: this.setZoom(this.coords.accuracy)
       });
+
+      // Tiles
       L.tileLayer(AppConfig.MAP_TILES_URL, { attribution: AppConfig.MAP_TILES_ATTRIBUTION }).addTo(this.map);
-      this.map.on('click', (event: { latlng: { lat: number; lng: number } }) => {
-        this.latitude = event.latlng.lat;
-        this.longitude = event.latlng.lng;
-        this.setMarker(this.latitude, this.longitude);
-        this.map.setView([this.latitude, this.longitude]);
-      });
+
+      if (this.isEditable) {
+        // OnClick
+        this.map.on('click', (event: { latlng: { lat: number; lng: number } }) => {
+          this.onClickMap(event.latlng.lat, event.latlng.lng);
+        });
+      }
     }
+  }
+
+  /**
+   * Click on map event
+   *
+   * @private
+   * @param {number} latitude
+   * @param {number} longitude
+   * @memberof UiMapComponent
+   */
+  private onClickMap(latitude: number, longitude: number): void {
+    this.coords.latitude = latitude;
+    this.coords.longitude = longitude;
+    console.log('onclick coords', this.coords);
+    this.draw();
+    this.resetViewMap();
+    this.sendPositionCoords.emit(this.coords);
+  }
+
+  /**
+   * Reset the map's view
+   *
+   * @private
+   * @memberof UiMapComponent
+   */
+  private resetViewMap(): void {
+    console.log('resetViewMap', this.coords);
+    this.map.setView([this.coords.latitude, this.coords.longitude], this.setZoom(this.coords.accuracy));
+  }
+
+  /**
+   * Draw a circle or set a marker on the map
+   *
+   * @private
+   * @memberof UiMapComponent
+   */
+  private draw(): void {
+    this.displayMarker
+      ? this.setMarker(this.coords.latitude, this.coords.longitude)
+      : this.drawCircle(this.coords.latitude, this.coords.longitude, this.coords.accuracy);
   }
 
   /**
@@ -96,21 +178,23 @@ export class UiMapComponent implements AfterViewInit {
    *
    * @private
    * @param {number} lat
-   * @param {number} long
+   * @param {number} lng
    * @param {number} rad
    * @memberof UiMapComponent
    */
-  private drawCircle(lat: number, long: number, rad: number): void {
+  private drawCircle(lat: number, lng: number, rad: number): void {
     if (this.map) {
-      if (this.circle) {
-        this.map.removeLayer(this.circle);
+      if (!this.circle) {
+        this.circle = L.circle([lat, lng], {
+          color: this.circleColor,
+          fillColor: this.circleColor,
+          fillOpacity: this.circleOpacity,
+          radius: rad
+        }).addTo(this.map);
+      } else {
+        this.circle.setLatLng({ lat, lng });
+        this.circle.setRadius(rad);
       }
-      this.circle = L.circle([lat, long], {
-        color: this.circleColor,
-        fillColor: this.circleColor,
-        fillOpacity: this.circleOpacity,
-        radius: rad
-      }).addTo(this.map);
     }
   }
 
@@ -119,15 +203,12 @@ export class UiMapComponent implements AfterViewInit {
    *
    * @private
    * @param {number} lat
-   * @param {number} long
+   * @param {number} lng
    * @memberof UiMapComponent
    */
-  private setMarker(lat: number, long: number): void {
+  private setMarker(lat: number, lng: number): void {
     if (this.map) {
-      if (this.marker) {
-        this.map.removeLayer(this.marker);
-      }
-      this.marker = L.marker([lat, long]).addTo(this.map);
+      this.marker ? this.marker.setLatLng({ lat, lng }) : (this.marker = L.marker([lat, lng]).addTo(this.map));
     }
   }
 
@@ -141,11 +222,11 @@ export class UiMapComponent implements AfterViewInit {
    */
   private setZoom(accuracy: number): number {
     if (accuracy < 500) {
-      return 15;
+      return 16;
     } else if (accuracy < 1000) {
-      return 14;
+      return 15;
     } else if (accuracy < 2000) {
-      return 13;
+      return 14;
     } else {
       return 10;
     }

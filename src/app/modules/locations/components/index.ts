@@ -1,9 +1,16 @@
-import { LocationDetailComponent } from './location-detail/location-detail.component';
-import { LocationFormComponent } from './location-form/location-form.component';
+import { LocationDetailDialogComponent } from './location-detail-dialog/location-detail-dialog.component';
+import { LocationDetailIconsComponent } from './location-detail-icons/location-detail-icons.component';
+import { LocationFormDialogComponent } from './location-form-dialog/location-form-dialog.component';
 import { LocationListComponent } from './location-list/location-list.component';
 
-export const components: any[] = [LocationDetailComponent, LocationFormComponent, LocationListComponent];
+export const components: any[] = [
+  LocationDetailDialogComponent,
+  LocationDetailIconsComponent,
+  LocationFormDialogComponent,
+  LocationListComponent
+];
 
-export * from './location-detail/location-detail.component';
-export * from './location-form/location-form.component';
+export * from './location-detail-dialog/location-detail-dialog.component';
+export * from './location-detail-icons/location-detail-icons.component';
+export * from './location-form-dialog/location-form-dialog.component';
 export * from './location-list/location-list.component';

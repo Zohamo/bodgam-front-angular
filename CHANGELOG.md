@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Handle http errors : service
 - Profile : Single Page with conditionnal tabs > edit, privacy, my games, my locations, my events
 - compléter page de profil-detail
+- change location representation : with GeoCoordinates
+- generic CRUD
+- NEW EVENT : SET DEFAULT LOCATION !!! + REMOVE LocationFormComponent > now we use the MODAL !!!
 
 ## [Unreleased]
 

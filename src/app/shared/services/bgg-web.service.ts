@@ -39,6 +39,6 @@ export class BggWebService {
    * @memberof BggWebService
    */
   public getThing(thingId: number): Observable<BggGameRepresentation> {
-    return this.http.get<BggGameRepresentation>(`{$this.api}/thing/{$thingId}`);
+    return this.http.get<BggGameRepresentation>(`${this.api}/thing/${thingId}`);
   }
 }

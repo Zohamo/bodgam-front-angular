@@ -9,6 +9,7 @@
 /node_modules
 
 # profiling files
+src/app/config/app.keys.ts
 chrome-profiler-events.json
 speed-measure-plugin.json
 

@@ -6,5 +6,8 @@ export const AppConfig = {
   MAP_INIT_LATITUDE: 43.604652, // Toulouse
   MAP_INIT_LONGITUDE: 1.444209, // Toulouse
   MAP_TILES_ATTRIBUTION: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  MAP_TILES_URL: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+  MAP_TILES_URL: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+
+  // Material Snack Bar
+  SNACK_BAR_DURATION: 3 * 1000
 };
