@@ -5,7 +5,7 @@
   </h2>
   <button mat-raised-button color="primary" class="ml-auto" [routerLink]="['/events', 'create']">
     <fa-icon [icon]="faCalendarPlus"></fa-icon>
-    <span>Nouvel évènement</span>
+    <span i18n="">Nouvel évènement</span>
   </button>
 </div>
 <div class="py-3" *ngIf="events$ | async as events">

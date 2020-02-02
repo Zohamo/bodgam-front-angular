@@ -7,14 +7,14 @@
     <ng-container *ngIf="location.addressDistrict !== ''">{{ location.addressDistrict }},</ng-container>
     <strong>{{ location.addressCity }}</strong>
   </p>
-  <button *ngIf="location.isPublic" mat-stroked-button color="accent">
+  <button *ngIf="location.isPublic" mat-stroked-button color="accent" i18n="">
     Voir l'adresse exacte
   </button>
   <app-location-detail-icons
     [isAllowedSmoking]="location.isAllowedSmoking"
     [isAccessible]="location.isAccessible"
   ></app-location-detail-icons>
-  <p *ngIf="!location.isPublic" class="note">
+  <p *ngIf="!location.isPublic" class="note" i18n="">
     Vous ne verrez l'adresse exacte qu'une fois votre présence confirmée par l'organisateur.
   </p>
 </div>
