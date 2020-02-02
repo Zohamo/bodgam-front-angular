@@ -1,4 +1,8 @@
 <ng-container [ngSwitch]="data">
+  <!-- Event -->
+  <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
+  <p *ngSwitchCase="'fail-save-event'" i18n="">Un problème est survenu lors de la sauvegarde votre évènement.</p>
+
   <!-- Geocode -->
   <p *ngSwitchCase="'fail-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
   <p *ngSwitchCase="'fail-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>

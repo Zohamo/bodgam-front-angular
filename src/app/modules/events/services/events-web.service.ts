@@ -48,27 +48,17 @@ export class EventsWebService {
   }
 
   /**
-   * Call the BackEnd to create a new event
+   * Call the BackEnd to save an event
    *
    * @param {EventRepresentation} event
    * @returns {Observable<EventRepresentation>}
    * @memberof EventsWebService
    */
-  public createEvent(event: EventRepresentation): Observable<EventRepresentation> {
+  public saveEvent(event: EventRepresentation): Observable<EventRepresentation> {
     return of(eventStub);
-    return this.http.post<EventRepresentation>(`${this.api}`, event);
-  }
-
-  /**
-   * Call the BackEnd to edit an event's data
-   *
-   * @param {EventRepresentation} event
-   * @returns {Observable<EventRepresentation>}
-   * @memberof EventsWebService
-   */
-  public updateEvent(event: EventRepresentation): Observable<EventRepresentation> {
-    return of(eventStub);
-    return this.http.patch<EventRepresentation>(`${this.api}/${event.id}`, event);
+    return event.id
+      ? this.http.patch<EventRepresentation>(`${this.api}/${event.id}`, event)
+      : this.http.post<EventRepresentation>(`${this.api}`, event);
   }
 
   /**
