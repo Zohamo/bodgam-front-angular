@@ -1,4 +1,7 @@
 <ng-container [ngSwitch]="data">
+  <!-- BGG -->
+  <p *ngSwitchCase="'fail-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
+
   <!-- Event -->
   <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
   <p *ngSwitchCase="'fail-save-event'" i18n="">Un problème est survenu lors de la sauvegarde votre évènement.</p>
@@ -6,6 +9,10 @@
   <!-- Geocode -->
   <p *ngSwitchCase="'fail-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
   <p *ngSwitchCase="'fail-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
+
+  <!-- Profile -->
+  <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>
+  <p *ngSwitchCase="'fail-save-profile'" i18n="">Un problème est survenu lors de la mise à jour votre profil.</p>
 
   <!-- Location -->
   <p *ngSwitchCase="'success-save-location'" i18n="">Votre lieu a été sauvegardé avec succès.</p>

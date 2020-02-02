@@ -10,12 +10,15 @@ import { SharedModule } from '@shared/shared.module';
 // Components
 import * as fromComponents from './components';
 import * as fromPages from './pages';
+// Entry Components
+import { ProfileFormDialogComponent } from './components/profile-form-dialog/profile-form-dialog.component';
 // UI
 import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
@@ -38,6 +41,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
@@ -51,6 +55,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     GamesModule,
     LocationsModule,
     SharedModule
-  ]
+  ],
+  entryComponents: [ProfileFormDialogComponent]
 })
 export class UsersModule {}

@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import moment from 'moment';
 
+// Entry Components
+import { ProfileFormDialogComponent } from '../profile-form-dialog/profile-form-dialog.component';
+
 // Models
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
 
@@ -12,8 +15,10 @@ import {
   faMapMarked,
   faMars,
   faMobileAlt,
+  faPenSquare,
   faVenus
 } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-user-detail',
@@ -28,6 +33,7 @@ export class UserDetailComponent {
   faMapMarked = faMapMarked;
   faMars = faMars;
   faMobileAlt = faMobileAlt;
+  faPenSquare = faPenSquare;
   faVenus = faVenus;
 
   // Inputs
@@ -36,6 +42,14 @@ export class UserDetailComponent {
   @Input() set userDetail(userDetail: UserFullRepresentation) {
     this.user = userDetail;
   }
+
+  /**
+   * Creates an instance of UserDetailComponent.
+   *
+   * @param {MatDialog} dialog
+   * @memberof UserDetailComponent
+   */
+  constructor(private dialog: MatDialog) {}
 
   /**
    * Format the birthdate for display
@@ -71,5 +85,25 @@ export class UserDetailComponent {
    */
   public shortWebsite(website: string): string {
     return website.split('://')[1];
+  }
+
+  /**
+   * Open a dialog to edit the profile
+   *
+   * @param {number} userId
+   * @memberof UserDetailComponent
+   */
+  public openProfileFormDialog(userId: number): void {
+    console.log('userId', userId);
+    const dialogRef = this.dialog.open(ProfileFormDialogComponent, {
+      data: { id: userId }
+    });
+
+    dialogRef.afterClosed().subscribe((profileSaved: UserFullRepresentation) => {
+      console.log('profileSaved', profileSaved);
+      if (profileSaved) {
+        this.user = profileSaved;
+      }
+    });
   }
 }
