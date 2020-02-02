@@ -2,11 +2,17 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
+// Models
 import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
+
+// Services
 import { EventsWebService } from '../../services/events-web.service';
 import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
-// Font Awesome
+import { SnackBarService } from '@shared/services/snack-bar.service';
+
+// UI
 import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -34,7 +40,8 @@ export class EventEditPageComponent implements OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private eventsWebService: EventsWebService,
-    private locationsWebService: LocationsWebService
+    private locationsWebService: LocationsWebService,
+    public snackBarService: SnackBarService
   ) {
     this.getEvent();
     this.event$.subscribe((event) => {
@@ -76,8 +83,23 @@ export class EventEditPageComponent implements OnDestroy {
     }
   }
 
+  /**
+   * Calls the EventsWebService to save an event
+   *
+   * @param {EventRepresentation} event
+   * @memberof EventEditPageComponent
+   */
   public saveEvent(event: EventRepresentation): void {
-    event.id ? this.eventsWebService.updateEvent(event) : this.eventsWebService.createEvent(event);
+    this.eventsWebService.saveEvent(event).subscribe(
+      (eventSaved) => {
+        console.log('event saved', eventSaved);
+        this.snackBarService.open('success-save-event');
+      },
+      (error) => {
+        console.log('ERROR saving event', error);
+        this.snackBarService.open('fail-save-event');
+      }
+    );
   }
 
   /**

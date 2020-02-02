@@ -1,18 +1,18 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import moment from 'moment';
 
 // Entry components
 import { LocationFormDialogComponent } from 'src/app/modules/locations/components/location-form-dialog/location-form-dialog.component';
 
 // Models
+import { Country } from '@shared/models/country.model';
 import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 
 // UI
 import { faCheck, faPlusSquare, faPenSquare, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { Country } from '@shared/models/country.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-event-form',

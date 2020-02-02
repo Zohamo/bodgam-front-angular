@@ -31,8 +31,8 @@ export class LocationsWebService {
    * @memberof LocationsWebService
    */
   public getLocations(): Observable<LocationRepresentation[]> {
-    // return this.http.get<LocationRepresentation[]>(`{$this.api}`);
     return of(locationsStub);
+    return this.http.get<LocationRepresentation[]>(`{$this.api}`);
   }
 
   /**
@@ -49,31 +49,7 @@ export class LocationsWebService {
   }
 
   /**
-   * Call the BackEnd to create a new location
-   *
-   * @param {LocationFullRepresentation} location
-   * @returns {Observable<LocationFullRepresentation>}
-   * @memberof LocationsWebService
-   */
-  public createLocation(location: LocationFullRepresentation): Observable<LocationFullRepresentation> {
-    // return this.http.post<LocationFullRepresentation>(`${this.api}`, location);
-    return of(locationStub);
-  }
-
-  /**
-   * Call the BackEnd to edit a location's data
-   *
-   * @param {LocationFullRepresentation} location
-   * @returns {Observable<LocationFullRepresentation>}
-   * @memberof LocationsWebService
-   */
-  public updateLocation(location: LocationFullRepresentation): Observable<LocationFullRepresentation> {
-    // return this.http.patch<LocationFullRepresentation>(`${this.api}/${location.id}`, location);
-    return of(locationStub);
-  }
-
-  /**
-   * Call the BackEnd to save a location's data
+   * Call the BackEnd to save a location
    *
    * @param {LocationFullRepresentation} location
    * @returns {Observable<LocationFullRepresentation>}
@@ -94,7 +70,7 @@ export class LocationsWebService {
    * @memberof LocationsWebService
    */
   public deleteLocation(locationId: number): Observable<LocationFullRepresentation> {
-    // return this.http.delete<LocationFullRepresentation>(`${this.api}/${locationId}`);
     return of(locationStub);
+    return this.http.delete<LocationFullRepresentation>(`${this.api}/${locationId}`);
   }
 }

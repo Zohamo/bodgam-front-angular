@@ -19,10 +19,10 @@ import { GeocodeResultLocation } from '@shared/models/geocode/geocode-result-loc
 import { LocationsWebService } from '../../services/locations-web.service';
 import { CountriesWebService } from '@shared/services/countries-web.service';
 import { GeolocationWebService } from '@shared/services/geolocation-web.service';
+import { SnackBarService } from '@shared/services/snack-bar.service';
 
 // UI
 import { faAngleDoubleDown, faAngleDoubleUp, faCheck, faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-location-form-dialog',
@@ -64,7 +64,7 @@ export class LocationFormDialogComponent {
     private countriesWebService: CountriesWebService,
     private geolocationWebService: GeolocationWebService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {
     this.createForm();
     console.log('data', data);
@@ -218,12 +218,12 @@ export class LocationFormDialogComponent {
       this.locationsWebService.saveLocation(this.prepareSaveEntity()).subscribe(
         (locationSaved) => {
           console.log('location saved', locationSaved);
-          this.openSnackBar('success-save-location');
+          this.snackBarService.open('success-save-location');
           this.dialogRef.close(locationSaved);
         },
         (error) => {
           console.log('ERROR saving location', error);
-          this.openSnackBar('fail-save-location');
+          this.snackBarService.open('fail-save-location');
           this.isLoading = false;
         }
       );
@@ -237,19 +237,6 @@ export class LocationFormDialogComponent {
    */
   public onClose(): void {
     this.dialogRef.close();
-  }
-
-  /**
-   * Open Material Snack Bar
-   *
-   * @param {string} messageKey
-   * @memberof LocationFormDialogComponent
-   */
-  public openSnackBar(messageKey: string): void {
-    this.snackBar.openFromComponent(SnackBarMessageComponent, {
-      data: messageKey,
-      duration: AppConfig.SNACK_BAR_DURATION
-    });
   }
 
   /**
@@ -277,12 +264,12 @@ export class LocationFormDialogComponent {
           if (geocode && geocode.results[0].locations.length) {
             this.populateAddress(geocode.results[0].locations[0]);
           } else {
-            this.openSnackBar('fail-reverse-geocode');
+            this.snackBarService.open('fail-reverse-geocode');
           }
         },
         (error) => {
           console.log('ERROR reverse geocode', error);
-          this.openSnackBar('fail-reverse-geocode');
+          this.snackBarService.open('fail-reverse-geocode');
         }
       );
   }
@@ -312,12 +299,12 @@ export class LocationFormDialogComponent {
           // Patch form coords
           this.populateCoords(this.coords);
         } else {
-          this.openSnackBar('fail-geocode');
+          this.snackBarService.open('fail-geocode');
         }
       },
       (error) => {
         console.log('ERROR geocode', error);
-        this.openSnackBar('fail-geocode');
+        this.snackBarService.open('fail-geocode');
       }
     );
   }

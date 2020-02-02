@@ -27,7 +27,7 @@ export class UsersWebService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Call the BackEnd to retrieve the users's list
+   * Call the BackEnd to retrieve the users list
    *
    * @returns {Observable<UserRepresentation[]>}
    * @memberof UsersWebService
@@ -54,29 +54,21 @@ export class UsersWebService {
   }
 
   /**
-   * Call the BackEnd to create a new user
+   * Call the BackEnd to save the user's data
    *
    * @param {UserFullRepresentation} user
    * @returns {Observable<UserFullRepresentation>}
    * @memberof UsersWebService
    */
-  public createUser(user: UserFullRepresentation): Observable<UserFullRepresentation> {
-    return this.http.post<UserFullRepresentation>(`${this.api}/${user.id}`, user);
+  public saveUser(user: UserFullRepresentation): Observable<UserFullRepresentation> {
+    return of(userStub);
+    return user.id
+      ? this.http.patch<UserFullRepresentation>(`${this.api}/${user.id}`, user)
+      : this.http.post<UserFullRepresentation>(`${this.api}`, user);
   }
 
   /**
-   * Call the BackEnd to edit a user's data
-   *
-   * @param {UserFullRepresentation} user
-   * @returns {Observable<UserFullRepresentation>}
-   * @memberof UsersWebService
-   */
-  public updateUser(user: UserFullRepresentation): Observable<UserFullRepresentation> {
-    return this.http.patch<UserFullRepresentation>(`${this.api}/${user.id}`, user);
-  }
-
-  /**
-   * Call the BackEnd to edit a user's privacy data
+   * Call the BackEnd to edit the user's privacy data
    *
    * @param {UserFullRepresentation} user
    * @returns {Observable<UserFullRepresentation>}

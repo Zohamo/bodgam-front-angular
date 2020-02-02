@@ -2,12 +2,17 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { UsersWebService } from '../../services/users-web.service';
-import { UserFullRepresentation } from '../../models/user-full-representation.model';
-import { CountriesWebService } from '@shared/services/countries-web.service';
-import { Country } from '@shared/models/country.model';
+
+// Models
 import { BggGameRepresentation } from '@shared/models/bgg/bgg-game-representation.model';
+import { Country } from '@shared/models/country.model';
+import { UserFullRepresentation } from '../../models/user-full-representation.model';
+
+// Services
 import { BggWebService } from '@shared/services/bgg-web.service';
+import { CountriesWebService } from '@shared/services/countries-web.service';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { UsersWebService } from '../../services/users-web.service';
 
 @Component({
   selector: 'app-user-edit-page',
@@ -33,7 +38,8 @@ export class UserEditPageComponent implements OnDestroy {
     private route: ActivatedRoute,
     private usersWebService: UsersWebService,
     private countriesWebService: CountriesWebService,
-    private bggWebService: BggWebService
+    private bggWebService: BggWebService,
+    public snackBarService: SnackBarService
   ) {
     this.getUser();
     this.getCountries();
@@ -98,30 +104,21 @@ export class UserEditPageComponent implements OnDestroy {
   }
 
   /**
-   * Create or Edit the user's data through the web service
+   * Calls the UsersWebService to save the user's data
    *
    * @param {UserFullRepresentation} user
    * @memberof UserEditPageComponent
    */
   public updateUser(user: UserFullRepresentation): void {
-    if (!user.id) {
-      this.usersWebService.createUser(user).subscribe(
-        (userResponse: UserFullRepresentation) => {
-          console.log('createUser OK', userResponse);
-        },
-        (error) => {
-          console.log('createUser ERROR', error);
-        }
-      );
-    } else {
-      this.usersWebService.updateUser(user).subscribe(
-        (userResponse: UserFullRepresentation) => {
-          console.log('updateUser OK', userResponse);
-        },
-        (error) => {
-          console.log('updateUser ERROR', error);
-        }
-      );
-    }
+    this.usersWebService.saveUser(user).subscribe(
+      (userSaved) => {
+        console.log('user saved', userSaved);
+        this.snackBarService.open('success-save-user');
+      },
+      (error) => {
+        console.log('ERROR saving user', error);
+        this.snackBarService.open('fail-save-user');
+      }
+    );
   }
 }
