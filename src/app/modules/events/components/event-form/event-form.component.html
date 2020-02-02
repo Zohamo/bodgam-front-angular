@@ -206,8 +206,8 @@
       <button mat-raised-button type="button" color="primary" [disabled]="!eventForm.valid" (click)="onSubmit()">
         <fa-icon *ngIf="eventForm.valid" [icon]="faCheck"></fa-icon>
         <fa-icon *ngIf="!eventForm.valid" [icon]="faTimesCircle"></fa-icon>
-        <ng-container *ngIf="this.event.id === null" i18n>Créer</ng-container>
-        <ng-container *ngIf="this.event.id !== null" i18n>Modifier</ng-container>
+        <span *ngIf="this.event.id === null" i18n>Créer</span>
+        <span *ngIf="this.event.id !== null" i18n>Modifier</span>
       </button>
     </mat-card-actions>
   </form>

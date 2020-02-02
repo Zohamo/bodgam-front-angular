@@ -50,11 +50,11 @@
       <div class="d-flex justify-content-around mt-3">
         <button mat-raised-button type="button" color="accent" (click)="onReverseGeocode()" i18n="">
           <fa-icon [icon]="faAngleDoubleDown"></fa-icon>
-          Récupérer l'adresse depuis la carte
+          <span i18n="">Récupérer l'adresse depuis la carte</span>
         </button>
         <button mat-raised-button type="button" color="accent" (click)="onGeocode()" i18n="">
           <fa-icon [icon]="faAngleDoubleUp"></fa-icon>
-          Chercher l'adresse sur la carte
+          <span i18n="">Chercher l'adresse sur la carte</span>
         </button>
       </div>
     </section>
@@ -158,7 +158,7 @@
   <button mat-raised-button type="button" color="primary" [disabled]="!locationForm.valid" (click)="onSubmit()">
     <fa-icon *ngIf="locationForm.valid" [icon]="faCheck"></fa-icon>
     <fa-icon *ngIf="!locationForm.valid" [icon]="faTimesCircle"></fa-icon>
-    <ng-container *ngIf="location.id === null" i18n>Créer</ng-container>
-    <ng-container *ngIf="location.id !== null" i18n>Modifier</ng-container>
+    <span *ngIf="location.id === null" i18n>Créer</span>
+    <span *ngIf="location.id !== null" i18n>Modifier</span>
   </button>
 </div>
