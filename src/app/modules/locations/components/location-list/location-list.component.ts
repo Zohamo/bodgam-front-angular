@@ -70,7 +70,7 @@ export class LocationListComponent implements OnInit {
   }
 
   /**
-   * Open the dialog to edit a location
+   * Open a dialog to edit a location
    *
    * @param {number} locationId
    * @memberof LocationListComponent

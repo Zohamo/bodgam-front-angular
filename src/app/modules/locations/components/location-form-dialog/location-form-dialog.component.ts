@@ -2,11 +2,7 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppConfig } from 'src/app/config/app.config';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-// Entry Components
-import { SnackBarMessageComponent } from '@shared/components/snack-bar-message/snack-bar-message.component';
 
 // Models
 import { LocationFullRepresentation } from '../../models/location-full-representation';

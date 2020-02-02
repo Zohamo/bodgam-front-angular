@@ -1,8 +1,0 @@
-<app-user-form
-  *ngIf="user$ | async as user"
-  [userEditing]="user"
-  [countryList]="countries"
-  (getBggGames)="getGames($event)"
-  [gamesList]="games"
-  (saveUser)="updateUser($event)"
-></app-user-form>
