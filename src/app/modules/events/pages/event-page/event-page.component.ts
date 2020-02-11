@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+
+// Models
 import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationFullRepresentation } from 'src/app/modules/locations/models/location-full-representation';
+
+// Services
 import { EventsWebService } from '../../services/events-web.service';
 import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
 
@@ -12,7 +16,9 @@ import { LocationsWebService } from 'src/app/modules/locations/services/location
   templateUrl: './event-page.component.html',
   styleUrls: ['./event-page.component.scss']
 })
-export class EventPageComponent {
+export class EventPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public event$: Observable<EventRepresentation>;
   public location: LocationFullRepresentation;
 
@@ -30,9 +36,19 @@ export class EventPageComponent {
     private locationsWebService: LocationsWebService
   ) {
     this.getEvent();
-    this.event$.subscribe((event) => {
+    this.event$.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       this.getLocation(event.location.id);
     });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof EventPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -55,8 +71,11 @@ export class EventPageComponent {
    * @memberof EventPageComponent
    */
   private getLocation(locationId: number): void {
-    this.locationsWebService.getLocation(locationId).subscribe((location) => {
-      this.location = location;
-    });
+    this.locationsWebService
+      .getLocation(locationId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((location) => {
+        this.location = location;
+      });
   }
 }

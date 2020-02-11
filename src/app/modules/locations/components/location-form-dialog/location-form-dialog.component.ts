@@ -1,8 +1,8 @@
-import { Component, Inject, ViewChild } from '@angular/core';
-import { forkJoin } from 'rxjs';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { Component, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { forkJoin, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // Models
 import { LocationFullRepresentation } from '../../models/location-full-representation';
@@ -19,13 +19,16 @@ import { SnackBarService } from '@shared/services/snack-bar.service';
 
 // UI
 import { faAngleDoubleDown, faAngleDoubleUp, faCheck, faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-location-form-dialog',
   templateUrl: './location-form-dialog.component.html',
   styleUrls: ['./location-form-dialog.component.scss']
 })
-export class LocationFormDialogComponent {
+export class LocationFormDialogComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public isLoading = true;
   public locationForm: FormGroup;
   public location: LocationFullRepresentation;
@@ -65,8 +68,9 @@ export class LocationFormDialogComponent {
     this.createForm();
     console.log('data', data);
 
-    forkJoin(this.locationsWebService.getLocation(data.id), this.countriesWebService.getCountries()).subscribe(
-      ([location, countries]) => {
+    forkJoin(this.locationsWebService.getLocation(data.id), this.countriesWebService.getCountries())
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([location, countries]) => {
         console.log('location', location);
         console.log('countries', countries);
         this.location = location;
@@ -81,8 +85,17 @@ export class LocationFormDialogComponent {
           latitude: this.location.coordsLatitude,
           longitude: this.location.coordsLongitude
         };
-      }
-    );
+      });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof LocationFormDialogComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -211,18 +224,21 @@ export class LocationFormDialogComponent {
     if (this.locationForm.valid) {
       console.log('onSubmit location', this.prepareSaveEntity());
       this.isLoading = true;
-      this.locationsWebService.saveLocation(this.prepareSaveEntity()).subscribe(
-        (locationSaved) => {
-          console.log('location saved', locationSaved);
-          this.snackBarService.open('success-save-location');
-          this.dialogRef.close(locationSaved);
-        },
-        (error) => {
-          console.log('ERROR saving location', error);
-          this.snackBarService.open('fail-save-location');
-          this.isLoading = false;
-        }
-      );
+      this.locationsWebService
+        .saveLocation(this.prepareSaveEntity())
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          (locationSaved) => {
+            console.log('location saved', locationSaved);
+            this.snackBarService.open('success-save-location');
+            this.dialogRef.close(locationSaved);
+          },
+          (error) => {
+            console.log('ERROR saving location', error);
+            this.snackBarService.open('fail-save-location');
+            this.isLoading = false;
+          }
+        );
     }
   }
 
@@ -254,6 +270,7 @@ export class LocationFormDialogComponent {
   public onReverseGeocode(): void {
     this.geolocationWebService
       .reverseGeocode(this.locationForm.value.coordsLatitude, this.locationForm.value.coordsLongitude)
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         (geocode: Geocode) => {
           console.log('reverse geocode', geocode);
@@ -280,29 +297,32 @@ export class LocationFormDialogComponent {
       this.locationForm.get('addressZipCode').value
     } ${this.locationForm.get('addressCity').value}`;
 
-    this.geolocationWebService.geocode(address).subscribe(
-      (geocode: Geocode) => {
-        console.log('geocode', geocode);
-        if (geocode && geocode.results[0].locations.length) {
-          // Set showExactLocation to true
-          this.locationForm.get('showExactLocation').setValue(true);
-          // Set this.coords
-          this.coords = {
-            accuracy: 0,
-            latitude: geocode.results[0].locations[0].latLng.lat,
-            longitude: geocode.results[0].locations[0].latLng.lng
-          };
-          // Patch form coords
-          this.populateCoords(this.coords);
-        } else {
+    this.geolocationWebService
+      .geocode(address)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (geocode: Geocode) => {
+          console.log('geocode', geocode);
+          if (geocode && geocode.results[0].locations.length) {
+            // Set showExactLocation to true
+            this.locationForm.get('showExactLocation').setValue(true);
+            // Set this.coords
+            this.coords = {
+              accuracy: 0,
+              latitude: geocode.results[0].locations[0].latLng.lat,
+              longitude: geocode.results[0].locations[0].latLng.lng
+            };
+            // Patch form coords
+            this.populateCoords(this.coords);
+          } else {
+            this.snackBarService.open('fail-geocode');
+          }
+        },
+        (error) => {
+          console.log('ERROR geocode', error);
           this.snackBarService.open('fail-geocode');
         }
-      },
-      (error) => {
-        console.log('ERROR geocode', error);
-        this.snackBarService.open('fail-geocode');
-      }
-    );
+      );
   }
 
   /**

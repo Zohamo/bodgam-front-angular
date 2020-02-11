@@ -1,6 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// Models
 import { LocationFullRepresentation } from '../../models/location-full-representation';
 import { GeoCoordinates } from '@shared/models/geo-coordinates.model';
+
+// Services
 import { LocationsWebService } from '../../services/locations-web.service';
 
 // UI
@@ -12,31 +18,56 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './location-detail-dialog.component.html',
   styleUrls: ['./location-detail-dialog.component.scss']
 })
-export class LocationDetailDialogComponent {
-  faBuilding = faBuilding;
+export class LocationDetailDialogComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public location: LocationFullRepresentation;
   public address: string;
   public coords: GeoCoordinates = new GeoCoordinates();
   public triggerCenterMap = false;
 
+  // UI
+  faBuilding = faBuilding;
+
+  /**
+   * Creates an instance of LocationDetailDialogComponent.
+   *
+   * @param {MatDialogRef<LocationDetailDialogComponent>} dialogRef
+   * @param {*} data
+   * @param {LocationsWebService} locationsWebService
+   * @memberof LocationDetailDialogComponent
+   */
   constructor(
     public dialogRef: MatDialogRef<LocationDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private locationsWebService: LocationsWebService
   ) {
     console.log('data', data);
-    this.locationsWebService.getLocation(data.id).subscribe(
-      (location: LocationFullRepresentation) => {
-        if (location) {
-          this.location = location;
-          this.buildAddress();
-          this.buildCoords();
+    this.locationsWebService
+      .getLocation(data.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (location: LocationFullRepresentation) => {
+          if (location) {
+            this.location = location;
+            this.buildAddress();
+            this.buildCoords();
+          }
+        },
+        (error) => {
+          console.log('ERROR getting location', error);
         }
-      },
-      (error) => {
-        console.log('ERROR getting location', error);
-      }
-    );
+      );
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof LocationDetailDialogComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
