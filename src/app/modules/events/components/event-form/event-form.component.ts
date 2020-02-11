@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 // Entry components
 import { LocationFormDialogComponent } from 'src/app/modules/locations/components/location-form-dialog/location-form-dialog.component';
@@ -20,15 +22,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./event-form.component.scss']
 })
 export class EventFormComponent {
-  // Font Awesome
+  public eventForm: FormGroup;
+  public today: Date;
+  public hasNoLocation: boolean;
+
+  // UI
+
   faCheck = faCheck;
   faPlusSquare = faPlusSquare;
   faPenSquare = faPenSquare;
   faTimesCircle = faTimesCircle;
-
-  public eventForm: FormGroup;
-  public today: Date;
-  public hasNoLocation: boolean;
 
   // Inputs
 
@@ -210,7 +213,7 @@ export class EventFormComponent {
       data: { id: locationId }
     });
 
-    dialogRef.afterClosed().subscribe((locationSaved: LocationRepresentation) => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe((locationSaved: LocationRepresentation) => {
       console.log('locationSaved', locationSaved);
       if (locationSaved) {
         if (locationId) {

@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, Subscription, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, Subscription, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, take } from 'rxjs/operators';
 
 // Models
 import { EventRepresentation } from '../../models/event-representation.model';
@@ -21,13 +21,14 @@ import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./event-edit-page.component.scss']
 })
 export class EventEditPageComponent implements OnDestroy {
-  // Font Awesome
-  faCalendarPlus = faCalendarPlus;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   public event$: Observable<EventRepresentation>;
   public userLocations: LocationRepresentation[];
 
-  private routeParamSubscribe: Subscription;
+  // UI
+
+  faCalendarPlus = faCalendarPlus;
 
   /**
    * Creates an instance of EventEditPageComponent.
@@ -44,7 +45,7 @@ export class EventEditPageComponent implements OnDestroy {
     public snackBarService: SnackBarService
   ) {
     this.getEvent();
-    this.event$.subscribe((event) => {
+    this.event$.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       this.getLocations();
     });
   }
@@ -54,10 +55,9 @@ export class EventEditPageComponent implements OnDestroy {
    *
    * @memberof EventEditPageComponent
    */
-  ngOnDestroy() {
-    if (this.routeParamSubscribe) {
-      this.routeParamSubscribe.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -68,7 +68,7 @@ export class EventEditPageComponent implements OnDestroy {
    */
   private getEvent(): void {
     if (this.route) {
-      this.routeParamSubscribe = this.route.data.subscribe((data) => {
+      this.route.data.pipe(takeUntil(this.destroy$)).subscribe((data) => {
         switch (data.name) {
           case 'create':
             this.event$ = of(new EventRepresentation());
@@ -90,16 +90,19 @@ export class EventEditPageComponent implements OnDestroy {
    * @memberof EventEditPageComponent
    */
   public saveEvent(event: EventRepresentation): void {
-    this.eventsWebService.saveEvent(event).subscribe(
-      (eventSaved) => {
-        console.log('event saved', eventSaved);
-        this.snackBarService.open('success-save-event');
-      },
-      (error) => {
-        console.log('ERROR saving event', error);
-        this.snackBarService.open('fail-save-event');
-      }
-    );
+    this.eventsWebService
+      .saveEvent(event)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (eventSaved) => {
+          console.log('event saved', eventSaved);
+          this.snackBarService.open('success-save-event');
+        },
+        (error) => {
+          console.log('ERROR saving event', error);
+          this.snackBarService.open('fail-save-event');
+        }
+      );
   }
 
   /**
@@ -109,8 +112,11 @@ export class EventEditPageComponent implements OnDestroy {
    * @memberof EventEditPageComponent
    */
   private getLocations(): void {
-    this.locationsWebService.getLocations().subscribe((locations) => {
-      this.userLocations = locations ? locations : [];
-    });
+    this.locationsWebService
+      .getLocations()
+      .pipe(take(1))
+      .subscribe((locations) => {
+        this.userLocations = locations ? locations : [];
+      });
   }
 }

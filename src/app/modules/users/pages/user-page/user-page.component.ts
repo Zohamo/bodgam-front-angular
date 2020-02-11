@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 // Models
 import { HttpErrorResponse } from '@angular/common/http';
@@ -24,7 +24,9 @@ import { LocationsWebService } from 'src/app/modules/locations/services/location
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent {
+export class UserPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public user$: Observable<UserFullRepresentation>;
   public games: BggGameRepresentation[];
   public events: EventRepresentation[];
@@ -61,7 +63,7 @@ export class UserPageComponent {
     private locationsWebService: LocationsWebService
   ) {
     this.getUser();
-    this.user$.subscribe((user: UserFullRepresentation) => {
+    this.user$.pipe(takeUntil(this.destroy$)).subscribe((user: UserFullRepresentation) => {
       if (user.bggName) {
         this.getGames(user.bggName);
       }
@@ -70,6 +72,16 @@ export class UserPageComponent {
         this.getLocations();
       }
     });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof UserPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -92,16 +104,19 @@ export class UserPageComponent {
    * @memberof UserPageComponent
    */
   private getGames(bggName: string): void {
-    this.bggWebService.getCollection(bggName).subscribe(
-      (games: BggGameRepresentation[]) => {
-        this.games = games && games.length > 0 ? games : null;
-        this.isLoadingGames = false;
-      },
-      (error: HttpErrorResponse) => {
-        console.log('bgg getCollection error', error);
-        this.isLoadingGames = false;
-      }
-    );
+    this.bggWebService
+      .getCollection(bggName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (games: BggGameRepresentation[]) => {
+          this.games = games && games.length > 0 ? games : null;
+          this.isLoadingGames = false;
+        },
+        (error: HttpErrorResponse) => {
+          console.log('bgg getCollection error', error);
+          this.isLoadingGames = false;
+        }
+      );
   }
 
   /**
@@ -112,16 +127,19 @@ export class UserPageComponent {
    * @memberof UserPageComponent
    */
   private getEvents(userId: number): void {
-    this.eventsWebService.getEvents(userId).subscribe(
-      (events) => {
-        this.events = events && events.length > 0 ? events : null;
-        this.isLoadingEvents = false;
-      },
-      (error: HttpErrorResponse) => {
-        console.log('getEvents error', error);
-        this.isLoadingEvents = false;
-      }
-    );
+    this.eventsWebService
+      .getEvents(userId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (events) => {
+          this.events = events && events.length > 0 ? events : null;
+          this.isLoadingEvents = false;
+        },
+        (error: HttpErrorResponse) => {
+          console.log('getEvents error', error);
+          this.isLoadingEvents = false;
+        }
+      );
   }
 
   /**
@@ -131,16 +149,19 @@ export class UserPageComponent {
    * @memberof UserPageComponent
    */
   private getLocations(): void {
-    this.locationsWebService.getLocations().subscribe(
-      (locations) => {
-        this.locations = locations && locations.length > 0 ? locations : null;
-        this.isLoadingLocations = false;
-      },
-      (error: HttpErrorResponse) => {
-        console.log('getLocations error', error);
-        this.isLoadingLocations = false;
-      }
-    );
+    this.locationsWebService
+      .getLocations()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (locations) => {
+          this.locations = locations && locations.length > 0 ? locations : null;
+          this.isLoadingLocations = false;
+        },
+        (error: HttpErrorResponse) => {
+          console.log('getLocations error', error);
+          this.isLoadingLocations = false;
+        }
+      );
   }
 
   /**
@@ -150,13 +171,16 @@ export class UserPageComponent {
    * @memberof UserPageComponent
    */
   public updateUserPrivacy(user: UserFullRepresentation): void {
-    this.usersWebService.updateUserPrivacy(user).subscribe(
-      (userResponse: UserFullRepresentation) => {
-        console.log('updateUserPrivacy OK', userResponse);
-      },
-      (error: HttpErrorResponse) => {
-        console.log('updateUserPrivacy ERROR', error);
-      }
-    );
+    this.usersWebService
+      .updateUserPrivacy(user)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (userResponse: UserFullRepresentation) => {
+          console.log('updateUserPrivacy OK', userResponse);
+        },
+        (error: HttpErrorResponse) => {
+          console.log('updateUserPrivacy ERROR', error);
+        }
+      );
   }
 }

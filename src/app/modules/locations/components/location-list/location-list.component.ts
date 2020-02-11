@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 // Entry components
 import { LocationDetailDialogComponent } from '../location-detail-dialog/location-detail-dialog.component';
@@ -19,11 +20,14 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./location-list.component.scss']
 })
 export class LocationListComponent implements OnInit {
+  public displayedColumns: string[] = ['privacy', 'name', 'location', 'icons', 'actions'];
+  public dataSource: MatTableDataSource<LocationRepresentation>;
+
+  // UI
   faPenSquare = faPenSquare;
   faTrash = faTrash;
 
-  public displayedColumns: string[] = ['privacy', 'name', 'location', 'icons', 'actions'];
-  public dataSource: MatTableDataSource<LocationRepresentation>;
+  // View Children
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -81,16 +85,19 @@ export class LocationListComponent implements OnInit {
       data: { id: locationId }
     });
 
-    dialogRef.afterClosed().subscribe((locationSaved: LocationRepresentation) => {
-      console.log('locationSaved', locationSaved);
-      if (locationSaved) {
-        this.locations.map((location) => {
-          if (location.id === locationSaved.id) {
-            location = locationSaved;
-          }
-        });
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((locationSaved: LocationRepresentation) => {
+        console.log('locationSaved', locationSaved);
+        if (locationSaved) {
+          this.locations.map((location) => {
+            if (location.id === locationSaved.id) {
+              location = locationSaved;
+            }
+          });
+        }
+      });
   }
 
   /**

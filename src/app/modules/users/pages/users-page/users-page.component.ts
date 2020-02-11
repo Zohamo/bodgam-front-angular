@@ -1,20 +1,31 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { UsersWebService } from '../../services/users-web.service';
-import { UserRepresentation } from '../../models/user-representation.model';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { CountriesWebService } from '@shared/services/countries-web.service';
+import { Component, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// Models
 import { Country } from '@shared/models/country.model';
+import { UserRepresentation } from '../../models/user-representation.model';
+
+// Services
+import { CountriesWebService } from '@shared/services/countries-web.service';
+import { UsersWebService } from '../../services/users-web.service';
+
+// UI
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-users-page',
   templateUrl: './users-page.component.html',
   styleUrls: ['./users-page.component.scss']
 })
-export class UsersPageComponent {
-  faUsers = faUsers;
+export class UsersPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public users$: Observable<UserRepresentation[]>;
   public countries: Country[];
+
+  // UI
+  faUsers = faUsers;
 
   /**
    * Creates an instance of UsersPageComponent.
@@ -26,6 +37,16 @@ export class UsersPageComponent {
   constructor(private usersWebService: UsersWebService, private countriesWebService: CountriesWebService) {
     this.getUsers();
     this.getCountries();
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof UsersPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -45,8 +66,11 @@ export class UsersPageComponent {
    * @memberof UserEditPageComponent
    */
   private getCountries(): void {
-    this.countriesWebService.getCountries().subscribe((countries) => {
-      this.countries = countries;
-    });
+    this.countriesWebService
+      .getCountries()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((countries) => {
+        this.countries = countries;
+      });
   }
 }

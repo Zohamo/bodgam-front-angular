@@ -19,6 +19,7 @@ import {
   faVenus
 } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-detail',
@@ -99,11 +100,14 @@ export class UserDetailComponent {
       data: { id: userId }
     });
 
-    dialogRef.afterClosed().subscribe((profileSaved: UserFullRepresentation) => {
-      console.log('profileSaved', profileSaved);
-      if (profileSaved) {
-        this.user = profileSaved;
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((profileSaved: UserFullRepresentation) => {
+        console.log('profileSaved', profileSaved);
+        if (profileSaved) {
+          this.user = profileSaved;
+        }
+      });
   }
 }

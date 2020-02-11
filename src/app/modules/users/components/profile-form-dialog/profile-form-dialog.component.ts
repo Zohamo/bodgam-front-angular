@@ -1,8 +1,7 @@
-import { Component, Inject, Output, EventEmitter } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import moment from 'moment';
+import { forkJoin, Subject } from 'rxjs';
 
 // Models
 import { UserFullRepresentation } from '../../models/user-full-representation.model';
@@ -17,19 +16,24 @@ import { UsersWebService } from '../../services/users-web.service';
 
 // UI
 import { faCheck, faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-form-dialog',
   templateUrl: './profile-form-dialog.component.html',
   styleUrls: ['./profile-form-dialog.component.scss']
 })
-export class ProfileFormDialogComponent {
+export class ProfileFormDialogComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public user: UserFullRepresentation;
   public userForm: FormGroup;
   public today: Date;
   public countries: Country[];
   public games: BggGameRepresentation[];
   public isLoadingBggGames: boolean;
+
   // UI
   faCheck = faCheck;
   faTimesCircle = faTimesCircle;
@@ -54,8 +58,9 @@ export class ProfileFormDialogComponent {
     this.createForm();
 
     console.log('data', data);
-    forkJoin(this.usersWebService.getUser(data.id), this.countriesWebService.getCountries()).subscribe(
-      ([user, countries]) => {
+    forkJoin(this.usersWebService.getUser(data.id), this.countriesWebService.getCountries())
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([user, countries]) => {
         console.log('user', user);
         console.log('countries', countries);
         this.user = user;
@@ -63,8 +68,17 @@ export class ProfileFormDialogComponent {
 
         this.populateForm();
         this.userForm.get('country').enable();
-      }
-    );
+      });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof ProfileFormDialogComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**
@@ -144,17 +158,20 @@ export class ProfileFormDialogComponent {
   public onSubmit(): void {
     if (this.userForm.valid) {
       console.log('userForm', this.prepareSaveEntity());
-      this.usersWebService.saveUser(this.prepareSaveEntity()).subscribe(
-        (profileSaved) => {
-          console.log('profile saved', profileSaved);
-          this.snackBarService.open('success-save-profile');
-          this.dialogRef.close(profileSaved);
-        },
-        (error) => {
-          console.log('ERROR saving profile', error);
-          this.snackBarService.open('fail-save-profile');
-        }
-      );
+      this.usersWebService
+        .saveUser(this.prepareSaveEntity())
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          (profileSaved) => {
+            console.log('profile saved', profileSaved);
+            this.snackBarService.open('success-save-profile');
+            this.dialogRef.close(profileSaved);
+          },
+          (error) => {
+            console.log('ERROR saving profile', error);
+            this.snackBarService.open('fail-save-profile');
+          }
+        );
     }
   }
 
@@ -174,18 +191,21 @@ export class ProfileFormDialogComponent {
    */
   public onGetBggGames(): void {
     this.isLoadingBggGames = true;
-    this.bggWebService.getCollection(this.userForm.value.bggName).subscribe(
-      (games) => {
-        this.isLoadingBggGames = false;
-        console.log('games', games);
-        this.games = games;
-      },
-      (error) => {
-        this.isLoadingBggGames = false;
-        console.log('ERROR get games', error);
-        this.snackBarService.open('fail-bgg-user');
-      }
-    );
+    this.bggWebService
+      .getCollection(this.userForm.value.bggName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (games) => {
+          this.isLoadingBggGames = false;
+          console.log('games', games);
+          this.games = games;
+        },
+        (error) => {
+          this.isLoadingBggGames = false;
+          console.log('ERROR get games', error);
+          this.snackBarService.open('fail-bgg-user');
+        }
+      );
   }
 
   /**

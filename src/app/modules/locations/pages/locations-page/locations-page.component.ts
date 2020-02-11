@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
-import { LocationRepresentation } from '../../models/location-representation.model';
-import { LocationsWebService } from '../../services/locations-web.service';
+import { Component, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 
 // Entry components
 import { LocationFormDialogComponent } from '../../components/location-form-dialog/location-form-dialog.component';
+
+// Models
+import { LocationRepresentation } from '../../models/location-representation.model';
+
+// Services
+import { LocationsWebService } from '../../services/locations-web.service';
 
 // UI
 import { faMapMarked, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
@@ -14,11 +20,14 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './locations-page.component.html',
   styleUrls: ['./locations-page.component.scss']
 })
-export class LocationsPageComponent {
-  faMapMarked = faMapMarked;
-  faMapMarkedAlt = faMapMarkedAlt;
+export class LocationsPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   public locations: LocationRepresentation[];
+
+  // UI
+  faMapMarked = faMapMarked;
+  faMapMarkedAlt = faMapMarkedAlt;
 
   /**
    * Creates an instance of LocationsPageComponent.
@@ -31,22 +40,35 @@ export class LocationsPageComponent {
   }
 
   /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof LocationsPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  /**
    * Call LocationsWebService to get the user's locations
    *
    * @private
    * @memberof LocationsPageComponent
    */
   private getLocations(): void {
-    this.locationsWebService.getLocations().subscribe(
-      (locations) => {
-        if (locations) {
-          this.locations = locations;
+    this.locationsWebService
+      .getLocations()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (locations) => {
+          if (locations) {
+            this.locations = locations;
+          }
+        },
+        (error) => {
+          console.log('getLocations ERROR', error);
         }
-      },
-      (error) => {
-        console.log('getLocations ERROR', error);
-      }
-    );
+      );
   }
 
   /**
@@ -59,13 +81,16 @@ export class LocationsPageComponent {
       data: { id: null }
     });
 
-    dialogRef.afterClosed().subscribe((locationSaved: LocationRepresentation) => {
-      console.log('locationSaved', locationSaved);
-      if (locationSaved) {
-        this.locations.push(locationSaved);
-        this.locations = this.locations.concat();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((locationSaved: LocationRepresentation) => {
+        console.log('locationSaved', locationSaved);
+        if (locationSaved) {
+          this.locations.push(locationSaved);
+          this.locations = this.locations.concat();
+        }
+      });
   }
 
   /**
@@ -75,9 +100,12 @@ export class LocationsPageComponent {
    * @memberof LocationsPageComponent
    */
   public deleteLocation(id: number): void {
-    this.locationsWebService.deleteLocation(id).subscribe(() => {
-      console.log(`location ${id} successfully deleted`);
-      this.locations = this.locations.filter((location) => location.id !== id);
-    });
+    this.locationsWebService
+      .deleteLocation(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        console.log(`location ${id} successfully deleted`);
+        this.locations = this.locations.filter((location) => location.id !== id);
+      });
   }
 }
