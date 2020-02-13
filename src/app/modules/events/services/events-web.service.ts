@@ -1,19 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { environment } from '@env';
+import { Observable } from 'rxjs';
 import { EventRepresentation } from '../models/event-representation.model';
-
-// Stubs
-import eventsStub from 'src/assets/data/stubs/stub-events.json';
-import eventStub from 'src/assets/data/stubs/stub-event.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsWebService {
-  private api = `${environment.apiPath}/events`;
-
   /**
    * Creates an instance of EventsWebService.
    *
@@ -29,10 +23,9 @@ export class EventsWebService {
    * @memberof EventsWebService
    */
   public getEvents(userId?: number): Observable<EventRepresentation[]> {
-    return of(eventsStub);
     return userId
-      ? this.http.get<EventRepresentation[]>(`${this.api}/${userId}`)
-      : this.http.get<EventRepresentation[]>(`${this.api}`);
+      ? this.http.get<EventRepresentation[]>(`${environment.apiPath}/users/${userId}/events`)
+      : this.http.get<EventRepresentation[]>(`${environment.apiPath}/events`);
   }
 
   /**
@@ -43,8 +36,7 @@ export class EventsWebService {
    * @memberof EventsWebService
    */
   public getEvent(id: number): Observable<EventRepresentation> {
-    return of(eventStub);
-    return this.http.get<EventRepresentation>(`{$this.api}/{$id}`);
+    return this.http.get<EventRepresentation>(`${environment.apiPath}/events/${id}`);
   }
 
   /**
@@ -55,21 +47,19 @@ export class EventsWebService {
    * @memberof EventsWebService
    */
   public saveEvent(event: EventRepresentation): Observable<EventRepresentation> {
-    return of(eventStub);
     return event.id
-      ? this.http.patch<EventRepresentation>(`${this.api}/${event.id}`, event)
-      : this.http.post<EventRepresentation>(`${this.api}`, event);
+      ? this.http.put<EventRepresentation>(`${environment.apiPath}/events/${event.id}`, event)
+      : this.http.post<EventRepresentation>(`${environment.apiPath}`, event);
   }
 
   /**
    * Call the BackEnd to delete an event
    *
-   * @param {number} eventId
+   * @param {number} id
    * @returns {Observable<EventRepresentation>}
    * @memberof EventsWebService
    */
-  public deleteLocation(eventId: number): Observable<EventRepresentation> {
-    return of(eventStub);
-    return this.http.delete<EventRepresentation>(`${this.api}/${eventId}`);
+  public deleteEvent(id: number): Observable<EventRepresentation> {
+    return this.http.delete<EventRepresentation>(`${environment.apiPath}/events/${id}`);
   }
 }

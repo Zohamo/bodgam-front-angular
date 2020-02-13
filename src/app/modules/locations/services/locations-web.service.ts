@@ -1,20 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { LocationRepresentation } from '../models/location-representation.model';
-import { LocationFullRepresentation } from '../models/location-full-representation';
+import { Observable, of } from 'rxjs';
 
-// Stubs
-import locationsStub from 'src/assets/data/stubs/stub-locations.json';
-import locationStub from 'src/assets/data/stubs/stub-location-full.json';
+// Models
+import { LocationFullRepresentation } from '../models/location-full-representation';
+import { LocationRepresentation } from '../models/location-representation.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationsWebService {
-  private api = `${environment.apiPath}/locations`;
-
   /**
    * Creates an instance of LocationsWebService.
    *
@@ -31,8 +27,8 @@ export class LocationsWebService {
    * @memberof LocationsWebService
    */
   public getLocations(): Observable<LocationRepresentation[]> {
-    return of(locationsStub);
-    return this.http.get<LocationRepresentation[]>(`{$this.api}`);
+    // TODO get userId ?
+    return this.http.get<LocationRepresentation[]>(`${environment.apiPath}/locations`);
   }
 
   /**
@@ -43,9 +39,9 @@ export class LocationsWebService {
    * @memberof LocationsWebService
    */
   public getLocation(id: number): Observable<LocationFullRepresentation> {
-    console.log('getLocation', id);
-    return of(id ? locationStub : new LocationFullRepresentation());
-    return id ? this.http.get<LocationFullRepresentation>(`{$this.api}/{$id}`) : of(new LocationFullRepresentation());
+    return id
+      ? this.http.get<LocationFullRepresentation>(`${environment.apiPath}/locations/${id}`)
+      : of(new LocationFullRepresentation());
   }
 
   /**
@@ -56,21 +52,19 @@ export class LocationsWebService {
    * @memberof LocationsWebService
    */
   public saveLocation(location: LocationFullRepresentation): Observable<LocationFullRepresentation> {
-    return of(locationStub);
     return location.id
-      ? this.http.patch<LocationFullRepresentation>(`${this.api}/${location.id}`, location)
-      : this.http.post<LocationFullRepresentation>(`${this.api}`, location);
+      ? this.http.put<LocationFullRepresentation>(`${environment.apiPath}/locations/${location.id}`, location)
+      : this.http.post<LocationFullRepresentation>(`${environment.apiPath}`, location);
   }
 
   /**
    * Call the BackEnd to delete a location
    *
-   * @param {number} locationId
+   * @param {number} id
    * @returns {Observable<LocationFullRepresentation>}
    * @memberof LocationsWebService
    */
-  public deleteLocation(locationId: number): Observable<LocationFullRepresentation> {
-    return of(locationStub);
-    return this.http.delete<LocationFullRepresentation>(`${this.api}/${locationId}`);
+  public deleteLocation(id: number): Observable<LocationFullRepresentation> {
+    return this.http.delete<LocationFullRepresentation>(`${environment.apiPath}/locations/${id}`);
   }
 }

@@ -59,7 +59,7 @@
         <fa-icon [icon]="faCogs"></fa-icon>
         <span>Paramètres</span>
       </ng-template>
-      <app-user-privacy-form [userDetail]="user" (saveUserPrivacy)="updateUserPrivacy($event)"></app-user-privacy-form>
+      <app-user-privacy-form [userDetail]="user" (saveUserPrivacy)="saveUser($event)"></app-user-privacy-form>
     </mat-tab>
   </mat-tab-group>
 </ng-container>
