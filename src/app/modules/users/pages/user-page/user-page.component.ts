@@ -170,16 +170,16 @@ export class UserPageComponent implements OnDestroy {
    * @param {UserFullRepresentation} user
    * @memberof UserPageComponent
    */
-  public updateUserPrivacy(user: UserFullRepresentation): void {
+  public saveUser(user: UserFullRepresentation): void {
     this.usersWebService
-      .updateUserPrivacy(user)
+      .saveUser(user)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (userResponse: UserFullRepresentation) => {
-          console.log('updateUserPrivacy OK', userResponse);
+          console.log('saveUser OK', userResponse);
         },
         (error: HttpErrorResponse) => {
-          console.log('updateUserPrivacy ERROR', error);
+          console.log('saveUser ERROR', error);
         }
       );
   }

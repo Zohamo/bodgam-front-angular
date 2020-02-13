@@ -1,23 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { environment } from '@env';
+import { Observable } from 'rxjs';
 
 // Models
 import { UserFullRepresentation } from '../models/user-full-representation.model';
 import { UserRepresentation } from '../models/user-representation.model';
 
-// Stubs
-import userStub from 'src/assets/data/stubs/stub-user.json';
-import usersStub from 'src/assets/data/stubs/stub-users.json';
-
 @Injectable({
   providedIn: 'root'
 })
 export class UsersWebService {
-  private api = `${environment.apiPath}/users`;
-
   /**
    * Creates an instance of UsersWebService.
    *
@@ -33,12 +26,7 @@ export class UsersWebService {
    * @memberof UsersWebService
    */
   public getUsers(): Observable<UserRepresentation[]> {
-    // return this.http.get<UserRepresentation[]>(`${this.api}`);
-    return of(usersStub).pipe(
-      map((users: UserRepresentation[]) => {
-        return users.filter((user: UserRepresentation) => user.isActive);
-      })
-    );
+    return this.http.get<UserRepresentation[]>(`${environment.apiPath}/users`);
   }
 
   /**
@@ -49,8 +37,7 @@ export class UsersWebService {
    * @memberof UsersWebService
    */
   public getUser(id: number): Observable<UserFullRepresentation> {
-    // return this.http.get<UserFullRepresentation[]>(`${this.api}/${id}`);
-    return of(userStub);
+    return this.http.get<UserFullRepresentation>(`${environment.apiPath}/users/${id}`);
   }
 
   /**
@@ -61,20 +48,19 @@ export class UsersWebService {
    * @memberof UsersWebService
    */
   public saveUser(user: UserFullRepresentation): Observable<UserFullRepresentation> {
-    return of(userStub);
     return user.id
-      ? this.http.patch<UserFullRepresentation>(`${this.api}/${user.id}`, user)
-      : this.http.post<UserFullRepresentation>(`${this.api}`, user);
+      ? this.http.put<UserFullRepresentation>(`${environment.apiPath}/users/${user.id}`, user)
+      : this.http.post<UserFullRepresentation>(`${environment.apiPath}/users`, user);
   }
 
   /**
-   * Call the BackEnd to edit the user's privacy data
+   * Call the BackEnd to delete a user
    *
-   * @param {UserFullRepresentation} user
+   * @param {number} id
    * @returns {Observable<UserFullRepresentation>}
    * @memberof UsersWebService
    */
-  public updateUserPrivacy(user: UserFullRepresentation): Observable<UserFullRepresentation> {
-    return this.http.put<UserFullRepresentation>(`${this.api}/${user.id}/privacy`, user.privacy);
+  public deleteUser(id: number): Observable<UserFullRepresentation> {
+    return this.http.delete<UserFullRepresentation>(`${environment.apiPath}/users/${id}`);
   }
 }
