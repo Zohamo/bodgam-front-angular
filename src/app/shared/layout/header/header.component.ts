@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+
+// Entry Components
+import { LoginFormDialogComponent } from '@core/components/auth/login-form-dialog/login-form-dialog.component';
+import { RegisterFormDialogComponent } from '@core/components/auth/register-form-dialog/register-form-dialog.component';
+
+// Services
+import { AuthenticationWebService } from '@core/services/authentication-web.service';
+
+// UI
 import {
   faCalendarAlt,
   faCaretDown,
@@ -10,6 +19,7 @@ import {
   faUsers,
   faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-header',
@@ -28,21 +38,39 @@ export class HeaderComponent {
   faUsers = faUsers;
   faUserPlus = faUserPlus;
 
-  public user: { id: number; name: string; isAuth: boolean };
+  /**
+   * Creates an instance of HeaderComponent.
+   *
+   * @param {MatDialog} dialog
+   * @param {AuthenticationWebService} authenticationWebService
+   * @memberof HeaderComponent
+   */
+  constructor(private dialog: MatDialog, private authenticationWebService: AuthenticationWebService) {}
 
-  constructor() {
-    this.user = {
-      id: 28,
-      name: 'Zohamo',
-      isAuth: true
-    };
+  /**
+   * Event to register new user
+   *
+   * @memberof HeaderComponent
+   */
+  public onRegister(): void {
+    this.dialog.open(RegisterFormDialogComponent);
   }
 
-  onLogin() {
-    this.user.isAuth = true;
+  /**
+   * Event for user login
+   *
+   * @memberof HeaderComponent
+   */
+  public onLogin(): void {
+    this.dialog.open(LoginFormDialogComponent);
   }
 
-  onLogout() {
-    this.user.isAuth = false;
+  /**
+   * Event fot user logout
+   *
+   * @memberof HeaderComponent
+   */
+  public onLogout(): void {
+    this.authenticationWebService.logout();
   }
 }

@@ -16,7 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as fromComponents from './components';
 import * as fromPages from './pages';
 import * as fromSharedComponents from './shared/components';
-import { LocationDetailIconsComponent } from '../locations/components';
+
 export const uiModules: any[] = [
   FontAwesomeModule,
   MatCardModule,

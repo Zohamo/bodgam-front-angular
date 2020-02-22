@@ -8,9 +8,9 @@ import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 
 // Services
+import { AlertService } from '@core/services/alert.service';
 import { EventsWebService } from '../../services/events-web.service';
 import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
-import { SnackBarService } from '@shared/services/snack-bar.service';
 
 // UI
 import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
@@ -42,7 +42,7 @@ export class EventEditPageComponent implements OnDestroy {
     private route: ActivatedRoute,
     private eventsWebService: EventsWebService,
     private locationsWebService: LocationsWebService,
-    public snackBarService: SnackBarService
+    public alertService: AlertService
   ) {
     this.getEvent();
     this.event$.pipe(takeUntil(this.destroy$)).subscribe((event) => {
@@ -96,11 +96,11 @@ export class EventEditPageComponent implements OnDestroy {
       .subscribe(
         (eventSaved) => {
           console.log('event saved', eventSaved);
-          this.snackBarService.open('success-save-event');
+          this.alertService.open('success-save-event');
         },
         (error) => {
           console.log('ERROR saving event', error);
-          this.snackBarService.open('fail-save-event');
+          this.alertService.open('error-save-event');
         }
       );
   }

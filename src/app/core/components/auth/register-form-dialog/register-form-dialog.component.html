@@ -1,0 +1,46 @@
+<form *ngIf="!isLoading" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <h1 mat-dialog-title i18n="">Créer un compte</h1>
+
+    <mat-form-field class="w-100">
+      <input matInput type="email" formControlName="email" email placeholder="Courriel" i18n-placeholder="" required />
+      <div *ngIf="isSubmitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required" i18n="">Requis</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        placeholder="Mot de passe"
+        i18n-placeholder=""
+        required
+      />
+      <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required" i18n="">Requis</div>
+        <div *ngIf="f.password.errors.minlength" i18n="">6 caractères minimum</div>
+      </div>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <!-- Action buttons -->
+
+  <div mat-dialog-actions>
+    <button mat-stroked-button type="button" color="primary" (click)="onClose()" i18n="">
+      Annuler
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      [disabled]="!registerForm.valid || isLoading"
+      (click)="onSubmit()"
+    >
+      <fa-icon *ngIf="registerForm.valid" [icon]="faCheck"></fa-icon>
+      <fa-icon *ngIf="!registerForm.valid" [icon]="faTimesCircle"></fa-icon>
+      <span i18n="">Créer</span>
+    </button>
+  </div>
+</form>

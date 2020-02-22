@@ -14,13 +14,13 @@
     </a>
     <span class="flex-spacer"></span>
     <ng-container *ngIf="!user?.isAuth">
-      <a (click)="onLogin()" [routerLink]="['/']">
-        <fa-icon [icon]="faSignInAlt"></fa-icon>
-        <span>Connexion</span>
-      </a>
-      <a [routerLink]="['/players', 'create']">
+      <a (click)="onRegister()">
         <fa-icon [icon]="faUserPlus"></fa-icon>
         <span>Créer un compte</span>
+      </a>
+      <a (click)="onLogin()">
+        <fa-icon [icon]="faSignInAlt"></fa-icon>
+        <span>Connexion</span>
       </a>
     </ng-container>
     <ng-container *ngIf="user?.isAuth">
@@ -41,7 +41,7 @@
           <fa-icon [icon]="faMapMarked"></fa-icon>
           <span>Mes lieux</span>
         </a>
-        <a mat-menu-item (click)="onLogout()" [routerLink]="['/']">
+        <a mat-menu-item (click)="onLogout()">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
           <span>Déconnexion</span>
         </a>

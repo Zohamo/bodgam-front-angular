@@ -1,7 +1,5 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -11,18 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed for deprecated features removed in this release.
 - Fixed for any bug fixes.
 - Security to invite users to upgrade in case of vulnerabilities.
-
-## [Todo]
-
-- EventForm : set level & atmosphere default values
-- EventForm : add isPrivate option
-- UserForm : country list > https://www.npmjs.com/package/i18n-iso-countries
-- Handle http errors : service
-- Profile : Single Page with conditionnal tabs > edit, privacy, my games, my locations, my events
-- compléter page de profil-detail
-- change location representation : with GeoCoordinates
-- generic CRUD
-- NEW EVENT : SET DEFAULT LOCATION !!! + REMOVE LocationFormComponent > now we use the MODAL !!!
 
 ## [Unreleased]
 
