@@ -1,4 +1,4 @@
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SnackBarMessageComponent } from './snack-bar-message/snack-bar-message.component';
 import { UiDateComponent } from './ui-date/ui-date.component';
 import { UiFormHelperComponent } from './ui-form-helper/ui-form-helper.component';
 import { UiMapComponent } from './ui-map/ui-map.component';
@@ -7,7 +7,7 @@ import { UiSpinnerComponent } from './ui-spinner/ui-spinner.component';
 import { UiVisibilityComponent } from './ui-visibility/ui-visibility.component';
 
 export const components: any[] = [
-  PageNotFoundComponent,
+  SnackBarMessageComponent,
   UiDateComponent,
   UiFormHelperComponent,
   UiMapComponent,
@@ -16,7 +16,7 @@ export const components: any[] = [
   UiVisibilityComponent
 ];
 
-export * from './page-not-found/page-not-found.component';
+export * from './snack-bar-message/snack-bar-message.component';
 export * from './ui-date/ui-date.component';
 export * from './ui-form-helper/ui-form-helper.component';
 export * from './ui-map/ui-map.component';

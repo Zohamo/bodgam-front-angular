@@ -1,24 +1,36 @@
 <ng-container [ngSwitch]="data">
   <!-- BGG -->
-  <p *ngSwitchCase="'fail-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
+  <p *ngSwitchCase="'error-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
 
   <!-- Event -->
   <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
-  <p *ngSwitchCase="'fail-save-event'" i18n="">Un problème est survenu lors de la sauvegarde votre évènement.</p>
+  <p *ngSwitchCase="'error-save-event'" i18n="">Un problème est survenu lors de la sauvegarde votre évènement.</p>
 
   <!-- Geocode -->
-  <p *ngSwitchCase="'fail-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
-  <p *ngSwitchCase="'fail-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
-
-  <!-- Profile -->
-  <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>
-  <p *ngSwitchCase="'fail-save-profile'" i18n="">Un problème est survenu lors de la mise à jour votre profil.</p>
+  <p *ngSwitchCase="'error-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
+  <p *ngSwitchCase="'error-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
 
   <!-- Location -->
   <p *ngSwitchCase="'success-save-location'" i18n="">Votre lieu a été sauvegardé avec succès.</p>
-  <p *ngSwitchCase="'fail-save-location'" i18n="">Un problème est survenu lors de la sauvegarde votre lieu.</p>
+  <p *ngSwitchCase="'error-save-location'" i18n="">Un problème est survenu lors de la sauvegarde votre lieu.</p>
 
-  <!-- Default -->
-  <p *ngSwitchCase="'fail'" i18n="">Raté !</p>
+  <!-- Login -->
+  <p *ngSwitchCase="'success-login'" i18n="">Vous êtes maintenant connecté(e).</p>
+  <p *ngSwitchCase="'error-login'" i18n="">
+    Un problème est survenu lors de votre connexion,
+    <br />
+    voulez-vous réessayer&nbsp;?
+  </p>
+
+  <!-- Profile -->
+  <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>
+  <p *ngSwitchCase="'error-save-profile'" i18n="">Un problème est survenu lors de la mise à jour votre profil.</p>
+
+  <!-- Register -->
+  <p *ngSwitchCase="'success-register'" i18n="">Votre a été créé avec succès.</p>
+  <p *ngSwitchCase="'error-register'" i18n="">Un problème est survenu lors de la création de votre compte.</p>
+
+  <!-- default -->
+  <p *ngSwitchCase="'error'" i18n="">Une erreur est survenue, merci de réessayer.</p>
   <p *ngSwitchDefault i18n="">Effectué</p>
 </ng-container>

@@ -235,7 +235,7 @@ export class LocationFormDialogComponent implements OnDestroy {
           },
           (error) => {
             console.log('ERROR saving location', error);
-            this.snackBarService.open('fail-save-location');
+            this.snackBarService.open('error-save-location');
             this.isLoading = false;
           }
         );
@@ -277,12 +277,12 @@ export class LocationFormDialogComponent implements OnDestroy {
           if (geocode && geocode.results[0].locations.length) {
             this.populateAddress(geocode.results[0].locations[0]);
           } else {
-            this.snackBarService.open('fail-reverse-geocode');
+            this.snackBarService.open('error-reverse-geocode');
           }
         },
         (error) => {
           console.log('ERROR reverse geocode', error);
-          this.snackBarService.open('fail-reverse-geocode');
+          this.snackBarService.open('error-reverse-geocode');
         }
       );
   }
@@ -315,12 +315,12 @@ export class LocationFormDialogComponent implements OnDestroy {
             // Patch form coords
             this.populateCoords(this.coords);
           } else {
-            this.snackBarService.open('fail-geocode');
+            this.snackBarService.open('error-geocode');
           }
         },
         (error) => {
           console.log('ERROR geocode', error);
-          this.snackBarService.open('fail-geocode');
+          this.snackBarService.open('error-geocode');
         }
       );
   }

@@ -169,7 +169,7 @@ export class ProfileFormDialogComponent implements OnDestroy {
           },
           (error) => {
             console.log('ERROR saving profile', error);
-            this.snackBarService.open('fail-save-profile');
+            this.snackBarService.open('error-save-profile');
           }
         );
     }
@@ -203,7 +203,7 @@ export class ProfileFormDialogComponent implements OnDestroy {
         (error) => {
           this.isLoadingBggGames = false;
           console.log('ERROR get games', error);
-          this.snackBarService.open('fail-bgg-user');
+          this.snackBarService.open('error-bgg-user');
         }
       );
   }

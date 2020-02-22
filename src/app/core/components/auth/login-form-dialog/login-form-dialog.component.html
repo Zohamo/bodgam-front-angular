@@ -1,0 +1,39 @@
+﻿<form *ngIf="!isLoading" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <h1 mat-dialog-title i18n="">Connexion</h1>
+
+    <mat-form-field class="w-100">
+      <input matInput type="email" formControlName="email" email placeholder="Courriel" i18n-placeholder="" required />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        placeholder="Mot de passe"
+        i18n-placeholder=""
+        required
+      />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <!-- Action buttons -->
+
+  <div mat-dialog-actions>
+    <button mat-stroked-button type="button" color="primary" (click)="onClose()" i18n="">
+      Annuler
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      [disabled]="!loginForm.valid || isLoading"
+      (click)="onSubmit()"
+    >
+      <fa-icon *ngIf="loginForm.valid" [icon]="faCheck"></fa-icon>
+      <fa-icon *ngIf="!loginForm.valid" [icon]="faTimesCircle"></fa-icon>
+      <span i18n="">Se connecter</span>
+    </button>
+  </div>
+</form>
