@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { environment } from '@env';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -16,9 +17,10 @@ export class AuthenticationWebService {
    * Creates an instance of AuthenticationWebService.
    *
    * @param {HttpClient} http
+   * @param {Router} router
    * @memberof AuthenticationWebService
    */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -35,18 +37,28 @@ export class AuthenticationWebService {
   }
 
   /**
+   * Get current user stream
+   *
+   * @readonly
+   * @type {Observable<User>}
+   * @memberof AuthenticationWebService
+   */
+  public get currentUser$(): Observable<User> {
+    return this.currentUser;
+  }
+
+  /**
    * Calls the API to register a new user and receives a JWT
    *
-   * @param {string} email
-   * @param {string} password
+   * @param {User} user
    * @returns {Observable<User>}
    * @memberof AuthenticationWebService
    */
-  public register(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${environment.apiPath}/users/register`, { email, password }).pipe(
-      map((user: User) => {
-        this.storeCurrentUser(user);
-        return user;
+  public register(user: User): Observable<User> {
+    return this.http.post<User>(`${environment.apiPath}/register`, user).pipe(
+      map((currentUser: User) => {
+        this.storeCurrentUser(currentUser);
+        return currentUser;
       })
     );
   }
@@ -60,12 +72,23 @@ export class AuthenticationWebService {
    * @memberof AuthenticationWebService
    */
   public login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${environment.apiPath}/users/authenticate`, { email, password }).pipe(
+    return this.http.post<User>(`${environment.apiPath}/login`, { email, password }).pipe(
       map((user: User) => {
         this.storeCurrentUser(user);
         return user;
       })
     );
+  }
+
+  /**
+   * Calls the API to delete the User/Profile
+   *
+   * @param {number} id
+   * @returns {Observable<string>}
+   * @memberof AuthenticationWebService
+   */
+  public delete(id: number): Observable<string> {
+    return this.http.delete<string>(`${environment.apiPath}/user/${id}`);
   }
 
   /**
@@ -76,6 +99,7 @@ export class AuthenticationWebService {
    * @memberof AuthenticationWebService
    */
   private storeCurrentUser(user: User): void {
+    console.log('currentUser', user);
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUserSubject.next(user);
   }
@@ -89,5 +113,6 @@ export class AuthenticationWebService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/']);
   }
 }

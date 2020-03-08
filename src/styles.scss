@@ -4,6 +4,7 @@
 @import 'assets/scss/_mixins.scss';
 // Content
 @import 'assets/scss/events.scss';
+@import 'assets/scss/locations.scss';
 
 html,
 body {
@@ -30,6 +31,22 @@ button .ng-fa-icon {
   margin-right: 0.5rem;
 }
 
+.action-buttons > * {
+  margin-left: 1rem !important;
+  &:first-child {
+    margin-left: 0 !important;
+  }
+}
+
+.mat-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    margin: 0 0.25rem;
+  }
+}
+
 /**
  * Colors
  */
@@ -50,6 +67,7 @@ button .ng-fa-icon {
   color: $success;
 }
 
+.color-warn,
 .danger {
   color: $warn;
 }

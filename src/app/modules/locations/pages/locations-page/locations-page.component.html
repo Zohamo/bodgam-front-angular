@@ -10,7 +10,11 @@
 </div>
 <div class="py-3">
   <div *ngIf="locations.length">
-    <app-location-list [locations]="locations" (deleteLocation)="deleteLocation($event)"></app-location-list>
+    <app-location-list
+      [locations]="locations"
+      (refreshLocations)="getProfileLocations()"
+      (deleteLocation)="deleteLocation($event)"
+    ></app-location-list>
   </div>
   <p *ngIf="!locations.length" i18n="">Aucun lieu n'a été trouvé.</p>
 </div>

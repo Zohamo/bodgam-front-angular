@@ -25,7 +25,15 @@
   </p>
   <ul class="inline-list">
     <li><span class="color-grey">Participants&nbsp;:</span></li>
-    <li><a href="#" title="organisateur">Zohamo*</a></li>
+    <li>
+      <a href="#" title="organisateur" class="players-host">{{ event.host.name }}</a>
+      <ng-container *ngIf="event.players.length">
+        <ng-container *ngFor="let player of event.players">
+          -
+          <a href="#" class="players-player">{{ player.name }}</a>
+        </ng-container>
+      </ng-container>
+    </li>
   </ul>
 </div>
 <div class="section-end">

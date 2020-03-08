@@ -1,24 +1,22 @@
 <mat-card class="mt-4">
   <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-    <!-- Hidden -->
-    <div class="d-hidden">
-      <input matInput class="cdk-visually-hidden" formControlName="id" value="id" />
-      <input matInput class="cdk-visually-hidden" formControlName="host" value="host" />
-      <input matInput class="cdk-visually-hidden" formControlName="location" value="location" />
-    </div>
     <mat-card-content>
       <!-- Title -->
 
       <section>
+        <p class="text-right">
+          <mat-checkbox formControlName="isPrivate" i18n="">Évènement privé</mat-checkbox>
+        </p>
+
         <mat-form-field class="w-100">
           <h4 class="color-primary">
             <input matInput placeholder="Titre" formControlName="title" />
           </h4>
         </mat-form-field>
-        <p class="text-justify" i18n>
+        <p class="text-justify" i18n="">
           <em>
             Un bon titre c'est important, ça permet de définir dans quels types de jeux ou d'ambiance vont se retrouver
-            les participants&nbsp;!
+            les participants au premier coup d'&oelig;il&nbsp;!
             <br />
             Soyez concis mais précis.
           </em>
@@ -28,7 +26,7 @@
       <!-- Date -->
 
       <section>
-        <h3 i18n>Quand ?</h3>
+        <h3 i18n="">Quand ?</h3>
         <div class="row">
           <mat-form-field class="col-md-3">
             <input
@@ -58,11 +56,11 @@
       <!-- Location -->
 
       <section>
-        <h3 i18n>Où ?</h3>
+        <h3 i18n="">Où ?</h3>
         <div class="d-flex align-items-baseline">
           <mat-form-field class="flex-grow-1">
-            <mat-label *ngIf="hasNoLocation" i18n>Veuillez créer un lieu</mat-label>
-            <mat-label *ngIf="!hasNoLocation" i18n>Mes lieux</mat-label>
+            <mat-label *ngIf="hasNoLocation" i18n="">Veuillez créer un lieu</mat-label>
+            <mat-label *ngIf="!hasNoLocation" i18n="">Mes lieux</mat-label>
             <mat-select matNativeControl formControlName="location">
               <mat-option *ngFor="let location of locations" [value]="location">{{ location.name }}</mat-option>
             </mat-select>
@@ -77,22 +75,27 @@
             (click)="openLocationFormDialog(eventForm.value.location.id)"
           >
             <fa-icon [icon]="faPenSquare"></fa-icon>
-            <span i18n>Modifier</span>
+            <span i18n="">Modifier</span>
           </button>
 
           <button mat-button type="button" color="primary" (click)="openLocationFormDialog()">
             <fa-icon [icon]="faPlusSquare"></fa-icon>
-            <span i18n>Nouveau</span>
+            <span i18n="">Nouveau</span>
           </button>
         </div>
 
-        <div class="d-flex align-items-center" *ngIf="this.eventForm.get('location').value">
-          <strong>{{ this.eventForm.get('location').value.name }}</strong>
+        <div class="d-flex align-items-center" *ngIf="this.eventForm.value.location">
+          <strong>{{ this.eventForm.value.location.name }}</strong>
           <span class="mx-3">
-            <ng-container *ngIf="this.eventForm.get('location').value.addressDistrict !== ''">
-              {{ this.eventForm.get('location').value.addressDistrict }},&nbsp;
-            </ng-container>
-            {{ this.eventForm.get('location').value.addressCity }}
+            <span *ngIf="this.eventForm.value.location.district" class="location-district">
+              {{ this.eventForm.value.location.district }}
+            </span>
+            <span *ngIf="this.eventForm.value.location.city" class="location-city">
+              {{ this.eventForm.value.location.city }}
+            </span>
+            <span *ngIf="this.eventForm.value.location.country" class="location-country">
+              {{ this.eventForm.value.location.country }}
+            </span>
           </span>
           <app-location-detail-icons
             [isAllowedSmoking]="this.eventForm.get('location').value?.isAllowedSmoking"
@@ -104,7 +107,7 @@
       <!-- Players & Level -->
 
       <section>
-        <h3 i18n>Qui ?</h3>
+        <h3 i18n="">Qui ?</h3>
         <div class="row">
           <mat-form-field class="col-md-3">
             <input
@@ -125,47 +128,49 @@
             />
           </mat-form-field>
           <mat-form-field class="col-md-3">
-            <mat-label i18n>Niveau</mat-label>
+            <mat-label i18n="">Niveau minimum</mat-label>
             <mat-select matNativeControl formControlName="level">
-              <mat-option [value]="0" i18n>
+              <mat-option [value]="0" i18n="">
                 Tous niveaux
               </mat-option>
-              <mat-option [value]="1" i18n>
+              <mat-option [value]="1" i18n="">
                 Débutant
               </mat-option>
-              <mat-option [value]="2" i18n>
+              <mat-option [value]="2" i18n="">
                 Intermédiaire
               </mat-option>
-              <mat-option [value]="3" i18n>
+              <mat-option [value]="3" i18n="">
                 Expert
               </mat-option>
-              <mat-option [value]="4" i18n>
+              <mat-option [value]="4" i18n="">
                 Légendaire
               </mat-option>
             </mat-select>
           </mat-form-field>
+
           <mat-form-field class="col-md-3">
-            <mat-label i18n>Ambiance</mat-label>
+            <mat-label i18n="">Ambiance</mat-label>
             <mat-select matNativeControl formControlName="atmosphere">
-              <mat-option [value]="0" i18n>
+              <mat-option [value]="0" i18n="">
                 Festive
               </mat-option>
-              <mat-option [value]="1" i18n>
+              <mat-option [value]="1" i18n="">
                 Détendue
               </mat-option>
-              <mat-option [value]="2" i18n>
+              <mat-option [value]="2" i18n="">
                 Détendue et concentrée
               </mat-option>
-              <mat-option [value]="3" i18n>
+              <mat-option [value]="3" i18n="">
                 Concentrée
               </mat-option>
-              <mat-option [value]="4" i18n>
+              <mat-option [value]="4" i18n="">
                 Studieuse
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <p class="text-justify" i18n>
+
+        <p class="text-justify" i18n="">
           <em>
             Cet évènement aura lieu si vous êtes au moins
             <strong>{{ this.eventForm.get('minPlayers').value + 1 }}</strong>
@@ -181,9 +186,9 @@
       <!-- Description -->
 
       <section>
-        <h3 i18n>Quoi ?</h3>
+        <h3 i18n="">Quoi ?</h3>
         <div class="row">
-          <p class="col-12 font-italic text-justify" i18n>
+          <p class="col-12 font-italic text-justify" i18n="">
             <em>
               C'est le moment de vous lâcher&nbsp;!
               <br />
@@ -202,12 +207,12 @@
     <!-- Action buttons -->
 
     <mat-card-actions>
-      <p *ngIf="!eventForm.valid" i18n>* champs obligatoires</p>
+      <p *ngIf="!eventForm.valid" i18n="">* champs obligatoires</p>
       <button mat-raised-button type="button" color="primary" [disabled]="!eventForm.valid" (click)="onSubmit()">
         <fa-icon *ngIf="eventForm.valid" [icon]="faCheck"></fa-icon>
         <fa-icon *ngIf="!eventForm.valid" [icon]="faTimesCircle"></fa-icon>
-        <span *ngIf="this.event.id === null" i18n>Créer</span>
-        <span *ngIf="this.event.id !== null" i18n>Modifier</span>
+        <span *ngIf="this.event.id === null" i18n="">Créer</span>
+        <span *ngIf="this.event.id !== null" i18n="">Modifier</span>
       </button>
     </mat-card-actions>
   </form>

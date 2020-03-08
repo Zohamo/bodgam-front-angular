@@ -11,19 +11,20 @@ import { LayoutModule } from './layout/layout.module';
 
 // UI
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
-  declarations: [...fromComponents.components, ...fromPages.components],
   imports: [
     AuthModule,
     CommonModule,
     FontAwesomeModule,
     LayoutModule,
     MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatProgressSpinnerModule
   ],
+  declarations: [...fromComponents.components, ...fromPages.components],
   exports: [AuthModule, LayoutModule, ...fromComponents.components, ...fromPages.components]
 })
 export class SharedModule {}

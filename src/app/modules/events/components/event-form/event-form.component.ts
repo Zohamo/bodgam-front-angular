@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, first } from 'rxjs/operators';
 
 // Entry components
 import { LocationFormDialogComponent } from 'src/app/modules/locations/components/location-form-dialog/location-form-dialog.component';
@@ -33,7 +33,9 @@ export class EventFormComponent {
   faPenSquare = faPenSquare;
   faTimesCircle = faTimesCircle;
 
-  // Inputs
+  /**
+   * Inputs
+   */
 
   public event: EventRepresentation;
   @Input() set eventEditing(eventEditing: EventRepresentation) {
@@ -44,10 +46,14 @@ export class EventFormComponent {
 
   public locations: LocationRepresentation[];
   @Input() set userLocations(userLocations: LocationRepresentation[]) {
+    console.log('EventFormComponent userLocations', userLocations);
     this.locations = userLocations;
     this.checkIfHasRegisteredLocation();
     if (this.event.location && this.event.location.id) {
       this.setDefaultLocation(this.event.location.id);
+    } else if (!this.hasNoLocation) {
+      const defaultLocation = this.locations.find((location) => location.isDefault);
+      this.setDefaultLocation(defaultLocation ? defaultLocation.id : this.locations[0].id);
     }
   }
 
@@ -58,7 +64,9 @@ export class EventFormComponent {
     }
   }
 
-  // Outputs
+  /**
+   * Outputs
+   */
 
   @Output() saveEvent = new EventEmitter<EventRepresentation>();
 
@@ -84,17 +92,18 @@ export class EventFormComponent {
     this.eventForm = this.fb.group({
       id: [],
       title: ['', [Validators.required, Validators.minLength(2)]],
+      isPrivate: ['', Validators.required],
       // Datetime
       startDatetime: [this.today, Validators.required],
       startTimeHours: [18, Validators.required],
       startTimeMinutes: [30, Validators.required],
-      endDatetime: ['', Validators.required],
+      endDatetime: [], // TODO : implement endDatetime
       // Location
       location: [{ value: '', disabled: true }, Validators.required],
       // Players
       host: [],
-      minPlayers: ['', Validators.required],
-      maxPlayers: ['', Validators.required],
+      minPlayers: ['', Validators.required], // TODO : cannot be superior to maxPlayers
+      maxPlayers: ['', Validators.required], // TODO : cannot be inferior to minPlayers
       // Details
       description: [],
       level: ['', Validators.required],
@@ -113,14 +122,14 @@ export class EventFormComponent {
       this.eventForm.setValue({
         id: this.event.id,
         title: this.event.title,
+        isPrivate: this.event.isPrivate,
         // Datetime
-        startDatetime: moment
-          .unix(this.event.startDatetime)
+        startDatetime: moment(this.event.startDatetime)
           .hours(0)
           .minutes(0)
           .format(),
-        startTimeHours: moment.unix(this.event.startDatetime).format('HH'),
-        startTimeMinutes: moment.unix(this.event.startDatetime).format('mm'),
+        startTimeHours: moment(this.event.startDatetime).format('HH'),
+        startTimeMinutes: moment(this.event.startDatetime).format('mm'),
         endDatetime: this.event.endDatetime,
         // Location
         location: this.event.location,
@@ -148,14 +157,16 @@ export class EventFormComponent {
    * @memberof EventFormComponent
    */
   private prepareSaveEntity(): EventRepresentation {
-    const eventForm = this.eventForm.value;
+    const eventForm = Object.assign({}, this.eventForm.value);
+
     eventForm.startDatetime = moment(eventForm.startDatetime)
       .hours(eventForm.startTimeHours)
       .minutes(eventForm.startTimeMinutes)
       .valueOf();
     delete eventForm.startTimeHours;
     delete eventForm.startTimeMinutes;
-    console.log('event', eventForm);
+
+    console.log('prepareSaveEntity event', eventForm);
     return eventForm;
   }
 
@@ -213,21 +224,24 @@ export class EventFormComponent {
       data: { id: locationId }
     });
 
-    dialogRef.afterClosed().pipe(take(1)).subscribe((locationSaved: LocationRepresentation) => {
-      console.log('locationSaved', locationSaved);
-      if (locationSaved) {
-        if (locationId) {
-          this.locations.map((location) => {
-            if (location.id === locationSaved.id) {
-              location = locationSaved;
-            }
-          });
-        } else {
-          this.locations.push(locationSaved);
-          this.checkIfHasRegisteredLocation();
-          this.setDefaultLocation(locationSaved.id);
+    dialogRef
+      .afterClosed()
+      .pipe(first())
+      .subscribe((locationSaved: LocationRepresentation) => {
+        console.log('locationSaved', locationSaved);
+        if (locationSaved) {
+          if (locationId) {
+            this.locations.map((location) => {
+              if (location.id === locationSaved.id) {
+                location = locationSaved;
+              }
+            });
+          } else {
+            this.locations.push(locationSaved);
+            this.checkIfHasRegisteredLocation();
+            this.setDefaultLocation(locationSaved.id);
+          }
         }
-      }
-    });
+      });
   }
 }

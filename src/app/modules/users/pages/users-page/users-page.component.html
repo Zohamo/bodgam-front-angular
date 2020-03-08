@@ -1,7 +1,0 @@
-<h2>
-  <fa-icon [icon]="faUsers" class="mr-3"></fa-icon>
-  <span>Joueurs</span>
-</h2>
-<div class="py-3" *ngIf="users$ | async as users">
-  <app-user-list [usersList]="users" [countryList]="countries"></app-user-list>
-</div>

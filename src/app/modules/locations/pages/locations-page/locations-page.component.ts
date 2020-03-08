@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
+import { takeUntil, take, first } from 'rxjs/operators';
 
 // Entry components
 import { LocationFormDialogComponent } from '../../components/location-form-dialog/location-form-dialog.component';
@@ -14,6 +14,7 @@ import { LocationsWebService } from '../../services/locations-web.service';
 // UI
 import { faMapMarked, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthenticationWebService } from '@core/services/authentication-web.service';
 
 @Component({
   selector: 'app-locations-page',
@@ -23,7 +24,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class LocationsPageComponent implements OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  public locations: LocationRepresentation[];
+  public locations: LocationRepresentation[] = [];
+  public userId: number;
 
   // UI
   faMapMarked = faMapMarked;
@@ -35,8 +37,12 @@ export class LocationsPageComponent implements OnDestroy {
    * @param {LocationsWebService} locationsWebService
    * @memberof LocationsPageComponent
    */
-  constructor(private locationsWebService: LocationsWebService, private dialog: MatDialog) {
-    this.getLocations();
+  constructor(
+    private authenticationWebService: AuthenticationWebService,
+    private locationsWebService: LocationsWebService,
+    private dialog: MatDialog
+  ) {
+    this.getProfileLocations();
   }
 
   /**
@@ -52,21 +58,21 @@ export class LocationsPageComponent implements OnDestroy {
   /**
    * Call LocationsWebService to get the user's locations
    *
-   * @private
    * @memberof LocationsPageComponent
    */
-  private getLocations(): void {
+  public getProfileLocations(): void {
     this.locationsWebService
-      .getLocations()
-      .pipe(takeUntil(this.destroy$))
+      .getLocations(this.authenticationWebService.currentUserValue.id)
+      .pipe(first())
       .subscribe(
         (locations) => {
+          console.log('getProfileLocations OK', locations);
           if (locations) {
             this.locations = locations;
           }
         },
         (error) => {
-          console.log('getLocations ERROR', error);
+          console.log('getProfileLocations ERROR', error);
         }
       );
   }
@@ -83,7 +89,7 @@ export class LocationsPageComponent implements OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(take(1))
+      .pipe(first())
       .subscribe((locationSaved: LocationRepresentation) => {
         console.log('locationSaved', locationSaved);
         if (locationSaved) {

@@ -26,30 +26,28 @@ export class EventTimeslotComponent {
   public endTimeMinutes: string;
 
   @Input() set startDatetime(startDatetime: number) {
-    this.startDateDayName = moment
-      .unix(startDatetime)
+    this.startDateDayName = moment(startDatetime)
       .locale('fr')
       .format('dddd');
-    this.startDateDayNameShort = moment
-      .unix(startDatetime)
+    this.startDateDayNameShort = moment(startDatetime)
       .locale('fr')
       .format('ddd');
-    this.startDateDayNumber = moment.unix(startDatetime).format('D');
-    this.startDateMonth = moment
-      .unix(startDatetime)
+    this.startDateDayNumber = moment(startDatetime).format('D');
+    this.startDateMonth = moment(startDatetime)
       .locale('fr')
       .format('MMMM');
-    this.startDateMonthShort = moment
-      .unix(startDatetime)
+    this.startDateMonthShort = moment(startDatetime)
       .locale('fr')
       .format('MMM');
-    this.startDateYear = moment.unix(startDatetime).format('YYYY');
-    this.startTimeHour = moment.unix(startDatetime).format('HH');
-    this.startTimeMinutes = moment.unix(startDatetime).format('mm');
+    this.startDateYear = moment(startDatetime).format('YYYY');
+    this.startTimeHour = moment(startDatetime).format('HH');
+    this.startTimeMinutes = moment(startDatetime).format('mm');
   }
 
   @Input() set endDatetime(endDatetime: number) {
-    this.endTimeHour = moment.unix(endDatetime).format('HH');
-    this.endTimeMinutes = moment.unix(endDatetime).format('mm');
+    if (endDatetime) {
+      this.endTimeHour = moment(endDatetime).format('HH');
+      this.endTimeMinutes = moment(endDatetime).format('mm');
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { take, first } from 'rxjs/operators';
 
 // Entry components
 import { LocationDetailDialogComponent } from '../location-detail-dialog/location-detail-dialog.component';
@@ -20,29 +20,44 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./location-list.component.scss']
 })
 export class LocationListComponent implements OnInit {
-  public displayedColumns: string[] = ['privacy', 'name', 'location', 'icons', 'actions'];
+  public displayedColumns: string[] = ['privacy', 'name', 'location', 'icons'];
   public dataSource: MatTableDataSource<LocationRepresentation>;
 
   // UI
   faPenSquare = faPenSquare;
   faTrash = faTrash;
 
-  // View Children
+  /**
+   * Inputs
+   */
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  // Inputs
+  public isAdmin: boolean;
+  @Input() set isUserAdmin(isUserAdmin: boolean) {
+    this.isAdmin = isUserAdmin;
+    if (isUserAdmin) {
+      this.displayedColumns.push('actions');
+    }
+  }
 
   @Input() set locations(locations: LocationRepresentation[]) {
-    console.log('locations', locations);
+    console.log('Input locations', locations);
     if (locations) {
       this.dataSource = new MatTableDataSource(locations);
     }
   }
 
-  // Outputs
+  /**
+   * Outputs
+   */
 
+  @Output() refreshLocations = new EventEmitter<number>();
   @Output() deleteLocation = new EventEmitter<number>();
+
+  /**
+   * View Children
+   */
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   /**
    * Creates an instance of LocationListComponent.
@@ -87,15 +102,19 @@ export class LocationListComponent implements OnInit {
 
     dialogRef
       .afterClosed()
-      .pipe(take(1))
+      .pipe(first())
       .subscribe((locationSaved: LocationRepresentation) => {
         console.log('locationSaved', locationSaved);
         if (locationSaved) {
-          this.locations.map((location) => {
+          // TODO : fix refresh list
+          console.log('this.dataSource BEFORE', this.dataSource.data[0]);
+          this.dataSource.data.map((location) => {
             if (location.id === locationSaved.id) {
               location = locationSaved;
             }
           });
+          console.log('this.dataSource AFTER', this.dataSource.data[0]);
+          this.refreshLocations.emit();
         }
       });
   }

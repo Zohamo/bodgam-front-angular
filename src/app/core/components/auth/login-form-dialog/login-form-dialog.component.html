@@ -24,13 +24,7 @@
     <button mat-stroked-button type="button" color="primary" (click)="onClose()" i18n="">
       Annuler
     </button>
-    <button
-      mat-raised-button
-      type="button"
-      color="primary"
-      [disabled]="!loginForm.valid || isLoading"
-      (click)="onSubmit()"
-    >
+    <button mat-raised-button color="primary" [disabled]="!loginForm.valid || isLoading" (click)="onSubmit()">
       <fa-icon *ngIf="loginForm.valid" [icon]="faCheck"></fa-icon>
       <fa-icon *ngIf="!loginForm.valid" [icon]="faTimesCircle"></fa-icon>
       <span i18n="">Se connecter</span>

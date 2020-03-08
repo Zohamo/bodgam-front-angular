@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   MatCardModule,
   MatButtonModule,
+  MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
@@ -24,6 +25,7 @@ import {
     FontAwesomeModule,
     MatCardModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,

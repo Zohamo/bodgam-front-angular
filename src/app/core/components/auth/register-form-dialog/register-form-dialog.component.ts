@@ -2,9 +2,15 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
+// Models
+import { User } from '@core/models/user.model';
+
 // Services
 import { AlertService } from '@core/services/alert.service';
 import { AuthenticationWebService } from '@core/services/authentication-web.service';
+
+// Validators
+import { MustMatch } from '@core/helpers/must-match.validator';
 
 // UI
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
@@ -47,11 +53,18 @@ export class RegisterFormDialogComponent {
    *
    * @memberof RegisterFormDialogComponent
    */
-  createForm(): void {
-    this.registerForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+  private createForm(): void {
+    this.registerForm = this.formBuilder.group(
+      {
+        name: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        passwordConfirm: ['', Validators.required]
+      },
+      {
+        validator: MustMatch('password', 'passwordConfirm')
+      }
+    );
   }
 
   /**
@@ -66,6 +79,16 @@ export class RegisterFormDialogComponent {
   }
 
   /**
+   * Prepare the entity before submit
+   *
+   * @returns {User}
+   * @memberof RegisterFormDialogComponent
+   */
+  private prepareSaveEntity(): User {
+    return this.registerForm.value;
+  }
+
+  /**
    * Submit form
    *
    * @memberof RegisterFormDialogComponent
@@ -75,12 +98,12 @@ export class RegisterFormDialogComponent {
 
     if (this.registerForm.valid) {
       this.isLoading = true;
-      console.log('submit', this.f.email.value, this.f.password.value);
+      console.log('submit', this.prepareSaveEntity());
       this.authenticationWebService
-        .register(this.f.email.value, this.f.password.value)
+        .register(this.prepareSaveEntity())
         .pipe(first())
         .subscribe(
-          (data) => {
+          (user) => {
             this.alertService.open('success-register');
             this.dialogRef.close();
           },
