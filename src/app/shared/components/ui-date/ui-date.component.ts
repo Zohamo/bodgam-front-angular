@@ -12,13 +12,11 @@ export class UiDateComponent {
   public dateMonthShort: string;
 
   @Input() set date(date: number) {
-    this.dateDayNameShort = moment
-      .unix(date)
+    this.dateDayNameShort = moment(date)
       .locale('fr')
       .format('ddd');
-    this.dateDayNumber = moment.unix(date).format('D');
-    this.dateMonthShort = moment
-      .unix(date)
+    this.dateDayNumber = moment(date).format('D');
+    this.dateMonthShort = moment(date)
       .locale('fr')
       .format('MMM');
   }

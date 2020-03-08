@@ -1,0 +1,49 @@
+<ng-container [ngSwitch]="data">
+  <!-- Profile -->
+  <ng-container *ngSwitchCase="'delete-profile'">
+    <h2 mat-dialog-title class="danger" i18n="">
+      Êtes-vous sur(e) de vouloir supprimer votre compte&nbsp;?
+    </h2>
+
+    <mat-dialog-content>
+      <p i18n="">
+        Il s'agit là d'une décision importante&nbsp;: vous perdrez toutes vos
+        <ins>informations personnelles</ins>
+        , vos
+        <ins>contacts</ins>
+        et votre
+        <ins>historique</ins>
+        &nbsp;!
+      </p>
+      <p i18n="">
+        <strong>Mais surtout&nbsp;!!</strong>
+        Nous serons très tristes de devoir vous dire "au revoir" (c'est tellement triste les "au revoir"&hellip;)
+      </p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button color="primary" (click)="onClose()">
+        <span i18n="">Annuler</span>
+      </button>
+      <button mat-button color="warn" (click)="onConfirm()">
+        <span i18n="">Supprimer votre profil</span>
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+
+  <!-- default -->
+  <ng-container *ngSwitchDefault>
+    <mat-dialog-content>
+      <p i18n="">Êtes-vous sûr(e)&nbsp;?</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button (click)="onClose()">
+        <span i18n="">Annuler</span>
+      </button>
+      <button mat-raised-button (click)="onConfirm()">
+        <span i18n="">Confirmer</span>
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+</ng-container>

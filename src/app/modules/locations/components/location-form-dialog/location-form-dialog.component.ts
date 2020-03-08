@@ -2,7 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, first } from 'rxjs/operators';
 
 // Models
 import { LocationFullRepresentation } from '../../models/location-full-representation';
@@ -69,7 +69,7 @@ export class LocationFormDialogComponent implements OnDestroy {
     console.log('data', data);
 
     forkJoin(this.locationsWebService.getLocation(data.id), this.countriesWebService.getCountries())
-      .pipe(takeUntil(this.destroy$))
+      .pipe(first())
       .subscribe(([location, countries]) => {
         console.log('location', location);
         console.log('countries', countries);
@@ -79,11 +79,11 @@ export class LocationFormDialogComponent implements OnDestroy {
 
         this.populateForm();
 
-        this.mapCircleRadius = this.location.coordsAccuracy;
+        this.mapCircleRadius = this.location.accuracy;
         this.coords = {
-          accuracy: this.location.coordsAccuracy,
-          latitude: this.location.coordsLatitude,
-          longitude: this.location.coordsLongitude
+          accuracy: this.location.accuracy,
+          latitude: this.location.latitude,
+          longitude: this.location.longitude
         };
       });
   }
@@ -112,16 +112,16 @@ export class LocationFormDialogComponent implements OnDestroy {
       isDefault: ['', Validators.required],
       isPublic: ['', Validators.required],
       // Address
-      addressField1: [],
-      addressField2: [],
-      addressZipCode: [],
-      addressDistrict: [],
-      addressCity: [],
-      addressCountry: ['', Validators.required],
+      address1: [],
+      address2: [],
+      zipCode: [],
+      district: [],
+      city: [],
+      country: ['', Validators.required],
       // Coordinates
-      coordsLatitude: [],
-      coordsLongitude: [],
-      coordsAccuracy: [],
+      latitude: [],
+      longitude: [],
+      accuracy: [],
       // Details
       description: [],
       isAllowedSmoking: ['', Validators.required],
@@ -146,22 +146,22 @@ export class LocationFormDialogComponent implements OnDestroy {
         isDefault: this.location.isDefault,
         isPublic: this.location.isPublic,
         // Address
-        addressField1: this.location.addressField1,
-        addressField2: this.location.addressField2,
-        addressZipCode: this.location.addressZipCode,
-        addressDistrict: this.location.addressDistrict,
-        addressCity: this.location.addressCity,
-        addressCountry: this.location.addressCountry,
+        address1: this.location.address1 || '',
+        address2: this.location.address2 || '',
+        zipCode: this.location.zipCode || '',
+        district: this.location.district || '',
+        city: this.location.city,
+        country: this.location.country,
         // Coordinates
-        coordsLatitude: this.location.coordsLatitude,
-        coordsLongitude: this.location.coordsLongitude,
-        coordsAccuracy: this.location.coordsAccuracy,
+        latitude: this.location.latitude,
+        longitude: this.location.longitude,
+        accuracy: this.location.accuracy,
         // Details
-        description: this.location.description,
+        description: this.location.description ? this.location.description : '',
         isAllowedSmoking: this.location.isAllowedSmoking,
         isAccessible: this.location.isAccessible,
         // Other
-        showExactLocation: this.location.coordsAccuracy === null ? false : !Boolean(this.location.coordsAccuracy)
+        showExactLocation: this.location.accuracy === null ? false : !Boolean(this.location.accuracy)
       });
     }
   }
@@ -176,12 +176,12 @@ export class LocationFormDialogComponent implements OnDestroy {
   private populateAddress(geocodeLocation: GeocodeResultLocation): void {
     if (this.locationForm) {
       this.locationForm.patchValue({
-        addressField1: this.locationForm.value.showExactLocation ? geocodeLocation.street : '',
-        addressField2: '',
-        addressZipCode: geocodeLocation.postalCode,
-        addressDistrict: geocodeLocation.adminArea6,
-        addressCity: geocodeLocation.adminArea5,
-        addressCountry: geocodeLocation.adminArea1
+        address1: this.locationForm.value.showExactLocation ? geocodeLocation.street : '',
+        address2: '',
+        zipCode: geocodeLocation.postalCode,
+        district: geocodeLocation.adminArea6,
+        city: geocodeLocation.adminArea5,
+        country: geocodeLocation.adminArea1
       });
     }
   }
@@ -195,9 +195,9 @@ export class LocationFormDialogComponent implements OnDestroy {
   public populateCoords(coords: GeoCoordinates): void {
     if (coords) {
       this.locationForm.patchValue({
-        coordsLatitude: coords.latitude,
-        coordsLongitude: coords.longitude,
-        coordsAccuracy: coords.accuracy
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        accuracy: coords.accuracy
       });
     }
   }
@@ -210,7 +210,9 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   private prepareSaveEntity(): LocationFullRepresentation {
-    this.locationForm.get('coordsAccuracy').enable();
+    if (this.locationForm.value.showExactLocation) {
+      this.locationForm.patchValue({ accuracy: 0 });
+    }
     this.locationForm.get('showExactLocation').disable();
     return this.locationForm.value;
   }
@@ -226,7 +228,7 @@ export class LocationFormDialogComponent implements OnDestroy {
       this.isLoading = true;
       this.locationsWebService
         .saveLocation(this.prepareSaveEntity())
-        .pipe(takeUntil(this.destroy$))
+        .pipe(first())
         .subscribe(
           (locationSaved) => {
             console.log('location saved', locationSaved);
@@ -257,8 +259,8 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   public onSetMinAccuracy(): void {
-    if (this.locationForm.value.showExactLocation && this.locationForm.value.coordsAccuracy < 100) {
-      this.locationForm.get('coordsAccuracy').setValue(100);
+    if (this.locationForm.value.showExactLocation && this.locationForm.value.accuracy < 100) {
+      this.locationForm.get('accuracy').setValue(100);
     }
   }
 
@@ -269,7 +271,7 @@ export class LocationFormDialogComponent implements OnDestroy {
    */
   public onReverseGeocode(): void {
     this.geolocationWebService
-      .reverseGeocode(this.locationForm.value.coordsLatitude, this.locationForm.value.coordsLongitude)
+      .reverseGeocode(this.locationForm.value.latitude, this.locationForm.value.longitude)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (geocode: Geocode) => {
@@ -293,9 +295,9 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   public onGeocode(): void {
-    const address = `${this.locationForm.get('addressField1').value}, ${
-      this.locationForm.get('addressZipCode').value
-    } ${this.locationForm.get('addressCity').value}`;
+    const address = `${this.locationForm.value.address1}, ${this.locationForm.value.zipCode} ${
+      this.locationForm.value.city
+    }`;
 
     this.geolocationWebService
       .geocode(address)

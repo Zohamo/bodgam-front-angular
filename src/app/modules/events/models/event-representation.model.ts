@@ -1,18 +1,19 @@
-import { UserRepresentation } from '../../users/models/user-representation.model';
+import { ProfileRepresentation } from '../../profiles/models/profile-representation.model';
 import { LocationRepresentation } from '../../locations/models/location-representation.model';
 import moment from 'moment';
 
 export class EventRepresentation {
   id: number;
   title: string;
+  isPrivate: boolean;
   // Datetime
-  startDatetime: number;
+  startDatetime: moment.Moment;
   endDatetime: number;
   // Location
   location: LocationRepresentation;
   // Players
-  host: UserRepresentation;
-  players: UserRepresentation[];
+  host: ProfileRepresentation;
+  players: ProfileRepresentation[];
   minPlayers: number;
   maxPlayers: number;
   // Details
@@ -23,11 +24,11 @@ export class EventRepresentation {
   constructor() {
     this.id = null;
     this.title = '';
+    this.isPrivate = false;
     // Datetime
     this.startDatetime = moment()
       .add(1, 'h')
-      .minutes(0)
-      .unix();
+      .minutes(0);
     this.endDatetime = null;
     // Location
     this.location = null;
@@ -39,6 +40,6 @@ export class EventRepresentation {
     // Details
     this.description = '';
     this.level = 0;
-    this.atmosphere = 0;
+    this.atmosphere = 2;
   }
 }

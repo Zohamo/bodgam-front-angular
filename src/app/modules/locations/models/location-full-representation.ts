@@ -1,28 +1,28 @@
-import { LocationRepresentation } from "./location-representation.model";
+import { LocationRepresentation } from './location-representation.model';
 
 export class LocationFullRepresentation extends LocationRepresentation {
   // Coordinates
-  coordsLatitude: number;
-  coordsLongitude: number;
-  coordsAccuracy: number;
+  latitude: number;
+  longitude: number;
+  accuracy: number;
   // Address
-  addressField1: string;
-  addressField2: string;
-  addressZipCode: number;
+  address1: string;
+  address2: string;
+  zipCode: number;
   // Details
   description: string;
 
   constructor() {
     super();
     // Coordinates
-    this.coordsLatitude = null;
-    this.coordsLongitude = null;
-    this.coordsAccuracy = null;
+    this.latitude = null;
+    this.longitude = null;
+    this.accuracy = null;
     // Address
-    this.addressField1 = "";
-    this.addressField2 = "";
-    this.addressZipCode = null;
+    this.address1 = '';
+    this.address2 = '';
+    this.zipCode = null;
     // Details
-    this.description = "";
+    this.description = '';
   }
 }

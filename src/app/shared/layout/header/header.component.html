@@ -13,7 +13,7 @@
       <span>Évènements</span>
     </a>
     <span class="flex-spacer"></span>
-    <ng-container *ngIf="!user?.isAuth">
+    <ng-container *ngIf="!isAuth">
       <a (click)="onRegister()">
         <fa-icon [icon]="faUserPlus"></fa-icon>
         <span>Créer un compte</span>
@@ -23,7 +23,7 @@
         <span>Connexion</span>
       </a>
     </ng-container>
-    <ng-container *ngIf="user?.isAuth">
+    <ng-container *ngIf="isAuth">
       <button mat-button class="ml-2 h-100" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
         {{ user.name }}
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
@@ -33,7 +33,7 @@
           <fa-icon [icon]="faUser"></fa-icon>
           <span>Mon profil</span>
         </a>
-        <a mat-menu-item [routerLink]="['/events']">
+        <a mat-menu-item [routerLink]="['/players', user.id, 'events']">
           <fa-icon [icon]="faCalendarAlt"></fa-icon>
           <span>Mes évènements</span>
         </a>

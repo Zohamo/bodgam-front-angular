@@ -4,8 +4,11 @@
 <div class="section-content">
   <h3>{{ location.name }}</h3>
   <p>
-    <ng-container *ngIf="location.addressDistrict !== ''">{{ location.addressDistrict }},</ng-container>
-    <strong>{{ location.addressCity }}</strong>
+    <span *ngIf="location.district" class="location-district">
+      {{ location.district }}
+    </span>
+    <span *ngIf="location.city" class="location-city">{{ location.city }},</span>
+    <span *ngIf="location.country" class="location-country">{{ location.country }}</span>
   </p>
   <button *ngIf="location.isPublic" mat-stroked-button color="accent" i18n="">
     Voir l'adresse exacte

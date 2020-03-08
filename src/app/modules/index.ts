@@ -1,11 +1,11 @@
 import { EventsModule } from './events/events.module';
 import { GamesModule } from './games/games.module';
 import { LocationsModule } from './locations/locations.module';
-import { UsersModule } from './users/users.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
-export const modules: any[] = [EventsModule, GamesModule, LocationsModule, UsersModule];
+export const modules: any[] = [EventsModule, GamesModule, LocationsModule, ProfilesModule];
 
 export * from './events/events.module';
 export * from './games/games.module';
 export * from './locations/locations.module';
-export * from './users/users.module';
+export * from './profiles/profiles.module';

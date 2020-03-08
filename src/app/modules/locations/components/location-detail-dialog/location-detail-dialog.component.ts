@@ -78,11 +78,9 @@ export class LocationDetailDialogComponent implements OnDestroy {
    */
   private buildAddress(): void {
     const sep = ', ';
-    this.address = `${this.location.addressField1}${
-      this.location.addressField1 && this.location.addressDistrict ? sep : ''
-    }${this.location.addressDistrict} ${this.location.addressZipCode} ${this.location.addressCity}${sep}${
-      this.location.addressCountry
-    }`.trim();
+    this.address = `${this.location.address1}${this.location.address1 && this.location.district ? sep : ''}${
+      this.location.district
+    } ${this.location.zipCode} ${this.location.city}${sep}${this.location.country}`.trim();
   }
 
   /**
@@ -92,9 +90,9 @@ export class LocationDetailDialogComponent implements OnDestroy {
    * @memberof LocationDetailDialogComponent
    */
   private buildCoords(): void {
-    this.coords.accuracy = this.location.coordsAccuracy;
-    this.coords.latitude = this.location.coordsLatitude;
-    this.coords.longitude = this.location.coordsLongitude;
+    this.coords.accuracy = this.location.accuracy;
+    this.coords.latitude = this.location.latitude;
+    this.coords.longitude = this.location.longitude;
   }
 
   /**

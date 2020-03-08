@@ -1,13 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, Subscription, of, Subject } from 'rxjs';
-import { switchMap, takeUntil, take } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, first } from 'rxjs/operators';
 
 // Models
 import { EventRepresentation } from '../../models/event-representation.model';
 import { LocationRepresentation } from 'src/app/modules/locations/models/location-representation.model';
 
 // Services
+import { AuthenticationWebService } from '@core/services/authentication-web.service';
 import { AlertService } from '@core/services/alert.service';
 import { EventsWebService } from '../../services/events-web.service';
 import { LocationsWebService } from 'src/app/modules/locations/services/locations-web.service';
@@ -42,7 +43,9 @@ export class EventEditPageComponent implements OnDestroy {
     private route: ActivatedRoute,
     private eventsWebService: EventsWebService,
     private locationsWebService: LocationsWebService,
-    public alertService: AlertService
+    public alertService: AlertService,
+    private router: Router,
+    private authenticationWebService: AuthenticationWebService
   ) {
     this.getEvent();
     this.event$.pipe(takeUntil(this.destroy$)).subscribe((event) => {
@@ -94,9 +97,10 @@ export class EventEditPageComponent implements OnDestroy {
       .saveEvent(event)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (eventSaved) => {
+        (eventSaved: EventRepresentation) => {
           console.log('event saved', eventSaved);
           this.alertService.open('success-save-event');
+          this.router.navigate(['events', eventSaved.id]);
         },
         (error) => {
           console.log('ERROR saving event', error);
@@ -113,8 +117,8 @@ export class EventEditPageComponent implements OnDestroy {
    */
   private getLocations(): void {
     this.locationsWebService
-      .getLocations()
-      .pipe(take(1))
+      .getLocations(this.authenticationWebService.currentUserValue.id)
+      .pipe(first())
       .subscribe((locations) => {
         this.userLocations = locations ? locations : [];
       });

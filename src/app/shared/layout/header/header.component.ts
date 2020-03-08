@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+// Models
+import { User } from '@core/models/user.model';
 
 // Entry Components
 import { LoginFormDialogComponent } from '@core/components/auth/login-form-dialog/login-form-dialog.component';
@@ -26,7 +30,13 @@ import { MatDialog } from '@angular/material';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
+  public user: User;
+  public isAuth = false;
+
+  // Subscriptions
+  public userSubscription: Subscription;
+
   // Font Awesome
   faCalendarAlt = faCalendarAlt;
   faCaretDown = faCaretDown;
@@ -46,6 +56,29 @@ export class HeaderComponent {
    * @memberof HeaderComponent
    */
   constructor(private dialog: MatDialog, private authenticationWebService: AuthenticationWebService) {}
+
+  /**
+   * A lifecycle hook that is called after Angular has initialized all data-bound properties
+   *
+   * @memberof HeaderComponent
+   */
+  ngOnInit(): void {
+    this.userSubscription = this.authenticationWebService.currentUser$.subscribe((user) => {
+      this.user = user;
+      this.isAuth = Boolean(user);
+    });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof HeaderComponent
+   */
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
 
   /**
    * Event to register new user

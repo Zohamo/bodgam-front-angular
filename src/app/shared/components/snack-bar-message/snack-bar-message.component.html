@@ -3,8 +3,10 @@
   <p *ngSwitchCase="'error-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
 
   <!-- Event -->
+  <p *ngSwitchCase="'success-delete-event'" i18n="">Votre évènement a été supprimé avec succès.</p>
   <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
-  <p *ngSwitchCase="'error-save-event'" i18n="">Un problème est survenu lors de la sauvegarde votre évènement.</p>
+  <p *ngSwitchCase="'error-delete-event'" i18n="">Un problème est survenu lors de la suppression de votre évènement.</p>
+  <p *ngSwitchCase="'error-save-event'" i18n="">Un problème est survenu lors de la sauvegarde de votre évènement.</p>
 
   <!-- Geocode -->
   <p *ngSwitchCase="'error-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
@@ -12,7 +14,7 @@
 
   <!-- Location -->
   <p *ngSwitchCase="'success-save-location'" i18n="">Votre lieu a été sauvegardé avec succès.</p>
-  <p *ngSwitchCase="'error-save-location'" i18n="">Un problème est survenu lors de la sauvegarde votre lieu.</p>
+  <p *ngSwitchCase="'error-save-location'" i18n="">Un problème est survenu lors de la sauvegarde de votre lieu.</p>
 
   <!-- Login -->
   <p *ngSwitchCase="'success-login'" i18n="">Vous êtes maintenant connecté(e).</p>
@@ -21,13 +23,16 @@
     <br />
     voulez-vous réessayer&nbsp;?
   </p>
+  <p *ngSwitchCase="'must-login'" i18n="">Veuillez vous connecter.</p>
 
   <!-- Profile -->
   <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>
-  <p *ngSwitchCase="'error-save-profile'" i18n="">Un problème est survenu lors de la mise à jour votre profil.</p>
+  <p *ngSwitchCase="'error-save-profile'" i18n="">Un problème est survenu lors de la mise à jour de votre profil.</p>
+  <p *ngSwitchCase="'success-delete-profile'" i18n="">Votre profil a été supprimé avec succès.</p>
+  <p *ngSwitchCase="'error-delete-profile'" i18n="">Un problème est survenu lors de la suppression de votre profil.</p>
 
   <!-- Register -->
-  <p *ngSwitchCase="'success-register'" i18n="">Votre a été créé avec succès.</p>
+  <p *ngSwitchCase="'success-register'" i18n="">Votre compte a été créé avec succès.</p>
   <p *ngSwitchCase="'error-register'" i18n="">Un problème est survenu lors de la création de votre compte.</p>
 
   <!-- default -->

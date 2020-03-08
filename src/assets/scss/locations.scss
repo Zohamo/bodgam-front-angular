@@ -1,0 +1,22 @@
+@import 'src/assets/scss/_variables.scss';
+@import 'src/assets/scss/_mixins.scss';
+
+.location-district,
+.location-city {
+  margin-right: 0.25rem;
+}
+
+.location-district::after {
+  content: ',';
+}
+
+.location-city {
+  font-weight: 500;
+}
+
+.location-country::before {
+  content: '(';
+}
+.location-country::after {
+  content: ')';
+}

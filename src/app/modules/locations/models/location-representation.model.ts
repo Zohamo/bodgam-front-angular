@@ -11,9 +11,9 @@ export class LocationRepresentation {
   isDefault: boolean;
   isPublic: boolean;
   // Address
-  addressDistrict: string;
-  addressCity: string;
-  addressCountry: string;
+  district: string;
+  city: string;
+  country: string;
   // Details
   isAllowedSmoking: boolean;
   isAccessible: boolean;
@@ -25,9 +25,9 @@ export class LocationRepresentation {
     this.isDefault = false;
     this.isPublic = false;
     // Address
-    this.addressDistrict = '';
-    this.addressCity = '';
-    this.addressCountry = '';
+    this.district = '';
+    this.city = '';
+    this.country = '';
     // Details
     this.isAllowedSmoking = true;
     this.isAccessible = true;
