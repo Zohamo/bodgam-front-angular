@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
+import { EventRepresentation } from '@/models';
 import { Observable } from 'rxjs';
-import { EventRepresentation } from '../models/event-representation.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventsWebService {
+export class EventService {
   /**
-   * Creates an instance of EventsWebService.
+   * Creates an instance of EventService.
    *
    * @param {HttpClient} http
-   * @memberof EventsWebService
+   * @memberof EventService
    */
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class EventsWebService {
    * @private
    * @param {EventRepresentation} event
    * @returns {EventRepresentation}
-   * @memberof EventsWebService
+   * @memberof EventService
    */
   private eventEditor(event: EventRepresentation): EventRepresentation {
     if (!event.players) {
@@ -37,7 +37,7 @@ export class EventsWebService {
    *
    * @param {number} [profileId]
    * @returns {Observable<EventRepresentation[]>}
-   * @memberof EventsWebService
+   * @memberof EventService
    */
   public getEvents(profileId?: number): Observable<EventRepresentation[]> {
     return profileId
@@ -60,7 +60,7 @@ export class EventsWebService {
    *
    * @param {number} id
    * @returns {Observable<EventRepresentation>}
-   * @memberof EventsWebService
+   * @memberof EventService
    */
   public getEvent(id: number): Observable<EventRepresentation> {
     return this.http
@@ -73,7 +73,7 @@ export class EventsWebService {
    *
    * @param {EventRepresentation} event
    * @returns {Observable<EventRepresentation>}
-   * @memberof EventsWebService
+   * @memberof EventService
    */
   public saveEvent(event: EventRepresentation): Observable<EventRepresentation> {
     return event.id
@@ -90,7 +90,7 @@ export class EventsWebService {
    *
    * @param {number} id
    * @returns {Observable<EventRepresentation>}
-   * @memberof EventsWebService
+   * @memberof EventService
    */
   public deleteEvent(id: number): Observable<EventRepresentation> {
     return this.http.delete<EventRepresentation>(`${environment.apiPath}/events/${id}`);

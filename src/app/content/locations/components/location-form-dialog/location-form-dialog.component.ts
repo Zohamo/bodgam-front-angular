@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Country, Geocode, GeocodeResultLocation, GeoCoordinates, LocationFullRepresentation } from '@/models';
-import { CountriesWebService, GeolocationWebService, LocationsWebService, SnackBarService } from '@/services';
+import { CountryService, GeocodingService, LocationService, SnackBarService } from '@/services';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
 
@@ -37,22 +37,22 @@ export class LocationFormDialogComponent implements OnDestroy {
    *
    * @param {FormBuilder} fb
    * @param {MatSnackBar} snackBar
-   * @param {GeolocationWebService} geolocationWebService
+   * @param {GeocodingService} geocodingService
    * @memberof LocationFormDialogComponent
    */
   constructor(
     public dialogRef: MatDialogRef<LocationFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private locationsWebService: LocationsWebService,
-    private countriesWebService: CountriesWebService,
-    private geolocationWebService: GeolocationWebService,
+    private locationService: LocationService,
+    private countryService: CountryService,
+    private geocodingService: GeocodingService,
     private fb: FormBuilder,
     private snackBarService: SnackBarService
   ) {
     this.createForm();
     console.log('data', data);
 
-    forkJoin(this.locationsWebService.getLocation(data.id), this.countriesWebService.getCountries())
+    forkJoin(this.locationService.getLocation(data.id), this.countryService.getCountries())
       .pipe(first())
       .subscribe(([location, countries]) => {
         console.log('location', location);
@@ -210,7 +210,7 @@ export class LocationFormDialogComponent implements OnDestroy {
     if (this.locationForm.valid) {
       console.log('onSubmit location', this.prepareSaveEntity());
       this.isLoading = true;
-      this.locationsWebService
+      this.locationService
         .saveLocation(this.prepareSaveEntity())
         .pipe(first())
         .subscribe(
@@ -254,7 +254,7 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   public onReverseGeocode(): void {
-    this.geolocationWebService
+    this.geocodingService
       .reverseGeocode(this.locationForm.value.latitude, this.locationForm.value.longitude)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
@@ -283,7 +283,7 @@ export class LocationFormDialogComponent implements OnDestroy {
       this.locationForm.value.city
     }`;
 
-    this.geolocationWebService
+    this.geocodingService
       .geocode(address)
       .pipe(takeUntil(this.destroy$))
       .subscribe(

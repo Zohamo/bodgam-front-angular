@@ -1,21 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
+import { LocationFullRepresentation, LocationRepresentation } from '@/models';
 import { Observable, of } from 'rxjs';
-
-// Models
-import { LocationFullRepresentation } from '../models/location-full-representation.model';
-import { LocationRepresentation } from '../models/location-representation.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocationsWebService {
+export class LocationService {
   /**
-   * Creates an instance of LocationsWebService.
+   * Creates an instance of LocationService.
    *
    * @param {HttpClient} http
-   * @memberof LocationsWebService
+   * @memberof LocationService
    */
   constructor(private http: HttpClient) {}
 
@@ -24,7 +21,7 @@ export class LocationsWebService {
    *
    * @param {number} [profileId]
    * @returns {Observable<LocationRepresentation[]>}
-   * @memberof LocationsWebService
+   * @memberof LocationService
    */
   public getLocations(profileId?: number): Observable<LocationRepresentation[]> {
     return profileId
@@ -37,7 +34,7 @@ export class LocationsWebService {
    *
    * @param {number} id
    * @returns {Observable<LocationFullRepresentation>}
-   * @memberof LocationsWebService
+   * @memberof LocationService
    */
   public getLocation(id: number): Observable<LocationFullRepresentation> {
     return id
@@ -50,7 +47,7 @@ export class LocationsWebService {
    *
    * @param {LocationFullRepresentation} location
    * @returns {Observable<LocationFullRepresentation>}
-   * @memberof LocationsWebService
+   * @memberof LocationService
    */
   public saveLocation(location: LocationFullRepresentation): Observable<LocationFullRepresentation> {
     return location.id
@@ -63,7 +60,7 @@ export class LocationsWebService {
    *
    * @param {number} id
    * @returns {Observable<LocationFullRepresentation>}
-   * @memberof LocationsWebService
+   * @memberof LocationService
    */
   public deleteLocation(id: number): Observable<LocationFullRepresentation> {
     return this.http.delete<LocationFullRepresentation>(`${environment.apiPath}/locations/${id}`);

@@ -10,11 +10,11 @@ import {
 } from '@/models';
 import {
   AlertService,
-  AuthenticationWebService,
-  BggWebService,
-  EventsWebService,
-  LocationsWebService,
-  ProfilesWebService
+  AuthenticationService,
+  BoardGameGeekService,
+  EventService,
+  LocationService,
+  ProfileService
 } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil, first } from 'rxjs/operators';
@@ -61,17 +61,17 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * Creates an instance of ProfilePageComponent.
    *
    * @param {ActivatedRoute} route
-   * @param {ProfilesWebService} profilesWebService
-   * @param {BggWebService} bggWebService
+   * @param {ProfileService} profileService
+   * @param {BoardGameGeekService} boardGameGeekService
    * @memberof ProfilePageComponent
    */
   constructor(
     private route: ActivatedRoute,
-    private profilesWebService: ProfilesWebService,
-    private authenticationWebService: AuthenticationWebService,
-    private bggWebService: BggWebService,
-    private eventsWebService: EventsWebService,
-    private locationsWebService: LocationsWebService,
+    private profileService: ProfileService,
+    private authenticationService: AuthenticationService,
+    private boardGameGeekService: BoardGameGeekService,
+    private eventService: EventService,
+    private locationService: LocationService,
     private alertService: AlertService,
     private dialog: MatDialog
   ) {}
@@ -127,8 +127,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     this.profile$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.profileId = +params.get('id');
-        this.isAdmin = this.authenticationWebService.currentUserValue.id === this.profileId;
-        return this.profilesWebService.getProfile(this.profileId);
+        this.isAdmin = this.authenticationService.currentUserValue.id === this.profileId;
+        return this.profileService.getProfile(this.profileId);
       })
     );
   }
@@ -152,7 +152,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * @memberof ProfilePageComponent
    */
   private getGames(bggName: string): void {
-    this.bggWebService
+    this.boardGameGeekService
       .getCollection(bggName)
       .pipe(first())
       .subscribe(
@@ -175,7 +175,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * @memberof ProfilePageComponent
    */
   private getEvents(profileId: number): void {
-    this.eventsWebService
+    this.eventService
       .getEvents(profileId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
@@ -197,7 +197,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * @memberof ProfilePageComponent
    */
   private getLocations(): void {
-    this.locationsWebService
+    this.locationService
       .getLocations(this.profileId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
@@ -219,7 +219,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * @memberof ProfilePageComponent
    */
   public saveProfile(profile: ProfileFullRepresentation): void {
-    this.profile$ = this.profilesWebService.saveProfile(profile).pipe(takeUntil(this.destroy$));
+    this.profile$ = this.profileService.saveProfile(profile).pipe(takeUntil(this.destroy$));
   }
 
   /**
@@ -229,7 +229,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * @memberof ProfilePageComponent
    */
   public saveProfilePrivacy(privacy: ProfilePrivacyRepresentation): void {
-    this.profilesWebService
+    this.profileService
       .saveProfilePrivacy(this.profileId, privacy)
       .pipe(first())
       .subscribe(
@@ -251,14 +251,14 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    */
   public deleteProfile(): void {
     if (this.isAdmin) {
-      this.authenticationWebService
+      this.authenticationService
         .delete(this.profileId)
         .pipe(first())
         .subscribe(
           (response) => {
             console.log('deleteProfile OK', response);
             this.alertService.open('success-delete-profile');
-            this.authenticationWebService.logout();
+            this.authenticationService.logout();
           },
           (error: HttpErrorResponse) => {
             console.log('deleteProfile ERROR', error);

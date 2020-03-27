@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GeolocationWebService {
+export class GeocodingService {
   private apiPath = AppApi.GEOLOCATION;
 
   /**
-   * Creates an instance of GeolocationWebService.
+   * Creates an instance of GeocodingService.
    *
    * @param {HttpClient} http
-   * @memberof GeolocationWebService
+   * @memberof GeocodingService
    */
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class GeolocationWebService {
    *
    * @param {string} address
    * @returns {Observable<Geocode>}
-   * @memberof GeolocationWebService
+   * @memberof GeocodingService
    */
   public geocode(address: string): Observable<Geocode> {
     return this.http.get<Geocode>(`${this.apiPath}/address?key=${AppKeys.MAPQUEST}&location=${address}`);
@@ -37,7 +37,7 @@ export class GeolocationWebService {
    * @param {number} latitude
    * @param {number} longitude
    * @returns {Observable<Geocode>}
-   * @memberof GeolocationWebService
+   * @memberof GeocodingService
    */
   public reverseGeocode(latitude: number, longitude: number): Observable<Geocode> {
     return this.http.get<Geocode>(`${this.apiPath}/reverse?key=${AppKeys.MAPQUEST}&location=${latitude},${longitude}`);

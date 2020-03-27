@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BggGameRepresentation } from '@/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-// Models
-import { BggGameRepresentation } from '../models/bgg/bgg-game-representation.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BggWebService {
+export class BoardGameGeekService {
   // http://bgg-json.azurewebsites.net/
   private bggApiPath = 'http://bgg-json.azurewebsites.net';
   private api = `${this.bggApiPath}`;
@@ -21,7 +19,7 @@ export class BggWebService {
    *
    * @param {string} userName
    * @returns {Observable<BggGameRepresentation[]>}
-   * @memberof BggWebService
+   * @memberof BoardGameGeekService
    */
   public getCollection(userName: string): Observable<BggGameRepresentation[]> {
     return this.http.get<BggGameRepresentation[]>(`${this.api}/collection/${userName}`).pipe(
@@ -36,7 +34,7 @@ export class BggWebService {
    *
    * @param {number} thingId
    * @returns {Observable<BggGameRepresentation>}
-   * @memberof BggWebService
+   * @memberof BoardGameGeekService
    */
   public getThing(thingId: number): Observable<BggGameRepresentation> {
     return this.http.get<BggGameRepresentation>(`${this.api}/thing/${thingId}`);

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Country, ProfileRepresentation } from '@/models';
-import { CountriesWebService, ProfilesWebService } from '@/services';
+import { CountryService, ProfileService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -24,11 +24,11 @@ export class ProfilesPageComponent implements OnDestroy {
   /**
    * Creates an instance of ProfilesPageComponent.
    *
-   * @param {ProfilesWebService} profilesWebService
-   * @param {CountriesWebService} countriesWebService
+   * @param {ProfileService} profileService
+   * @param {CountryService} countryService
    * @memberof ProfilesPageComponent
    */
-  constructor(private profilesWebService: ProfilesWebService, private countriesWebService: CountriesWebService) {
+  constructor(private profileService: ProfileService, private countryService: CountryService) {
     this.getProfiles();
     this.getCountries();
   }
@@ -50,7 +50,7 @@ export class ProfilesPageComponent implements OnDestroy {
    * @memberof ProfilesPageComponent
    */
   private getProfiles(): void {
-    this.profiles$ = this.profilesWebService.getProfiles();
+    this.profiles$ = this.profileService.getProfiles();
   }
 
   /**
@@ -60,7 +60,7 @@ export class ProfilesPageComponent implements OnDestroy {
    * @memberof ProfileEditPageComponent
    */
   private getCountries(): void {
-    this.countriesWebService
+    this.countryService
       .getCountries()
       .pipe(takeUntil(this.destroy$))
       .subscribe((countries) => {

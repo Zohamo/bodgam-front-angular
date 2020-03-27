@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LocationRepresentation } from '@/models';
-import { AuthenticationWebService, LocationsWebService } from '@/services';
+import { AuthenticationService, LocationService } from '@/services';
 import { Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
 
@@ -29,12 +29,12 @@ export class LocationsPageComponent implements OnDestroy {
   /**
    * Creates an instance of LocationsPageComponent.
    *
-   * @param {LocationsWebService} locationsWebService
+   * @param {LocationService} locationService
    * @memberof LocationsPageComponent
    */
   constructor(
-    private authenticationWebService: AuthenticationWebService,
-    private locationsWebService: LocationsWebService,
+    private authenticationService: AuthenticationService,
+    private locationService: LocationService,
     private dialog: MatDialog
   ) {
     this.getProfileLocations();
@@ -51,13 +51,13 @@ export class LocationsPageComponent implements OnDestroy {
   }
 
   /**
-   * Call LocationsWebService to get the user's locations
+   * Call LocationService to get the user's locations
    *
    * @memberof LocationsPageComponent
    */
   public getProfileLocations(): void {
-    this.locationsWebService
-      .getLocations(this.authenticationWebService.currentUserValue.id)
+    this.locationService
+      .getLocations(this.authenticationService.currentUserValue.id)
       .pipe(first())
       .subscribe(
         (locations) => {
@@ -95,13 +95,13 @@ export class LocationsPageComponent implements OnDestroy {
   }
 
   /**
-   * Call LocationsWebService to delete a location of this user
+   * Call LocationService to delete a location of this user
    *
    * @param {number} id
    * @memberof LocationsPageComponent
    */
   public deleteLocation(id: number): void {
-    this.locationsWebService
+    this.locationService
       .deleteLocation(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {

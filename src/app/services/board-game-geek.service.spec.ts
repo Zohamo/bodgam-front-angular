@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BggWebService } from './bgg-web.service';
+import { BoardGameGeekService } from './board-game-geek.service';
 
-describe('BggWebService', () => {
+describe('BoardGameGeekService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BggWebService = TestBed.get(BggWebService);
+    const service: BoardGameGeekService = TestBed.get(BoardGameGeekService);
     expect(service).toBeTruthy();
   });
 });

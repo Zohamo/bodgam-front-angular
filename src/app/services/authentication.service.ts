@@ -9,16 +9,16 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationWebService {
+export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
   /**
-   * Creates an instance of AuthenticationWebService.
+   * Creates an instance of AuthenticationService.
    *
    * @param {HttpClient} http
    * @param {Router} router
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -30,7 +30,7 @@ export class AuthenticationWebService {
    *
    * @readonly
    * @type {User}
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
@@ -41,7 +41,7 @@ export class AuthenticationWebService {
    *
    * @readonly
    * @type {Observable<User>}
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   public get currentUser$(): Observable<User> {
     return this.currentUser;
@@ -52,7 +52,7 @@ export class AuthenticationWebService {
    *
    * @param {User} user
    * @returns {Observable<User>}
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   public register(user: User): Observable<User> {
     return this.http.post<User>(`${environment.apiPath}/register`, user).pipe(
@@ -69,7 +69,7 @@ export class AuthenticationWebService {
    * @param {string} email
    * @param {string} password
    * @returns {Observable<User>}
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   public login(email: string, password: string): Observable<User> {
     return this.http.post<User>(`${environment.apiPath}/login`, { email, password }).pipe(
@@ -85,7 +85,7 @@ export class AuthenticationWebService {
    *
    * @param {number} id
    * @returns {Observable<string>}
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   public delete(id: number): Observable<string> {
     return this.http.delete<string>(`${environment.apiPath}/user/${id}`);
@@ -96,7 +96,7 @@ export class AuthenticationWebService {
    *
    * @private
    * @param {User} user
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   private storeCurrentUser(user: User): void {
     console.log('currentUser', user);
@@ -107,7 +107,7 @@ export class AuthenticationWebService {
   /**
    * Logout the user
    *
-   * @memberof AuthenticationWebService
+   * @memberof AuthenticationService
    */
   public logout(): void {
     // remove user from local storage and set current user to null
