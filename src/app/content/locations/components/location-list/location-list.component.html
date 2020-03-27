@@ -1,0 +1,58 @@
+<table mat-table [dataSource]="dataSource" class="w-100">
+  <!-- Privacy Column -->
+  <ng-container matColumnDef="privacy">
+    <td mat-cell *matCellDef="let location">
+      <app-button-visibility [visible]="location.isPublic"></app-button-visibility>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <td mat-cell *matCellDef="let location">
+      <button mat-button type="button" color="primary" (click)="openLocationDetailDialog(location.id)">
+        {{ location.name }}
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <td mat-cell *matCellDef="let location">
+      <span *ngIf="location.district" class="location-district">
+        {{ location.district }}
+      </span>
+      <span *ngIf="location.city" class="location-city">{{ location.city }}</span>
+      <span *ngIf="location.country" class="location-country">{{ location.country }}</span>
+    </td>
+  </ng-container>
+
+  <!-- Icons Column -->
+  <ng-container matColumnDef="icons">
+    <td mat-cell *matCellDef="let location" class="text-center">
+      <app-location-detail-icons
+        [isAllowedSmoking]="location.isAllowedSmoking"
+        [isAccessible]="location.isAccessible"
+      ></app-location-detail-icons>
+    </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container *ngIf="isAdmin" matColumnDef="actions">
+    <td mat-cell *matCellDef="let location" class="text-center">
+      <button mat-button type="button" color="primary" (click)="openLocationFormDialog(location.id)">
+        <fa-icon [icon]="faPenSquare"></fa-icon>
+      </button>
+      <button mat-button type="button" color="primary" (click)="onDeleteLocation(location.id)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr
+    mat-row
+    *matRowDef="let location; columns: displayedColumns"
+    [ngClass]="{ 'default-location': location.isDefault }"
+  ></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
