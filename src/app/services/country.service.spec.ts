@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CountriesWebService } from './countries-web.service';
+import { CountryService } from './country.service';
 
-describe('CountriesWebService', () => {
+describe('CountryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CountriesWebService = TestBed.get(CountriesWebService);
+    const service: CountryService = TestBed.get(CountryService);
     expect(service).toBeTruthy();
   });
 });

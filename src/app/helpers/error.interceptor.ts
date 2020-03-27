@@ -1,6 +1,6 @@
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticationWebService } from '@/services';
+import { AuthenticationService } from '@/services';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -9,10 +9,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   /**
    * Creates an instance of ErrorInterceptor.
    *
-   * @param {AuthenticationWebService} authenticationWebService
+   * @param {AuthenticationService} authenticationService
    * @memberof ErrorInterceptor
    */
-  constructor(private authenticationWebService: AuthenticationWebService) {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   /**
    * Intercept API errors
@@ -27,7 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 401) {
           // auto logout if 401 response returned from api
-          this.authenticationWebService.logout();
+          this.authenticationService.logout();
           location.reload(); // deprecated : location.reload(true);
         }
 

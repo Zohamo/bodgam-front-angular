@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventRepresentation } from '@/models';
-import { AuthenticationWebService, EventsWebService } from '@/services';
+import { AuthenticationService, EventService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -25,13 +25,13 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   /**
    * Creates an instance of EventsPageComponent.
    *
-   * @param {EventsWebService} eventsWebService
+   * @param {EventService} eventService
    * @memberof EventsPageComponent
    */
   constructor(
     private route: ActivatedRoute,
-    private eventsWebService: EventsWebService,
-    private authenticationWebService: AuthenticationWebService
+    private eventService: EventService,
+    private authenticationService: AuthenticationService
   ) {}
 
   /**
@@ -54,7 +54,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Call EventsWebService to get the events
+   * Call EventService to get the events
    *
    * @private
    * @memberof EventsPageComponent
@@ -65,11 +65,11 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         switch (data.name) {
           case 'listAll':
             this.isUserList = false;
-            this.events$ = this.eventsWebService.getEvents();
+            this.events$ = this.eventService.getEvents();
             break;
           case 'userList':
             this.isUserList = true;
-            this.events$ = this.eventsWebService.getEvents(this.authenticationWebService.currentUserValue.id);
+            this.events$ = this.eventService.getEvents(this.authenticationService.currentUserValue.id);
             break;
         }
       });

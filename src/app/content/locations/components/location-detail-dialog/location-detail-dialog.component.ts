@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { GeoCoordinates, LocationFullRepresentation } from '@/models';
-import { LocationsWebService } from '@/services';
+import { LocationService } from '@/services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -29,16 +29,16 @@ export class LocationDetailDialogComponent implements OnDestroy {
    *
    * @param {MatDialogRef<LocationDetailDialogComponent>} dialogRef
    * @param {*} data
-   * @param {LocationsWebService} locationsWebService
+   * @param {LocationService} locationService
    * @memberof LocationDetailDialogComponent
    */
   constructor(
     public dialogRef: MatDialogRef<LocationDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private locationsWebService: LocationsWebService
+    private locationService: LocationService
   ) {
     console.log('data', data);
-    this.locationsWebService
+    this.locationService
       .getLocation(data.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(

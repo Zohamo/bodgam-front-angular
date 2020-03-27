@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BggGameRepresentation, Country, ProfileFullRepresentation, User } from '@/models';
 import {
-  AuthenticationWebService,
-  BggWebService,
-  CountriesWebService,
-  ProfilesWebService,
+  AuthenticationService,
+  BoardGameGeekService,
+  CountryService,
+  ProfileService,
   SnackBarService
 } from '@/services';
 import moment from 'moment';
@@ -46,13 +46,13 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
-    private authenticationWebService: AuthenticationWebService,
-    private profilesWebService: ProfilesWebService,
-    private countriesWebService: CountriesWebService,
-    private bggWebService: BggWebService,
+    private authenticationService: AuthenticationService,
+    private profileService: ProfileService,
+    private countryService: CountryService,
+    private boardGameGeekService: BoardGameGeekService,
     public snackBarService: SnackBarService
   ) {
-    this.user = this.authenticationWebService.currentUserValue;
+    this.user = this.authenticationService.currentUserValue;
     this.today = new Date();
     this.createForm();
   }
@@ -64,7 +64,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     if (this.user && this.user.id) {
-      forkJoin(this.profilesWebService.getProfile(this.user.id), this.countriesWebService.getCountries())
+      forkJoin(this.profileService.getProfile(this.user.id), this.countryService.getCountries())
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           ([profile, countries]) => {
@@ -176,7 +176,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     if (this.profileForm.valid) {
       console.log('profileForm', this.prepareSaveEntity());
-      this.profilesWebService
+      this.profileService
         .saveProfile(this.prepareSaveEntity())
         .pipe(first())
         .subscribe(
@@ -209,7 +209,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    */
   public onGetBggGames(): void {
     this.isLoadingBggGames = true;
-    this.bggWebService
+    this.boardGameGeekService
       .getCollection(this.profileForm.value.bggName)
       .pipe(takeUntil(this.destroy$))
       .subscribe(

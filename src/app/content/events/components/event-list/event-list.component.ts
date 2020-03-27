@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EventRepresentation } from '@/models';
-import { AlertService, AuthenticationWebService, EventsWebService } from '@/services';
+import { AlertService, AuthenticationService, EventService } from '@/services';
 
 // UI
 import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -28,18 +28,16 @@ export class EventListComponent {
    * Creates an instance of EventListComponent.
    *
    * @param {AlertService} alertService
-   * @param {AuthenticationWebService} authenticationWebService
-   * @param {EventsWebService} eventsWebService
+   * @param {AuthenticationService} authenticationService
+   * @param {EventService} eventService
    * @memberof EventListComponent
    */
   constructor(
     private alertService: AlertService,
-    private authenticationWebService: AuthenticationWebService,
-    private eventsWebService: EventsWebService
+    private authenticationService: AuthenticationService,
+    private eventService: EventService
   ) {
-    this.userId = this.authenticationWebService.currentUserValue
-      ? this.authenticationWebService.currentUserValue.id
-      : null;
+    this.userId = this.authenticationService.currentUserValue ? this.authenticationService.currentUserValue.id : null;
   }
 
   /**
@@ -61,7 +59,7 @@ export class EventListComponent {
    * @memberof EventListComponent
    */
   public onDeleteEvent(event: EventRepresentation): void {
-    this.eventsWebService.deleteEvent(event.id).subscribe(
+    this.eventService.deleteEvent(event.id).subscribe(
       (res) => {
         console.log('DELETE EVENT', res);
         this.events.splice(this.events.indexOf(event), 1);

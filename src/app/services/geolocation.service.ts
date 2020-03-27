@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
-import { NavigatorGeolocationPosition } from '../models/navigator/navigator-geolocation-position.model';
+import { NavigatorGeolocationPosition } from '@/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeolocationService {
+  /**
+   * Get current user's position with Navigator
+   *
+   * @returns {Promise<NavigatorGeolocationPosition>}
+   * @memberof GeolocationService
+   */
   public getPosition(): Promise<NavigatorGeolocationPosition> {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(

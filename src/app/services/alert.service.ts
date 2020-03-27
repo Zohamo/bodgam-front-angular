@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
-import { AppConfig } from 'src/app/config/app.config';
+import { AppConfig } from '@/config';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {

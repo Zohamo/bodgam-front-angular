@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Country } from '@/models';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Country } from '../models/country.model';
 
 // Stubs
 import countriesStub from 'src/assets/data/stubs/stub-countries.json';
@@ -10,7 +10,7 @@ import countriesStub from 'src/assets/data/stubs/stub-countries.json';
 @Injectable({
   providedIn: 'root'
 })
-export class CountriesWebService {
+export class CountryService {
   private lang = 'fr';
 
   // https://restcountries.eu/

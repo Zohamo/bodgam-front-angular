@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AppConfig } from '@/config';
-import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
 import { MatSnackBar } from '@angular/material';
+import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
+import { AppConfig } from '@/config';
 
 @Injectable({
   providedIn: 'root'
