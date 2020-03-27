@@ -1,20 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// Modules
-import * as fromModules from './modules';
-import { SharedModule } from './shared/shared.module';
+// Imports
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LayoutModule } from '@/layout/layout.module';
+import { SnackBarMessageModule } from './components';
+import * as fromContent from './content';
+
+// Declarations
+import * as fromPages from './pages';
 
 // Providers
-import { JwtInterceptor } from '@core/helpers/jwt.interceptor';
-
-// UI
-import { MatDateFormats, MatSnackBarModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { ErrorInterceptor, JwtInterceptor } from '@/helpers';
+import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -29,22 +30,19 @@ export const MY_FORMAT: MatDateFormats = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
-    MatSnackBarModule,
-    SharedModule,
-    ...fromModules.modules
+    BrowserModule,
+    HttpClientModule,
+    LayoutModule,
+    SnackBarMessageModule,
+    ...fromContent.modules
   ],
+  declarations: [AppComponent, ...fromPages.components],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }
   ],
