@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EventRepresentation } from '@/models';
-import { AlertService, AuthenticationService, EventService } from '@/services';
+import { AlertService, UserService, EventService } from '@/services';
 
 // UI
 import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -28,16 +28,16 @@ export class EventListComponent {
    * Creates an instance of EventListComponent.
    *
    * @param {AlertService} alertService
-   * @param {AuthenticationService} authenticationService
+   * @param {UserService} userService
    * @param {EventService} eventService
    * @memberof EventListComponent
    */
   constructor(
     private alertService: AlertService,
-    private authenticationService: AuthenticationService,
+    private userService: UserService,
     private eventService: EventService
   ) {
-    this.userId = this.authenticationService.currentUserValue ? this.authenticationService.currentUserValue.id : null;
+    this.userId = this.userService.id;
   }
 
   /**

@@ -15,7 +15,7 @@ import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-
 import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
 import { AppConfig } from '@/config';
 import { User } from '@/models';
-import { AuthenticationService } from '@/services';
+import { UserService } from '@/services';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -46,10 +46,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Creates an instance of HeaderComponent.
    *
    * @param {MatDialog} dialog
-   * @param {AuthenticationService} authenticationService
+   * @param {UserService} userService
    * @memberof HeaderComponent
    */
-  constructor(private dialog: MatDialog, private authenticationService: AuthenticationService) {}
+  constructor(private dialog: MatDialog, private userService: UserService) {}
 
   /**
    * A lifecycle hook that is called after Angular has initialized all data-bound properties
@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   ngOnInit(): void {
-    this.userSubscription = this.authenticationService.currentUser$.subscribe((user) => {
+    this.userSubscription = this.userService.currentUser$.subscribe((user) => {
       this.user = user;
       this.isAuth = Boolean(user);
     });
@@ -98,6 +98,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onLogout(): void {
-    this.authenticationService.logout();
+    this.userService.logout();
   }
 }

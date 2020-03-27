@@ -1,5 +1,4 @@
 export * from './alert.service';
-export * from './authentication.service';
 export * from './board-game-geek.service';
 export * from './country.service';
 export * from './event.service';
@@ -8,3 +7,4 @@ export * from './geolocation.service';
 export * from './location.service';
 export * from './profile.service';
 export * from './snack-bar.service';
+export * from './user.service';

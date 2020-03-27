@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { AlertService, AuthenticationService } from '@/services';
+import { AlertService, UserService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +24,7 @@ export class DialogUserLoginComponent {
    *
    * @param {MatDialogRef<DialogUserLoginComponent>} dialogRef
    * @param {FormBuilder} formBuilder
-   * @param {AuthenticationService} authenticationService
+   * @param {UserService} userService
    * @param {AlertService} alertService
    * @memberof DialogUserLoginComponent
    */
@@ -32,7 +32,7 @@ export class DialogUserLoginComponent {
     private dialogRef: MatDialogRef<DialogUserLoginComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private authenticationService: AuthenticationService
+    private userService: UserService
   ) {
     this.createForm();
   }
@@ -71,7 +71,7 @@ export class DialogUserLoginComponent {
     if (this.loginForm.valid) {
       this.isSubmitted = true;
       console.log('submit', this.f.email.value, this.f.password.value);
-      this.authenticationService
+      this.userService
         .login(this.f.email.value, this.f.password.value)
         .pipe(first())
         .subscribe(
