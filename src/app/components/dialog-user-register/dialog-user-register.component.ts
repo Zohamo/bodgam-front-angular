@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { MustMatch } from '@/helpers';
 import { User } from '@/models';
-import { AlertService, AuthenticationService } from '@/services';
+import { AlertService, UserService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -34,7 +34,7 @@ export class DialogUserRegisterComponent {
     private dialogRef: MatDialogRef<DialogUserRegisterComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private authenticationService: AuthenticationService
+    private userService: UserService
   ) {
     this.createForm();
   }
@@ -90,7 +90,7 @@ export class DialogUserRegisterComponent {
     if (this.registerForm.valid) {
       this.isLoading = true;
       console.log('submit', this.prepareSaveEntity());
-      this.authenticationService
+      this.userService
         .register(this.prepareSaveEntity())
         .pipe(first())
         .subscribe(

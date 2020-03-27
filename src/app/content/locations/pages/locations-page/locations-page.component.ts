@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LocationRepresentation } from '@/models';
-import { AuthenticationService, LocationService } from '@/services';
+import { UserService, LocationService } from '@/services';
 import { Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
 
@@ -32,11 +32,7 @@ export class LocationsPageComponent implements OnDestroy {
    * @param {LocationService} locationService
    * @memberof LocationsPageComponent
    */
-  constructor(
-    private authenticationService: AuthenticationService,
-    private locationService: LocationService,
-    private dialog: MatDialog
-  ) {
+  constructor(private userService: UserService, private locationService: LocationService, private dialog: MatDialog) {
     this.getProfileLocations();
   }
 
@@ -57,7 +53,7 @@ export class LocationsPageComponent implements OnDestroy {
    */
   public getProfileLocations(): void {
     this.locationService
-      .getLocations(this.authenticationService.currentUserValue.id)
+      .getLocations(this.userService.id)
       .pipe(first())
       .subscribe(
         (locations) => {

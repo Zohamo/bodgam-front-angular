@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventRepresentation } from '@/models';
-import { AuthenticationService, EventService } from '@/services';
+import { UserService, EventService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -28,11 +28,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
    * @param {EventService} eventService
    * @memberof EventsPageComponent
    */
-  constructor(
-    private route: ActivatedRoute,
-    private eventService: EventService,
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private route: ActivatedRoute, private eventService: EventService, private userService: UserService) {}
 
   /**
    * A lifecycle hook that is called after Angular has initialized all data-bound properties
@@ -69,7 +65,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
             break;
           case 'userList':
             this.isUserList = true;
-            this.events$ = this.eventService.getEvents(this.authenticationService.currentUserValue.id);
+            this.events$ = this.eventService.getEvents(this.userService.id);
             break;
         }
       });

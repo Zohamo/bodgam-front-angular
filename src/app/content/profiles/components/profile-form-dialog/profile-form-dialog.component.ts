@@ -1,13 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BggGameRepresentation, Country, ProfileFullRepresentation, User } from '@/models';
-import {
-  AuthenticationService,
-  BoardGameGeekService,
-  CountryService,
-  ProfileService,
-  SnackBarService
-} from '@/services';
+import { UserService, BoardGameGeekService, CountryService, ProfileService, SnackBarService } from '@/services';
 import moment from 'moment';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
@@ -46,13 +40,13 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
+    private userService: UserService,
     private profileService: ProfileService,
     private countryService: CountryService,
     private boardGameGeekService: BoardGameGeekService,
     public snackBarService: SnackBarService
   ) {
-    this.user = this.authenticationService.currentUserValue;
+    this.user = this.userService.value;
     this.today = new Date();
     this.createForm();
   }

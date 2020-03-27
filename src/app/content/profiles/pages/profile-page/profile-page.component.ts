@@ -10,7 +10,7 @@ import {
 } from '@/models';
 import {
   AlertService,
-  AuthenticationService,
+  UserService,
   BoardGameGeekService,
   EventService,
   LocationService,
@@ -68,7 +68,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private profileService: ProfileService,
-    private authenticationService: AuthenticationService,
+    private userService: UserService,
     private boardGameGeekService: BoardGameGeekService,
     private eventService: EventService,
     private locationService: LocationService,
@@ -127,7 +127,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     this.profile$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.profileId = +params.get('id');
-        this.isAdmin = this.authenticationService.currentUserValue.id === this.profileId;
+        this.isAdmin = this.userService.id === this.profileId;
         return this.profileService.getProfile(this.profileId);
       })
     );
@@ -251,14 +251,14 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    */
   public deleteProfile(): void {
     if (this.isAdmin) {
-      this.authenticationService
-        .delete(this.profileId)
+      this.userService
+        .deleteUser(this.profileId)
         .pipe(first())
         .subscribe(
           (response) => {
             console.log('deleteProfile OK', response);
             this.alertService.open('success-delete-profile');
-            this.authenticationService.logout();
+            this.userService.logout();
           },
           (error: HttpErrorResponse) => {
             console.log('deleteProfile ERROR', error);
