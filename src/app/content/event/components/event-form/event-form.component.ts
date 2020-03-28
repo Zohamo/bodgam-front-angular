@@ -5,7 +5,7 @@ import moment from 'moment';
 import { first } from 'rxjs/operators';
 
 // Entry components
-import { LocationFormDialogComponent } from '@/content/locations/components';
+import { LocationFormDialogComponent } from '@/content/location/components';
 
 // UI
 import { faCheck, faPlusSquare, faPenSquare, faTimesCircle } from '@fortawesome/free-solid-svg-icons';

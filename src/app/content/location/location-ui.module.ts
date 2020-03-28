@@ -53,4 +53,4 @@ import {
     SpinnerModule
   ]
 })
-export class LocationsUiModule {}
+export class LocationUiModule {}
