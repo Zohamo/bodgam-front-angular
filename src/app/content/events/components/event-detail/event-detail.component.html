@@ -29,4 +29,19 @@
     ></app-event-timeslot>
     <app-event-location class="event-section location" [location]="event.location"></app-event-location>
   </mat-card-content>
+
+  <!-- Action Buttons -->
+
+  <mat-card-actions class="action-buttons">
+    <ng-container *ngIf="userId === event.host.id">
+      <button type="button" mat-raised-button color="primary" [routerLink]="['/events/edit', event.id]">
+        <fa-icon [icon]="faEdit"></fa-icon>
+        <span i18n="">Modifier</span>
+      </button>
+      <button type="button" mat-stroked-button color="warn" (click)="onDeleteEvent(event)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+        <span i18n="">Supprimer</span>
+      </button>
+    </ng-container>
+  </mat-card-actions>
 </mat-card>

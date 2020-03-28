@@ -2,20 +2,36 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
 import { EventRepresentation } from '@/models';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
+  private currentEventSubject: BehaviorSubject<EventRepresentation>;
+  public currentEvent: Observable<EventRepresentation>;
   /**
    * Creates an instance of EventService.
    *
    * @param {HttpClient} http
    * @memberof EventService
    */
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.currentEventSubject = new BehaviorSubject<EventRepresentation>(null);
+    this.currentEvent = this.currentEventSubject.asObservable();
+  }
+
+  /**
+   * Get current Event value
+   *
+   * @readonly
+   * @type {EventRepresentation}
+   * @memberof EventService
+   */
+  public get value(): EventRepresentation {
+    return this.currentEventSubject.value;
+  }
 
   /**
    * Edit the Event representation received
@@ -63,9 +79,15 @@ export class EventService {
    * @memberof EventService
    */
   public getEvent(id: number): Observable<EventRepresentation> {
-    return this.http
-      .get<EventRepresentation>(`${environment.apiPath}/events/${id}`)
-      .pipe(map((event) => this.eventEditor(event)));
+    return this.value && this.value.id === id
+      ? this.currentEvent
+      : this.http.get<EventRepresentation>(`${environment.apiPath}/events/${id}`).pipe(
+          map((eventRes) => {
+            const event = this.eventEditor(eventRes);
+            this.currentEventSubject.next(event);
+            return event;
+          })
+        );
   }
 
   /**

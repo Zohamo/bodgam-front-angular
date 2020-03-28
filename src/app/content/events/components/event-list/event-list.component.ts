@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { EventRepresentation } from '@/models';
 import { AlertService, UserService, EventService } from '@/services';
-
-// UI
-import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-list',
@@ -55,7 +53,7 @@ export class EventListComponent {
   /**
    * OnEvent delete event
    *
-   * @param {number} eventId
+   * @param {EventRepresentation} event
    * @memberof EventListComponent
    */
   public onDeleteEvent(event: EventRepresentation): void {

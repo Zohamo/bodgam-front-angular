@@ -1,1 +1,5 @@
-<app-event-detail *ngIf="event$ | async as event" [eventDetail]="event"></app-event-detail>
+<app-event-detail
+  *ngIf="event$ | async as event"
+  [eventDetail]="event"
+  (deleteEvent)="deleteEvent($event)"
+></app-event-detail>
