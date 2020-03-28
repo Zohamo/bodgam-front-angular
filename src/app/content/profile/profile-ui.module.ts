@@ -61,4 +61,4 @@ import {
     MatTabsModule
   ]
 })
-export class ProfilesUiModule {}
+export class ProfileUiModule {}

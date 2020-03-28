@@ -43,4 +43,4 @@ import {
     MatSelectModule
   ]
 })
-export class EventsUiModule {}
+export class EventUiModule {}

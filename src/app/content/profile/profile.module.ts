@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 // Imports
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EventsModule } from '../events/events.module';
-import { GamesModule } from '../games/games.module';
-import { LocationsModule } from '../locations/locations.module';
-import { ProfilesRoutingModule } from './profiles-routing.module';
-import { ProfilesUiModule } from './profiles-ui.module';
+import { EventModule } from '../event/event.module';
+import { GameModule } from '../game/game.module';
+import { LocationModule } from '../location/location.module';
+import { ProfileRoutingModule } from './profile-routing.module';
+import { ProfileUiModule } from './profile-ui.module';
 // Declarations
 import * as fromComponents from './components';
 import * as fromPages from './pages';
@@ -19,13 +19,13 @@ import { ProfileFormDialogComponent } from './components';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    EventsModule,
-    GamesModule,
-    LocationsModule,
-    ProfilesRoutingModule,
-    ProfilesUiModule
+    EventModule,
+    GameModule,
+    LocationModule,
+    ProfileRoutingModule,
+    ProfileUiModule
   ],
   declarations: [...fromComponents.components, ...fromPages.components],
   entryComponents: [DialogConfirmComponent, ProfileFormDialogComponent]
 })
-export class ProfilesModule {}
+export class ProfileModule {}

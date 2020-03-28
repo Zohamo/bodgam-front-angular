@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GamesRoutingModule } from './games-routing.module';
+import { GamesRoutingModule } from './game-routing.module';
 import { GameListComponent } from './components/game-list/game-list.component';
 
 @NgModule({
@@ -8,4 +8,4 @@ import { GameListComponent } from './components/game-list/game-list.component';
   imports: [CommonModule, GamesRoutingModule],
   exports: [GameListComponent]
 })
-export class GamesModule {}
+export class GameModule {}
