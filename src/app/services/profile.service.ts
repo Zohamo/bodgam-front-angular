@@ -2,19 +2,37 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
 import { ProfileFullRepresentation, ProfileRepresentation, ProfilePrivacyRepresentation } from '@/models';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
+  private currentProfileSubject: BehaviorSubject<ProfileFullRepresentation>;
+  public currentProfile: Observable<ProfileFullRepresentation>;
+
   /**
    * Creates an instance of ProfileService.
    *
    * @param {HttpClient} http
    * @memberof ProfileService
    */
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.currentProfileSubject = new BehaviorSubject<ProfileFullRepresentation>(null);
+    this.currentProfile = this.currentProfileSubject.asObservable();
+  }
+
+  /**
+   * Get current Profile value
+   *
+   * @readonly
+   * @type {ProfileFullRepresentation}
+   * @memberof LocationService
+   */
+  public get value(): ProfileFullRepresentation {
+    return this.currentProfileSubject.value;
+  }
 
   /**
    * Call the BackEnd to retrieve the profiles list
@@ -34,7 +52,15 @@ export class ProfileService {
    * @memberof ProfileService
    */
   public getProfile(id: number): Observable<ProfileFullRepresentation> {
-    return this.http.get<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${id}`);
+    console.log('value', this.value, id);
+    return this.value && this.value.id === id
+      ? this.currentProfile
+      : this.http.get<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${id}`).pipe(
+          map((profileRes) => {
+            this.currentProfileSubject.next(profileRes);
+            return profileRes;
+          })
+        );
   }
 
   /**

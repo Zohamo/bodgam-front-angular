@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 // Entry Components
 import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
 import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
+import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { DialogUserRegisterComponent } from '@/components/dialog-user-register/d
     RouterModule
   ],
   declarations: [HeaderComponent],
-  entryComponents: [DialogUserLoginComponent, DialogUserRegisterComponent],
+  entryComponents: [DialogUserLoginComponent, DialogUserRegisterComponent, SnackBarMessageComponent],
   exports: [HeaderComponent]
 })
 export class LayoutModule {}

@@ -30,7 +30,7 @@ export class UserService {
   }
 
   /**
-   * Get current user value
+   * Get current User value
    *
    * @readonly
    * @type {User}
