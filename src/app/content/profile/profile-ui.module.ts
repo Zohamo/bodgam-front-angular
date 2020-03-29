@@ -8,15 +8,13 @@ import {
   MatCheckboxModule,
   MatDatepickerModule,
   MatDialogModule,
-  MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
   MatNativeDateModule,
   MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
-  MatTableModule,
-  MatTabsModule
+  MatTableModule
 } from '@angular/material';
 
 @NgModule({
@@ -32,15 +30,13 @@ import {
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
     MatSidenavModule,
-    MatTableModule,
-    MatTabsModule
+    MatTableModule
   ],
   exports: [
     ButtonVisibilityModule,
@@ -53,15 +49,13 @@ import {
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
     MatSidenavModule,
-    MatTableModule,
-    MatTabsModule
+    MatTableModule
   ]
 })
 export class ProfileUiModule {}

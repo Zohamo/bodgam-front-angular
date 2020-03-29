@@ -42,9 +42,8 @@ export class EventService {
    * @memberof EventService
    */
   private updateValue(value: EventBg): EventBg {
-    const newValue = Object.assign(this.value, this.eventFormatter(value));
-    this.currentEventSubject.next(newValue);
-    return newValue;
+    this.currentEventSubject.next(this.eventFormatter(value));
+    return value;
   }
 
   /**

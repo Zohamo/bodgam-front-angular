@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Profile } from '@/models';
 import { Observable } from 'rxjs';
-import { ProfileService } from '@/services';
+import { ProfileService, UserService } from '@/services';
 
 @Component({
   selector: 'app-profile-detail-page',
@@ -9,6 +9,7 @@ import { ProfileService } from '@/services';
   styleUrls: ['./profile-detail-page.component.scss']
 })
 export class ProfileDetailPageComponent {
+  public userId: number;
   public profile$: Observable<Profile>;
 
   /**
@@ -17,8 +18,9 @@ export class ProfileDetailPageComponent {
    * @param {ProfileService} profileService
    * @memberof ProfileDetailPageComponent
    */
-  constructor(private profileService: ProfileService) {
-    this.profile$ = this.profileService.currentProfile$;
+  constructor(private profileService: ProfileService, private userService: UserService) {
+    this.userId = userService.id;
+    this.profile$ = profileService.currentProfile$;
   }
 
   /**

@@ -11,7 +11,6 @@ import {
   faVenus
 } from '@fortawesome/free-solid-svg-icons';
 import { Profile } from '@/models';
-import { UserService } from '@/services';
 import moment from 'moment';
 import { first } from 'rxjs/operators';
 
@@ -23,8 +22,6 @@ import { ProfileFormDialogComponent } from '../profile-form-dialog/profile-form-
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent {
-  public isAdmin: boolean;
-
   // Font Awesome
   faEnvelope = faEnvelope;
   faGenderless = faGenderless;
@@ -35,14 +32,12 @@ export class ProfileDetailComponent {
   faPenSquare = faPenSquare;
   faVenus = faVenus;
 
-  // Inputs
+  /**
+   * Inputs
+   */
 
-  public profile: Profile;
-  @Input() set setProfile(setProfile: Profile) {
-    this.profile = setProfile;
-    console.log('ProfileDetail', this.profile);
-    this.isAdmin = this.profile.id === this.userService.id;
-  }
+  @Input() profile: Profile;
+  @Input() isAdmin: boolean;
 
   /**
    * Creates an instance of ProfileDetailComponent.
@@ -50,7 +45,7 @@ export class ProfileDetailComponent {
    * @param {MatDialog} dialog
    * @memberof ProfileDetailComponent
    */
-  constructor(private dialog: MatDialog, private userService: UserService) {}
+  constructor(private dialog: MatDialog) {}
 
   /**
    * Format the birthdate for display
@@ -94,7 +89,7 @@ export class ProfileDetailComponent {
    * @memberof ProfileDetailComponent
    */
   public openProfileFormDialog(profileId: number): void {
-    if (this.profile.id === this.userService.id) {
+    if (this.isAdmin) {
       const dialogRef = this.dialog.open(ProfileFormDialogComponent, {
         data: this.profile
       });
