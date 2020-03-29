@@ -1,4 +1,4 @@
-export class ProfileRatingsRepresentation {
+export class ProfileRatings {
   reception: number[];
   teaching: number[];
   liking: number[];

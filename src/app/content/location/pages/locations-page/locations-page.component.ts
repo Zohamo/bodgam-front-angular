@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { LocationRepresentation } from '@/models';
+import { LocationItem } from '@/models';
 import { UserService, LocationService } from '@/services';
 import { Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
@@ -19,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class LocationsPageComponent implements OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  public locations: LocationRepresentation[] = [];
+  public locations: LocationItem[] = [];
   public userId: number;
 
   // UI
@@ -81,7 +81,7 @@ export class LocationsPageComponent implements OnDestroy {
     dialogRef
       .afterClosed()
       .pipe(first())
-      .subscribe((locationSaved: LocationRepresentation) => {
+      .subscribe((locationSaved: LocationItem) => {
         console.log('locationSaved', locationSaved);
         if (locationSaved) {
           this.locations.push(locationSaved);

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventRepresentation } from '@/models';
+import { EventBg } from '@/models';
 import { UserService, EventService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { faCalendarAlt, faCalendarPlus } from '@fortawesome/free-solid-svg-icons
 })
 export class EventsPageComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
-  public events$: Observable<EventRepresentation[]>;
+  public events$: Observable<EventBg[]>;
 
   public isUserList: boolean;
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { LocationRepresentation } from '@/models';
+import { LocationItem } from '@/models';
 import { first } from 'rxjs/operators';
 
 // Components
@@ -17,7 +17,7 @@ import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class LocationListComponent implements OnInit {
   public displayedColumns: string[] = ['privacy', 'name', 'location', 'icons'];
-  public dataSource: MatTableDataSource<LocationRepresentation>;
+  public dataSource: MatTableDataSource<LocationItem>;
 
   // UI
   faPenSquare = faPenSquare;
@@ -35,7 +35,7 @@ export class LocationListComponent implements OnInit {
     }
   }
 
-  @Input() set locations(locations: LocationRepresentation[]) {
+  @Input() set locations(locations: LocationItem[]) {
     console.log('Input locations', locations);
     if (locations) {
       this.dataSource = new MatTableDataSource(locations);
@@ -99,7 +99,7 @@ export class LocationListComponent implements OnInit {
     dialogRef
       .afterClosed()
       .pipe(first())
-      .subscribe((locationSaved: LocationRepresentation) => {
+      .subscribe((locationSaved: LocationItem) => {
         console.log('locationSaved', locationSaved);
         if (locationSaved) {
           // TODO : fix refresh list

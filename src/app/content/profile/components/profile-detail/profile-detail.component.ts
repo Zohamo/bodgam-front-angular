@@ -10,7 +10,7 @@ import {
   faPenSquare,
   faVenus
 } from '@fortawesome/free-solid-svg-icons';
-import { ProfileFullRepresentation } from '@/models';
+import { Profile } from '@/models';
 import { UserService } from '@/services';
 import moment from 'moment';
 import { first } from 'rxjs/operators';
@@ -37,8 +37,8 @@ export class ProfileDetailComponent {
 
   // Inputs
 
-  public profile: ProfileFullRepresentation;
-  @Input() set setProfile(setProfile: ProfileFullRepresentation) {
+  public profile: Profile;
+  @Input() set setProfile(setProfile: Profile) {
     this.profile = setProfile;
     console.log('ProfileDetail', this.profile);
     this.isAdmin = this.profile.id === this.userService.id;
@@ -102,7 +102,7 @@ export class ProfileDetailComponent {
       dialogRef
         .afterClosed()
         .pipe(first())
-        .subscribe((profileSaved: ProfileFullRepresentation) => {
+        .subscribe((profileSaved: Profile) => {
           console.log('profileSaved', profileSaved);
           if (profileSaved) {
             this.profile = profileSaved;

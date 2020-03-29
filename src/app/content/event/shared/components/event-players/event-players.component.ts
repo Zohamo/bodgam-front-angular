@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EventRepresentation } from '@/models';
+import { EventBg } from '@/models';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,5 +9,5 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventPlayersComponent {
   faUsers = faUsers;
-  @Input() event: EventRepresentation;
+  @Input() event: EventBg;
 }

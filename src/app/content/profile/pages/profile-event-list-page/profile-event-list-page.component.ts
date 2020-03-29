@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EventRepresentation } from '@/models';
+import { EventBg } from '@/models';
 import { EventService, ProfileService } from '@/services';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileEventListPageComponent {
   public profileId: number;
-  public events$: Observable<EventRepresentation[]>;
+  public events$: Observable<EventBg[]>;
 
   /**
    * Creates an instance of ProfileEventListPageComponent.

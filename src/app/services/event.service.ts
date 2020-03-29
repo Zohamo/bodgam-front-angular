@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { EventRepresentation } from '@/models';
+import { EventBg } from '@/models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EventService {
-  private currentEventSubject: BehaviorSubject<EventRepresentation>;
-  public currentEvent: Observable<EventRepresentation>;
+  private currentEventSubject: BehaviorSubject<EventBg>;
+  public currentEvent: Observable<EventBg>;
   /**
    * Creates an instance of EventService.
    *
@@ -18,7 +18,7 @@ export class EventService {
    * @memberof EventService
    */
   constructor(private http: HttpClient) {
-    this.currentEventSubject = new BehaviorSubject<EventRepresentation>(null);
+    this.currentEventSubject = new BehaviorSubject<EventBg>(null);
     this.currentEvent = this.currentEventSubject.asObservable();
   }
 
@@ -26,22 +26,22 @@ export class EventService {
    * Get current Event value
    *
    * @readonly
-   * @type {EventRepresentation}
+   * @type {EventBg}
    * @memberof EventService
    */
-  public get value(): EventRepresentation {
+  public get value(): EventBg {
     return this.currentEventSubject.value;
   }
 
   /**
-   * Edit the Event representation received
+   * Edit the Event model received
    *
    * @private
-   * @param {EventRepresentation} event
-   * @returns {EventRepresentation}
+   * @param {EventBg} event
+   * @returns {EventBg}
    * @memberof EventService
    */
-  private eventEditor(event: EventRepresentation): EventRepresentation {
+  private eventEditor(event: EventBg): EventBg {
     if (!event.players) {
       event.players = [];
     }
@@ -52,18 +52,18 @@ export class EventService {
    * Calls the API to get all events (of a specific Profile)
    *
    * @param {number} [profileId]
-   * @returns {Observable<EventRepresentation[]>}
+   * @returns {Observable<EventBg[]>}
    * @memberof EventService
    */
-  public getEvents(profileId?: number): Observable<EventRepresentation[]> {
+  public getEvents(profileId?: number): Observable<EventBg[]> {
     return profileId
-      ? this.http.get<EventRepresentation[]>(`${environment.apiPath}/profile/${profileId}/events`).pipe(
+      ? this.http.get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/events`).pipe(
           map((events) => {
             events.map((event) => this.eventEditor(event));
             return events;
           })
         )
-      : this.http.get<EventRepresentation[]>(`${environment.apiPath}/events`).pipe(
+      : this.http.get<EventBg[]>(`${environment.apiPath}/events`).pipe(
           map((events) => {
             events.map((event) => this.eventEditor(event));
             return events;
@@ -75,13 +75,13 @@ export class EventService {
    * Calls the server to get one event by its id
    *
    * @param {number} id
-   * @returns {Observable<EventRepresentation>}
+   * @returns {Observable<EventBg>}
    * @memberof EventService
    */
-  public getEvent(id: number): Observable<EventRepresentation> {
+  public getEvent(id: number): Observable<EventBg> {
     return this.value && this.value.id === id
       ? this.currentEvent
-      : this.http.get<EventRepresentation>(`${environment.apiPath}/events/${id}`).pipe(
+      : this.http.get<EventBg>(`${environment.apiPath}/events/${id}`).pipe(
           map((eventRes) => {
             const event = this.eventEditor(eventRes);
             this.currentEventSubject.next(event);
@@ -93,17 +93,17 @@ export class EventService {
   /**
    * Call the BackEnd to save an event
    *
-   * @param {EventRepresentation} event
-   * @returns {Observable<EventRepresentation>}
+   * @param {EventBg} event
+   * @returns {Observable<EventBg>}
    * @memberof EventService
    */
-  public saveEvent(event: EventRepresentation): Observable<EventRepresentation> {
+  public saveEvent(event: EventBg): Observable<EventBg> {
     return event.id
       ? this.http
-          .put<EventRepresentation>(`${environment.apiPath}/events/${event.id}`, event)
+          .put<EventBg>(`${environment.apiPath}/events/${event.id}`, event)
           .pipe(map((eventRes) => this.eventEditor(eventRes)))
       : this.http
-          .post<EventRepresentation>(`${environment.apiPath}/events`, event)
+          .post<EventBg>(`${environment.apiPath}/events`, event)
           .pipe(map((eventRes) => this.eventEditor(eventRes)));
   }
 
@@ -111,10 +111,10 @@ export class EventService {
    * Call the BackEnd to delete an event
    *
    * @param {number} id
-   * @returns {Observable<EventRepresentation>}
+   * @returns {Observable<EventBg>}
    * @memberof EventService
    */
-  public deleteEvent(id: number): Observable<EventRepresentation> {
-    return this.http.delete<EventRepresentation>(`${environment.apiPath}/events/${id}`);
+  public deleteEvent(id: number): Observable<EventBg> {
+    return this.http.delete<EventBg>(`${environment.apiPath}/events/${id}`);
   }
 }

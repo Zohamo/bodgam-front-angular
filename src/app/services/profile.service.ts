@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { ProfileFullRepresentation, ProfileRepresentation, ProfilePrivacyRepresentation } from '@/models';
+import { Profile, ProfileItem, ProfilePrivacy } from '@/models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProfileService {
-  private currentProfileSubject: BehaviorSubject<ProfileFullRepresentation>;
-  public currentProfile: Observable<ProfileFullRepresentation>;
+  private currentProfileSubject: BehaviorSubject<Profile>;
+  public currentProfile: Observable<Profile>;
 
   /**
    * Creates an instance of ProfileService.
@@ -19,7 +19,7 @@ export class ProfileService {
    * @memberof ProfileService
    */
   constructor(private http: HttpClient) {
-    this.currentProfileSubject = new BehaviorSubject<ProfileFullRepresentation>(null);
+    this.currentProfileSubject = new BehaviorSubject<Profile>(null);
     this.currentProfile = this.currentProfileSubject.asObservable();
   }
 
@@ -27,10 +27,10 @@ export class ProfileService {
    * Get current Profile observable
    *
    * @readonly
-   * @type {Observable<ProfileFullRepresentation>}
+   * @type {Observable<Profile>}
    * @memberof ProfileService
    */
-  public get currentProfile$(): Observable<ProfileFullRepresentation> {
+  public get currentProfile$(): Observable<Profile> {
     return this.currentProfile;
   }
 
@@ -38,35 +38,35 @@ export class ProfileService {
    * Get current Profile value
    *
    * @readonly
-   * @type {ProfileFullRepresentation}
+   * @type {Profile}
    * @memberof ProfileService
    */
-  public get value(): ProfileFullRepresentation {
+  public get value(): Profile {
     return this.currentProfileSubject.value;
   }
 
   /**
    * Call the BackEnd to retrieve the profiles list
    *
-   * @returns {Observable<ProfileRepresentation[]>}
+   * @returns {Observable<ProfileItem[]>}
    * @memberof ProfileService
    */
-  public getProfiles(): Observable<ProfileRepresentation[]> {
-    return this.http.get<ProfileRepresentation[]>(`${environment.apiPath}/profiles`);
+  public getProfiles(): Observable<ProfileItem[]> {
+    return this.http.get<ProfileItem[]>(`${environment.apiPath}/profiles`);
   }
 
   /**
    * Call the BackEnd to retrieve a specific profile's data
    *
    * @param {number} id
-   * @returns {Observable<ProfileFullRepresentation>}
+   * @returns {Observable<Profile>}
    * @memberof ProfileService
    */
-  public getProfile(id: number): Observable<ProfileFullRepresentation> {
+  public getProfile(id: number): Observable<Profile> {
     console.log('getProfile', this.currentProfile);
     return this.value && this.value.id === id
       ? this.currentProfile
-      : this.http.get<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${id}`).pipe(
+      : this.http.get<Profile>(`${environment.apiPath}/profiles/${id}`).pipe(
           map((profileRes) => {
             this.currentProfileSubject.next(profileRes);
             return profileRes;
@@ -77,20 +77,20 @@ export class ProfileService {
   /**
    * Call the BackEnd to save the profile's data
    *
-   * @param {ProfileFullRepresentation} profile
-   * @returns {Observable<ProfileFullRepresentation>}
+   * @param {Profile} profile
+   * @returns {Observable<Profile>}
    * @memberof ProfileService
    */
-  public saveProfile(profile: ProfileFullRepresentation): Observable<ProfileFullRepresentation> {
+  public saveProfile(profile: Profile): Observable<Profile> {
     return profile.id
-      ? this.http.put<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${profile.id}`, profile).pipe(
+      ? this.http.put<Profile>(`${environment.apiPath}/profiles/${profile.id}`, profile).pipe(
           map((profileRes) => {
             console.log('profileRes', profileRes);
             this.currentProfileSubject.next(Object.assign(this.value, profileRes));
             return profileRes;
           })
         )
-      : this.http.post<ProfileFullRepresentation>(`${environment.apiPath}/profiles`, profile).pipe(
+      : this.http.post<Profile>(`${environment.apiPath}/profiles`, profile).pipe(
           map((profileRes) => {
             this.currentProfileSubject.next(Object.assign(this.value, profileRes));
             return profileRes;
@@ -102,32 +102,27 @@ export class ProfileService {
    * Call the API to save the profile's privacy
    *
    * @param {number} profileId
-   * @param {ProfilePrivacyRepresentation} privacy
-   * @returns {Observable<ProfilePrivacyRepresentation>}
+   * @param {ProfilePrivacy} privacy
+   * @returns {Observable<ProfilePrivacy>}
    * @memberof ProfileService
    */
-  public saveProfilePrivacy(
-    profileId: number,
-    privacy: ProfilePrivacyRepresentation
-  ): Observable<ProfilePrivacyRepresentation> {
-    return this.http
-      .put<ProfilePrivacyRepresentation>(`${environment.apiPath}/profile/${profileId}/privacy`, privacy)
-      .pipe(
-        map((privacyRes) => {
-          this.currentProfileSubject.next(Object.assign(this.value, { privacy: privacyRes }));
-          return privacyRes;
-        })
-      );
+  public saveProfilePrivacy(profileId: number, privacy: ProfilePrivacy): Observable<ProfilePrivacy> {
+    return this.http.put<ProfilePrivacy>(`${environment.apiPath}/profile/${profileId}/privacy`, privacy).pipe(
+      map((privacyRes) => {
+        this.currentProfileSubject.next(Object.assign(this.value, { privacy: privacyRes }));
+        return privacyRes;
+      })
+    );
   }
 
   /**
    * Call the BackEnd to delete a profile
    *
    * @param {number} id
-   * @returns {Observable<ProfileFullRepresentation>}
+   * @returns {Observable<Profile>}
    * @memberof ProfileService
    */
-  public deleteProfile(id: number): Observable<ProfileFullRepresentation> {
-    return this.http.delete<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${id}`);
+  public deleteProfile(id: number): Observable<Profile> {
+    return this.http.delete<Profile>(`${environment.apiPath}/profiles/${id}`);
   }
 }

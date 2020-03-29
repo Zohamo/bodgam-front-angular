@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { EventRepresentation } from '@/models';
+import { EventBg } from '@/models';
 import { AlertService, UserService, EventService } from '@/services';
 
 @Component({
@@ -20,7 +20,7 @@ export class EventListComponent {
    * Inputs
    */
 
-  @Input() events: EventRepresentation[];
+  @Input() events: EventBg[];
 
   /**
    * Creates an instance of EventListComponent.
@@ -53,10 +53,10 @@ export class EventListComponent {
   /**
    * OnEvent delete event
    *
-   * @param {EventRepresentation} event
+   * @param {EventBg} event
    * @memberof EventListComponent
    */
-  public onDeleteEvent(event: EventRepresentation): void {
+  public onDeleteEvent(event: EventBg): void {
     this.eventService.deleteEvent(event.id).subscribe(
       (res) => {
         console.log('DELETE EVENT', res);

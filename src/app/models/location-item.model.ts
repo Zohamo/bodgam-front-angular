@@ -2,9 +2,9 @@
  * Front End representation of a location, used only with an array of locations
  *
  * @export
- * @class LocationRepresentation
+ * @class LocationItem
  */
-export class LocationRepresentation {
+export class LocationItem {
   id: number;
   name: string;
   isDisabled: boolean;

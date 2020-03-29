@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { Country, ProfileRepresentation } from '@/models';
+import { Country, ProfileItem } from '@/models';
 import { ProfileService, CountryService } from '@/services';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./profile-list-page.component.scss']
 })
 export class ProfileListPageComponent {
-  public profiles$: Observable<ProfileRepresentation[]>;
+  public profiles$: Observable<ProfileItem[]>;
   public countries: Country[];
 
   // UI

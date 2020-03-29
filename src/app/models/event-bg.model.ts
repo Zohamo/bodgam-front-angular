@@ -1,7 +1,7 @@
-import { LocationRepresentation, ProfileRepresentation } from '@/models';
+import { LocationItem, ProfileItem } from '@/models';
 import moment from 'moment';
 
-export class EventRepresentation {
+export class EventBg {
   id: number;
   title: string;
   isPrivate: boolean;
@@ -9,10 +9,10 @@ export class EventRepresentation {
   startDatetime: moment.Moment;
   endDatetime: number;
   // Location
-  location: LocationRepresentation;
+  location: LocationItem;
   // Players
-  host: ProfileRepresentation;
-  players: ProfileRepresentation[];
+  host: ProfileItem;
+  players: ProfileItem[];
   minPlayers: number;
   maxPlayers: number;
   // Details

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BggGameRepresentation } from '@/models';
+import { BggGame } from '@/models';
 
 @Component({
   selector: 'app-game-list',
@@ -7,5 +7,5 @@ import { BggGameRepresentation } from '@/models';
   styleUrls: ['./game-list.component.scss']
 })
 export class GameListComponent {
-  @Input() games: BggGameRepresentation;
+  @Input() games: BggGame;
 }
