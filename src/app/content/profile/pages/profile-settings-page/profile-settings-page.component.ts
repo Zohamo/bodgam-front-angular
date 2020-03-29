@@ -11,6 +11,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./profile-settings-page.component.scss']
 })
 export class ProfileSettingsPageComponent {
+  public userId: number;
   public profileId: number;
   public profile$: Observable<Profile>;
 
@@ -27,8 +28,9 @@ export class ProfileSettingsPageComponent {
     private profileService: ProfileService,
     private userService: UserService
   ) {
-    this.profileId = this.profileService.value.id;
-    this.profile$ = this.profileService.currentProfile$;
+    this.userId = userService.id;
+    this.profileId = profileService.value.id;
+    this.profile$ = profileService.currentProfile$;
   }
 
   /**

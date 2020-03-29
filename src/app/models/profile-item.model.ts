@@ -1,6 +1,5 @@
 export class ProfileItem {
   id: number;
-  isActive: boolean;
   name: string;
   avatar: string;
   district: string;
@@ -9,7 +8,6 @@ export class ProfileItem {
 
   constructor() {
     this.id = null;
-    this.isActive = false;
     this.name = '';
     this.avatar = null;
     this.district = '';

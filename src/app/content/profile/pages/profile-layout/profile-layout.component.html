@@ -1,11 +1,11 @@
 <ng-container *ngIf="profile$ | async as profile">
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="true" [fixedTopGap]="100">
-      <h2 class="color-primary mb-3">
-        <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
-        {{ profile?.name }}
-      </h2>
+  <h2 class="color-primary mb-3">
+    <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
+    {{ profile?.name }}
+  </h2>
 
+  <mat-sidenav-container>
+    <mat-sidenav opened mode="side">
       <nav class="nav-profile">
         <ul>
           <li>

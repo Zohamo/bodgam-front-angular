@@ -11,7 +11,6 @@ export class ProfileRatingsComponent {
 
   public ratings: ProfileRatings;
   @Input() set profileRatings(profileRatings: ProfileRatings) {
-    console.log('set profileRatings', profileRatings);
     if (profileRatings) {
       this.ratings = profileRatings;
     }
@@ -25,7 +24,6 @@ export class ProfileRatingsComponent {
    * @memberof ProfileRatingComponent
    */
   public average(values: number[]): number {
-    // console.log('average values', values);
     return Array.isArray(values) && values.length
       ? values.reduce((previous, current) => (current += previous)) / values.length
       : null;
