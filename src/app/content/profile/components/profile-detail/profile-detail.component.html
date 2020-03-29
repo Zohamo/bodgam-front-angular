@@ -1,7 +1,7 @@
 <div class="profile-information">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h5 class="mb-0" i18n="">Informations personnelles</h5>
-    <button mat-button type="button" color="primary" (click)="openProfileFormDialog(profile.id)">
+    <button *ngIf="isAdmin" mat-button type="button" color="primary" (click)="openProfileFormDialog(profile.id)">
       <fa-icon [icon]="faPenSquare"></fa-icon>
     </button>
   </div>

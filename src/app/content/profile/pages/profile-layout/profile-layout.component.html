@@ -1,0 +1,61 @@
+<ng-container *ngIf="profile$ | async as profile">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="true" [fixedTopGap]="100">
+      <h2 class="color-primary mb-3">
+        <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
+        {{ profile?.name }}
+      </h2>
+
+      <nav class="nav-profile">
+        <ul>
+          <li>
+            <a [routerLink]="['/player', profileId]">
+              <span class="icon-container">
+                <fa-icon [icon]="faUser"></fa-icon>
+              </span>
+              <span i18n="">Profil</span>
+            </a>
+          </li>
+          <li *ngIf="profile.bggName">
+            <a [routerLink]="['/player', profileId, 'games']">
+              <span class="icon-container">
+                <fa-icon [icon]="faDice"></fa-icon>
+              </span>
+              <span i18n="">Jeux</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/player', profileId, 'events']">
+              <span class="icon-container">
+                <fa-icon [icon]="faCalendarAlt"></fa-icon>
+              </span>
+              <span i18n="">Évènements</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/player', profileId, 'locations']">
+              <span class="icon-container">
+                <fa-icon [icon]="faMapMarked"></fa-icon>
+              </span>
+              <span i18n="">Lieux</span>
+            </a>
+          </li>
+          <li *ngIf="isAdmin">
+            <a [routerLink]="['/player', profileId, 'settings']">
+              <span class="icon-container">
+                <fa-icon [icon]="faCogs"></fa-icon>
+              </span>
+              <span i18n="">Paramètres</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

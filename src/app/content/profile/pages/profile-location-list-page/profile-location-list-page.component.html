@@ -1,0 +1,11 @@
+<div *ngIf="locations$ | async as locations; else loading">
+  <p *ngIf="!locations.length" class="text-center" i18n="">
+    <em>Aucun lieu n'a été trouvé.</em>
+  </p>
+
+  <app-location-list *ngIf="locations.length" [locations]="locations"></app-location-list>
+</div>
+
+<ng-template #loading>
+  <app-spinner [message]="'Lieux'"></app-spinner>
+</ng-template>

@@ -1,0 +1,4 @@
+<div *ngIf="profile$ | async as profile" class="row">
+  <app-profile-ratings [profileRatings]="profile?.ratings" class="col-md-8"></app-profile-ratings>
+  <app-profile-detail [setProfile]="profile" class="col-md-4"></app-profile-detail>
+</div>

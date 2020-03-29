@@ -24,11 +24,22 @@ export class ProfileService {
   }
 
   /**
+   * Get current Profile observable
+   *
+   * @readonly
+   * @type {Observable<ProfileFullRepresentation>}
+   * @memberof ProfileService
+   */
+  public get currentProfile$(): Observable<ProfileFullRepresentation> {
+    return this.currentProfile;
+  }
+
+  /**
    * Get current Profile value
    *
    * @readonly
    * @type {ProfileFullRepresentation}
-   * @memberof LocationService
+   * @memberof ProfileService
    */
   public get value(): ProfileFullRepresentation {
     return this.currentProfileSubject.value;
@@ -52,7 +63,7 @@ export class ProfileService {
    * @memberof ProfileService
    */
   public getProfile(id: number): Observable<ProfileFullRepresentation> {
-    console.log('value', this.value, id);
+    console.log('getProfile', this.currentProfile);
     return this.value && this.value.id === id
       ? this.currentProfile
       : this.http.get<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${id}`).pipe(
@@ -72,12 +83,23 @@ export class ProfileService {
    */
   public saveProfile(profile: ProfileFullRepresentation): Observable<ProfileFullRepresentation> {
     return profile.id
-      ? this.http.put<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${profile.id}`, profile)
-      : this.http.post<ProfileFullRepresentation>(`${environment.apiPath}/profiles`, profile);
+      ? this.http.put<ProfileFullRepresentation>(`${environment.apiPath}/profiles/${profile.id}`, profile).pipe(
+          map((profileRes) => {
+            console.log('profileRes', profileRes);
+            this.currentProfileSubject.next(Object.assign(this.value, profileRes));
+            return profileRes;
+          })
+        )
+      : this.http.post<ProfileFullRepresentation>(`${environment.apiPath}/profiles`, profile).pipe(
+          map((profileRes) => {
+            this.currentProfileSubject.next(Object.assign(this.value, profileRes));
+            return profileRes;
+          })
+        );
   }
 
   /**
-   * Call the BackEnd to save the profile's privacy
+   * Call the API to save the profile's privacy
    *
    * @param {number} profileId
    * @param {ProfilePrivacyRepresentation} privacy
@@ -88,7 +110,14 @@ export class ProfileService {
     profileId: number,
     privacy: ProfilePrivacyRepresentation
   ): Observable<ProfilePrivacyRepresentation> {
-    return this.http.put<ProfilePrivacyRepresentation>(`${environment.apiPath}/profiles/${profileId}/privacy`, privacy);
+    return this.http
+      .put<ProfilePrivacyRepresentation>(`${environment.apiPath}/profile/${profileId}/privacy`, privacy)
+      .pipe(
+        map((privacyRes) => {
+          this.currentProfileSubject.next(Object.assign(this.value, { privacy: privacyRes }));
+          return privacyRes;
+        })
+      );
   }
 
   /**

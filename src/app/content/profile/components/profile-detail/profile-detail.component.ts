@@ -1,12 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProfileFullRepresentation } from '@/models';
-import moment from 'moment';
-import { take } from 'rxjs/operators';
-
-// Components
-import { ProfileFormDialogComponent } from '../profile-form-dialog/profile-form-dialog.component';
-
-// UI
+import { MatDialog } from '@angular/material';
 import {
   faEnvelope,
   faGenderless,
@@ -17,7 +10,12 @@ import {
   faPenSquare,
   faVenus
 } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material';
+import { ProfileFullRepresentation } from '@/models';
+import { UserService } from '@/services';
+import moment from 'moment';
+import { first } from 'rxjs/operators';
+
+import { ProfileFormDialogComponent } from '../profile-form-dialog/profile-form-dialog.component';
 
 @Component({
   selector: 'app-profile-detail',
@@ -25,6 +23,8 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent {
+  public isAdmin: boolean;
+
   // Font Awesome
   faEnvelope = faEnvelope;
   faGenderless = faGenderless;
@@ -38,8 +38,10 @@ export class ProfileDetailComponent {
   // Inputs
 
   public profile: ProfileFullRepresentation;
-  @Input() set profileDetail(profileDetail: ProfileFullRepresentation) {
-    this.profile = profileDetail;
+  @Input() set setProfile(setProfile: ProfileFullRepresentation) {
+    this.profile = setProfile;
+    console.log('ProfileDetail', this.profile);
+    this.isAdmin = this.profile.id === this.userService.id;
   }
 
   /**
@@ -48,7 +50,7 @@ export class ProfileDetailComponent {
    * @param {MatDialog} dialog
    * @memberof ProfileDetailComponent
    */
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private userService: UserService) {}
 
   /**
    * Format the birthdate for display
@@ -92,19 +94,20 @@ export class ProfileDetailComponent {
    * @memberof ProfileDetailComponent
    */
   public openProfileFormDialog(profileId: number): void {
-    console.log('profileId', profileId);
-    const dialogRef = this.dialog.open(ProfileFormDialogComponent, {
-      data: { id: profileId }
-    });
-
-    dialogRef
-      .afterClosed()
-      .pipe(take(1))
-      .subscribe((profileSaved: ProfileFullRepresentation) => {
-        console.log('profileSaved', profileSaved);
-        if (profileSaved) {
-          this.profile = profileSaved;
-        }
+    if (this.profile.id === this.userService.id) {
+      const dialogRef = this.dialog.open(ProfileFormDialogComponent, {
+        data: this.profile
       });
+
+      dialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((profileSaved: ProfileFullRepresentation) => {
+          console.log('profileSaved', profileSaved);
+          if (profileSaved) {
+            this.profile = profileSaved;
+          }
+        });
+    }
   }
 }
