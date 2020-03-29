@@ -1,0 +1,26 @@
+.mat-drawer-side {
+  border-right: none;
+  padding-right: 2rem;
+
+  .nav-profile ul {
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 1.1rem;
+    li {
+      margin-bottom: 0.5rem;
+      .icon-container {
+        display: inline-block;
+        text-align: center;
+        width: 32px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.mat-drawer-container {
+  background-color: inherit;
+  .mat-drawer-content {
+    overflow: hidden;
+  }
+}

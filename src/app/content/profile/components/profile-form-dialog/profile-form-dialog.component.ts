@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BggGameRepresentation, Country, ProfileFullRepresentation, User } from '@/models';
-import { UserService, BoardGameGeekService, CountryService, ProfileService, SnackBarService } from '@/services';
+import { BggGameRepresentation, Country, ProfileFullRepresentation } from '@/models';
+import { BoardGameGeekService, CountryService, ProfileService, SnackBarService } from '@/services';
 import moment from 'moment';
-import { forkJoin, Subject } from 'rxjs';
-import { takeUntil, first } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 // UI
 import { faCheck, faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile-form-dialog',
@@ -18,8 +18,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  private user: User;
-  public profile: ProfileFullRepresentation = new ProfileFullRepresentation();
+  // private user: User;
+  // public profile: ProfileFullRepresentation = new ProfileFullRepresentation();
   public profileForm: FormGroup;
   public today: Date;
   public countries: Country[];
@@ -34,19 +34,23 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   /**
    * Creates an instance of ProfileFormDialogComponent.
    *
+   * @param {MatDialogRef<ProfileFormDialogComponent>} dialogRef
    * @param {FormBuilder} fb
+   * @param {ProfileService} profileService
+   * @param {CountryService} countryService
+   * @param {BoardGameGeekService} boardGameGeekService
+   * @param {SnackBarService} snackBarService
    * @memberof ProfileFormDialogComponent
    */
   constructor(
-    public dialogRef: MatDialogRef<ProfileFormDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public profile: ProfileFullRepresentation,
+    private dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
-    private userService: UserService,
     private profileService: ProfileService,
     private countryService: CountryService,
     private boardGameGeekService: BoardGameGeekService,
-    public snackBarService: SnackBarService
+    private snackBarService: SnackBarService
   ) {
-    this.user = this.userService.value;
     this.today = new Date();
     this.createForm();
   }
@@ -57,28 +61,26 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * @memberof ProfileFormDialogComponent
    */
   ngOnInit(): void {
-    if (this.user && this.user.id) {
-      forkJoin(this.profileService.getProfile(this.user.id), this.countryService.getCountries())
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          ([profile, countries]) => {
-            console.log('profile', profile);
-            console.log('countries', countries);
-            if (profile) {
-              this.profile = profile;
-            }
-            if (countries) {
-              this.countries = countries;
-            }
+    this.populateForm();
 
-            this.populateForm();
+    this.countryService
+      .getCountries()
+      .pipe(first())
+      .subscribe(
+        (countries) => {
+          console.log('countries', countries);
+          if (countries) {
+            this.countries = countries;
             this.profileForm.get('country').enable();
-          },
-          (error) => {
-            console.log('ERROR profile, countries', error);
+            this.profileForm.patchValue({
+              country: this.profile.country || 'FR'
+            });
           }
-        );
-    }
+        },
+        (error) => {
+          console.log('ERROR countries', error);
+        }
+      );
   }
 
   /**
@@ -126,15 +128,15 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * @memberof ProfileFormDialogComponent
    */
   private populateForm(): void {
-    if (this.user && this.profile) {
+    if (this.profile) {
       this.profileForm.setValue({
         id: this.profile.id,
-        userId: this.user.id,
-        name: this.user.name || this.profile.name,
+        userId: this.profile.id,
+        name: this.profile.name,
         district: this.profile.district,
         city: this.profile.city,
         country: this.profile.country,
-        email: this.user.email || this.profile.email,
+        email: this.profile.email,
         gender: this.profile.gender,
         birthdate: this.profile.birthdate ? moment.unix(this.profile.birthdate).format() : null,
         bggName: this.profile.bggName,
@@ -205,7 +207,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
     this.isLoadingBggGames = true;
     this.boardGameGeekService
       .getCollection(this.profileForm.value.bggName)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(first())
       .subscribe(
         (games) => {
           this.isLoadingBggGames = false;

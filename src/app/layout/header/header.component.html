@@ -29,15 +29,15 @@
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu">
-        <a mat-menu-item [routerLink]="['/players', user.id]">
+        <a mat-menu-item [routerLink]="['/player', user.id]">
           <fa-icon [icon]="faUser"></fa-icon>
           <span>Mon profil</span>
         </a>
-        <a mat-menu-item [routerLink]="['/players', user.id, 'events']">
+        <a mat-menu-item [routerLink]="['/player', user.id, 'events']">
           <fa-icon [icon]="faCalendarAlt"></fa-icon>
           <span>Mes évènements</span>
         </a>
-        <a mat-menu-item [routerLink]="['/locations']">
+        <a mat-menu-item [routerLink]="['/player', user.id, 'locations']">
           <fa-icon [icon]="faMapMarked"></fa-icon>
           <span>Mes lieux</span>
         </a>

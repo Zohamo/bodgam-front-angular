@@ -7,7 +7,6 @@ import { AuthGuard } from '@/helpers';
 
 const routes: Routes = [
   { path: 'events', component: EventsPageComponent, data: { name: 'listAll' } },
-  { path: 'players/:id/events', component: EventsPageComponent, data: { name: 'userList' } },
   {
     path: 'events/create',
     component: EventEditPageComponent,

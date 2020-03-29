@@ -1,0 +1,8 @@
+<ng-container *ngIf="profile$ | async as profile">
+  <app-profile-privacy-form
+    [profilePrivacy]="profile.privacy"
+    (saveProfilePrivacy)="saveProfilePrivacy($event)"
+  ></app-profile-privacy-form>
+
+  <app-profile-settings (deleteProfile)="deleteProfile()"></app-profile-settings>
+</ng-container>

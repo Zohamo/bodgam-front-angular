@@ -14,6 +14,7 @@ import {
   MatNativeDateModule,
   MatPaginatorModule,
   MatSelectModule,
+  MatSidenavModule,
   MatTableModule,
   MatTabsModule
 } from '@angular/material';
@@ -37,6 +38,7 @@ import {
     MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatSidenavModule,
     MatTableModule,
     MatTabsModule
   ],
@@ -57,6 +59,7 @@ import {
     MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatSidenavModule,
     MatTableModule,
     MatTabsModule
   ]

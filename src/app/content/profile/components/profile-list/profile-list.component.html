@@ -30,7 +30,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let profile; columns: displayedColumns" [routerLink]="['/players', profile.userId]"></tr>
+  <tr mat-row *matRowDef="let profile; columns: displayedColumns" [routerLink]="['/player', profile.userId]"></tr>
 </table>
 
 <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>

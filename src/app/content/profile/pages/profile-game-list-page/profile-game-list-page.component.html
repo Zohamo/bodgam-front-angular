@@ -1,0 +1,8 @@
+<div *ngIf="games$ | async as games; else loading">
+  <app-game-list *ngIf="games" [games]="games"></app-game-list>
+  <p *ngIf="!games" i18n>Aucun jeu n'a été trouvé.</p>
+</div>
+
+<ng-template #loading>
+  <app-spinner [message]="'BoardGameGeek'"></app-spinner>
+</ng-template>

@@ -1,0 +1,11 @@
+<div *ngIf="events$ | async as events; else loading">
+  <p *ngIf="!events.length" class="text-center" i18n="">
+    <em>Aucun évènement n'a été trouvé.</em>
+  </p>
+
+  <app-event-list *ngIf="events.length" [events]="events"></app-event-list>
+</div>
+
+<ng-template #loading>
+  <app-spinner [message]="'Évènements'"></app-spinner>
+</ng-template>
