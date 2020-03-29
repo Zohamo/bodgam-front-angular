@@ -138,7 +138,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
         country: this.profile.country,
         email: this.profile.email,
         gender: this.profile.gender,
-        birthdate: this.profile.birthdate ? moment.unix(this.profile.birthdate).format() : null,
+        birthdate: this.profile.birthdate ? moment(this.profile.birthdate).format() : null,
         bggName: this.profile.bggName,
         phoneNumber: this.profile.phoneNumber,
         privacy: {
