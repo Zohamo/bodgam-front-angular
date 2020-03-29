@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { GeoCoordinates, LocationFullRepresentation } from '@/models';
+import { GeoCoordinates, Location } from '@/models';
 import { LocationService } from '@/services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class LocationDetailDialogComponent implements OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  public location: LocationFullRepresentation;
+  public location: Location;
   public address: string;
   public coords: GeoCoordinates = new GeoCoordinates();
   public triggerCenterMap = false;
@@ -42,7 +42,7 @@ export class LocationDetailDialogComponent implements OnDestroy {
       .getLocation(data.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (location: LocationFullRepresentation) => {
+        (location: Location) => {
           if (location) {
             this.location = location;
             this.buildAddress();

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { faCalendarAlt, faCogs, faDice, faMapMarked, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { ProfileFullRepresentation } from '@/models';
+import { Profile } from '@/models';
 import { ProfileService, UserService } from '@/services';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ProfileLayoutComponent {
   public profileId: number;
-  public profile$: Observable<ProfileFullRepresentation>;
+  public profile$: Observable<Profile>;
   public isAdmin: boolean = null;
 
   // Font Awesome

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BggGameRepresentation } from '@/models';
+import { BggGame } from '@/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -18,13 +18,13 @@ export class BoardGameGeekService {
    * Get a game's collection from BGG
    *
    * @param {string} userName
-   * @returns {Observable<BggGameRepresentation[]>}
+   * @returns {Observable<BggGame[]>}
    * @memberof BoardGameGeekService
    */
-  public getCollection(userName: string): Observable<BggGameRepresentation[]> {
-    return this.http.get<BggGameRepresentation[]>(`${this.api}/collection/${userName}`).pipe(
-      map((collection: BggGameRepresentation[]) => {
-        return collection.filter((game: BggGameRepresentation) => game.owned);
+  public getCollection(userName: string): Observable<BggGame[]> {
+    return this.http.get<BggGame[]>(`${this.api}/collection/${userName}`).pipe(
+      map((collection: BggGame[]) => {
+        return collection.filter((game: BggGame) => game.owned);
       })
     );
   }
@@ -33,10 +33,10 @@ export class BoardGameGeekService {
    * Get a thing (game,..) from BGG
    *
    * @param {number} thingId
-   * @returns {Observable<BggGameRepresentation>}
+   * @returns {Observable<BggGame>}
    * @memberof BoardGameGeekService
    */
-  public getThing(thingId: number): Observable<BggGameRepresentation> {
-    return this.http.get<BggGameRepresentation>(`${this.api}/thing/${thingId}`);
+  public getThing(thingId: number): Observable<BggGame> {
+    return this.http.get<BggGame>(`${this.api}/thing/${thingId}`);
   }
 }

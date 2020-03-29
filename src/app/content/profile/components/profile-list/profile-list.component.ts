@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Country, ProfileFullRepresentation, ProfileRepresentation } from '@/models';
+import { Country, Profile, ProfileItem } from '@/models';
 
 // UI
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -11,7 +11,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 })
 export class ProfileListComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'district', 'city', 'country'];
-  public dataSource: MatTableDataSource<ProfileRepresentation>;
+  public dataSource: MatTableDataSource<ProfileItem>;
   public isSetCountryNames = false;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -19,8 +19,8 @@ export class ProfileListComponent implements OnInit {
 
   // Inputs
 
-  public profiles: ProfileRepresentation[];
-  @Input() set profilesList(profilesList: ProfileRepresentation[]) {
+  public profiles: ProfileItem[];
+  @Input() set profilesList(profilesList: ProfileItem[]) {
     if (profilesList) {
       this.profiles = profilesList;
       this.dataSource = new MatTableDataSource(this.profiles);
@@ -67,7 +67,7 @@ export class ProfileListComponent implements OnInit {
    */
   setCountryNames(countries: Country[]): void {
     if (this.profiles && !this.isSetCountryNames) {
-      this.profiles.forEach((profile: ProfileFullRepresentation) => {
+      this.profiles.forEach((profile: Profile) => {
         const countryFound = countries.find((country) => {
           return country.isoCode === profile.country;
         });

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { EventRepresentation, LocationRepresentation } from '@/models';
+import { EventBg, LocationItem } from '@/models';
 import { AlertService, UserService, EventService, LocationService } from '@/services';
 import { Observable, of, Subject } from 'rxjs';
 import { switchMap, takeUntil, first } from 'rxjs/operators';
@@ -16,8 +16,8 @@ import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 export class EventEditPageComponent implements OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  public event$: Observable<EventRepresentation>;
-  public userLocations: LocationRepresentation[];
+  public event$: Observable<EventBg>;
+  public userLocations: LocationItem[];
 
   // UI
 
@@ -69,7 +69,7 @@ export class EventEditPageComponent implements OnDestroy {
       this.route.data.pipe(takeUntil(this.destroy$)).subscribe((data) => {
         switch (data.name) {
           case 'create':
-            this.event$ = of(new EventRepresentation());
+            this.event$ = of(new EventBg());
             break;
           case 'edit':
             this.event$ = this.route.paramMap.pipe(
@@ -84,15 +84,15 @@ export class EventEditPageComponent implements OnDestroy {
   /**
    * Calls the EventService to save an event
    *
-   * @param {EventRepresentation} event
+   * @param {EventBg} event
    * @memberof EventEditPageComponent
    */
-  public saveEvent(event: EventRepresentation): void {
+  public saveEvent(event: EventBg): void {
     this.eventService
       .saveEvent(event)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (eventSaved: EventRepresentation) => {
+        (eventSaved: EventBg) => {
           console.log('event saved', eventSaved);
           this.alertService.open('success-save-event');
           this.router.navigate(['events', eventSaved.id]);

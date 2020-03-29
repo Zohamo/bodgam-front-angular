@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProfileService, BoardGameGeekService } from '@/services';
-import { BggGameRepresentation } from '@/models';
+import { BggGame } from '@/models';
 
 @Component({
   selector: 'app-profile-game-list-page',
@@ -10,7 +10,7 @@ import { BggGameRepresentation } from '@/models';
 })
 export class ProfileGameListPageComponent {
   public profileBggName: string;
-  public games$: Observable<BggGameRepresentation[]>;
+  public games$: Observable<BggGame[]>;
 
   /**
    * Creates an instance of ProfileGameListPageComponent.

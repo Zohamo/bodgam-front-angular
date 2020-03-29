@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Country, Geocode, GeocodeResultLocation, GeoCoordinates, LocationFullRepresentation } from '@/models';
+import { Country, Geocode, GeocodeResultLocation, GeoCoordinates, Location } from '@/models';
 import { CountryService, GeocodingService, LocationService, SnackBarService } from '@/services';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class LocationFormDialogComponent implements OnDestroy {
 
   public isLoading = true;
   public locationForm: FormGroup;
-  public location: LocationFullRepresentation;
+  public location: Location;
   public countries: Country[];
   public showExactLocation = false;
   public mapCircleRadius: number;
@@ -190,10 +190,10 @@ export class LocationFormDialogComponent implements OnDestroy {
    * Prepare the entity before submit
    *
    * @private
-   * @returns {LocationFullRepresentation}
+   * @returns {Location}
    * @memberof LocationFormDialogComponent
    */
-  private prepareSaveEntity(): LocationFullRepresentation {
+  private prepareSaveEntity(): Location {
     if (this.locationForm.value.showExactLocation) {
       this.locationForm.patchValue({ accuracy: 0 });
     }

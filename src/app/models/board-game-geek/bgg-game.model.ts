@@ -1,4 +1,4 @@
-export class BggGameRepresentation {
+export class BggGame {
   public gameId: number;
   public name: string;
   public image: string;

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Country, EventRepresentation, LocationRepresentation } from '@/models';
+import { Country, EventBg, LocationItem } from '@/models';
 import moment from 'moment';
 import { first } from 'rxjs/operators';
 
@@ -32,15 +32,15 @@ export class EventFormComponent {
    * Inputs
    */
 
-  public event: EventRepresentation;
-  @Input() set eventEditing(eventEditing: EventRepresentation) {
+  public event: EventBg;
+  @Input() set eventEditing(eventEditing: EventBg) {
     this.event = eventEditing;
     this.populateForm();
     this.checkIfHasRegisteredLocation();
   }
 
-  public locations: LocationRepresentation[];
-  @Input() set userLocations(userLocations: LocationRepresentation[]) {
+  public locations: LocationItem[];
+  @Input() set userLocations(userLocations: LocationItem[]) {
     console.log('EventFormComponent userLocations', userLocations);
     this.locations = userLocations;
     this.checkIfHasRegisteredLocation();
@@ -63,7 +63,7 @@ export class EventFormComponent {
    * Outputs
    */
 
-  @Output() saveEvent = new EventEmitter<EventRepresentation>();
+  @Output() saveEvent = new EventEmitter<EventBg>();
 
   /**
    * Creates an instance of EventFormComponent.
@@ -148,10 +148,10 @@ export class EventFormComponent {
    * Prepare the entity before submit
    *
    * @private
-   * @returns {EventRepresentation}
+   * @returns {EventBg}
    * @memberof EventFormComponent
    */
-  private prepareSaveEntity(): EventRepresentation {
+  private prepareSaveEntity(): EventBg {
     const eventForm = Object.assign({}, this.eventForm.value);
 
     eventForm.startDatetime = moment(eventForm.startDatetime)
@@ -222,7 +222,7 @@ export class EventFormComponent {
     dialogRef
       .afterClosed()
       .pipe(first())
-      .subscribe((locationSaved: LocationRepresentation) => {
+      .subscribe((locationSaved: LocationItem) => {
         console.log('locationSaved', locationSaved);
         if (locationSaved) {
           if (locationId) {

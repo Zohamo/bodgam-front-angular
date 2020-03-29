@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProfileRatingsRepresentation } from '@/models';
+import { ProfileRatings } from '@/models';
 
 @Component({
   selector: 'app-profile-ratings',
@@ -9,8 +9,8 @@ import { ProfileRatingsRepresentation } from '@/models';
 export class ProfileRatingsComponent {
   // Inputs
 
-  public ratings: ProfileRatingsRepresentation;
-  @Input() set profileRatings(profileRatings: ProfileRatingsRepresentation) {
+  public ratings: ProfileRatings;
+  @Input() set profileRatings(profileRatings: ProfileRatings) {
     console.log('set profileRatings', profileRatings);
     if (profileRatings) {
       this.ratings = profileRatings;
@@ -34,11 +34,11 @@ export class ProfileRatingsComponent {
   /**
    * Calculate the global average of all ratings
    *
-   * @param {ProfileRatingsRepresentation} ratings
+   * @param {ProfileRatings} ratings
    * @returns {number}
    * @memberof ProfileRatingsComponent
    */
-  public globalAverage(ratings: ProfileRatingsRepresentation): number {
+  public globalAverage(ratings: ProfileRatings): number {
     const values = [];
     for (const key in ratings) {
       if (ratings.hasOwnProperty(key)) {

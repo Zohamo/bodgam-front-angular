@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BggGameRepresentation, Country, ProfileFullRepresentation } from '@/models';
+import { BggGame, Country, Profile } from '@/models';
 import { BoardGameGeekService, CountryService, ProfileService, SnackBarService } from '@/services';
 import moment from 'moment';
 import { Subject } from 'rxjs';
@@ -19,11 +19,11 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   // private user: User;
-  // public profile: ProfileFullRepresentation = new ProfileFullRepresentation();
+  // public profile: Profile = new Profile();
   public profileForm: FormGroup;
   public today: Date;
   public countries: Country[];
-  public games: BggGameRepresentation[];
+  public games: BggGame[];
   public isLoadingBggGames: boolean;
 
   // UI
@@ -43,7 +43,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * @memberof ProfileFormDialogComponent
    */
   constructor(
-    @Inject(MAT_DIALOG_DATA) public profile: ProfileFullRepresentation,
+    @Inject(MAT_DIALOG_DATA) public profile: Profile,
     private dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
     private profileService: ProfileService,
@@ -155,10 +155,10 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * Prepare the entity before submit
    *
    * @private
-   * @returns {ProfileFullRepresentation}
+   * @returns {Profile}
    * @memberof ProfileFormDialogComponent
    */
-  private prepareSaveEntity(): ProfileFullRepresentation {
+  private prepareSaveEntity(): Profile {
     const profileForm = this.profileForm.value;
     profileForm.birthdate = moment(profileForm.birthdate).valueOf();
     return profileForm;

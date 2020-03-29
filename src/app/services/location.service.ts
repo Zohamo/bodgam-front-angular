@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { LocationFullRepresentation, LocationRepresentation } from '@/models';
+import { Location, LocationItem } from '@/models';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LocationService {
-  private currentLocationSubject: BehaviorSubject<LocationFullRepresentation>;
-  public currentLocation: Observable<LocationFullRepresentation>;
+  private currentLocationSubject: BehaviorSubject<Location>;
+  public currentLocation: Observable<Location>;
   /**
    * Creates an instance of LocationService.
    *
@@ -18,7 +18,7 @@ export class LocationService {
    * @memberof LocationService
    */
   constructor(private http: HttpClient) {
-    this.currentLocationSubject = new BehaviorSubject<LocationFullRepresentation>(null);
+    this.currentLocationSubject = new BehaviorSubject<Location>(null);
     this.currentLocation = this.currentLocationSubject.asObservable();
   }
 
@@ -26,10 +26,10 @@ export class LocationService {
    * Get current Location value
    *
    * @readonly
-   * @type {LocationFullRepresentation}
+   * @type {Location}
    * @memberof LocationService
    */
-  public get value(): LocationFullRepresentation {
+  public get value(): Location {
     return this.currentLocationSubject.value;
   }
 
@@ -37,28 +37,28 @@ export class LocationService {
    * Call the API to get all locations (of a specific Profile)
    *
    * @param {number} [profileId]
-   * @returns {Observable<LocationRepresentation[]>}
+   * @returns {Observable<LocationItem[]>}
    * @memberof LocationService
    */
-  public getLocations(profileId?: number): Observable<LocationRepresentation[]> {
+  public getLocations(profileId?: number): Observable<LocationItem[]> {
     return profileId
-      ? this.http.get<LocationRepresentation[]>(`${environment.apiPath}/profile/${profileId}/locations`)
-      : this.http.get<LocationRepresentation[]>(`${environment.apiPath}/locations`);
+      ? this.http.get<LocationItem[]>(`${environment.apiPath}/profile/${profileId}/locations`)
+      : this.http.get<LocationItem[]>(`${environment.apiPath}/locations`);
   }
 
   /**
    * Call the API to get a locations's data
    *
    * @param {number} id
-   * @returns {Observable<LocationFullRepresentation>}
+   * @returns {Observable<Location>}
    * @memberof LocationService
    */
-  public getLocation(id: number): Observable<LocationFullRepresentation> {
+  public getLocation(id: number): Observable<Location> {
     return !id
-      ? of(new LocationFullRepresentation())
+      ? of(new Location())
       : this.value && this.value.id === id
       ? this.currentLocation
-      : this.http.get<LocationFullRepresentation>(`${environment.apiPath}/locations/${id}`).pipe(
+      : this.http.get<Location>(`${environment.apiPath}/locations/${id}`).pipe(
           map((locationRes) => {
             this.currentLocationSubject.next(locationRes);
             return locationRes;
@@ -69,24 +69,24 @@ export class LocationService {
   /**
    * Call the API to save a location
    *
-   * @param {LocationFullRepresentation} location
-   * @returns {Observable<LocationFullRepresentation>}
+   * @param {Location} location
+   * @returns {Observable<Location>}
    * @memberof LocationService
    */
-  public saveLocation(location: LocationFullRepresentation): Observable<LocationFullRepresentation> {
+  public saveLocation(location: Location): Observable<Location> {
     return location.id
-      ? this.http.put<LocationFullRepresentation>(`${environment.apiPath}/locations/${location.id}`, location)
-      : this.http.post<LocationFullRepresentation>(`${environment.apiPath}/locations`, location);
+      ? this.http.put<Location>(`${environment.apiPath}/locations/${location.id}`, location)
+      : this.http.post<Location>(`${environment.apiPath}/locations`, location);
   }
 
   /**
    * Call the BackEnd to delete a location
    *
    * @param {number} id
-   * @returns {Observable<LocationFullRepresentation>}
+   * @returns {Observable<Location>}
    * @memberof LocationService
    */
-  public deleteLocation(id: number): Observable<LocationFullRepresentation> {
-    return this.http.delete<LocationFullRepresentation>(`${environment.apiPath}/locations/${id}`);
+  public deleteLocation(id: number): Observable<Location> {
+    return this.http.delete<Location>(`${environment.apiPath}/locations/${id}`);
   }
 }

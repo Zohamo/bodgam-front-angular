@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { EventRepresentation } from '@/models';
+import { EventBg } from '@/models';
 import { AlertService, EventService } from '@/services';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./event-page.component.scss']
 })
 export class EventPageComponent {
-  public event$: Observable<EventRepresentation>;
+  public event$: Observable<EventBg>;
 
   /**
    * Creates an instance of EventPageComponent.

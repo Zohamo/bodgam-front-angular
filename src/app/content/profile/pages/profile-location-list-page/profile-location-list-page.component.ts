@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocationRepresentation } from '@/models';
+import { LocationItem } from '@/models';
 import { LocationService, ProfileService } from '@/services';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileLocationListPageComponent {
   public profileId: number;
-  public locations$: Observable<LocationRepresentation[]>;
+  public locations$: Observable<LocationItem[]>;
 
   /**
    * Creates an instance of ProfileLocationListPageComponent.

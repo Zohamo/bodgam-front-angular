@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileFullRepresentation } from '@/models';
+import { Profile } from '@/models';
 import { Observable } from 'rxjs';
 import { ProfileService } from '@/services';
 
@@ -9,7 +9,7 @@ import { ProfileService } from '@/services';
   styleUrls: ['./profile-detail-page.component.scss']
 })
 export class ProfileDetailPageComponent {
-  public profile$: Observable<ProfileFullRepresentation>;
+  public profile$: Observable<Profile>;
 
   /**
    * Creates an instance of ProfileDetailPageComponent.
@@ -24,10 +24,10 @@ export class ProfileDetailPageComponent {
   /**
    * Call ProfileService to edit the profile.
    *
-   * @param {ProfileFullRepresentation} profile
+   * @param {Profile} profile
    * @memberof ProfileDetailPageComponent
    */
-  public saveProfile(profile: ProfileFullRepresentation): void {
+  public saveProfile(profile: Profile): void {
     this.profile$ = this.profileService.saveProfile(profile);
   }
 }

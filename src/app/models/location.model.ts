@@ -1,6 +1,6 @@
-import { LocationRepresentation } from './location-representation.model';
+import { LocationItem } from './location-item.model';
 
-export class LocationFullRepresentation extends LocationRepresentation {
+export class Location extends LocationItem {
   // Coordinates
   latitude: number;
   longitude: number;

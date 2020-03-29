@@ -1,4 +1,4 @@
-export class ProfileRepresentation {
+export class ProfileItem {
   id: number;
   isActive: boolean;
   name: string;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProfileFullRepresentation, ProfilePrivacyRepresentation } from '@/models';
+import { Profile, ProfilePrivacy } from '@/models';
 import { AlertService, ProfileService, UserService } from '@/services';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
 })
 export class ProfileSettingsPageComponent {
   public profileId: number;
-  public profile$: Observable<ProfileFullRepresentation>;
+  public profile$: Observable<Profile>;
 
   /**
    * Creates an instance of ProfileSettingsPageComponent.
@@ -34,15 +34,15 @@ export class ProfileSettingsPageComponent {
   /**
    * Call UserService to edit the profile's privacy.
    *
-   * @param {ProfilePrivacyRepresentation} privacy
+   * @param {ProfilePrivacy} privacy
    * @memberof ProfileSettingsPageComponent
    */
-  public saveProfilePrivacy(privacy: ProfilePrivacyRepresentation): void {
+  public saveProfilePrivacy(privacy: ProfilePrivacy): void {
     this.profileService
       .saveProfilePrivacy(this.profileId, privacy)
       .pipe(first())
       .subscribe(
-        (privacyResponse: ProfilePrivacyRepresentation) => {
+        (privacyResponse: ProfilePrivacy) => {
           console.log('saveProfilePrivacy OK', privacyResponse);
           this.alertService.open('success-save-profile');
         },

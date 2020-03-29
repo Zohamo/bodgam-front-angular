@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LocationRepresentation } from '@/models';
+import { LocationItem } from '@/models';
 import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,5 +9,5 @@ import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventLocationComponent {
   faBuilding = faBuilding;
-  @Input() location: LocationRepresentation;
+  @Input() location: LocationItem;
 }

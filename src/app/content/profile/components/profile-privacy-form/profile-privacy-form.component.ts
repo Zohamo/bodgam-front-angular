@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfilePrivacyRepresentation } from '@/models';
+import { ProfilePrivacy } from '@/models';
 
 // UI
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -20,15 +20,15 @@ export class ProfilePrivacyFormComponent {
 
   // Inputs
 
-  public privacy: ProfilePrivacyRepresentation;
-  @Input() set profilePrivacy(profilePrivacy: ProfilePrivacyRepresentation) {
+  public privacy: ProfilePrivacy;
+  @Input() set profilePrivacy(profilePrivacy: ProfilePrivacy) {
     this.privacy = profilePrivacy;
     this.populateForm();
   }
 
   // Outputs
 
-  @Output() saveProfilePrivacy = new EventEmitter<ProfilePrivacyRepresentation>();
+  @Output() saveProfilePrivacy = new EventEmitter<ProfilePrivacy>();
 
   /**
    * Creates an instance of ProfilePrivacyFormComponent.
@@ -78,10 +78,10 @@ export class ProfilePrivacyFormComponent {
    * Prepare the entity before submit
    *
    * @private
-   * @returns {ProfilePrivacyRepresentation}
+   * @returns {ProfilePrivacy}
    * @memberof profilePrivacyFormComponent
    */
-  private prepareSaveEntity(): ProfilePrivacyRepresentation {
+  private prepareSaveEntity(): ProfilePrivacy {
     return this.profilePrivacyForm.value;
   }
 

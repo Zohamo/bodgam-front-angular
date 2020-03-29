@@ -1,4 +1,4 @@
-export class ProfilePrivacyRepresentation {
+export class ProfilePrivacy {
   showEmail: boolean;
   showPhoneNumber: boolean;
   showBirthdate: boolean;
