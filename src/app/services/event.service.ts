@@ -18,7 +18,7 @@ export class EventService {
    * @memberof EventService
    */
   constructor(private http: HttpClient) {
-    this.currentEventSubject = new BehaviorSubject<EventBg>(null);
+    this.currentEventSubject = new BehaviorSubject<EventBg>(new EventBg());
     this.currentEvent = this.currentEventSubject.asObservable();
   }
 
@@ -34,14 +34,28 @@ export class EventService {
   }
 
   /**
-   * Edit the Event model received
+   * Update the Event observable value from the API result.
+   *
+   * @private
+   * @param {EventBg} value
+   * @returns {EventBg}
+   * @memberof EventService
+   */
+  private updateValue(value: EventBg): EventBg {
+    const newValue = Object.assign(this.value, this.eventFormatter(value));
+    this.currentEventSubject.next(newValue);
+    return newValue;
+  }
+
+  /**
+   * Format the Event model received
    *
    * @private
    * @param {EventBg} event
    * @returns {EventBg}
    * @memberof EventService
    */
-  private eventEditor(event: EventBg): EventBg {
+  private eventFormatter(event: EventBg): EventBg {
     if (!event.players) {
       event.players = [];
     }
@@ -49,30 +63,26 @@ export class EventService {
   }
 
   /**
-   * Calls the API to get all events (of a specific Profile)
+   * Call the API to get all events.
    *
    * @param {number} [profileId]
    * @returns {Observable<EventBg[]>}
    * @memberof EventService
    */
   public getEvents(profileId?: number): Observable<EventBg[]> {
-    return profileId
-      ? this.http.get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/events`).pipe(
-          map((events) => {
-            events.map((event) => this.eventEditor(event));
-            return events;
-          })
-        )
-      : this.http.get<EventBg[]>(`${environment.apiPath}/events`).pipe(
-          map((events) => {
-            events.map((event) => this.eventEditor(event));
-            return events;
-          })
-        );
+    return (profileId
+      ? this.http.get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/events`)
+      : this.http.get<EventBg[]>(`${environment.apiPath}/events`)
+    ).pipe(
+      map((events) => {
+        events.map((event) => this.eventFormatter(event));
+        return events;
+      })
+    );
   }
 
   /**
-   * Calls the server to get one event by its id
+   * Call the API to get one Event
    *
    * @param {number} id
    * @returns {Observable<EventBg>}
@@ -81,34 +91,27 @@ export class EventService {
   public getEvent(id: number): Observable<EventBg> {
     return this.value && this.value.id === id
       ? this.currentEvent
-      : this.http.get<EventBg>(`${environment.apiPath}/events/${id}`).pipe(
-          map((eventRes) => {
-            const event = this.eventEditor(eventRes);
-            this.currentEventSubject.next(event);
-            return event;
-          })
-        );
+      : this.http
+          .get<EventBg>(`${environment.apiPath}/events/${id}`)
+          .pipe(map((eventRes) => this.updateValue(eventRes)));
   }
 
   /**
-   * Call the BackEnd to save an event
+   * Call the API to save an Event
    *
    * @param {EventBg} event
    * @returns {Observable<EventBg>}
    * @memberof EventService
    */
   public saveEvent(event: EventBg): Observable<EventBg> {
-    return event.id
-      ? this.http
-          .put<EventBg>(`${environment.apiPath}/events/${event.id}`, event)
-          .pipe(map((eventRes) => this.eventEditor(eventRes)))
-      : this.http
-          .post<EventBg>(`${environment.apiPath}/events`, event)
-          .pipe(map((eventRes) => this.eventEditor(eventRes)));
+    return (event.id
+      ? this.http.put<EventBg>(`${environment.apiPath}/events/${event.id}`, event)
+      : this.http.post<EventBg>(`${environment.apiPath}/events`, event)
+    ).pipe(map((eventRes) => this.updateValue(eventRes)));
   }
 
   /**
-   * Call the BackEnd to delete an event
+   * Call the API to delete an Event
    *
    * @param {number} id
    * @returns {Observable<EventBg>}

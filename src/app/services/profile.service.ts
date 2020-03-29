@@ -19,7 +19,7 @@ export class ProfileService {
    * @memberof ProfileService
    */
   constructor(private http: HttpClient) {
-    this.currentProfileSubject = new BehaviorSubject<Profile>(null);
+    this.currentProfileSubject = new BehaviorSubject<Profile>(new Profile());
     this.currentProfile = this.currentProfileSubject.asObservable();
   }
 
@@ -46,6 +46,20 @@ export class ProfileService {
   }
 
   /**
+   * Update the Profile observable value from the API result.
+   *
+   * @private
+   * @param {Profile} value
+   * @returns {Profile}
+   * @memberof ProfileService
+   */
+  private updateValue(value: Profile | { privacy: ProfilePrivacy }): Profile {
+    const newValue = Object.assign(this.value, value);
+    this.currentProfileSubject.next(newValue);
+    return newValue;
+  }
+
+  /**
    * Call the BackEnd to retrieve the profiles list
    *
    * @returns {Observable<ProfileItem[]>}
@@ -66,12 +80,9 @@ export class ProfileService {
     console.log('getProfile', this.currentProfile);
     return this.value && this.value.id === id
       ? this.currentProfile
-      : this.http.get<Profile>(`${environment.apiPath}/profiles/${id}`).pipe(
-          map((profileRes) => {
-            this.currentProfileSubject.next(profileRes);
-            return profileRes;
-          })
-        );
+      : this.http
+          .get<Profile>(`${environment.apiPath}/profiles/${id}`)
+          .pipe(map((profileRes) => this.updateValue(profileRes)));
   }
 
   /**
@@ -82,20 +93,10 @@ export class ProfileService {
    * @memberof ProfileService
    */
   public saveProfile(profile: Profile): Observable<Profile> {
-    return profile.id
-      ? this.http.put<Profile>(`${environment.apiPath}/profiles/${profile.id}`, profile).pipe(
-          map((profileRes) => {
-            console.log('profileRes', profileRes);
-            this.currentProfileSubject.next(Object.assign(this.value, profileRes));
-            return profileRes;
-          })
-        )
-      : this.http.post<Profile>(`${environment.apiPath}/profiles`, profile).pipe(
-          map((profileRes) => {
-            this.currentProfileSubject.next(Object.assign(this.value, profileRes));
-            return profileRes;
-          })
-        );
+    return (profile.id
+      ? this.http.put<Profile>(`${environment.apiPath}/profiles/${profile.id}`, profile)
+      : this.http.post<Profile>(`${environment.apiPath}/profiles`, profile)
+    ).pipe(map((profileRes) => this.updateValue(profileRes)));
   }
 
   /**
@@ -109,7 +110,7 @@ export class ProfileService {
   public saveProfilePrivacy(profileId: number, privacy: ProfilePrivacy): Observable<ProfilePrivacy> {
     return this.http.put<ProfilePrivacy>(`${environment.apiPath}/profile/${profileId}/privacy`, privacy).pipe(
       map((privacyRes) => {
-        this.currentProfileSubject.next(Object.assign(this.value, { privacy: privacyRes }));
+        this.updateValue({ privacy: privacyRes });
         return privacyRes;
       })
     );
