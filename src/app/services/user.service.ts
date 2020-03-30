@@ -106,7 +106,7 @@ export class UserService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    location.reload();
+    this.router.navigate(['/']);
   }
 
   /**

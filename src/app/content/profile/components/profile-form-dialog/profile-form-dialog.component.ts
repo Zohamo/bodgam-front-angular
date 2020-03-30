@@ -113,10 +113,10 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
       bggName: [],
       phoneNumber: [],
       privacy: this.fb.group({
-        showEmail: ['', Validators.required],
-        showPhoneNumber: ['', Validators.required],
-        showBirthdate: ['', Validators.required],
-        showBggName: ['', Validators.required]
+        email: ['', Validators.required],
+        phoneNumber: ['', Validators.required],
+        birthdate: ['', Validators.required],
+        bggName: ['', Validators.required]
       })
     });
   }
@@ -142,10 +142,10 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
         bggName: this.profile.bggName,
         phoneNumber: this.profile.phoneNumber,
         privacy: {
-          showEmail: this.profile.privacy.showEmail,
-          showPhoneNumber: this.profile.privacy.showPhoneNumber,
-          showBirthdate: this.profile.privacy.showBirthdate,
-          showBggName: this.profile.privacy.showBggName
+          email: this.profile.privacy.email,
+          phoneNumber: this.profile.privacy.phoneNumber,
+          birthdate: this.profile.privacy.birthdate,
+          bggName: this.profile.privacy.bggName
         }
       });
     }
@@ -230,22 +230,22 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    */
   public onSwitchControlValue(control: string): void {
     switch (control) {
-      case 'showEmail':
-        this.profileForm.patchValue({ privacy: { showEmail: !this.profileForm.value.privacy.showEmail } });
+      case 'email':
+        this.profileForm.patchValue({ privacy: { email: !this.profileForm.value.privacy.email } });
         break;
-      case 'showPhoneNumber':
+      case 'phoneNumber':
         this.profileForm.patchValue({
-          privacy: { showPhoneNumber: !this.profileForm.value.privacy.showPhoneNumber }
+          privacy: { phoneNumber: !this.profileForm.value.privacy.phoneNumber }
         });
         break;
-      case 'showBirthdate':
+      case 'birthdate':
         this.profileForm.patchValue({
-          privacy: { showBirthdate: !this.profileForm.value.privacy.showBirthdate }
+          privacy: { birthdate: !this.profileForm.value.privacy.birthdate }
         });
         break;
-      case 'showBggName':
+      case 'bggName':
         this.profileForm.patchValue({
-          privacy: { showBggName: !this.profileForm.value.privacy.showBggName }
+          privacy: { bggName: !this.profileForm.value.privacy.bggName }
         });
         break;
     }

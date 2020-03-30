@@ -76,11 +76,9 @@ export class ProfileService {
    * @memberof ProfileService
    */
   public getProfile(id: number): Observable<Profile> {
-    return this.value && this.value.id === id
-      ? this.currentProfile
-      : this.http
-          .get<Profile>(`${environment.apiPath}/profiles/${id}`)
-          .pipe(map((profileRes) => this.updateValue(profileRes)));
+    return this.http
+      .get<Profile>(`${environment.apiPath}/profiles/${id}`)
+      .pipe(map((profileRes) => this.updateValue(profileRes)));
   }
 
   /**
