@@ -48,11 +48,11 @@ export class ProfilePrivacyFormComponent {
    */
   private createForm(): void {
     this.profilePrivacyForm = this.fb.group({
-      showEmail: ['', Validators.required],
-      showPhoneNumber: ['', Validators.required],
-      showBirthdate: ['', Validators.required],
-      showBggName: ['', Validators.required],
-      showWebsite: ['', Validators.required]
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      birthdate: ['', Validators.required],
+      bggName: ['', Validators.required],
+      website: ['', Validators.required]
     });
   }
 
@@ -65,11 +65,11 @@ export class ProfilePrivacyFormComponent {
   private populateForm(): void {
     if (this.privacy) {
       this.profilePrivacyForm.setValue({
-        showEmail: this.privacy.showEmail,
-        showPhoneNumber: this.privacy.showPhoneNumber,
-        showBirthdate: this.privacy.showBirthdate,
-        showBggName: this.privacy.showBggName,
-        showWebsite: this.privacy.showWebsite
+        email: this.privacy.email,
+        phoneNumber: this.privacy.phoneNumber,
+        birthdate: this.privacy.birthdate,
+        bggName: this.privacy.bggName,
+        website: this.privacy.website
       });
     }
   }

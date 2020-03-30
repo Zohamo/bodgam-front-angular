@@ -1,15 +1,15 @@
 export class ProfilePrivacy {
-  showEmail: boolean;
-  showPhoneNumber: boolean;
-  showBirthdate: boolean;
-  showWebsite: boolean;
-  showBggName: boolean;
+  email: boolean;
+  phoneNumber: boolean;
+  birthdate: boolean;
+  website: boolean;
+  bggName: boolean;
 
   constructor() {
-    this.showEmail = false;
-    this.showPhoneNumber = false;
-    this.showBirthdate = false;
-    this.showWebsite = false;
-    this.showBggName = false;
+    this.email = false;
+    this.phoneNumber = false;
+    this.birthdate = false;
+    this.website = false;
+    this.bggName = false;
   }
 }

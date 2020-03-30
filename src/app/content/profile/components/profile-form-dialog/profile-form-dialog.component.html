@@ -33,10 +33,10 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showBirthdate')">
+        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('birthdate')">
           <app-button-visibility
             class="btn-visibility"
-            [visible]="profileForm.value.privacy.showBirthdate"
+            [visible]="profileForm.value.privacy.birthdate"
           ></app-button-visibility>
         </button>
       </div>
@@ -50,10 +50,10 @@
         <input matInput type="email" formControlName="email" placeholder="Courriel" i18n-placeholder email required />
       </mat-form-field>
       <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showEmail')">
+        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('email')">
           <app-button-visibility
             class="btn-visibility"
-            [visible]="profileForm.value.privacy.showEmail"
+            [visible]="profileForm.value.privacy.email"
           ></app-button-visibility>
         </button>
       </div>
@@ -62,10 +62,10 @@
         <input matInput type="phone" placeholder="Téléphone" i18n-placeholder formControlName="phoneNumber" />
       </mat-form-field>
       <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showPhoneNumber')">
+        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('phoneNumber')">
           <app-button-visibility
             class="btn-visibility"
-            [visible]="profileForm.value.privacy.showPhoneNumber"
+            [visible]="profileForm.value.privacy.phoneNumber"
           ></app-button-visibility>
         </button>
       </div>
@@ -118,10 +118,10 @@
         <span i18n>Rechercher</span>
       </button>
       <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('showBggName')">
+        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('bggName')">
           <app-button-visibility
             class="btn-visibility"
-            [visible]="profileForm.value.privacy.showBggName"
+            [visible]="profileForm.value.privacy.bggName"
           ></app-button-visibility>
         </button>
       </div>

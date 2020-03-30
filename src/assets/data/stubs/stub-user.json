@@ -13,11 +13,11 @@
   "phoneNumber": "+33 6 47 82 49 42",
   "website": "http://mathiasmille.fr",
   "privacy": {
-    "showEmail": false,
-    "showPhoneNumber": true,
-    "showWebsite": true,
-    "showBirthdate": true,
-    "showBggName": true
+    "email": false,
+    "phoneNumber": true,
+    "website": true,
+    "birthdate": true,
+    "bggName": true
   },
   "ratings": {
     "reception": [4, 5],
