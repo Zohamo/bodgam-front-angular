@@ -13,7 +13,7 @@
         <span *ngIf="event.location.district" class="location-district">{{ event.location.district }}</span>
         <span *ngIf="event.location.city" class="location-city">{{ event?.location.city }}</span>
         <span *ngIf="event.location.country" class="location-country">{{ event?.location.country }}</span>
-        <span class="mx-2">{{ event?.players.length + 1 }}/{{ event?.maxPlayers }} joueurs</span>
+        <span class="mx-2">{{ event?.players.length + 1 }}/{{ event?.maxPlayers + 1 }} joueurs</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
 

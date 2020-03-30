@@ -51,7 +51,7 @@ export class ProfileListComponent implements OnInit {
    * @param {string} filterValue
    * @memberof ProfileListComponent
    */
-  applyFilter(filterValue: string): void {
+  public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
