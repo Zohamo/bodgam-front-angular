@@ -3,7 +3,7 @@
 </div>
 <div class="section-content">
   <h3>
-    {{ event.players.length + 1 }}/{{ event.maxPlayers }}
+    {{ event.players.length + 1 }}/{{ event.maxPlayers + 1 }}
     <ng-container>Joueurs</ng-container>
   </h3>
   <p>
@@ -16,8 +16,8 @@
     </span>
     <span
       [ngClass]="{
-        success: event.players.length > event.minPlayers,
-        danger: event.players.length <= event.minPlayers
+        success: event.players.length >= event.minPlayers,
+        danger: event.players.length < event.minPlayers
       }"
     >
       {{ event.minPlayers + 1 }}
@@ -26,18 +26,20 @@
   <ul class="inline-list">
     <li><span class="color-grey">Participants&nbsp;:</span></li>
     <li>
-      <a href="#" title="organisateur" class="players-host">{{ event.host.name }}</a>
+      <a class="players-host" [routerLink]="['/player', event.host.id]" matTooltip="Organisateur" i18n-matTooltip="">
+        {{ event.host.name }}
+      </a>
       <ng-container *ngIf="event.players.length">
         <ng-container *ngFor="let player of event.players">
           -
-          <a href="#" class="players-player">{{ player.name }}</a>
+          <a class="players-player" [routerLink]="['/player', player.id]">{{ player.name }}</a>
         </ng-container>
       </ng-container>
     </li>
   </ul>
 </div>
 <div class="section-end">
-  <p class="color-grey">Il reste {{ event.maxPlayers - event.players.length - 1 }} places&nbsp;!</p>
+  <p class="color-grey">Il reste {{ event.maxPlayers - event.players.length }} places&nbsp;!</p>
   <button mat-raised-button color="accent" i18n="">
     Je viens !
   </button>

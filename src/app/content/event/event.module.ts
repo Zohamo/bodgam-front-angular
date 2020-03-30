@@ -11,11 +11,10 @@ import * as fromPages from './pages';
 import * as fromSharedComponents from './shared/components';
 // Exports
 import { EventListComponent } from './components';
-import { EventsPageComponent } from './pages';
 
 @NgModule({
   declarations: [...fromComponents.components, ...fromPages.components, ...fromSharedComponents.components],
   imports: [CommonModule, EventRoutingModule, EventUiModule, FormsModule, ReactiveFormsModule, LocationModule],
-  exports: [EventsPageComponent, EventListComponent]
+  exports: [EventListComponent]
 })
 export class EventModule {}

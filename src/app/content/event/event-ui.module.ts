@@ -11,7 +11,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatNativeDateModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTooltipModule
 } from '@angular/material';
 
 @NgModule({
@@ -27,7 +28,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   exports: [
     SpinnerModule,
@@ -40,7 +42,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ]
 })
 export class EventUiModule {}

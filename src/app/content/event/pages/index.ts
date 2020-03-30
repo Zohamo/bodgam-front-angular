@@ -1,9 +1,9 @@
 import { EventEditPageComponent } from './event-edit-page/event-edit-page.component';
+import { EventListPageComponent } from './event-list-page/event-list-page.component';
 import { EventPageComponent } from './event-page/event-page.component';
-import { EventsPageComponent } from './events-page/events-page.component';
 
-export const components: any[] = [EventEditPageComponent, EventPageComponent, EventsPageComponent];
+export const components: any[] = [EventEditPageComponent, EventListPageComponent, EventPageComponent];
 
 export * from './event-edit-page/event-edit-page.component';
+export * from './event-list-page/event-list-page.component';
 export * from './event-page/event-page.component';
-export * from './events-page/events-page.component';

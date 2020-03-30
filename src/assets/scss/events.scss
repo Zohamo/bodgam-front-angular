@@ -8,10 +8,10 @@
 .event-section {
   display: flex;
   @include border-top;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 
   .section-icon {
-    width: 150px;
+    width: 120px;
     text-align: center;
     padding: 0 1.5rem;
     font-size: 48px;
@@ -27,6 +27,7 @@
 
   .section-end {
     align-self: center;
+    text-align: center;
     padding: 0.5rem 3rem;
     display: flex;
     flex-direction: column;

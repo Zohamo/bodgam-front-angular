@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EventsPageComponent } from './pages/events-page/events-page.component';
-import { EventPageComponent } from './pages/event-page/event-page.component';
-import { EventEditPageComponent } from './pages/event-edit-page/event-edit-page.component';
-import { AuthGuard } from '@/helpers';
+import { EventEditPageComponent, EventListPageComponent, EventPageComponent } from './pages';
 
 const routes: Routes = [
-  { path: 'events', component: EventsPageComponent, data: { name: 'listAll' } },
+  { path: 'events', component: EventListPageComponent },
   {
     path: 'events/create',
     component: EventEditPageComponent,
@@ -17,7 +14,7 @@ const routes: Routes = [
     component: EventEditPageComponent,
     data: { name: 'edit' }
   },
-  { path: 'events/:id', component: EventPageComponent, data: { name: 'read' } }
+  { path: 'events/:id', component: EventPageComponent }
 ];
 
 @NgModule({
