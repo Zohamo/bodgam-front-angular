@@ -1,0 +1,1296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr-FR" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="fb80133c9097c4ac8fd16e61c174f2b255bd0f86" datatype="html">
+        <source>Impossible de trouver votre profil sur BoardGameGeek.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62ddf1b910d0aa781f8d3694d0183d02338a7ac6" datatype="html">
+        <source>Votre évènement a été supprimé avec succès.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c8c3925f328aebb83e4b5dbe26f8448b5e8ba59f" datatype="html">
+        <source>Votre évènement a été sauvegardé avec succès.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="39335e16f164c7425c20336a18df2ea6da5142af" datatype="html">
+        <source>Un problème est survenu lors de la suppression de votre évènement.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8f290a4f6cae214ca1d401023444d97de9042604" datatype="html">
+        <source>Un problème est survenu lors de la sauvegarde de votre évènement.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cab0b6b476d6a1c7a9ccb703495cc55f3706346a" datatype="html">
+        <source>Impossible de trouver la position sur la carte depuis l&apos;adresse.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d64014f1e6759ddaa1183071a95c6cc3f6cf1ef0" datatype="html">
+        <source>Impossible de récupérer l&apos;adresse depuis la carte.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="17f831cfecc9ddbef07702f05fc9292a95bdbe4a" datatype="html">
+        <source>Votre lieu a été sauvegardé avec succès.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c7c30d2e26c96e8790ba58456d089e73484645bc" datatype="html">
+        <source>Un problème est survenu lors de la sauvegarde de votre lieu.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e17da7c57cebc1b807a483dc313b159d3476223b" datatype="html">
+        <source>Vous êtes maintenant connecté(e).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68fe823305cef78925f1652ca2f58f5eebf87490" datatype="html">
+        <source>
+    Un problème est survenu lors de votre connexion,
+    <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+    voulez-vous réessayer ?
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="55bd664b94d00f25f2c1cbcb359a22b4bfb36bcf" datatype="html">
+        <source>Veuillez vous connecter.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a98c08067c88451d7706d2296eb23233f4ffc660" datatype="html">
+        <source>Votre profil a été mis à jour avec succès.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6658b8a5178e16b8f91c6fee54bb327e557e7478" datatype="html">
+        <source>Un problème est survenu lors de la mise à jour de votre profil.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8c07a911580e90397594f5209b6971f435e856e" datatype="html">
+        <source>Votre profil a été supprimé avec succès.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b48fa3c42d8e99edd6dddaeeb2625a9b0f2fe22a" datatype="html">
+        <source>Un problème est survenu lors de la suppression de votre profil.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1936f73115aee2d5a0d4cafc7878e6322d3e0db1" datatype="html">
+        <source>Votre compte a été créé avec succès.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="97c7c3d92de49f4a99322096b35d465014702fa8" datatype="html">
+        <source>Un problème est survenu lors de la création de votre compte.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c4c6f23e6d3320c1062169357f4974f3c429d9ac" datatype="html">
+        <source>Une erreur est survenue, merci de réessayer.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b4446a1968c4f37f7597c9a045f1e526e4edb24" datatype="html">
+        <source>Effectué</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/snack-bar-message/snack-bar-message.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="55a57e6165759f4c48fd86a29d674304066044e9" datatype="html">
+        <source>Connexion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-login/dialog-user-login.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d1ca149ef3415a4dc6c6102c62db928b2cff6fc" datatype="html">
+        <source>Courriel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-login/dialog-user-login.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="df9d935c95f3e8eda64cfd0967fbb9cb358409e4" datatype="html">
+        <source>Mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-login/dialog-user-login.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acb1e3cb93a380c1ee237736e386d1754eccf989" datatype="html">
+        <source>
+      Annuler
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-login/dialog-user-login.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7a5b80bdfff39603e595a2a61d5032115874e412" datatype="html">
+        <source>Se connecter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-login/dialog-user-login.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23be8ed26976ff1dae39f62f67df179b03e1c232" datatype="html">
+        <source>Créer un compte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73e0ae8d867a3d2b9c8841073d098e69886aa1c4" datatype="html">
+        <source>Nom d&apos;utilisateur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d8bcac784f37b8b5d41819959ff433ad0cd1a27" datatype="html">
+        <source>Nom requis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6e564705da4df5039336aaa39237cce85195f84" datatype="html">
+        <source>Courriel requis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1085ab505c190d02939f06db735703f09aa5ea13" datatype="html">
+        <source>Mot de passe requis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e308e1bb46a8e752b782d9593b0faac243fab238" datatype="html">
+        <source>6 caractères minimum</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="208cd8305e230542d733f001398dc545e85f75d1" datatype="html">
+        <source>Confirmation du mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30a34083240dc18e84ba37513fa6a1cf320f443c" datatype="html">
+        <source>Créer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-user-register/dialog-user-register.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fde7b9b0e8c7480b861e25e1535d6762da9ed1d0" datatype="html">
+        <source>Pas de description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-list/event-list.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd499f808681b65d9d90b91f8fbd228876e43cf6" datatype="html">
+        <source>
+          Organisé par
+          <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/><x id="INTERPOLATION" equiv-text="{{ event.host.name }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-list/event-list.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c36b5f9fb44b479932caf1500ff163235c22707e" datatype="html">
+        <source>Voir</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-list/event-list.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d15bda3a65f69a753035f13bcb6d8a40b7455552" datatype="html">
+        <source>Modifier</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-list/event-list.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-detail/event-detail.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e32da846622c2c2eb7a59b745110dbbdb05407b7" datatype="html">
+        <source>Supprimer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-list/event-list.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-detail/event-detail.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c0cf96ffd42d459bb59c335353107c8f1034c5e8" datatype="html">
+        <source>Nom du lieu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0bac879c53565462d2f232f704fecf1795ece2e" datatype="html">
+        <source>Définir comme lieu par défaut</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c1c5733b7a45e75fea212716021da8a8d1cdeb90" datatype="html">
+        <source>Lieu public</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="421e4e22e6155c609912185dcd3b5f36481e320e" datatype="html">
+        <source>Fumeur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9aae0432f5ed6a188d64d5860aeda6a6d32a177c" datatype="html">
+        <source>Accessible en fauteuil roulant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="05bc1abfa23eb153be95033ab0dec198d67cb0c6" datatype="html">
+        <source>
+            Montrer l&apos;adresse exacte
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="15ce9b3a8bc47fff7c87b97b196dac2bd1732756" datatype="html">
+        <source>Récupérer l&apos;adresse depuis la carte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="603433cc888ee0cc8a31822abce00206470d444c" datatype="html">
+        <source>Chercher l&apos;adresse sur la carte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71134e1f8e386768460814d4d54b826ea9e1790a" datatype="html">
+        <source>Adresse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a76e7d5ee693cf3d9b2bd738ac5062c457a6dd2e" datatype="html">
+        <source>Complément d&apos;adresse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f61844fc6aac98f584eb5f115b7a9d210c18ce29" datatype="html">
+        <source>Code postal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b13398301a058c5a17bd627fcf2ae62fa9330b40" datatype="html">
+        <source>Quartier</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-list/profile-list.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b55c73c9a72989148ce4b995834ff07c999bd717" datatype="html">
+        <source>Ville</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-list/profile-list.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b619ba2da27be97b7ce282010ecd62dedb8ca431" datatype="html">
+        <source>Pays</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-list/profile-list.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="665a56eaf927546b33a630f8d433aac19e85dd1c" datatype="html">
+        <source>
+                <x id="INTERPOLATION" equiv-text="{{ country?.name }}"/>
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eec715de352a6b114713b30b640d319fa78207a0" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="87c5e70b1624fcb3c2b2ccb937de1128495df83f" datatype="html">
+        <source>* champs obligatoires</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/components/location-form-dialog/location-form-dialog.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">210</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="978f23b879681f50a1009c1a5296c16809b681f9" datatype="html">
+        <source>
+      Êtes-vous sur(e) de vouloir supprimer votre compte ?
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f9e2e87222c6202c02312635a93b29c36379d517" datatype="html">
+        <source>
+        Il s&apos;agit là d&apos;une décision importante : vous perdrez toutes vos
+        <x id="START_TAG_INS" ctype="x-ins" equiv-text="&lt;ins&gt;"/>informations personnelles<x id="CLOSE_TAG_INS" ctype="x-ins" equiv-text="&lt;/ins&gt;"/>
+        , vos
+        <x id="START_TAG_INS" ctype="x-ins" equiv-text="&lt;ins&gt;"/>contacts<x id="CLOSE_TAG_INS" ctype="x-ins" equiv-text="&lt;/ins&gt;"/>
+        et votre
+        <x id="START_TAG_INS" ctype="x-ins" equiv-text="&lt;ins&gt;"/>historique<x id="CLOSE_TAG_INS" ctype="x-ins" equiv-text="&lt;/ins&gt;"/>
+         !
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="34250de6960625ecd712d5bce0ba908b7c41e851" datatype="html">
+        <source>
+        <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Mais surtout !!<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        Nous serons très tristes de devoir vous dire &quot;au revoir&quot; (c&apos;est tellement triste les &quot;au revoir&quot;…)
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12380235948088ddf227ad226ce8a2ae63878fe5" datatype="html">
+        <source>Annuler</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="344d0f2e5f71e80e36ea8d22a0fd8f6499ea483c" datatype="html">
+        <source>Supprimer votre profil</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-settings/profile-settings.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb7b6c26eb0e1ee8835ca7c37674b80ddd320705" datatype="html">
+        <source>Êtes-vous sûr(e) ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e3da3c1369460b490b9077d027b9d04a8656ff74" datatype="html">
+        <source>Confirmer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/dialog-confirm/dialog-confirm.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c29989d53c8aea8d1aac1add7bfc2dd45b58314f" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ message }}"/> en chargement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/spinner/spinner.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="36691ceb40e314f2218936540ea6e97d863e4e08" datatype="html">
+        <source>Évènement privé</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="839415b2b220464eecf1cd9583615ff02398c863" datatype="html">
+        <source>
+          <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>
+            Un bon titre c&apos;est important, ça permet de définir dans quels types de jeux ou d&apos;ambiance vont se retrouver
+            les participants au premier coup d&apos;œil !
+            <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+            Soyez concis mais précis.
+          <x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6f00f957f66d5ae9afd08b5ce74b66c8b30ad6f6" datatype="html">
+        <source>Quand ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="406900aeda255ecde32402801ca5baea60c366b3" datatype="html">
+        <source>Où ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c05e1fdd516a5727333d9951eb97ad3dc68fe847" datatype="html">
+        <source>Veuillez créer un lieu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b1e23d74139200a33103ce86fd5c5695dac9b885" datatype="html">
+        <source>Mes lieux</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aee24ecdebdace141b39819a7034cd1a2d2cfb55" datatype="html">
+        <source>Nouveau</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe9016233eb746b60c9a04bece9e5400ebd50f90" datatype="html">
+        <source>Qui ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e6fb313defa28bbac0caa8cca4ef458abbbeb80" datatype="html">
+        <source>Niveau minimum</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="82d4d3dce7df9b805e5155001151cbb69d8bf107" datatype="html">
+        <source>
+                Tous niveaux
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="29e6651900077e0589d7e9af0c351e9246f4d3b0" datatype="html">
+        <source>
+                Débutant
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0e760c03e63463734867df0d6a3782f6e0986a5d" datatype="html">
+        <source>
+                Intermédiaire
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dd25c597f9f9224c9b7ae2f4d06b22a8aef1951e" datatype="html">
+        <source>
+                Expert
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="904cc13290e6a0909594ddec787062fb15a6c642" datatype="html">
+        <source>
+                Légendaire
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="709f87ee86b3ca3f882706b33fa7a8faa4260ef5" datatype="html">
+        <source>Ambiance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e20b278736377c0d319d5da01a2c2c72aff570c" datatype="html">
+        <source>
+                Festive
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dffc6c2233a7476529cf7b0a7d1a0db3a42bf5be" datatype="html">
+        <source>
+                Détendue
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d0cc9aeaf6681435f805d1e7f7b9a714bbd4a2f" datatype="html">
+        <source>
+                Détendue et concentrée
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="319fa501e36841dbd1a4c9143d563a18312841c3" datatype="html">
+        <source>
+                Concentrée
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8600b524b099284a34f6ec8b5a3f35618554ff7" datatype="html">
+        <source>
+                Studieuse
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b7cd39316a55e24e1490388e5f0a683181bb9e34" datatype="html">
+        <source>
+          <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>
+            Cet évènement aura lieu si vous êtes au moins
+            <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ this.eventForm.get(&apos;minPlayers&apos;).value + 1 }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+            joueurs .
+            <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+            Vous serez au maximum
+            <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ this.eventForm.get(&apos;maxPlayers&apos;).value + 1 }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+            joueurs .
+          <x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">173</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="07829356307e140d2f251a33459acc6c8701d8e5" datatype="html">
+        <source>Quoi ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb130ffdacda0eaaaf878f74cfa612b4b9835bf4" datatype="html">
+        <source>
+            <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>
+              C&apos;est le moment de vous lâcher !
+              <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+              Détaillez le plus possible votre évènement : quels jeux vous voulez sortir, s&apos;il doivent amener
+              quelque chose (des chips, de la bière, du saucisson...), savoir ce pour quoi ils sont bienvenus ou
+              non :
+            <x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/components/event-form/event-form.component.html</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="19eed43a8937a60b8c46b4832282a1688fc738ae" datatype="html">
+        <source>Évènements à venir</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/pages/event-list-page/event-list-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bdfd161bbdae1ae4b0c0faafc557ccb1f204f5b4" datatype="html">
+        <source>Mes évènements</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/pages/event-list-page/event-list-page.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8a0d8fca7cd19d73dfcf593d782bd19b86704cf1" datatype="html">
+        <source>Nouvel évènement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/pages/event-list-page/event-list-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f3a93bedd1fd5365bb9c066c2d69cdad222e6b47" datatype="html">
+        <source>
+    Festive
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-atmosphere/event-atmosphere.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="602bfb8412d52521fd970496206a208514f912dc" datatype="html">
+        <source>
+    Détendue
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-atmosphere/event-atmosphere.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9320aae4f277e32d6b5db4b27cfd443a0fa65a7a" datatype="html">
+        <source>
+    Détendue et concentrée
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-atmosphere/event-atmosphere.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="20a89f7b347f91e4ad75ee610d699d4d981aebcc" datatype="html">
+        <source>
+    Concentrée
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-atmosphere/event-atmosphere.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f8e80e053be88885d5443e0c7dc7f689541a4247" datatype="html">
+        <source>
+    Studieuse
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-atmosphere/event-atmosphere.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d260ba0692ccca1aae98dd8a0c80b01e441d803b" datatype="html">
+        <source>
+    Tous niveaux
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-level/event-level.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="82a23b1f363f32745949b6a4ddd4dcc0fbe3b2f1" datatype="html">
+        <source>
+    Débutant
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-level/event-level.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a2bce853de05cc21c4f7748e6f50fbd33dca2b8b" datatype="html">
+        <source>
+    Intermédiaire
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-level/event-level.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1342657d54702ac77c06fc000baeda354b40c0c7" datatype="html">
+        <source>
+    Expert
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-level/event-level.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1b4926f7de3e1a3c787d328ccabde2494188b6bf" datatype="html">
+        <source>
+    Légendaire
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-level/event-level.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="65b9e715696fbb505b49674bb98bc765679cebeb" datatype="html">
+        <source>
+    Voir l&apos;adresse exacte
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-location/event-location.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="866176c9c9b01bee41c5c899dc0e7e9830c28c4c" datatype="html">
+        <source>
+    Vous ne verrez l&apos;adresse exacte qu&apos;une fois votre présence confirmée par l&apos;organisateur.
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-location/event-location.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6f594e7fe81759777b83961670256477f83430ad" datatype="html">
+        <source>Organisateur</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-players/event-players.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9c02f59378e6c54dfdd432f6d5a41e97a56b19a3" datatype="html">
+        <source>
+    Je viens !
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/event/shared/components/event-players/event-players.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="efd394f614286187a4c0a4622020e1c1ff74045f" datatype="html">
+        <source>Nouveau lieu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/pages/locations-page/locations-page.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68067371659cb7b76331f112eda2047c84ebbe8f" datatype="html">
+        <source>Aucun lieu n&apos;a été trouvé.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/location/pages/locations-page/locations-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6d2c39708a32910f89701dd7e1cfb9ec1c195768" datatype="html">
+        <source>Pseudo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f1cfaab4979384a19a202f908bc34180cfff69f0" datatype="html">
+        <source>Un peu de vous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3abb9bedf0e840ea78c7295c9c0e094264a9c2ed" datatype="html">
+        <source>Je suis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52f62b0fcce72dcae528f3814ef2900f0c67a9b4" datatype="html">
+        <source>Autre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="32dead5ba2a4dea937468e01195711f80c175806" datatype="html">
+        <source>Femme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1a3d64d268d44d0ac1c86d7fa2b918ebb5e77d19" datatype="html">
+        <source>Homme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1de90342692898c182f7d2ea71afefd96498b678" datatype="html">
+        <source>Date de naissance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="34746fb1c7f3d2194d99652bdff89e6e14c9c4f4" datatype="html">
+        <source>Contact</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c34e20a0eb6652aedd651c9cfe3fc0c26b6fdc6c" datatype="html">
+        <source>Téléphone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dee236a7d1d2a8e0d80fc765e8d02b3474e7a02d" datatype="html">
+        <source>Où êtes-vous ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52cc72155645581ef5255a8fee4aaac9a4a02dfd" datatype="html">
+        <source>
+            <x id="INTERPOLATION" equiv-text="{{ country?.name }}"/>
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e5444c2e8958f007a19cc6949ffa6703149d9df" datatype="html">
+        <source>Board Game Geek</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c737c5aa5ec086994e038ec2d4f7d998733bccfb" datatype="html">
+        <source>
+      Entrez votre pseudo BGG afin de pouvoir récupérer votre liste de jeux ! Si ce n&apos;est pas encore fait, nous
+      vous invitons à visiter
+      <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>boardgamegeek.com<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+      .
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="366ded4e50e348ea8b333bd23a7220fcfd015677" datatype="html">
+        <source>Pseudo BGG</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a74db487f1577ddd1bb97940a9f18b8bbe2a1742" datatype="html">
+        <source>Rechercher</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-form-dialog/profile-form-dialog.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-list/profile-list.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c94173de4171d3ef9ec657b243574e389c89a391" datatype="html">
+        <source>Informations personnelles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ddfc94f8e68fdec3ad353014e679067d25fc9560" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ formatBirthdate(profile.birthdate) }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e2460f417111a64284c217eb3fa9dcf2b2a73cd1" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ profile.email }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d99bcbb31f8b7b9dec6d699b5188d8beae061b7a" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ profile.phoneNumber }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="919a25e7d86a4f0457b758c62a4e2ddb8771c202" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ profile.district }}"/>,</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="625e3b8332513c7fb182106bf683bc5097f78632" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ profile.city }}"/>,</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7b326a7a61d5a14b86caac1c615565335b9b8916" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ profile.country }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0159a4353f8e80bfdc96ac825f7cce806378263b" datatype="html">
+        <source>
+      <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Board Game Geek<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+      <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+      <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/><x id="INTERPOLATION" equiv-text="{{ profile.bggName }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6efa7abf3b79d1e9be1eb98dc7487b1aabaee27c" datatype="html">
+        <source>
+      <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Website<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+      <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+      <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/><x id="INTERPOLATION" equiv-text="{{ shortWebsite(profile.website) }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-detail/profile-detail.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="01afa66a69c6cf5671972200a4e4e2720815b344" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-list/profile-list.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="77b51f5b7138916767d19234f47a18f8434cf68d" datatype="html">
+        <source>Visibilité de vos informations personnelles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="911209caeed1c1bcf67c07fecff548315d4123e3" datatype="html">
+        <source>Numéro de téléphone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6ffe055d37637fd66f22e8cd177252a5ad2c2858" datatype="html">
+        <source>Pseudo BoardGameGeek</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="56cb7fff53e5d791c91cec81279e78e988cd8f8f" datatype="html">
+        <source>Site internet</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-privacy-form/profile-privacy-form.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1db6cc9a977f9ab640d4794214922775a6de0785" datatype="html">
+        <source>Accueil</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6cbfd5473193160c139eeb6af9b41d4927a1ad5" datatype="html">
+        <source>en tant qu&apos;hôte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a7c28efd6ec9d482dd10bdcaadeddf7d14b9ea66" datatype="html">
+        <source>Explication des règles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="611a610a9f590554e5c8c7818d1bf0f7b6de10a5" datatype="html">
+        <source>Sympathie</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb56b12869b5d12791903696404a69f648716549" datatype="html">
+        <source>Humilité</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3b3ea6803c65e655bedb72a2ebd62acd3fd0ca4b" datatype="html">
+        <source>Honnêteté</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f917073f741a4eb9daa4d1b4284e444f2a0d5438" datatype="html">
+        <source>Vitesse de jeu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="37b3a32cbd9bd3c067bf95095ce7593d80a24f83" datatype="html">
+        <source>Appréciation globale</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/components/profile-ratings/profile-ratings.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="57373a30bf9f0118266a43581ff6ded7dc4e7518" datatype="html">
+        <source>
+    <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Aucun évènement n&apos;a été trouvé.<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-event-list-page/profile-event-list-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="342bc4575162ed0a4e4331d89a60e9501f125fe2" datatype="html">
+        <source>Aucun jeu n&apos;a été trouvé.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-game-list-page/profile-game-list-page.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bd3df624f3ced9d60a80297df37b3017e5afa0d1" datatype="html">
+        <source>Profil</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="169912b2509ce04d861c5664468fa73b51f693c2" datatype="html">
+        <source>Jeux</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ff9dd438b5c13c971b5291a71ef988d2f671491a" datatype="html">
+        <source>Évènements</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ae8a09deb2adf1fc6d42624136ecb8a222f73c13" datatype="html">
+        <source>Lieux</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acef7e6d862f8dabe9d12145b971da1747b7e5c0" datatype="html">
+        <source>Paramètres</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b2a599342f496dfac050510800186e301066340f" datatype="html">
+        <source>Joueurs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-list-page/profile-list-page.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="79eb31de101798470cde35ad1051b2c073fa9bd9" datatype="html">
+        <source>
+    <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Aucun lieu n&apos;a été trouvé.<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/content/profile/pages/profile-location-list-page/profile-location-list-page.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

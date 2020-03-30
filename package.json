@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "extract-i18n": "ng xi18n --output-path i18n --i18n-locale fr-FR",
     "prettier": "prettier --config ./.prettierrc --write './src/**/*.{ts,js,css,scss,json,html}'"
   },
   "private": true,
