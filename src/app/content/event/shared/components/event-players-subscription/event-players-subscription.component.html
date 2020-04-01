@@ -1,0 +1,94 @@
+<ng-container *ngIf="event.maxPlayers - event.players.length <= 0">
+  <p class="color-warn">Plus de place disponible.</p>
+</ng-container>
+
+<ng-container *ngIf="event.maxPlayers - event.players.length > 0">
+  <p *ngIf="!subscriptionStatus" class="color-grey">
+    Il reste {{ event.maxPlayers - event.players.length }} places&nbsp;!
+  </p>
+
+  <!-- Subscription Text -->
+
+  <ng-container *ngIf="subscriptionStatus" [ngSwitch]="subscriptionStatus">
+    <p *ngSwitchCase="'accepted'" class="color-primary">
+      <a class="players-player" [routerLink]="['/player', event.host.id]">{{ event.host.name }}</a>
+      a accepté votre inscription
+    </p>
+    <p *ngSwitchCase="'refused'" class="color-warn">
+      <a class="players-player" [routerLink]="['/player', event.host.id]">{{ event.host.name }}</a>
+      a refusé votre inscription
+    </p>
+    <ng-container *ngSwitchCase="'pending'">
+      <p class="color-grey">
+        Vous avez confirmé votre présence.
+      </p>
+      <p>
+        <a class="players-player" [routerLink]="['/player', event.host.id]">{{ event.host.name }}</a>
+        doit maintenant accepter votre inscription&hellip;
+      </p>
+    </ng-container>
+    <p *ngSwitchCase="'not-confirmed'" class="color-warn">Vous devez confirmer ou non votre présence&nbsp;:</p>
+  </ng-container>
+
+  <ng-container *ngIf="subscriptionStatus !== 'refused'">
+    <!-- Subscription Button -->
+
+    <button
+      *ngIf="subscriptionStatus !== 'accepted' && subscriptionStatus !== 'pending'"
+      mat-raised-button
+      [color]="subscriptionStatus === 'not-confirmed' ? 'warn' : 'accent'"
+      [matMenuTriggerFor]="selectSubscription"
+    >
+      <ng-container [ngSwitch]="subscriptionStatus">
+        <ng-container *ngSwitchCase="'refused'">Refusé</ng-container>
+        <ng-container *ngSwitchCase="'not-confirmed'">Confirmer ma venue</ng-container>
+        <ng-container *ngSwitchDefault>Je m'inscris !</ng-container>
+      </ng-container>
+    </button>
+
+    <button
+      *ngIf="subscriptionStatus === 'accepted' || subscriptionStatus === 'pending'"
+      mat-button
+      color="accent"
+      [matMenuTriggerFor]="selectSubscription"
+    >
+      Changer de statut
+    </button>
+
+    <!-- Subscription Actions -->
+
+    <mat-menu #selectSubscription="matMenu">
+      <button
+        *ngIf="subscriptionStatus !== 'accepted' && subscriptionStatus !== 'pending'"
+        class="color-primary"
+        mat-menu-item
+        (click)="onSubscribe(true)"
+      >
+        <fa-icon [icon]="faThumbsUp"></fa-icon>
+        <span i18n="">Je suis sûr(e) de venir</span>
+      </button>
+      <button
+        *ngIf="subscriptionStatus !== 'not-confirmed'"
+        class="color-accent"
+        mat-menu-item
+        (click)="onSubscribe(false)"
+      >
+        <fa-icon [icon]="faQuestion"></fa-icon>
+        <span i18n="">Je viendrai peut-être</span>
+      </button>
+      <button
+        *ngIf="subscriptionStatus && subscriptionStatus !== 'refused'"
+        class="color-warn"
+        mat-menu-item
+        (click)="onUnsubscribe()"
+      >
+        <fa-icon [icon]="faThumbsDown"></fa-icon>
+        <span i18n="">J'annule, désolé(e)</span>
+      </button>
+      <button class="color-grey" mat-menu-item>
+        <fa-icon [icon]="faTimes"></fa-icon>
+        <span i18n="">(Oups non, pardon !)</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+</ng-container>

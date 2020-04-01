@@ -1,5 +1,6 @@
 import { LocationItem, ProfileItem } from '@/models';
 import moment from 'moment';
+import { EventSubscription } from './event-subscription.model';
 
 export class EventBg {
   id: number;
@@ -12,7 +13,9 @@ export class EventBg {
   location: LocationItem;
   // Players
   host: ProfileItem;
-  players: ProfileItem[];
+  subscription: EventSubscription; // the current User Subscription
+  subscriptions: EventSubscription[]; // all the current Subscriptions for the Host to administrate
+  players: ProfileItem[]; // all the Users with subscription.isAccepted = true
   minPlayers: number;
   maxPlayers: number;
   // Details
@@ -33,6 +36,7 @@ export class EventBg {
     this.location = null;
     // Players
     this.host = null;
+    this.subscription = null;
     this.players = [];
     this.minPlayers = 1;
     this.maxPlayers = 4;

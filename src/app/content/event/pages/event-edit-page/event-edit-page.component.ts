@@ -73,7 +73,12 @@ export class EventEditPageComponent implements OnDestroy {
             break;
           case 'edit':
             this.event$ = this.route.paramMap.pipe(
-              switchMap((params: ParamMap) => this.eventService.getEvent(+params.get('id')))
+              switchMap((params: ParamMap) => {
+                const eventId = +params.get('id');
+                return this.eventService.value.id === eventId
+                  ? this.eventService.currentEvent$
+                  : this.eventService.getEvent(eventId);
+              })
             );
             break;
         }

@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {
   faCalendarAlt,
+  faCalendarCheck,
+  faCalendarPlus,
   faCaretDown,
+  faClipboardList,
   faDungeon,
   faMapMarked,
   faSignInAlt,
@@ -33,7 +36,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Font Awesome
   faCalendarAlt = faCalendarAlt;
+  faCalendarCheck = faCalendarCheck;
+  faCalendarPlus = faCalendarPlus;
   faCaretDown = faCaretDown;
+  faClipboardList = faClipboardList;
   faDungeon = faDungeon;
   faMapMarked = faMapMarked;
   faSignInAlt = faSignInAlt;

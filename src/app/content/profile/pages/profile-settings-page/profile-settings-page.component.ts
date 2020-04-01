@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Profile, ProfilePrivacy } from '@/models';
 import { AlertService, ProfileService, UserService } from '@/services';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-settings-page',
   templateUrl: './profile-settings-page.component.html',
   styleUrls: ['./profile-settings-page.component.scss']
 })
-export class ProfileSettingsPageComponent {
+export class ProfileSettingsPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   public userId: number;
   public profileId: number;
   public profile$: Observable<Profile>;
@@ -29,8 +30,22 @@ export class ProfileSettingsPageComponent {
     private userService: UserService
   ) {
     this.userId = userService.id;
-    this.profileId = profileService.value.id;
     this.profile$ = profileService.currentProfile$;
+    this.profile$.pipe(takeUntil(this.destroy$)).subscribe((profile: Profile) => {
+      if (profile && profile.id) {
+        this.profileId = profile.id;
+      }
+    });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof ProfileSettingsPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**

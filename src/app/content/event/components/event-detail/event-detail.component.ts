@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { EventBg } from '@/models';
-import { EventService, UserService } from '@/services';
+import { EventService } from '@/services';
 
 @Component({
   selector: 'app-event-detail',
@@ -10,7 +10,6 @@ import { EventService, UserService } from '@/services';
 })
 export class EventDetailComponent {
   public event: EventBg;
-  public userId: number;
 
   // UI
   faEdit = faEdit;
@@ -19,6 +18,8 @@ export class EventDetailComponent {
   /**
    * Inputs
    */
+
+  @Input() userId: number;
 
   @Input() set eventDetail(eventDetail: EventBg) {
     this.event = eventDetail;
@@ -34,12 +35,9 @@ export class EventDetailComponent {
    * Creates an instance of EventDetailComponent.
    *
    * @param {EventService} eventService
-   * @param {UserService} userService
    * @memberof EventDetailComponent
    */
-  constructor(private eventService: EventService, private userService: UserService) {
-    this.userId = this.userService.id;
-  }
+  constructor(private eventService: EventService) {}
 
   /**
    * OnEvent delete event

@@ -4,6 +4,7 @@ import { AdminGuard } from '@/helpers';
 import { PageNotFoundComponent } from '@/pages';
 
 import {
+  ProfileAgendaPageComponent,
   ProfileDetailPageComponent,
   ProfileEventListPageComponent,
   ProfileGameListPageComponent,
@@ -21,6 +22,7 @@ const routes: Routes = [
     data: { name: 'read' },
     children: [
       { path: '', component: ProfileDetailPageComponent },
+      { path: 'agenda', component: ProfileAgendaPageComponent, canActivate: [AdminGuard] },
       { path: 'events', component: ProfileEventListPageComponent },
       { path: 'games', component: ProfileGameListPageComponent },
       { path: 'locations', component: ProfileLocationListPageComponent },

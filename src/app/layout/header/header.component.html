@@ -24,6 +24,33 @@
       </a>
     </ng-container>
     <ng-container *ngIf="isAuth">
+      <a
+        class="h5 disabled"
+        matTooltip="Notifications&#13;(fonctionnalité à venir)"
+        matTooltipClass="icon-tooltip"
+        i18n-matTooltip=""
+        disabled
+      >
+        <fa-icon [icon]="faClipboardList" class="mx-1"></fa-icon>
+      </a>
+      <a
+        class="h5"
+        [routerLink]="['/events', 'create']"
+        matTooltip="Créer un évènement"
+        matTooltipClass="icon-tooltip"
+        i18n-matTooltip=""
+      >
+        <fa-icon [icon]="faCalendarPlus" class="mx-1"></fa-icon>
+      </a>
+      <a
+        class="h5"
+        [routerLink]="['/player', user.id, 'agenda']"
+        matTooltip="Agenda"
+        matTooltipClass="icon-tooltip"
+        i18n-matTooltip=""
+      >
+        <fa-icon [icon]="faCalendarCheck" class="mx-1"></fa-icon>
+      </a>
       <button mat-button class="ml-2 h-100" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
         {{ user.name }}
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>

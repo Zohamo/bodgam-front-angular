@@ -1,5 +1,15 @@
 <div class="location-detail-icons">
-  <fa-icon *ngIf="isAllowedSmoking" [icon]="faSmoking" title="Fumeur"></fa-icon>
-  <fa-icon *ngIf="!isAllowedSmoking" [icon]="faSmokingBan" title="Non-Fumeur"></fa-icon>
-  <fa-icon *ngIf="isAccessible" [icon]="faWheelchair" title="Accessible en fauteuil roulant"></fa-icon>
+  <fa-icon
+    *ngIf="isAllowedSmoking"
+    [icon]="faSmoking"
+    matTooltip="On peut fumer&#13;(mais on n'est pas obligé)"
+    i18n-matTooltip=""
+  ></fa-icon>
+  <fa-icon *ngIf="!isAllowedSmoking" [icon]="faSmokingBan" matTooltip="Non-fumeur" i18n-matTooltip=""></fa-icon>
+  <fa-icon
+    *ngIf="isAccessible"
+    [icon]="faWheelchair"
+    matTooltip="Accessible en fauteuil roulant"
+    i18n-matTooltip=""
+  ></fa-icon>
 </div>

@@ -3,21 +3,27 @@
 </div>
 <div class="section-content">
   <h3>{{ location.name }}</h3>
-  <p>
-    <span *ngIf="location.district" class="location-district">
-      {{ location.district }}
-    </span>
-    <span *ngIf="location.city" class="location-city">{{ location.city }},</span>
-    <span *ngIf="location.country" class="location-country">{{ location.country }}</span>
-  </p>
-  <button *ngIf="location.isPublic" mat-stroked-button color="accent" i18n="">
-    Voir l'adresse exacte
-  </button>
-  <app-location-detail-icons
-    [isAllowedSmoking]="location.isAllowedSmoking"
-    [isAccessible]="location.isAccessible"
-  ></app-location-detail-icons>
-  <p *ngIf="!location.isPublic" class="note" i18n="">
-    Vous ne verrez l'adresse exacte qu'une fois votre présence confirmée par l'organisateur.
-  </p>
+
+  <div class="d-flex">
+    <div>
+      <p class="mb-1">
+        <span *ngIf="location.district" class="location-district">
+          {{ location.district }}
+        </span>
+        <span *ngIf="location.city" class="location-city">{{ location.city }},</span>
+        <span *ngIf="location.country" class="location-country">{{ location.country }}</span>
+      </p>
+
+      <app-location-detail-icons
+        [isAllowedSmoking]="location.isAllowedSmoking"
+        [isAccessible]="location.isAccessible"
+      ></app-location-detail-icons>
+    </div>
+
+    <div *ngIf="location.isPublic || showLocation" class="flex-grow-1 align-self-center">
+      <button mat-raised-button color="accent" class="d-block mx-auto" i18n="">
+        Voir l'adresse exacte
+      </button>
+    </div>
+  </div>
 </div>

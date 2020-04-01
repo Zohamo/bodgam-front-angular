@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { faCalendarAlt, faCogs, faDice, faMapMarked, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendarAlt,
+  faCalendarCheck,
+  faCogs,
+  faDice,
+  faMapMarked,
+  faUser,
+  faUserCircle
+} from '@fortawesome/free-solid-svg-icons';
 import { Profile } from '@/models';
 import { ProfileService, UserService } from '@/services';
 import { Observable } from 'rxjs';
@@ -18,6 +26,7 @@ export class ProfileLayoutComponent {
 
   // Font Awesome
   faCalendarAlt = faCalendarAlt;
+  faCalendarCheck = faCalendarCheck;
   faCogs = faCogs;
   faDice = faDice;
   faMapMarked = faMapMarked;

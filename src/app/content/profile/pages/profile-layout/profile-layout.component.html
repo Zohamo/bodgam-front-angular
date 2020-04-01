@@ -24,6 +24,14 @@
               <span i18n="">Jeux</span>
             </a>
           </li>
+          <li *ngIf="isAdmin">
+            <a [routerLink]="['/player', profileId, 'agenda']">
+              <span class="icon-container">
+                <fa-icon [icon]="faCalendarCheck"></fa-icon>
+              </span>
+              <span i18n="">Agenda</span>
+            </a>
+          </li>
           <li>
             <a [routerLink]="['/player', profileId, 'events']">
               <span class="icon-container">

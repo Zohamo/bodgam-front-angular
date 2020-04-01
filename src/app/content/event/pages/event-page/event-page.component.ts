@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EventBg } from '@/models';
-import { AlertService, EventService } from '@/services';
+import { AlertService, EventService, UserService } from '@/services';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -12,6 +12,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class EventPageComponent {
   public event$: Observable<EventBg>;
+  public userId: number;
 
   /**
    * Creates an instance of EventPageComponent.
@@ -20,8 +21,16 @@ export class EventPageComponent {
    * @param {EventService} eventService
    * @memberof EventPageComponent
    */
-  constructor(private route: ActivatedRoute, private alertService: AlertService, private eventService: EventService) {
-    this.getEvent();
+  constructor(
+    private route: ActivatedRoute,
+    private alertService: AlertService,
+    private eventService: EventService,
+    private userService: UserService
+  ) {
+    userService.currentUser$.subscribe((user) => {
+      this.userId = user ? user.id : null;
+      this.getEvent();
+    });
   }
 
   /**

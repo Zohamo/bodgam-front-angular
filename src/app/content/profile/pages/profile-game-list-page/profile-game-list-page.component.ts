@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ProfileService, BoardGameGeekService } from '@/services';
-import { BggGame } from '@/models';
+import { Component, OnDestroy } from '@angular/core';
+import { BggGame, Profile } from '@/models';
+import { BoardGameGeekService, ProfileService } from '@/services';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-game-list-page',
   templateUrl: './profile-game-list-page.component.html',
   styleUrls: ['./profile-game-list-page.component.scss']
 })
-export class ProfileGameListPageComponent {
-  public profileBggName: string;
+export class ProfileGameListPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   public games$: Observable<BggGame[]>;
 
   /**
@@ -20,7 +21,20 @@ export class ProfileGameListPageComponent {
    * @memberof ProfileGameListPageComponent
    */
   constructor(private boardGameGeekService: BoardGameGeekService, private profileService: ProfileService) {
-    this.profileBggName = this.profileService.value.bggName;
-    this.games$ = this.boardGameGeekService.getCollection(this.profileBggName);
+    profileService.currentProfile$.pipe(takeUntil(this.destroy$)).subscribe((profile: Profile) => {
+      if (profile && profile.bggName) {
+        this.games$ = boardGameGeekService.getCollection(profile.bggName);
+      }
+    });
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof ProfileGameListPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

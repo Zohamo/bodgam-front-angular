@@ -8,6 +8,13 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./event-players.component.scss']
 })
 export class EventPlayersComponent {
+  // Font Awesome
   faUsers = faUsers;
+
+  /**
+   * Inputs
+   */
+
   @Input() event: EventBg;
+  @Input() userId: number;
 }

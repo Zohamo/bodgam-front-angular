@@ -1,3 +1,4 @@
+import { ProfileAgendaPageComponent } from './profile-agenda-page/profile-agenda-page.component';
 import { ProfileDetailPageComponent } from './profile-detail-page/profile-detail-page.component';
 import { ProfileEventListPageComponent } from './profile-event-list-page/profile-event-list-page.component';
 import { ProfileGameListPageComponent } from './profile-game-list-page/profile-game-list-page.component';
@@ -7,6 +8,7 @@ import { ProfileLocationListPageComponent } from './profile-location-list-page/p
 import { ProfileSettingsPageComponent } from './profile-settings-page/profile-settings-page.component';
 
 export const components: any[] = [
+  ProfileAgendaPageComponent,
   ProfileDetailPageComponent,
   ProfileEventListPageComponent,
   ProfileGameListPageComponent,
@@ -16,6 +18,7 @@ export const components: any[] = [
   ProfileSettingsPageComponent
 ];
 
+export * from './profile-agenda-page/profile-agenda-page.component';
 export * from './profile-detail-page/profile-detail-page.component';
 export * from './profile-event-list-page/profile-event-list-page.component';
 export * from './profile-game-list-page/profile-game-list-page.component';

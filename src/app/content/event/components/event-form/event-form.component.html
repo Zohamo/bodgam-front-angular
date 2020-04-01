@@ -5,7 +5,9 @@
 
       <section>
         <p class="text-right">
-          <mat-checkbox formControlName="isPrivate" i18n="">Évènement privé</mat-checkbox>
+          <mat-checkbox formControlName="isPrivate" [disabled]="true" i18n="" matTooltip="Fonctionnalité à venir">
+            Évènement privé
+          </mat-checkbox>
         </p>
 
         <mat-form-field class="w-100">

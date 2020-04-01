@@ -3,7 +3,7 @@
 tr.mat-row {
   cursor: pointer;
   &:hover {
-    background-color: $accent;
+    background-color: $light-grey;
   }
   td.mat-column-name {
     font-weight: 700;

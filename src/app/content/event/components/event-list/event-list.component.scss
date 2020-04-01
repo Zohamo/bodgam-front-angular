@@ -1,38 +1,25 @@
 @import 'src/assets/scss/_variables.scss';
 
-::ng-deep.mat-expansion-panel {
-  margin-bottom: 1rem !important;
-  .mat-content {
-    justify-content: space-between;
-    align-items: center;
-    .mat-expansion-panel-header-title {
-      padding: 1rem 0;
-      flex-grow: 0 !important;
-      align-items: center;
-      .startDate {
-        width: 5rem;
-        text-align: center;
-        margin-right: 24px;
-      }
-      .title {
-        margin-bottom: 0;
-      }
-    }
-    .mat-expansion-panel-header-description {
-      flex-grow: 0;
-    }
+.mat-card {
+  margin-bottom: 1rem;
+  &:hover {
+    background-color: $light-grey;
   }
-  .mat-expansion-panel-content {
-    border-top: 1px solid #cacaca;
-    .mat-expansion-panel-body {
-      padding: 16px 24px;
-      .description {
-        color: $grey;
-      }
-      .action-buttons {
-        display: flex;
-        justify-content: space-around;
-      }
+  .event-title {
+    margin: 0.5rem 1rem;
+  }
+  .event-details {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: $grey;
+
+    .icon-container {
+      display: inline-block;
+      text-align: center;
+      width: 32px;
+      margin-left: 0.5rem;
     }
   }
 }

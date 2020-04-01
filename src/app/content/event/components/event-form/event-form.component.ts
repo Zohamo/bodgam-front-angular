@@ -160,6 +160,7 @@ export class EventFormComponent {
       .valueOf();
     delete eventForm.startTimeHours;
     delete eventForm.startTimeMinutes;
+    eventForm.endDatetime = null;
 
     console.log('prepareSaveEntity event', eventForm);
     return eventForm;

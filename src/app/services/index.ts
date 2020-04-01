@@ -2,6 +2,7 @@ export * from './alert.service';
 export * from './board-game-geek.service';
 export * from './country.service';
 export * from './event.service';
+export * from './event-subscription.service';
 export * from './geocoding.service';
 export * from './geolocation.service';
 export * from './location.service';

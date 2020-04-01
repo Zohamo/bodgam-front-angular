@@ -38,9 +38,16 @@
     </li>
   </ul>
 </div>
+
 <div class="section-end">
-  <p class="color-grey">Il reste {{ event.maxPlayers - event.players.length }} places&nbsp;!</p>
-  <button mat-raised-button color="accent" i18n="">
-    Je viens !
-  </button>
+  <app-event-players-administration
+    *ngIf="event.host.id === userId"
+    [setSubscriptions]="event.subscriptions"
+  ></app-event-players-administration>
+
+  <app-event-players-subscription
+    *ngIf="event.host.id !== userId"
+    [setEvent]="event"
+    [userId]="userId"
+  ></app-event-players-subscription>
 </div>

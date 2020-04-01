@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="data">
+<ng-container [ngSwitch]="data.message">
   <!-- BGG -->
   <p *ngSwitchCase="'error-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
 
@@ -7,6 +7,40 @@
   <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
   <p *ngSwitchCase="'error-delete-event'" i18n="">Un problème est survenu lors de la suppression de votre évènement.</p>
   <p *ngSwitchCase="'error-save-event'" i18n="">Un problème est survenu lors de la sauvegarde de votre évènement.</p>
+
+  <!-- Event Administration-->
+  <p *ngSwitchCase="'success-event-administration-accept'" i18n="">
+    <span class="color-primary">{{ data.input }}</span>
+    a bien été accepté.
+  </p>
+  <p *ngSwitchCase="'success-event-administration-refuse'" i18n="">
+    <span class="color-primary">{{ data.input }}</span>
+    a bien été refusé.
+  </p>
+  <p *ngSwitchCase="'error-event-administration-accept'" i18n="">
+    Un problème est survenu lors de l'acceptation de
+    <span class="color-primary">{{ data.input }}</span>
+    .
+  </p>
+  <p *ngSwitchCase="'error-event-administration-refuse'" i18n="">
+    Un problème est survenu lors du refus de
+    <span class="color-primary">{{ data.input }}</span>
+    .
+  </p>
+
+  <!-- Event Subscription -->
+  <p *ngSwitchCase="'success-event-subscription'" i18n="">
+    Votre inscription à cet évènement a été bien été prise en compte.
+  </p>
+  <p *ngSwitchCase="'error-event-subscription'" i18n="">
+    Un problème est survenu lors de votre inscription à cet évènement.
+  </p>
+  <p *ngSwitchCase="'success-event-unsubscription'" i18n="">
+    Votre désinscription à cet évènement a été bien été prise en compte.
+  </p>
+  <p *ngSwitchCase="'error-event-unsubscription'" i18n="">
+    Un problème est survenu lors de votre désinscription à cet évènement.
+  </p>
 
   <!-- Geocode -->
   <p *ngSwitchCase="'error-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
@@ -24,6 +58,7 @@
     voulez-vous réessayer&nbsp;?
   </p>
   <p *ngSwitchCase="'must-login'" i18n="">Veuillez vous connecter.</p>
+  <p *ngSwitchCase="'success-logout'" i18n="">Vous êtes maintenant déconnecté(e). A bientôt !</p>
 
   <!-- Profile -->
   <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>

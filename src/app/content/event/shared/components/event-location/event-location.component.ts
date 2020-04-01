@@ -10,4 +10,5 @@ import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 export class EventLocationComponent {
   faBuilding = faBuilding;
   @Input() location: LocationItem;
+  @Input() showLocation: boolean;
 }

@@ -17,11 +17,12 @@ export class AlertService {
    * Open Material Snack Bar
    *
    * @param {string} message
-   * @memberof SnackBarService
+   * @param {*} [input]
+   * @memberof AlertService
    */
-  public open(message: string): void {
+  public open(message: string, input?: any): void {
     this.snackBar.openFromComponent(SnackBarMessageComponent, {
-      data: message,
+      data: { message, input },
       duration: AppConfig.SNACK_BAR_DURATION
     });
   }

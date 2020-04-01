@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogUserLoginModule, DialogUserRegisterModule } from '@/components';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 // Declarations
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +22,7 @@ import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-b
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
+    MatTooltipModule,
     RouterModule
   ],
   declarations: [HeaderComponent],

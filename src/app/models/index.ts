@@ -10,6 +10,8 @@ export * from './navigator/navigator-geolocation-position-coords.model';
 export * from './navigator/navigator-geolocation-position.model';
 export * from './country.model';
 export * from './event-bg.model';
+export * from './event-subscription.model';
+export * from './event-subscription-groups.model';
 export * from './geo-coordinates.model';
 export * from './location-item.model';
 export * from './location.model';

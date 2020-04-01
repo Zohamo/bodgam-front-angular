@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faUsers, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { EventBg } from '@/models';
 import { AlertService, UserService, EventService } from '@/services';
 
@@ -12,9 +12,9 @@ export class EventListComponent {
   public userId: number;
 
   // UI
-  faEye = faEye;
-  faEdit = faEdit;
-  faTrash = faTrash;
+  faBuilding = faBuilding;
+  faUsers = faUsers;
+  faUserTie = faUserTie;
 
   /**
    * Inputs

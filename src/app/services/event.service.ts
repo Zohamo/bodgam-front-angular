@@ -23,6 +23,17 @@ export class EventService {
   }
 
   /**
+   * Get current Event observable
+   *
+   * @readonly
+   * @type {Observable<EventBg>}
+   * @memberof EventService
+   */
+  public get currentEvent$(): Observable<EventBg> {
+    return this.currentEvent;
+  }
+
+  /**
    * Get current Event value
    *
    * @readonly
@@ -72,12 +83,20 @@ export class EventService {
     return (profileId
       ? this.http.get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/events`)
       : this.http.get<EventBg[]>(`${environment.apiPath}/events`)
-    ).pipe(
-      map((events) => {
-        events.map((event) => this.eventFormatter(event));
-        return events;
-      })
-    );
+    ).pipe(map((events) => events.map((event) => this.eventFormatter(event))));
+  }
+
+  /**
+   * Call the API to get the events the user has subscribed to.
+   *
+   * @param {number} profileId
+   * @returns {Observable<EventBg[]>}
+   * @memberof EventService
+   */
+  public getEventsSubscribed(profileId: number): Observable<EventBg[]> {
+    return this.http
+      .get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/subscriptions`)
+      .pipe(map((events) => events.map((event) => this.eventFormatter(event))));
   }
 
   /**
@@ -88,11 +107,9 @@ export class EventService {
    * @memberof EventService
    */
   public getEvent(id: number): Observable<EventBg> {
-    return this.value && this.value.id === id
-      ? this.currentEvent
-      : this.http
-          .get<EventBg>(`${environment.apiPath}/events/${id}`)
-          .pipe(map((eventRes) => this.updateValue(eventRes)));
+    return this.http
+      .get<EventBg>(`${environment.apiPath}/events/${id}`)
+      .pipe(map((eventRes) => this.updateValue(eventRes)));
   }
 
   /**

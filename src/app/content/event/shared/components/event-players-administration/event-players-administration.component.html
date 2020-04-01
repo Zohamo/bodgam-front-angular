@@ -1,0 +1,110 @@
+<div *ngIf="subscriptionGroups" class="d-flex">
+  <div class="mx-3 px-5 border-right">
+    <!-- Players Accepted -->
+
+    <p class="color-primary text-uppercase">Acceptés</p>
+    <div
+      *ngFor="let subscription of subscriptionGroups.accepted; trackBy: trackByUserId"
+      class="d-flex justify-content-between align-items-center"
+    >
+      <ng-container *ngIf="subscription.profile">
+        <a [routerLink]="['/player', subscription.profile.id]" class="mr-5">
+          {{ subscription.profile.name }}
+        </a>
+        <div class="ml-auto">
+          <button
+            mat-icon-button
+            matTooltip="Refuser"
+            i18n-matTooltip=""
+            matTooltipShowDelay="750"
+            (click)="onConfirm(subscription, false)"
+          >
+            <fa-icon [icon]="faMinus"></fa-icon>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Players Refused -->
+
+    <p class="color-warn text-uppercase">Refusés</p>
+    <div
+      *ngFor="let subscription of subscriptionGroups.refused; trackBy: trackByUserId"
+      class="d-flex justify-content-between align-items-center"
+    >
+      <ng-container *ngIf="subscription.profile">
+        <a [routerLink]="['/player', subscription.profile.id]" class="mr-5">
+          {{ subscription.profile.name }}
+        </a>
+        <div class="ml-auto">
+          <button
+            mat-icon-button
+            matTooltip="Accepter"
+            i18n-matTooltip=""
+            matTooltipShowDelay="750"
+            (click)="onConfirm(subscription, true)"
+          >
+            <fa-icon [icon]="faPlus"></fa-icon>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div>
+    <p *ngIf="!subscriptionGroups?.pending.length && !subscriptionGroups?.hesitating.length" class="color-grey" i18n="">
+      Aucune inscription
+    </p>
+
+    <!-- Players Pending -->
+
+    <section *ngIf="subscriptionGroups?.pending.length">
+      <p class="color-grey">Inscriptions en attente</p>
+      <p
+        *ngFor="let subscription of subscriptionGroups.pending; trackBy: trackByUserId"
+        class="d-flex justify-content-between align-items-center"
+      >
+        <a [routerLink]="['/player', subscription.profile.id]" class="mr-5">
+          {{ subscription.profile.name }}
+        </a>
+        <span class="ml-auto">
+          <button
+            mat-icon-button
+            color="primary"
+            matTooltip="Accepter"
+            i18n-matTooltip=""
+            matTooltipShowDelay="750"
+            (click)="onConfirm(subscription, true)"
+          >
+            <fa-icon [icon]="faThumbsUp"></fa-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            matTooltip="Refuser"
+            i18n-matTooltip=""
+            matTooltipShowDelay="750"
+            (click)="onConfirm(subscription, false)"
+          >
+            <fa-icon [icon]="faThumbsDown"></fa-icon>
+          </button>
+        </span>
+      </p>
+    </section>
+
+    <!-- Players Hesitating -->
+
+    <section *ngIf="subscriptionGroups?.hesitating.length">
+      <p class="color-grey">Joueurs indécis</p>
+      <p>
+        <a
+          *ngFor="let subscription of subscriptionGroups.hesitating; trackBy: trackByUserId"
+          [routerLink]="['/player', subscription.profile.id]"
+          class="mr-3"
+        >
+          {{ subscription.profile.name }}
+        </a>
+      </p>
+    </section>
+  </div>
+</div>

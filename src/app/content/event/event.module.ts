@@ -10,11 +10,12 @@ import * as fromComponents from './components';
 import * as fromPages from './pages';
 import * as fromSharedComponents from './shared/components';
 // Exports
+import { EventFiltersComponent } from './shared/components';
 import { EventListComponent } from './components';
 
 @NgModule({
   declarations: [...fromComponents.components, ...fromPages.components, ...fromSharedComponents.components],
   imports: [CommonModule, EventRoutingModule, EventUiModule, FormsModule, ReactiveFormsModule, LocationModule],
-  exports: [EventListComponent]
+  exports: [EventFiltersComponent, EventListComponent]
 })
 export class EventModule {}

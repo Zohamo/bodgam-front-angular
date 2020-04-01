@@ -1,61 +1,37 @@
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let event of events; trackBy: eventTrackBy">
-    <!-- Header -->
+<a *ngFor="let event of events; trackBy: eventTrackBy" [routerLink]="['/events', event.id]">
+  <mat-card class="d-flex">
+    <!-- Date -->
+    <div class="event-startDate">
+      <app-event-date [date]="event?.startDatetime"></app-event-date>
+    </div>
 
-    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
-      <mat-panel-title>
-        <div class="startDate">
-          <app-event-date [date]="event?.startDatetime"></app-event-date>
-        </div>
-        <h3 class="title color-primary">{{ event?.title }}</h3>
-      </mat-panel-title>
-      <mat-panel-description>
+    <!-- Title -->
+    <h3 class="event-title color-primary">{{ event?.title }}</h3>
+
+    <!-- Details -->
+    <div class="event-details">
+      <div>
         <span *ngIf="event.location.district" class="location-district">{{ event.location.district }}</span>
         <span *ngIf="event.location.city" class="location-city">{{ event?.location.city }}</span>
         <span *ngIf="event.location.country" class="location-country">{{ event?.location.country }}</span>
-        <span class="mx-2">{{ event?.players.length + 1 }}/{{ event?.maxPlayers + 1 }} joueurs</span>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+        <span class="icon-container">
+          <fa-icon [icon]="faBuilding"></fa-icon>
+        </span>
+      </div>
 
-    <!-- Content -->
+      <div>
+        <span>{{ event?.players.length + 1 }}/{{ event?.maxPlayers + 1 }} joueurs</span>
+        <span class="icon-container">
+          <fa-icon [icon]="faUsers"></fa-icon>
+        </span>
+      </div>
 
-    <div class="description">
-      <ng-container *ngIf="!event?.description">
-        <p><em i18n="">Pas de description</em></p>
-      </ng-container>
-      <ng-container *ngIf="event?.description">
-        <p>{{ event?.description }}</p>
-      </ng-container>
-      <p class="text-right">
-        <em i18n="">
-          Organisé par
-          <a [routerLink]="['/player', event.host.id]">{{ event.host.name }}</a>
-        </em>
-      </p>
+      <div>
+        <span>{{ event.host.name }}</span>
+        <span class="icon-container">
+          <fa-icon [icon]="faUserTie"></fa-icon>
+        </span>
+      </div>
     </div>
-
-    <div class="row">
-      <app-event-location class="col-md-6 event-section location" [location]="event.location"></app-event-location>
-      <app-event-players class="col-md-6 event-section players" [event]="event"></app-event-players>
-    </div>
-
-    <!-- Action Buttons -->
-
-    <div class="action-buttons">
-      <button type="button" mat-raised-button color="primary" [routerLink]="['/events', event.id]">
-        <fa-icon [icon]="faEye"></fa-icon>
-        <span i18n="">Voir</span>
-      </button>
-      <ng-container *ngIf="userId === event.host.id">
-        <button type="button" mat-raised-button color="primary" [routerLink]="['/events/edit', event.id]">
-          <fa-icon [icon]="faEdit"></fa-icon>
-          <span i18n="">Modifier</span>
-        </button>
-        <button type="button" mat-stroked-button color="warn" (click)="onDeleteEvent(event)">
-          <fa-icon [icon]="faTrash"></fa-icon>
-          <span i18n="">Supprimer</span>
-        </button>
-      </ng-container>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+  </mat-card>
+</a>

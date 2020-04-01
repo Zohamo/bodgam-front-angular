@@ -41,3 +41,8 @@ a {
   font-size: 20px;
   color: rgba(0, 0, 0, 0.54);
 }
+
+::ng-deep .icon-tooltip {
+  background: $primary;
+  font-size: 1rem;
+}
