@@ -13,7 +13,7 @@ export class Profile extends ProfileItem {
   userId: number;
   email: string;
   gender: string;
-  birthdate: number;
+  birthdate: string;
   bggName: string;
   phoneNumber: string;
   website: string;

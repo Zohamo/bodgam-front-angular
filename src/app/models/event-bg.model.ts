@@ -8,7 +8,7 @@ export class EventBg {
   isPrivate: boolean;
   // Datetime
   startDatetime: moment.Moment;
-  endDatetime: number;
+  endDatetime: moment.Moment;
   // Location
   location: LocationItem;
   // Players

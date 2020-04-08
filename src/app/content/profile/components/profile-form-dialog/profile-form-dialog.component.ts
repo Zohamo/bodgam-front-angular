@@ -160,7 +160,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    */
   private prepareSaveEntity(): Profile {
     const profileForm = this.profileForm.value;
-    profileForm.birthdate = moment(profileForm.birthdate).valueOf();
+    profileForm.birthdate = moment(profileForm.birthdate).toDate();
     return profileForm;
   }
 

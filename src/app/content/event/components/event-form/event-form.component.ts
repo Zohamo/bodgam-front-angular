@@ -157,7 +157,7 @@ export class EventFormComponent {
     eventForm.startDatetime = moment(eventForm.startDatetime)
       .hours(eventForm.startTimeHours)
       .minutes(eventForm.startTimeMinutes)
-      .valueOf();
+      .format('YYYY-MM-DD HH:mm:ss');
     delete eventForm.startTimeHours;
     delete eventForm.startTimeMinutes;
     eventForm.endDatetime = null;
