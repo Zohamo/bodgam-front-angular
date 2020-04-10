@@ -1,35 +1,36 @@
-<mat-card class="mt-4">
-  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-    <mat-card-content>
-      <!-- Title -->
+<form class="form-event" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <!-- Title -->
+
+  <section>
+    <!-- TODO : implement isPrivate attribute to Event
+      <p class="text-right">
+      <mat-checkbox formControlName="isPrivate" i18n="">
+        Évènement privé
+      </mat-checkbox>
+    </p> -->
+
+    <mat-form-field class="w-100">
+      <h4 class="color-primary">
+        <input matInput placeholder="Titre" formControlName="title" autofocus />
+      </h4>
+    </mat-form-field>
+    <p class="comment" i18n="">
+      Un bon titre c'est important, ça permet de définir dans quels types de jeux ou d'ambiance vont se retrouver les
+      participants au premier coup d'&oelig;il&nbsp;! Soyez concis mais précis.
+    </p>
+  </section>
+
+  <mat-horizontal-stepper labelPosition="bottom">
+    <!-- Date -->
+
+    <mat-step state="when">
+      <ng-template matStepLabel>
+        <span class="step-title" i18n="">Date &amp; Heure</span>
+        <fa-icon [icon]="faClock"></fa-icon>
+        <span class="step-subtitle">{{ fv.startTimeHours }}:{{ fv.startTimeMinutes }} - {{ startDate }}</span>
+      </ng-template>
 
       <section>
-        <!-- TODO : implement isPrivate attribute to Event
-          <p class="text-right">
-          <mat-checkbox formControlName="isPrivate" i18n="">
-            Évènement privé
-          </mat-checkbox>
-        </p> -->
-
-        <mat-form-field class="w-100">
-          <h4 class="color-primary">
-            <input matInput placeholder="Titre" formControlName="title" />
-          </h4>
-        </mat-form-field>
-        <p class="text-justify" i18n="">
-          <em>
-            Un bon titre c'est important, ça permet de définir dans quels types de jeux ou d'ambiance vont se retrouver
-            les participants au premier coup d'&oelig;il&nbsp;!
-            <br />
-            Soyez concis mais précis.
-          </em>
-        </p>
-      </section>
-
-      <!-- Date -->
-
-      <section>
-        <h3 i18n="">Quand ?</h3>
         <div class="row">
           <mat-form-field class="col-md-3">
             <input
@@ -42,6 +43,7 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+
           <div class="col-md-3 row">
             <mat-form-field class="col-md-5">
               <input matInput type="number" min="0" max="23" formControlName="startTimeHours" />
@@ -54,12 +56,25 @@
             </mat-form-field>
           </div>
         </div>
-      </section>
 
-      <!-- Location -->
+        <div class="btn-group-nav">
+          <button class="ml-auto" type="button" mat-button matStepperNext>
+            <fa-icon [icon]="faChevronRight"></fa-icon>
+          </button>
+        </div>
+      </section>
+    </mat-step>
+
+    <!-- Location -->
+
+    <mat-step state="where">
+      <ng-template matStepLabel>
+        <span class="step-title" i18n="">Lieu</span>
+        <fa-icon [icon]="faBuilding"></fa-icon>
+        <span>{{ fv.location?.name }}</span>
+      </ng-template>
 
       <section>
-        <h3 i18n="">Où ?</h3>
         <div class="d-flex align-items-baseline">
           <mat-form-field class="flex-grow-1">
             <mat-label *ngIf="hasNoLocation" i18n="">Veuillez créer un lieu</mat-label>
@@ -74,8 +89,8 @@
             mat-button
             type="button"
             color="primary"
-            [disabled]="!eventForm.value.location"
-            (click)="openLocationFormDialog(eventForm.value.location.id)"
+            [disabled]="!fv.location"
+            (click)="openLocationFormDialog(fv.location.id)"
           >
             <fa-icon [icon]="faPenSquare"></fa-icon>
             <span i18n="">Modifier</span>
@@ -87,36 +102,49 @@
           </button>
         </div>
 
-        <div class="d-flex align-items-center" *ngIf="this.eventForm.value.location">
-          <strong>{{ this.eventForm.value.location.name }}</strong>
+        <p *ngIf="fv.location" class="d-flex align-items-center">
+          <strong>{{ fv.location.name }}</strong>
           <span class="mx-3">
-            <span *ngIf="this.eventForm.value.location.district" class="location-district">
-              {{ this.eventForm.value.location.district }}
+            <span *ngIf="fv.location.district" class="location-district">
+              {{ fv.location.district }}
             </span>
-            <span *ngIf="this.eventForm.value.location.city" class="location-city">
-              {{ this.eventForm.value.location.city }}
+            <span *ngIf="fv.location.city" class="location-city">
+              {{ fv.location.city }}
             </span>
-            <span *ngIf="this.eventForm.value.location.country" class="location-country">
-              {{ this.eventForm.value.location.country }}
+            <span *ngIf="fv.location.country" class="location-country">
+              {{ fv.location.country }}
             </span>
           </span>
           <app-location-detail-icons
-            [isAllowedSmoking]="this.eventForm.get('location').value?.isAllowedSmoking"
-            [isAccessible]="this.eventForm.get('location').value?.isAccessible"
+            [isAllowedSmoking]="fv.location?.isAllowedSmoking"
+            [isAccessible]="fv.location?.isAccessible"
           ></app-location-detail-icons>
-        </div>
+        </p>
       </section>
 
-      <!-- Players & Level -->
+      <div class="btn-group-nav">
+        <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+        <button type="button" mat-button matStepperNext><fa-icon [icon]="faChevronRight"></fa-icon></button>
+      </div>
+    </mat-step>
+
+    <!-- Players -->
+
+    <mat-step state="who">
+      <ng-template matStepLabel>
+        <span class="step-title" i18n="">Joueurs</span>
+        <fa-icon [icon]="faUsers"></fa-icon>
+        <span i18n="">{{ fv.minPlayers }} &lt; {{ fv.maxPlayers }}</span>
+      </ng-template>
 
       <section>
-        <h3 i18n="">Qui ?</h3>
         <div class="row">
           <mat-form-field class="col-md-3">
             <input
               matInput
               type="number"
               min="1"
+              [max]="fv.maxPlayers"
               placeholder="Nombre de joueurs minimum requis"
               formControlName="minPlayers"
             />
@@ -125,7 +153,7 @@
             <input
               matInput
               type="number"
-              [min]="this.eventForm.get('minPlayers').value"
+              [min]="fv.minPlayers"
               placeholder="Nombre de joueurs maximum acceptés"
               formControlName="maxPlayers"
             />
@@ -176,47 +204,84 @@
         <p class="text-justify" i18n="">
           <em>
             Cet évènement aura lieu si vous êtes au moins
-            <strong>{{ this.eventForm.get('minPlayers').value + 1 }}</strong>
+            <strong>{{ fv.minPlayers + 1 }}</strong>
             joueurs .
             <br />
             Vous serez au maximum
-            <strong>{{ this.eventForm.get('maxPlayers').value + 1 }}</strong>
+            <strong>{{ fv.maxPlayers + 1 }}</strong>
             joueurs .
           </em>
         </p>
       </section>
 
-      <!-- Description -->
+      <div class="btn-group-nav">
+        <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+        <button type="button" mat-button matStepperNext><fa-icon [icon]="faChevronRight"></fa-icon></button>
+      </div>
+    </mat-step>
+
+    <!-- Details -->
+
+    <mat-step state="what">
+      <ng-template matStepLabel>
+        <span class="step-title" i18n="">Détails</span>
+        <fa-icon [icon]="faMarker"></fa-icon>
+        <span i18n="">[&hellip;]</span>
+      </ng-template>
 
       <section>
-        <h3 i18n="">Quoi ?</h3>
         <div class="row">
-          <p class="col-12 font-italic text-justify" i18n="">
-            <em>
-              C'est le moment de vous lâcher&nbsp;!
-              <br />
-              Détaillez le plus possible votre évènement&nbsp;: quels jeux vous voulez sortir, s'il doivent amener
-              quelque chose (des chips, de la bière, du saucisson...), savoir ce pour quoi ils sont bienvenus ou
-              non&nbsp;:
-            </em>
+          <p class="col-12 comment" i18n="">
+            C'est le moment de vous lâcher&nbsp;!
+            <br />
+            Détaillez le plus possible votre évènement&nbsp;: quels jeux vous voulez sortir, s'il doivent amener quelque
+            chose (des chips, de la bière, du saucisson...), savoir ce pour quoi ils sont bienvenus ou non&nbsp;:
           </p>
           <mat-form-field class="col-12">
-            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              #descriptionAutosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              placeholder="Description"
+              formControlName="description"
+            ></textarea>
           </mat-form-field>
         </div>
       </section>
-    </mat-card-content>
 
-    <!-- Action buttons -->
+      <div class="btn-group-nav">
+        <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+        <button type="button" mat-button matStepperNext><fa-icon [icon]="faChevronRight"></fa-icon></button>
+      </div>
+    </mat-step>
 
-    <mat-card-actions>
-      <p *ngIf="!eventForm.valid" i18n="">* champs obligatoires</p>
-      <button mat-raised-button type="button" color="primary" [disabled]="!eventForm.valid" (click)="onSubmit()">
+    <!-- Validation -->
+
+    <mat-step state="done">
+      <ng-template matStepLabel>
+        <span class="step-title" i18n="">Validation</span>
         <fa-icon *ngIf="eventForm.valid" [icon]="faCheck"></fa-icon>
-        <fa-icon *ngIf="!eventForm.valid" [icon]="faTimesCircle"></fa-icon>
-        <span *ngIf="this.event.id === null" i18n="">Créer</span>
-        <span *ngIf="this.event.id !== null" i18n="">Modifier</span>
-      </button>
-    </mat-card-actions>
-  </form>
-</mat-card>
+        <fa-icon *ngIf="eventForm.invalid" [icon]="faTimesCircle"></fa-icon>
+      </ng-template>
+
+      <section class="text-center">
+        <p *ngIf="eventForm.invalid" class="danger">Veuillez remplir TOUS les champs requis&nbsp;!</p>
+
+        <ng-container *ngIf="eventForm.valid">
+          <p class="comment" i18n="">
+            Tous les champs sont remplis correctement, mais êtes-vous sûr(e) de n'avoir rien oublié&nbsp;?
+          </p>
+
+          <button class="btn-submit" mat-raised-button type="button" color="primary" (click)="onSubmit()">
+            <span i18n="">Valider</span>
+          </button>
+        </ng-container>
+      </section>
+
+      <div class="btn-group-nav">
+        <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>

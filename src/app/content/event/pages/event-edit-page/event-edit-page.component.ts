@@ -15,6 +15,7 @@ import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventEditPageComponent implements OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  public routeName: string;
 
   public event$: Observable<EventBg>;
   public userLocations: LocationItem[];
@@ -67,6 +68,7 @@ export class EventEditPageComponent implements OnDestroy {
   private getEvent(): void {
     if (this.route) {
       this.route.data.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+        this.routeName = data.name;
         switch (data.name) {
           case 'create':
             this.event$ = of(new EventBg());

@@ -1,15 +1,24 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  faBuilding,
+  faCheck,
+  faChevronLeft,
+  faChevronRight,
+  faClock,
+  faMarker,
+  faPlusSquare,
+  faPenSquare,
+  faTimesCircle,
+  faUsers
+} from '@fortawesome/free-solid-svg-icons';
 import { Country, EventBg, LocationItem } from '@/models';
 import moment from 'moment';
 import { first } from 'rxjs/operators';
 
 // Entry components
 import { LocationFormDialogComponent } from '@/content/location/components';
-
-// UI
-import { faCheck, faPlusSquare, faPenSquare, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-event-form',
@@ -23,10 +32,16 @@ export class EventFormComponent {
 
   // UI
 
+  faBuilding = faBuilding;
   faCheck = faCheck;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  faClock = faClock;
+  faMarker = faMarker;
   faPlusSquare = faPlusSquare;
   faPenSquare = faPenSquare;
   faTimesCircle = faTimesCircle;
+  faUsers = faUsers;
 
   /**
    * Inputs
@@ -75,6 +90,40 @@ export class EventFormComponent {
   constructor(private fb: FormBuilder, private dialog: MatDialog) {
     this.today = new Date();
     this.createForm();
+    this.adjustMinMaxPlayers();
+  }
+
+  /**
+   * Convenience getter for easy access to form fields
+   *
+   * @readonly
+   * @type {{ [key: string]: AbstractControl }}
+   * @memberof EventFormComponent
+   */
+  get fc(): { [key: string]: AbstractControl } {
+    return this.eventForm.controls;
+  }
+
+  /**
+   * Convenience getter for easy access to form value
+   *
+   * @readonly
+   * @type {*}
+   * @memberof EventFormComponent
+   */
+  get fv(): any {
+    return this.eventForm.value;
+  }
+
+  /**
+   * Getter for start date formatted
+   *
+   * @readonly
+   * @type {string}
+   * @memberof EventFormComponent
+   */
+  get startDate(): string {
+    return moment(this.fv.startDatetime).format('D/M/Y');
   }
 
   /**
@@ -97,8 +146,8 @@ export class EventFormComponent {
       location: [{ value: '', disabled: true }, Validators.required],
       // Players
       host: [],
-      minPlayers: ['', Validators.required], // TODO : cannot be superior to maxPlayers
-      maxPlayers: ['', Validators.required], // TODO : cannot be inferior to minPlayers
+      minPlayers: [],
+      maxPlayers: [],
       // Details
       description: [],
       level: ['', Validators.required],
@@ -137,10 +186,6 @@ export class EventFormComponent {
         level: this.event.level,
         atmosphere: this.event.atmosphere
       });
-
-      if (this.event.location && this.event.location.id) {
-        this.setDefaultLocation(this.event.location.id);
-      }
     }
   }
 
@@ -185,26 +230,24 @@ export class EventFormComponent {
    * @memberof EventFormComponent
    */
   private checkIfHasRegisteredLocation(): void {
-    this.hasNoLocation = !Array.isArray(this.locations) || this.locations.length === 0;
-    this.hasNoLocation ? this.eventForm.get('location').disable() : this.eventForm.get('location').enable();
+    this.hasNoLocation = !Array.isArray(this.locations) || !this.locations.length;
+    this.hasNoLocation ? this.fc.location.disable() : this.fc.location.enable();
   }
 
   /**
-   * Set the form control default location
+   * Set the Locations select form control default location.
    *
    * @private
-   * @param {number} locationId
+   * @param {number} [locationId]
    * @memberof EventFormComponent
    */
-  private setDefaultLocation(locationId: number) {
-    if (this.locations && this.locations.length > 0) {
-      this.eventForm
-        .get('location')
-        .setValue(
-          this.locations.find((location) => (this.event.location ? location.id === locationId : location.isDefault))
-        );
+  private setDefaultLocation(locationId?: number) {
+    if (this.locations && this.locations.length) {
+      this.fc.location.setValue(
+        this.locations.find((location) => (locationId ? location.id === locationId : location.isDefault)) ||
+          this.locations[0]
+      );
     }
-    this.eventForm.get('level').setValue(this.event.level);
   }
 
   /**
@@ -226,18 +269,32 @@ export class EventFormComponent {
       .subscribe((locationSaved: LocationItem) => {
         console.log('locationSaved', locationSaved);
         if (locationSaved) {
-          if (locationId) {
-            this.locations.map((location) => {
-              if (location.id === locationSaved.id) {
-                location = locationSaved;
-              }
-            });
-          } else {
-            this.locations.push(locationSaved);
-            this.checkIfHasRegisteredLocation();
-            this.setDefaultLocation(locationSaved.id);
-          }
+          locationId
+            ? (this.locations[this.locations.findIndex((location) => location.id === locationSaved.id)] = locationSaved)
+            : this.locations.push(locationSaved);
+
+          this.checkIfHasRegisteredLocation();
+          this.setDefaultLocation(locationSaved.id);
         }
       });
+  }
+
+  /**
+   * Adjust the min/max Players value if input is invalid.
+   *
+   * @private
+   * @memberof EventFormComponent
+   */
+  private adjustMinMaxPlayers(): void {
+    this.fc.minPlayers.valueChanges.subscribe((val) => {
+      if (val > this.fc.maxPlayers.value) {
+        this.fc.maxPlayers.patchValue(val);
+      }
+    });
+    this.fc.maxPlayers.valueChanges.subscribe((val) => {
+      if (val < this.fc.minPlayers.value) {
+        this.fc.minPlayers.patchValue(val);
+      }
+    });
   }
 }

@@ -3,6 +3,7 @@
     <!-- Players Accepted -->
 
     <p class="color-primary text-uppercase">Acceptés</p>
+    <p *ngIf="!subscriptionGroups.accepted.length" class="comment" i18n="">Aucun</p>
     <div
       *ngFor="let subscription of subscriptionGroups.accepted; trackBy: trackByUserId"
       class="d-flex justify-content-between align-items-center"
@@ -28,6 +29,7 @@
     <!-- Players Refused -->
 
     <p class="color-warn text-uppercase">Refusés</p>
+    <p *ngIf="!subscriptionGroups.refused.length" class="comment" i18n="">Aucun</p>
     <div
       *ngFor="let subscription of subscriptionGroups.refused; trackBy: trackByUserId"
       class="d-flex justify-content-between align-items-center"
@@ -52,7 +54,7 @@
   </div>
 
   <div>
-    <p *ngIf="!subscriptionGroups?.pending.length && !subscriptionGroups?.hesitating.length" class="color-grey" i18n="">
+    <p *ngIf="!subscriptionGroups?.pending.length && !subscriptionGroups?.hesitating.length" class="comment" i18n="">
       Aucune inscription
     </p>
 

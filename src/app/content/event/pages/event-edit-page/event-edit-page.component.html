@@ -1,6 +1,12 @@
-<h2>
-  <fa-icon [icon]="faCalendarPlus" class="mr-2"></fa-icon>
-  <span>Créer un évènement</span>
+<h2 *ngIf="routeName" [ngSwitch]="routeName" class="page-title">
+  <ng-container *ngSwitchCase="'create'">
+    <fa-icon [icon]="faCalendarPlus"></fa-icon>
+    <span i18n="">Créer un évènement</span>
+  </ng-container>
+  <ng-container *ngSwitchCase="'edit'">
+    <fa-icon [icon]="faCalendarPlus"></fa-icon>
+    <span i18n="">Modifier un évènement</span>
+  </ng-container>
 </h2>
 
 <app-event-form
