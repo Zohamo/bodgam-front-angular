@@ -8,14 +8,18 @@ import { LocationUiModule } from './location-ui.module';
 import * as fromComponents from './components';
 import * as fromPages from './pages';
 // Entry Components
-import { LocationDetailDialogComponent, LocationFormDialogComponent } from './components';
+import {
+  LocationDetailDialogComponent,
+  LocationEventListDialogComponent,
+  LocationFormDialogComponent
+} from './components';
 // Exports
 import { LocationDetailIconsComponent, LocationListComponent } from './components';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, LocationRoutingModule, LocationUiModule],
   declarations: [...fromComponents.components, ...fromPages.components],
-  entryComponents: [LocationDetailDialogComponent, LocationFormDialogComponent],
+  entryComponents: [LocationDetailDialogComponent, LocationEventListDialogComponent, LocationFormDialogComponent],
   exports: [LocationListComponent, LocationDetailIconsComponent]
 })
 export class LocationModule {}

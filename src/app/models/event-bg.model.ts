@@ -22,6 +22,8 @@ export class EventBg {
   description: string;
   level: number;
   atmosphere: number;
+  // Timestamps
+  deleted_at: string;
 
   constructor() {
     this.id = null;

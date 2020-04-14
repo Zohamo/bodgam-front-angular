@@ -36,7 +36,7 @@ export class ProfileSettingsComponent {
    */
   public onDeleteProfile(): void {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
-      data: 'delete-profile'
+      data: { message: 'delete-profile' }
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {

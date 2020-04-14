@@ -1,15 +1,47 @@
-<div class="location-detail-icons">
-  <fa-icon
-    *ngIf="isAllowedSmoking"
-    [icon]="faSmoking"
-    matTooltip="On peut fumer&#13;(mais on n'est pas obligé)"
-    i18n-matTooltip=""
-  ></fa-icon>
-  <fa-icon *ngIf="!isAllowedSmoking" [icon]="faSmokingBan" matTooltip="Non-fumeur" i18n-matTooltip=""></fa-icon>
-  <fa-icon
-    *ngIf="isAccessible"
-    [icon]="faWheelchair"
-    matTooltip="Accessible en fauteuil roulant"
-    i18n-matTooltip=""
-  ></fa-icon>
+<div class="location-detail-icons" [ngClass]="'size-' + size" [ngSwitch]="size">
+  <!-- Large -->
+
+  <ng-container *ngSwitchCase="'lg'">
+    <ul>
+      <li *ngIf="isAllowedSmoking">
+        <div class="icon-container">
+          <fa-icon [icon]="faSmoking"></fa-icon>
+        </div>
+        <span i18n="">
+          On peut fumer
+          <small>(mais on n'est pas obligé)</small>
+        </span>
+      </li>
+      <li *ngIf="!isAllowedSmoking">
+        <div class="icon-container">
+          <fa-icon [icon]="faSmokingBan"></fa-icon>
+        </div>
+        <span i18n="">Interdit de fumer</span>
+      </li>
+      <li *ngIf="isAccessible">
+        <div class="icon-container">
+          <fa-icon [icon]="faWheelchair"></fa-icon>
+        </div>
+        <span i18n="">Accessible en fauteuil roulant</span>
+      </li>
+    </ul>
+  </ng-container>
+
+  <!-- Small -->
+
+  <ng-container *ngSwitchDefault>
+    <fa-icon
+      *ngIf="isAllowedSmoking"
+      [icon]="faSmoking"
+      matTooltip="On peut fumer&#13;(mais on n'est pas obligé)"
+      i18n-matTooltip=""
+    ></fa-icon>
+    <fa-icon *ngIf="!isAllowedSmoking" [icon]="faSmokingBan" matTooltip="Non-fumeur" i18n-matTooltip=""></fa-icon>
+    <fa-icon
+      *ngIf="isAccessible"
+      [icon]="faWheelchair"
+      matTooltip="Accessible en fauteuil roulant"
+      i18n-matTooltip=""
+    ></fa-icon>
+  </ng-container>
 </div>

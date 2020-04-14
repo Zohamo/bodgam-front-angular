@@ -1,14 +1,16 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { LocationItem } from '@/models';
+import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
+import { faCheckSquare, faLock, faPenSquare, faTrash, faTree } from '@fortawesome/free-solid-svg-icons';
+import { LocationItem, EventBg } from '@/models';
+import { LocationService } from '@/services';
+import moment from 'moment';
 import { first } from 'rxjs/operators';
 
 // Components
+import { DialogConfirmComponent } from '@/components/dialog-confirm/dialog-confirm.component';
 import { LocationDetailDialogComponent } from '../location-detail-dialog/location-detail-dialog.component';
+import { LocationEventListDialogComponent } from '../location-event-list-dialog/location-event-list-dialog.component';
 import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
-
-// UI
-import { faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-location-list',
@@ -16,12 +18,15 @@ import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
   styleUrls: ['./location-list.component.scss']
 })
 export class LocationListComponent implements OnInit {
-  public displayedColumns: string[] = ['privacy', 'name', 'location', 'icons'];
+  public displayedColumns: string[] = ['default', 'privacy', 'name', 'location', 'icons'];
   public dataSource: MatTableDataSource<LocationItem>;
 
-  // UI
+  // Font Awesome
+  faCheckSquare = faCheckSquare;
+  faLock = faLock;
   faPenSquare = faPenSquare;
   faTrash = faTrash;
+  faTree = faTree;
 
   /**
    * Inputs
@@ -35,9 +40,11 @@ export class LocationListComponent implements OnInit {
     }
   }
 
-  @Input() set locations(locations: LocationItem[]) {
+  private locations: LocationItem[];
+  @Input() set setLocations(locations: LocationItem[]) {
     console.log('Input locations', locations);
     if (locations) {
+      this.locations = locations;
       this.dataSource = new MatTableDataSource(locations);
     }
   }
@@ -46,8 +53,7 @@ export class LocationListComponent implements OnInit {
    * Outputs
    */
 
-  @Output() refreshLocations = new EventEmitter<number>();
-  @Output() deleteLocation = new EventEmitter<number>();
+  @Output() deleteLocation = new EventEmitter<LocationItem>();
 
   /**
    * View Children
@@ -61,7 +67,7 @@ export class LocationListComponent implements OnInit {
    * @param {MatDialog} dialog
    * @memberof LocationListComponent
    */
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private locationService: LocationService) {}
 
   /**
    * A lifecycle hook that is called after Angular has initialized all data-bound properties
@@ -93,35 +99,89 @@ export class LocationListComponent implements OnInit {
   public openLocationFormDialog(locationId: number): void {
     console.log('locationId', locationId);
     const dialogRef = this.dialog.open(LocationFormDialogComponent, {
-      data: { id: locationId }
+      data: { id: locationId },
+      panelClass: 'panel-location'
     });
 
     dialogRef
       .afterClosed()
       .pipe(first())
-      .subscribe((locationSaved: LocationItem) => {
-        console.log('locationSaved', locationSaved);
-        if (locationSaved) {
-          // TODO : fix refresh list
-          console.log('this.dataSource BEFORE', this.dataSource.data[0]);
-          this.dataSource.data.map((location) => {
-            if (location.id === locationSaved.id) {
-              location = locationSaved;
-            }
-          });
-          console.log('this.dataSource AFTER', this.dataSource.data[0]);
-          this.refreshLocations.emit();
+      .subscribe((locationUpdated: LocationItem) => {
+        if (locationUpdated) {
+          this.updateLocationsDataSource(locationUpdated);
         }
       });
   }
 
   /**
-   * Delete location by id
+   * Update the Location's Table Data Source.
    *
-   * @param {number} id
+   * @private
+   * @param {LocationItem} locationUpdated
    * @memberof LocationListComponent
    */
-  public onDeleteLocation(id: number): void {
-    this.deleteLocation.emit(id);
+  private updateLocationsDataSource(locationUpdated: LocationItem): void {
+    if (locationUpdated.isDefault) {
+      this.locations
+        .filter((location) => location.id !== locationUpdated.id && location.isDefault)
+        .map((location) => {
+          location.isDefault = false;
+          return location;
+        });
+    }
+
+    this.locations[this.locations.findIndex((item) => item.id === locationUpdated.id)] = locationUpdated;
+    this.dataSource = new MatTableDataSource(this.locations);
+  }
+
+  /**
+   * Delete a location
+   *
+   * @param {LocationItem} location
+   * @memberof LocationListComponent
+   */
+  public onDeleteLocation(location: LocationItem): void {
+    this.locationService
+      .getLocationEvents(location.id)
+      .pipe(first())
+      .subscribe((events: EventBg[]) => {
+        const eventsToCome = events.filter((event) => moment(event.startDatetime) > moment());
+        eventsToCome.length
+          ? this.openDialogCantDeleteWithEventsList(location, eventsToCome)
+          : this.openDialogConfirmDelete(location);
+      });
+  }
+
+  /**
+   * Open a dialog saying the Location can't be deleted because of the list of Events that are related to it.
+   *
+   * @private
+   * @param {LocationItem} location
+   * @param {EventBg[]} events
+   * @memberof LocationListComponent
+   */
+  private openDialogCantDeleteWithEventsList(location: LocationItem, events: EventBg[]): void {
+    this.dialog.open(LocationEventListDialogComponent, {
+      data: { locationName: location.name, events, preventDelete: true }
+    });
+  }
+
+  /**
+   * Open a dialog asking the confirmation to delete the Location.
+   *
+   * @private
+   * @param {LocationItem} location
+   * @memberof LocationListComponent
+   */
+  private openDialogConfirmDelete(location: LocationItem): void {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      data: { message: 'delete-location', name: location.name }
+    });
+
+    dialogRef.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.deleteLocation.emit(location);
+      }
+    });
   }
 }

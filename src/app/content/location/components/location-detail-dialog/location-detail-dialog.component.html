@@ -1,3 +1,76 @@
-<p>
-  location-detail-dialog works!
-</p>
+<h2 mat-dialog-title>
+  <fa-icon [icon]="faBuilding"></fa-icon>
+  <span>{{ location.name }}</span>
+</h2>
+
+<div mat-dialog-content>
+  <mat-tab-group backgroundColor="accent">
+    <!-- Map -->
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <fa-icon [icon]="faMap"></fa-icon>
+        <span i18n="">Carte</span>
+      </ng-template>
+
+      <app-map
+        [coordinates]="coords"
+        [autoGeolocate]="location && !location.id"
+        [dMarker]="!location.accuracy"
+        [circleRadius]="location.accuracy"
+        [centerMap]="triggerCenterMap"
+      ></app-map>
+
+      <button mat-raised-button color="accent" class="btn-center-map" (click)="onCenterMap()">Centrer la carte</button>
+    </mat-tab>
+
+    <!-- Details -->
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <fa-icon [icon]="faInfoCircle"></fa-icon>
+        <span i18n="">Détails</span>
+      </ng-template>
+
+      <section class="d-flex justify-content-between px-5 py-3">
+        <div>
+          <h5 i18n="">Adresse</h5>
+
+          <address>
+            <ng-container *ngIf="location.address1">
+              {{ location.address1 }}
+              <br />
+            </ng-container>
+            <ng-container *ngIf="location.address2">
+              {{ location.address2 }}
+              <br />
+            </ng-container>
+            <ng-container *ngIf="location.district">
+              <span i18n="">Quartier&nbsp;:</span>
+              {{ location.district }}
+              <br />
+            </ng-container>
+            <ng-container *ngIf="location.zipCode || location.city">
+              <span *ngIf="location.zipCode" class="mr-2">{{ location.zipCode }}</span>
+              <span *ngIf="location.city">{{ location.city }}</span>
+              <br />
+            </ng-container>
+            <ng-container *ngIf="location.country">
+              {{ location.country }}
+            </ng-container>
+          </address>
+        </div>
+
+        <app-location-detail-icons
+          [isAllowedSmoking]="location.isAllowedSmoking"
+          [isAccessible]="location.isAccessible"
+          [size]="'lg'"
+        ></app-location-detail-icons>
+      </section>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button class="mx-auto" mat-dialog-close i18n="">Fermer</button>
+</div>

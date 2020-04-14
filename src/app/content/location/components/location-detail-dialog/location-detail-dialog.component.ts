@@ -1,11 +1,11 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
+import { faBuilding, faInfoCircle, faMap } from '@fortawesome/free-solid-svg-icons';
 import { GeoCoordinates, Location } from '@/models';
-import { LocationService } from '@/services';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { LocationService, CountryService } from '@/services';
+import { Subject, forkJoin } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 // UI
-import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -21,8 +21,10 @@ export class LocationDetailDialogComponent implements OnDestroy {
   public coords: GeoCoordinates = new GeoCoordinates();
   public triggerCenterMap = false;
 
-  // UI
+  // Font Awesome
   faBuilding = faBuilding;
+  faInfoCircle = faInfoCircle;
+  faMap = faMap;
 
   /**
    * Creates an instance of LocationDetailDialogComponent.
@@ -35,16 +37,18 @@ export class LocationDetailDialogComponent implements OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<LocationDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private countryService: CountryService
   ) {
-    console.log('data', data);
-    this.locationService
-      .getLocation(data.id)
-      .pipe(takeUntil(this.destroy$))
+    forkJoin(locationService.getLocation(data.id), countryService.getCountries())
+      .pipe(first())
       .subscribe(
-        (location: Location) => {
+        ([location, countries]) => {
           if (location) {
             this.location = location;
+            if (location.country && countries && countries.length) {
+              this.location.country = countries.find((country) => this.location.country === country.isoCode).name;
+            }
             this.buildAddress();
             this.buildCoords();
           }
@@ -91,7 +95,7 @@ export class LocationDetailDialogComponent implements OnDestroy {
   }
 
   /**
-   * Event to recenter the map
+   * Event to center the map
    *
    * @memberof LocationDetailDialogComponent
    */

@@ -1,0 +1,20 @@
+.mat-dialog-content {
+  width: 1200px;
+  height: 65vh;
+
+  ::ng-deep .mat-tab-label {
+    width: 50%;
+  }
+
+  app-map {
+    display: block;
+    height: 55vh;
+  }
+
+  .btn-center-map {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 500;
+  }
+}

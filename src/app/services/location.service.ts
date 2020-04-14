@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { Location, LocationItem } from '@/models';
+import { Location, LocationItem, EventBg } from '@/models';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -64,6 +64,17 @@ export class LocationService {
             return locationRes;
           })
         );
+  }
+
+  /**
+   * Call the API to get the Events related to the Location.
+   *
+   * @param {number} id
+   * @returns {Observable<EventBg[]>}
+   * @memberof LocationService
+   */
+  public getLocationEvents(id: number): Observable<EventBg[]> {
+    return this.http.get<EventBg[]>(`${environment.apiPath}/location/${id}/events`);
   }
 
   /**

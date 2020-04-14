@@ -11,10 +11,10 @@ export class DialogConfirmComponent {
    * Creates an instance of DialogConfirmComponent.
    *
    * @param {MatDialogRef<DialogConfirmComponent>} dialogRef
-   * @param {string} data
+   * @param {*} data
    * @memberof DialogConfirmComponent
    */
-  constructor(public dialogRef: MatDialogRef<DialogConfirmComponent>, @Inject(MAT_DIALOG_DATA) public data: string) {}
+  constructor(public dialogRef: MatDialogRef<DialogConfirmComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   /**
    * On Event, close the Dialog and return true

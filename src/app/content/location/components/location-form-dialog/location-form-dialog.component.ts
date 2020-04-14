@@ -1,22 +1,36 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Country, Geocode, GeocodeResultLocation, GeoCoordinates, Location } from '@/models';
-import { CountryService, GeocodingService, LocationService, SnackBarService } from '@/services';
-import { forkJoin, Subject } from 'rxjs';
-import { takeUntil, first } from 'rxjs/operators';
-
-// UI
-import { faAngleDoubleDown, faAngleDoubleUp, faCheck, faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { Component, Inject, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faCheck,
+  faCheckSquare,
+  faChevronLeft,
+  faChevronRight,
+  faInfoCircle,
+  faLock,
+  faMap,
+  faSmoking,
+  faSmokingBan,
+  faSquare,
+  faTimes,
+  faTimesCircle,
+  faTree,
+  faWheelchair
+} from '@fortawesome/free-solid-svg-icons';
+import { Country, Geocode, GeocodeResultLocation, GeoCoordinates, Location } from '@/models';
+import { AlertService, CountryService, GeocodingService, LocationService } from '@/services';
+import { forkJoin, Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-location-form-dialog',
   templateUrl: './location-form-dialog.component.html',
   styleUrls: ['./location-form-dialog.component.scss']
 })
-export class LocationFormDialogComponent implements OnDestroy {
-  private destroy$: Subject<boolean> = new Subject<boolean>();
-
+export class LocationFormDialogComponent {
   public isLoading = true;
   public locationForm: FormGroup;
   public location: Location;
@@ -26,11 +40,28 @@ export class LocationFormDialogComponent implements OnDestroy {
   public coords: GeoCoordinates;
 
   // Font Awesome
-  faAngleDoubleDown = faAngleDoubleDown;
-  faAngleDoubleUp = faAngleDoubleUp;
+  faAngleDoubleLeft = faAngleDoubleLeft;
+  faAngleDoubleRight = faAngleDoubleRight;
   faCheck = faCheck;
+  faCheckSquare = faCheckSquare;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  faInfoCircle = faInfoCircle;
+  faLock = faLock;
+  faMap = faMap;
+  faSmoking = faSmoking;
+  faSmokingBan = faSmokingBan;
+  faSquare = faSquare;
   faTimes = faTimes;
   faTimesCircle = faTimesCircle;
+  faTree = faTree;
+  faWheelchair = faWheelchair;
+
+  /**
+   * View Children
+   */
+
+  @ViewChild('stepper') private stepper: MatStepper;
 
   /**
    * Creates an instance of LocationFormDialogComponent.
@@ -47,10 +78,9 @@ export class LocationFormDialogComponent implements OnDestroy {
     private countryService: CountryService,
     private geocodingService: GeocodingService,
     private fb: FormBuilder,
-    private snackBarService: SnackBarService
+    private alertService: AlertService
   ) {
     this.createForm();
-    console.log('data', data);
 
     forkJoin(this.locationService.getLocation(data.id), this.countryService.getCountries())
       .pipe(first())
@@ -73,13 +103,25 @@ export class LocationFormDialogComponent implements OnDestroy {
   }
 
   /**
-   * Unsubscribe before component is destroyed
+   * Convenience getter for easy access to form fields
    *
+   * @readonly
+   * @type {{ [key: string]: AbstractControl }}
    * @memberof LocationFormDialogComponent
    */
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+  get fc(): { [key: string]: AbstractControl } {
+    return this.locationForm.controls;
+  }
+
+  /**
+   * Convenience getter for easy access to form value
+   *
+   * @readonly
+   * @type {*}
+   * @memberof LocationFormDialogComponent
+   */
+  get fv(): any {
+    return this.locationForm.value;
   }
 
   /**
@@ -91,23 +133,23 @@ export class LocationFormDialogComponent implements OnDestroy {
   private createForm(): void {
     this.locationForm = this.fb.group({
       id: [],
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(128)]],
       isDisabled: [false, Validators.required],
       isDefault: ['', Validators.required],
       isPublic: ['', Validators.required],
       // Address
-      address1: [],
-      address2: [],
-      zipCode: [],
-      district: [],
-      city: [],
+      address1: ['', Validators.maxLength(64)],
+      address2: ['', Validators.maxLength(32)],
+      zipCode: ['', Validators.maxLength(8)],
+      district: ['', Validators.maxLength(64)],
+      city: ['', Validators.maxLength(64)],
       country: ['', Validators.required],
       // Coordinates
       latitude: [],
       longitude: [],
       accuracy: [],
       // Details
-      description: [],
+      description: ['', Validators.maxLength(255)],
       isAllowedSmoking: ['', Validators.required],
       isAccessible: ['', Validators.required],
       // Other
@@ -160,7 +202,7 @@ export class LocationFormDialogComponent implements OnDestroy {
   private populateAddress(geocodeLocation: GeocodeResultLocation): void {
     if (this.locationForm) {
       this.locationForm.patchValue({
-        address1: this.locationForm.value.showExactLocation ? geocodeLocation.street : '',
+        address1: this.fv.showExactLocation ? geocodeLocation.street : '',
         address2: '',
         zipCode: geocodeLocation.postalCode,
         district: geocodeLocation.adminArea6,
@@ -194,11 +236,12 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   private prepareSaveEntity(): Location {
-    if (this.locationForm.value.showExactLocation) {
-      this.locationForm.patchValue({ accuracy: 0 });
+    const location = { ...this.fv };
+    if (location.showExactLocation) {
+      location.accuracy = 0;
     }
-    this.locationForm.get('showExactLocation').disable();
-    return this.locationForm.value;
+    delete location.showExactLocation;
+    return location;
   }
 
   /**
@@ -214,14 +257,14 @@ export class LocationFormDialogComponent implements OnDestroy {
         .saveLocation(this.prepareSaveEntity())
         .pipe(first())
         .subscribe(
-          (locationSaved) => {
+          (locationSaved: Location) => {
             console.log('location saved', locationSaved);
-            this.snackBarService.open('success-save-location');
+            this.alertService.open('success-save-location', locationSaved.name);
             this.dialogRef.close(locationSaved);
           },
           (error) => {
             console.log('ERROR saving location', error);
-            this.snackBarService.open('error-save-location');
+            this.alertService.open('error-save-location');
             this.isLoading = false;
           }
         );
@@ -243,32 +286,36 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   public onSetMinAccuracy(): void {
-    if (this.locationForm.value.showExactLocation && this.locationForm.value.accuracy < 100) {
-      this.locationForm.get('accuracy').setValue(100);
+    if (this.fv.showExactLocation && this.fv.accuracy < 100) {
+      this.fc.accuracy.patchValue(100);
     }
   }
 
   /**
-   * Call the reverse geocode API to retrieve the address from the map's coordinates
+   * Call the reverse geocode API to retrieve the address from the map's coordinates.
    *
+   * @param {boolean} [navToAddress=false]
    * @memberof LocationFormDialogComponent
    */
-  public onReverseGeocode(): void {
+  public onReverseGeocode(navToAddress = false): void {
     this.geocodingService
-      .reverseGeocode(this.locationForm.value.latitude, this.locationForm.value.longitude)
-      .pipe(takeUntil(this.destroy$))
+      .reverseGeocode(this.fv.latitude, this.fv.longitude)
+      .pipe(first())
       .subscribe(
         (geocode: Geocode) => {
           console.log('reverse geocode', geocode);
           if (geocode && geocode.results[0].locations.length) {
             this.populateAddress(geocode.results[0].locations[0]);
+            if (navToAddress) {
+              this.stepper.next();
+            }
           } else {
-            this.snackBarService.open('error-reverse-geocode');
+            this.alertService.open('error-reverse-geocode');
           }
         },
         (error) => {
           console.log('ERROR reverse geocode', error);
-          this.snackBarService.open('error-reverse-geocode');
+          this.alertService.open('error-reverse-geocode');
         }
       );
   }
@@ -279,19 +326,17 @@ export class LocationFormDialogComponent implements OnDestroy {
    * @memberof LocationFormDialogComponent
    */
   public onGeocode(): void {
-    const address = `${this.locationForm.value.address1}, ${this.locationForm.value.zipCode} ${
-      this.locationForm.value.city
-    }`;
+    const address = `${this.fv.address1}, ${this.fv.zipCode} ${this.fv.city}`;
 
     this.geocodingService
       .geocode(address)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(first())
       .subscribe(
         (geocode: Geocode) => {
           console.log('geocode', geocode);
           if (geocode && geocode.results[0].locations.length) {
             // Set showExactLocation to true
-            this.locationForm.get('showExactLocation').setValue(true);
+            this.fc.showExactLocation.patchValue(true);
             // Set this.coords
             this.coords = {
               accuracy: 0,
@@ -300,15 +345,27 @@ export class LocationFormDialogComponent implements OnDestroy {
             };
             // Patch form coords
             this.populateCoords(this.coords);
+            // Go to "Map" step
+            this.stepper.previous();
           } else {
-            this.snackBarService.open('error-geocode');
+            this.alertService.open('error-geocode');
           }
         },
         (error) => {
           console.log('ERROR geocode', error);
-          this.snackBarService.open('error-geocode');
+          this.alertService.open('error-geocode');
         }
       );
+  }
+
+  /**
+   * OnEvent toggle a boolean control's value
+   *
+   * @param {AbstractControl} control
+   * @memberof LocationFormDialogComponent
+   */
+  public onToggleValue(control: AbstractControl): void {
+    control.patchValue(!control.value);
   }
 
   /**

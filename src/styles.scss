@@ -90,7 +90,15 @@ button .ng-fa-icon {
 }
 
 .cdk-visually-hidden {
-  display: none; // fix to avoid vertical scrollbar
+  display: none;
+}
+
+/**
+ * Form
+ */
+
+.cdk-textarea-autosize {
+  overflow: hidden !important; // fix to avoid vertical scrollbar
 }
 
 /**
@@ -193,8 +201,12 @@ a {
  * Typography
  */
 
-.page-title .ng-fa-icon {
-  margin-right: 1rem;
+.page-title,
+.mat-dialog-title,
+.mat-tab-label-content {
+  .ng-fa-icon {
+    margin-right: 0.618rem;
+  }
 }
 
 em {

@@ -30,7 +30,7 @@
     <app-event-location
       class="event-section location"
       [location]="event.location"
-      [showLocation]="event.host.id === userId || event.subscription?.isAccepted"
+      [showLocation]="showLocation"
     ></app-event-location>
   </mat-card-content>
 

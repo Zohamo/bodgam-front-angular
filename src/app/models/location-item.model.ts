@@ -7,7 +7,6 @@
 export class LocationItem {
   id: number;
   name: string;
-  isDisabled: boolean;
   isDefault: boolean;
   isPublic: boolean;
   // Address
@@ -17,11 +16,12 @@ export class LocationItem {
   // Details
   isAllowedSmoking: boolean;
   isAccessible: boolean;
+  // Timestamps
+  deleted_at: string;
 
   constructor() {
     this.id = null;
     this.name = '';
-    this.isDisabled = true;
     this.isDefault = false;
     this.isPublic = false;
     // Address

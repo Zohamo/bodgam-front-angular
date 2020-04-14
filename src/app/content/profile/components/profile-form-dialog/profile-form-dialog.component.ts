@@ -18,15 +18,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  // private user: User;
-  // public profile: Profile = new Profile();
   public profileForm: FormGroup;
   public today: Date;
   public countries: Country[];
   public games: BggGame[];
   public isLoadingBggGames: boolean;
 
-  // UI
+  // Font Awesome
   faCheck = faCheck;
   faTimesCircle = faTimesCircle;
   faSearch = faSearch;
@@ -43,7 +41,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * @memberof ProfileFormDialogComponent
    */
   constructor(
-    @Inject(MAT_DIALOG_DATA) public profile: Profile,
+    @Inject(MAT_DIALOG_DATA) private profile: Profile,
     private dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
     private profileService: ProfileService,

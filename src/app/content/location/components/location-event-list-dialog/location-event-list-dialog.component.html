@@ -1,0 +1,21 @@
+<h2 *ngIf="data.preventDelete" mat-dialog-title class="color-warn" i18n="">
+  Impossible de supprimer ce lieu
+</h2>
+
+<div mat-dialog-content>
+  <p>
+    <strong class="color-primary mr-2">{{ data.locationName }}</strong>
+    <ng-container *ngIf="data.events.length === 1">est utilisé dans cet évènement à venir&nbsp;:</ng-container>
+    <ng-container *ngIf="data.events.length > 1">est utilisé dans les évènements à venir suivants&nbsp;:</ng-container>
+  </p>
+  <ul>
+    <li *ngFor="let event of data.events">
+      {{ event.startDatetime | date: 'd/L/yyyy' }}
+      <a [routerLink]="['/events', event.id]">{{ event.title }}</a>
+    </li>
+  </ul>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button class="mx-auto" mat-dialog-close i18n="">Fermer</button>
+</div>

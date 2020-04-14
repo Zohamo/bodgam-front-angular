@@ -14,4 +14,5 @@ export class LocationDetailIconsComponent {
 
   @Input() isAllowedSmoking: boolean;
   @Input() isAccessible: boolean;
+  @Input() size = 'sm';
 }

@@ -1,163 +1,305 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 
 <ng-container *ngIf="!isLoading">
-  <mat-dialog-content>
-    <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
-      <!-- Title & Details -->
+  <form [formGroup]="locationForm" class="form-location" (ngSubmit)="onSubmit()">
+    <!-- Title -->
 
-      <section>
-        <mat-form-field class="w-100">
-          <h4 class="color-primary">
-            <input matInput type="text" formControlName="name" placeholder="Nom du lieu" i18n-placeholder="" required />
-          </h4>
-        </mat-form-field>
-        <div class="mt-3 d-flex justify-content-between flex-wrap">
-          <mat-checkbox formControlName="isDefault" i18n="">Définir comme lieu par défaut</mat-checkbox>
-          <mat-checkbox formControlName="isPublic" i18n="">Lieu public</mat-checkbox>
-          <mat-checkbox formControlName="isAllowedSmoking" i18n="">Fumeur</mat-checkbox>
-          <mat-checkbox formControlName="isAccessible" i18n="">Accessible en fauteuil roulant</mat-checkbox>
-        </div>
-      </section>
+    <mat-form-field class="w-100">
+      <h4 class="color-primary">
+        <input matInput type="text" formControlName="name" placeholder="Nom du lieu" i18n-placeholder="" required />
+      </h4>
+    </mat-form-field>
 
+    <mat-horizontal-stepper #stepper labelPosition="bottom">
       <!-- Map -->
 
-      <section>
-        <app-map
-          [coordinates]="coords"
-          [isEditable]="true"
-          [autoGeolocate]="location && !location.id"
-          [dMarker]="locationForm.value.showExactLocation"
-          [circleRadius]="locationForm.value.accuracy"
-          (sendPositionCoords)="populateCoords($event); locationForm.value.country ? '' : onReverseGeocode()"
-        ></app-map>
+      <mat-step state="map">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Carte</span>
+          <fa-icon [icon]="faMap"></fa-icon>
+        </ng-template>
 
-        <div class="mt-4 px-2 d-flex justify-content-between align-items-center">
-          <mat-checkbox formControlName="showExactLocation" (click)="onSetMinAccuracy()" i18n="">
-            Montrer l'adresse exacte
-          </mat-checkbox>
+        <section>
+          <app-map
+            [coordinates]="coords"
+            [isEditable]="true"
+            [autoGeolocate]="location && !location.id"
+            [dMarker]="fv.showExactLocation"
+            [circleRadius]="fv.accuracy"
+            (sendPositionCoords)="populateCoords($event); fv.country ? '' : onReverseGeocode()"
+          ></app-map>
 
-          <mat-slider
-            class="ml-5 flex-grow-1"
-            thumbLabel
-            min="1"
-            max="5000"
-            step="1"
-            formControlName="accuracy"
-            (click)="onSetControlToFalse('showExactLocation')"
-          ></mat-slider>
-        </div>
-
-        <div class="d-flex justify-content-around mt-3">
-          <button mat-raised-button type="button" color="accent" (click)="onReverseGeocode()">
-            <fa-icon [icon]="faAngleDoubleDown"></fa-icon>
+          <button
+            mat-raised-button
+            type="button"
+            color="accent"
+            class="btn-get-address"
+            (click)="onReverseGeocode(true)"
+          >
+            <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
             <span i18n="">Récupérer l'adresse depuis la carte</span>
           </button>
-          <button mat-raised-button type="button" color="accent" (click)="onGeocode()">
-            <fa-icon [icon]="faAngleDoubleUp"></fa-icon>
-            <span i18n="">Chercher l'adresse sur la carte</span>
+
+          <div class="mt-4 px-2 d-flex justify-content-between align-items-center">
+            <mat-checkbox formControlName="showExactLocation" (click)="onSetMinAccuracy()" i18n="">
+              Montrer l'adresse exacte
+            </mat-checkbox>
+
+            <mat-slider
+              class="ml-5 flex-grow-1"
+              thumbLabel
+              min="1"
+              max="5000"
+              step="1"
+              formControlName="accuracy"
+              (click)="onSetControlToFalse('showExactLocation')"
+            ></mat-slider>
+          </div>
+        </section>
+
+        <div class="btn-group-nav">
+          <button type="button" class="ml-auto" mat-button matStepperNext>
+            <fa-icon [icon]="faChevronRight"></fa-icon>
           </button>
         </div>
-      </section>
+      </mat-step>
 
-      <!-- Address -->
+      <!-- Details -->
 
-      <section>
-        <div class="row">
-          <!-- Address : Field 1 -->
-          <mat-form-field class="col-md-6">
-            <input matInput type="text" formControlName="address1" placeholder="Adresse" i18n-placeholder="" />
-            <button
-              *ngIf="locationForm.value.address1"
-              mat-button
-              mat-icon-button
-              matSuffix
-              (click)="onClearField('address1')"
-              aria-label="Clear"
-            >
-              <fa-icon [icon]="faTimes"></fa-icon>
+      <mat-step state="details">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Détails</span>
+          <fa-icon [icon]="faInfoCircle"></fa-icon>
+        </ng-template>
+
+        <!-- Address -->
+
+        <section class="mb-3">
+          <h5 i18="">Adresse</h5>
+
+          <div class="row">
+            <!-- Address : Field 1 -->
+
+            <mat-form-field class="col-md-6">
+              <input
+                matInput
+                type="text"
+                formControlName="address1"
+                maxlength="64"
+                placeholder="Adresse"
+                i18n-placeholder=""
+              />
+              <mat-hint align="end">{{ fv.address1.length }} / 64</mat-hint>
+              <button
+                *ngIf="fv.address1"
+                mat-button
+                mat-icon-button
+                matSuffix
+                (click)="onClearField('address1')"
+                aria-label="Clear"
+              >
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </mat-form-field>
+
+            <!-- Address : Field 2 -->
+
+            <mat-form-field class="col-md-6">
+              <input
+                matInput
+                type="text"
+                formControlName="address2"
+                maxlength="32"
+                placeholder="Complément d'adresse"
+                i18n-placeholder=""
+              />
+              <mat-hint align="end">{{ fv.address2.length }} / 32</mat-hint>
+              <button
+                *ngIf="fv.address2"
+                mat-button
+                mat-icon-button
+                matSuffix
+                (click)="onClearField('address2')"
+                aria-label="Clear"
+              >
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <!-- Address : Zip Code -->
+
+            <mat-form-field class="col-md-3">
+              <input
+                matInput
+                type="text"
+                formControlName="zipCode"
+                maxlength="8"
+                placeholder="Code postal"
+                i18n-placeholder=""
+              />
+            </mat-form-field>
+
+            <!-- Address : District -->
+
+            <mat-form-field class="col-md-3">
+              <input
+                matInput
+                type="text"
+                formControlName="district"
+                maxlength="64"
+                placeholder="Quartier"
+                i18n-placeholder=""
+              />
+            </mat-form-field>
+
+            <!-- Address : City -->
+
+            <mat-form-field class="col-md-3">
+              <input
+                matInput
+                type="text"
+                formControlName="city"
+                maxlength="64"
+                placeholder="Ville"
+                i18n-placeholder=""
+              />
+            </mat-form-field>
+
+            <!-- Address : Country-->
+
+            <mat-form-field class="col-md-3">
+              <mat-label i18n="">Pays</mat-label>
+              <mat-select matNativeControl formControlName="country" required>
+                <mat-option *ngFor="let country of countries" [value]="country.isoCode">
+                  {{ country?.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Button : Get coords from address-->
+
+          <button mat-button type="button" color="accent" class="btn-get-coords" (click)="onGeocode()">
+            <fa-icon [icon]="faAngleDoubleLeft"></fa-icon>
+            <span i18n="">Chercher l'adresse sur la carte</span>
+          </button>
+        </section>
+
+        <!-- Description -->
+
+        <section>
+          <h5 i18n="">Description</h5>
+
+          <div class="btn-group-details">
+            <!--Button : Default -->
+
+            <button mat-button type="button" color="primary" class="btn-smoking" (click)="onToggleValue(fc.isDefault)">
+              <fa-icon *ngIf="fv.isDefault" [icon]="faCheckSquare"></fa-icon>
+              <fa-icon *ngIf="!fv.isDefault" [icon]="faSquare"></fa-icon>
+              <span i18n="">Lieu par défaut</span>
             </button>
-          </mat-form-field>
 
-          <!-- Address : Field 2 -->
-          <mat-form-field class="col-md-6">
-            <input
-              matInput
-              type="text"
-              formControlName="address2"
-              placeholder="Complément d'adresse"
-              i18n-placeholder=""
-            />
-            <button
-              *ngIf="locationForm.value.address2"
-              mat-button
-              mat-icon-button
-              matSuffix
-              (click)="onClearField('address2')"
-              aria-label="Clear"
-            >
-              <fa-icon [icon]="faTimes"></fa-icon>
+            <!--Button : Public / Private -->
+
+            <button mat-button type="button" color="primary" class="btn-smoking" (click)="onToggleValue(fc.isPublic)">
+              <ng-container *ngIf="fv.isPublic">
+                <fa-icon [icon]="faTree"></fa-icon>
+                <span i18n="">Lieu public</span>
+              </ng-container>
+              <ng-container *ngIf="!fv.isPublic">
+                <fa-icon [icon]="faLock"></fa-icon>
+                <span i18n="">Lieu privé</span>
+              </ng-container>
             </button>
-          </mat-form-field>
+
+            <!--Button : Smoking-->
+
+            <button
+              mat-button
+              type="button"
+              color="primary"
+              class="btn-smoking"
+              (click)="onToggleValue(fc.isAllowedSmoking)"
+            >
+              <ng-container *ngIf="fv.isAllowedSmoking">
+                <fa-icon [icon]="faSmoking"></fa-icon>
+                <span i18n="">Fumeur</span>
+              </ng-container>
+              <ng-container *ngIf="!fv.isAllowedSmoking">
+                <fa-icon [icon]="faSmokingBan"></fa-icon>
+                <span i18n="">Non fumeur</span>
+              </ng-container>
+            </button>
+
+            <!--Button : Accessible-->
+
+            <button
+              mat-button
+              type="button"
+              color="primary"
+              class="btn-smoking"
+              (click)="onToggleValue(fc.isAccessible)"
+            >
+              <ng-container *ngIf="fv.isAccessible">
+                <fa-icon [icon]="faWheelchair"></fa-icon>
+                <span i18n="">Accessible en fauteuil roulant</span>
+              </ng-container>
+              <ng-container *ngIf="!fv.isAccessible">
+                <span i18n="">Non accessible en fauteuil roulant</span>
+              </ng-container>
+            </button>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col-12">
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                #descriptionAutosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="description"
+                placeholder="Description"
+                i18n-placeholder=""
+              ></textarea>
+              <mat-hint align="end">{{ fv.description.length }} / 256</mat-hint>
+            </mat-form-field>
+          </div>
+        </section>
+
+        <div class="btn-group-nav">
+          <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+          <button type="button" mat-button matStepperNext><fa-icon [icon]="faChevronRight"></fa-icon></button>
         </div>
-        <div class="row">
-          <!-- Address : Zip Code -->
-          <mat-form-field class="col-md-3">
-            <input matInput type="text" formControlName="zipCode" placeholder="Code postal" i18n-placeholder="" />
-          </mat-form-field>
+      </mat-step>
 
-          <!-- Address : District -->
-          <mat-form-field class="col-md-3">
-            <input matInput type="text" formControlName="district" placeholder="Quartier" i18n-placeholder="" />
-          </mat-form-field>
+      <!-- Validation -->
 
-          <!-- Address : City -->
-          <mat-form-field class="col-md-3">
-            <input matInput type="text" formControlName="city" placeholder="Ville" i18n-placeholder="" />
-          </mat-form-field>
+      <mat-step state="done">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Validation</span>
+          <fa-icon *ngIf="locationForm.valid" [icon]="faCheck"></fa-icon>
+          <fa-icon *ngIf="locationForm.invalid" [icon]="faTimesCircle"></fa-icon>
+        </ng-template>
 
-          <!-- Address : Country-->
-          <mat-form-field class="col-md-3">
-            <mat-label i18n>Pays</mat-label>
-            <mat-select matNativeControl formControlName="country" required>
-              <mat-option *ngFor="let country of countries" [value]="country.isoCode" i18n>
-                {{ country?.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <section class="text-center">
+          <p *ngIf="locationForm.invalid" class="danger">Veuillez remplir TOUS les champs requis&nbsp;!</p>
+
+          <ng-container *ngIf="locationForm.valid">
+            <p class="comment" i18n="">
+              Tous les champs sont remplis correctement, mais êtes-vous sûr(e) de n'avoir rien oublié&nbsp;?
+            </p>
+
+            <button class="btn-submit" mat-raised-button type="button" color="primary" (click)="onSubmit()">
+              <span i18n="">Valider</span>
+            </button>
+          </ng-container>
+        </section>
+
+        <div class="btn-group-nav">
+          <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
         </div>
-      </section>
-
-      <!-- Description -->
-
-      <section>
-        <div class="row">
-          <mat-form-field class="col-12">
-            <textarea
-              matInput
-              cdkAutosizeMinRows="1"
-              formControlName="description"
-              placeholder="Description"
-              i18n-placeholder=""
-            ></textarea>
-            <mat-hint align="end">{{ locationForm.value.description.length }} / 256</mat-hint>
-          </mat-form-field>
-        </div>
-      </section>
-    </form>
-  </mat-dialog-content>
-
-  <!-- Action buttons -->
-
-  <div mat-dialog-actions>
-    <p *ngIf="!locationForm.valid" i18n>* champs obligatoires</p>
-    <button mat-stroked-button type="button" color="primary" (click)="onClose()" i18n="">
-      Annuler
-    </button>
-    <button mat-raised-button type="button" color="primary" [disabled]="!locationForm.valid" (click)="onSubmit()">
-      <fa-icon *ngIf="locationForm.valid" [icon]="faCheck"></fa-icon>
-      <fa-icon *ngIf="!locationForm.valid" [icon]="faTimesCircle"></fa-icon>
-      <span *ngIf="!location.id" i18n>Créer</span>
-      <span *ngIf="location.id" i18n>Modifier</span>
-    </button>
-  </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
 </ng-container>

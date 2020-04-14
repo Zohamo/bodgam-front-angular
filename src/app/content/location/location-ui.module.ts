@@ -13,7 +13,9 @@ import {
   MatSelectModule,
   MatSnackBarModule,
   MatSliderModule,
+  MatStepperModule,
   MatTableModule,
+  MatTabsModule,
   MatTooltipModule
 } from '@angular/material';
 
@@ -33,7 +35,9 @@ import {
     MatSelectModule,
     MatSnackBarModule,
     MatSliderModule,
+    MatStepperModule,
     MatTableModule,
+    MatTabsModule,
     MatTooltipModule,
     SpinnerModule
   ],
@@ -51,7 +55,9 @@ import {
     MatSelectModule,
     MatSnackBarModule,
     MatSliderModule,
+    MatStepperModule,
     MatTableModule,
+    MatTabsModule,
     MatTooltipModule,
     SpinnerModule
   ]

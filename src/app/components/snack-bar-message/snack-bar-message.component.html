@@ -47,8 +47,22 @@
   <p *ngSwitchCase="'error-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
 
   <!-- Location -->
-  <p *ngSwitchCase="'success-save-location'" i18n="">Votre lieu a été sauvegardé avec succès.</p>
+  <p *ngSwitchCase="'success-save-location'" i18n="">
+    Votre lieu
+    <span class="color-primary">{{ data.input }}</span>
+    a été sauvegardé avec succès.
+  </p>
   <p *ngSwitchCase="'error-save-location'" i18n="">Un problème est survenu lors de la sauvegarde de votre lieu.</p>
+  <p *ngSwitchCase="'success-delete-location'" i18n="">
+    Votre lieu
+    <span class="color-primary">{{ data.input }}</span>
+    a été supprimé avec succès.
+  </p>
+  <p *ngSwitchCase="'error-delete-location'" i18n="">
+    Un problème est survenu lors de la suppression de votre lieu
+    <span class="color-primary">{{ data.input }}</span>
+    .
+  </p>
 
   <!-- Login -->
   <p *ngSwitchCase="'success-login'" i18n="">Vous êtes maintenant connecté(e).</p>

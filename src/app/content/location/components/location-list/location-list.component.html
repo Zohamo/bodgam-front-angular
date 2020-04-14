@@ -1,8 +1,21 @@
 <table mat-table [dataSource]="dataSource" class="w-100">
+  <!-- Default Column -->
+  <ng-container matColumnDef="default">
+    <td mat-cell *matCellDef="let location" class="color-grey">
+      <fa-icon
+        *ngIf="location.isDefault"
+        [icon]="faCheckSquare"
+        matTooltip="Lieu par défaut"
+        i18n-matTooltip=""
+      ></fa-icon>
+    </td>
+  </ng-container>
+
   <!-- Privacy Column -->
   <ng-container matColumnDef="privacy">
-    <td mat-cell *matCellDef="let location">
-      <app-button-visibility [visible]="location.isPublic"></app-button-visibility>
+    <td mat-cell *matCellDef="let location" class="color-grey">
+      <fa-icon *ngIf="location.isPublic" [icon]="faTree" matTooltip="Lieu public" i18n-matTooltip=""></fa-icon>
+      <fa-icon *ngIf="!location.isPublic" [icon]="faLock" matTooltip="Lieu privé" i18n-matTooltip=""></fa-icon>
     </td>
   </ng-container>
 
@@ -39,10 +52,24 @@
   <!-- Actions Column -->
   <ng-container *ngIf="isAdmin" matColumnDef="actions">
     <td mat-cell *matCellDef="let location" class="text-center">
-      <button mat-button type="button" color="primary" (click)="openLocationFormDialog(location.id)">
+      <button
+        mat-button
+        type="button"
+        color="primary"
+        matTooltip="Modifier"
+        i18n-matTooltip=""
+        (click)="openLocationFormDialog(location.id)"
+      >
         <fa-icon [icon]="faPenSquare"></fa-icon>
       </button>
-      <button mat-button type="button" color="primary" (click)="onDeleteLocation(location.id)">
+      <button
+        mat-button
+        type="button"
+        color="primary"
+        matTooltip="Supprimer"
+        i18n-matTooltip=""
+        (click)="onDeleteLocation(location)"
+      >
         <fa-icon [icon]="faTrash"></fa-icon>
       </button>
     </td>

@@ -1,9 +1,21 @@
+<div class="d-flex mb-3">
+  <button mat-raised-button color="primary" class="ml-auto" (click)="openLocationFormDialog()">
+    <fa-icon [icon]="faMapMarkedAlt"></fa-icon>
+    <span i18n="">Nouveau lieu</span>
+  </button>
+</div>
+
 <div *ngIf="locations$ | async as locations; else loading">
-  <p *ngIf="!locations.length" class="text-center" i18n="">
-    <em>Aucun lieu n'a été trouvé.</em>
+  <p *ngIf="!locations.length" class="comment text-center" i18n="">
+    Aucun lieu n'a été trouvé.
   </p>
 
-  <app-location-list *ngIf="locations.length" [locations]="locations" [isUserAdmin]="isAdmin"></app-location-list>
+  <app-location-list
+    *ngIf="locations.length"
+    [setLocations]="locations"
+    [isUserAdmin]="isAdmin"
+    (deleteLocation)="deleteLocation($event)"
+  ></app-location-list>
 </div>
 
 <ng-template #loading>

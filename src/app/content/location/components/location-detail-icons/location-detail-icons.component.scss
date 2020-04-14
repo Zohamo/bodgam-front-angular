@@ -3,7 +3,33 @@
 .location-detail-icons {
   display: flex;
   color: $grey;
-  .ng-fa-icon {
+
+  &.size-lg {
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        .icon-container {
+          min-width: 3rem;
+          margin-right: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .ng-fa-icon {
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+  }
+
+  &.size-sm .ng-fa-icon {
     margin: 0.25rem 0.5rem;
     cursor: help;
   }

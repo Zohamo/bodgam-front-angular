@@ -18,12 +18,12 @@ export class SnackBarService {
   /**
    * Open Material Snack Bar
    *
-   * @param {string} messageKey
+   * @param {*} data
    * @memberof SnackBarService
    */
-  public open(messageKey: string): void {
+  public open(data: any): void {
     this.snackBar.openFromComponent(SnackBarMessageComponent, {
-      data: messageKey,
+      data,
       duration: AppConfig.SNACK_BAR_DURATION
     });
   }

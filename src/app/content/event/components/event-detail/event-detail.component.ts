@@ -10,6 +10,7 @@ import { EventService } from '@/services';
 })
 export class EventDetailComponent {
   public event: EventBg;
+  public showLocation: boolean;
 
   // UI
   faEdit = faEdit;
@@ -21,8 +22,9 @@ export class EventDetailComponent {
 
   @Input() userId: number;
 
-  @Input() set eventDetail(eventDetail: EventBg) {
-    this.event = eventDetail;
+  @Input() set eventDetail(event: EventBg) {
+    this.event = event;
+    this.setShowLocation();
   }
 
   /**
@@ -38,6 +40,19 @@ export class EventDetailComponent {
    * @memberof EventDetailComponent
    */
   constructor(private eventService: EventService) {}
+
+  /**
+   * Define if the User can access the full Location
+   *
+   * @memberof EventDetailComponent
+   */
+  public setShowLocation(): void {
+    this.showLocation =
+      !this.event.location.deleted_at &&
+      (this.event.location.isPublic ||
+        this.event.host.id === this.userId ||
+        (this.event.subscription && this.event.subscription.isAccepted));
+  }
 
   /**
    * OnEvent delete event

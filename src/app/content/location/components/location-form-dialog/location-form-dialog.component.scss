@@ -1,0 +1,45 @@
+@import 'src/assets/scss/_variables';
+
+::ng-deep .form-location .mat-step-label {
+  display: flex;
+  flex-direction: column;
+  color: $accent !important;
+  .step-title {
+    text-transform: uppercase;
+  }
+  fa-icon {
+    font-size: 1.25rem;
+  }
+}
+
+section {
+  position: relative;
+
+  app-map {
+    display: block;
+    height: 600px;
+  }
+
+  .btn-get-address {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 500;
+  }
+
+  .btn-group-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    button {
+      font-size: 1rem;
+    }
+  }
+}
+
+.btn-group-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
