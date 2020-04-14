@@ -21,7 +21,7 @@
     </div>
 
     <div *ngIf="showLocation" class="flex-grow-1 align-self-center">
-      <button mat-raised-button color="accent" class="d-block mx-auto" i18n="">
+      <button mat-raised-button color="accent" class="d-block mx-auto" (click)="onOpenLocationDetailDialog()" i18n="">
         Voir l'adresse exacte
       </button>
     </div>
