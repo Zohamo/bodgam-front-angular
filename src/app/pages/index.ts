@@ -1,5 +1,7 @@
+import { HomePageComponent } from './home-page/home-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-export const components: any[] = [PageNotFoundComponent];
+export const components: any[] = [HomePageComponent, PageNotFoundComponent];
 
-export * from '../pages/page-not-found/page-not-found.component';
+export * from './home-page/home-page.component';
+export * from './page-not-found/page-not-found.component';

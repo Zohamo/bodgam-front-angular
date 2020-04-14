@@ -1,0 +1,98 @@
+<h1>
+  Bienvenu(e) sur ce site en version
+  <strong>BETA</strong>
+  &nbsp;!
+</h1>
+
+<p class="comment">vous aurez remarqué comme c'est écrit en gros BETA&nbsp;!</p>
+
+<p>
+  Ce site devrait être fonctionnel mais vous êtes en train de l'essayer justement
+  <ins>pour le tester</ins>
+  , je vous serais donc gré de
+  <strong>m'envoyer vos retours</strong>
+  ainsi que les éventuels bugs dont vous auriez souffert
+  <span class="color-grey">avec un petit mot gentil</span>
+  à
+  <a href="mailto:mathias.mille@gmail.com">mathias.mille@gmail.com</a>
+  . Merci&nbsp;!
+</p>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Mode d'emploi
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p>
+      Je préfèrerais
+      <strong>que vous ne lisiez pas ce mode d'emploi</strong>
+      , du moins dans un premier temps, ainsi vous pourriez déjà m'indiquer si vous avez trouvé le premier contact assez
+      intuitif, ce qui est plutôt important.
+    </p>
+    <p>
+      Maintenant que cela a été dit, je me permets de te tutoyer, car j'estime qu'après ces quelques lignes nous nous
+      connaissons déjà beaucoup mieux.
+    </p>
+    <p>Alors qu'est-ce qu'on peut faire ici&nbsp;? Pour le moment&nbsp;:</p>
+    <ul>
+      <li>
+        Consulter les soirées jeux à venir (
+        <a [routerLink]="['/events']">&Eacute;vènements</a>
+        )
+      </li>
+      <li>
+        Consulter la liste des
+        <a [routerLink]="['/players']">Joueurs</a>
+        inscrits
+      </li>
+      <li>
+        Créer un compte
+        <a (click)="onRegister()">Utilisateur</a>
+        ainsi qu'un Profil , ce qui te permettra de&nbsp;:
+        <ul>
+          <li>Rejoindre des &Eacute;vènements à venir</li>
+          <li>
+            Créer des
+            <a [routerLink]="['/events', 'create']">&Eacute;vènements</a>
+            et y accepter ou non les Joueurs qui s'y inscrivent
+          </li>
+          <li>
+            Créer de nouveaux Lieux où tu pourras organiser tes &Eacute;vènements
+          </li>
+          <li>Remplir ton Profil et choisir tes règles de confidentialité (ce que tu désires montrer publiquement)</li>
+        </ul>
+      </li>
+    </ul>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Fonctionnalités à venir
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p>Par la suite, viendront ces fonctionnalités&nbsp;:</p>
+    <ul>
+      <li>Notifications sur tes &Eacute;vènements à venir (et autres...)</li>
+      <li>Système de Notation et de Commentaires des autres Joueurs</li>
+      <li>Messagerie/Chat pour communiquer avec les autres Joueurs</li>
+      <li>Possibilité de créer des &Eacute;vènements privés</li>
+      <li>Système d'Amitiés et/ou de Joueurs Favoris</li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<h2 class="mt-5">J'ai besoin de toi&nbsp;!</h2>
+
+<p>
+  Je ne me suis pas encore du tout décidé sur un nom pour ce site, qui soit bien référencé et accrocheur voir rigolo à
+  la fois, du coup
+  <strong>j'aimerai beaucoup que tu me donnes ton avis</strong>
+  parmi les suggestions suivantes&nbsp;:
+</p>
+
+<iframe width="100%" height="2300px" frameBorder="0" [src]="urlSafe"></iframe>

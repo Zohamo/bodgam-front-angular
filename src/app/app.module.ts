@@ -15,7 +15,7 @@ import * as fromPages from './pages';
 
 // Providers
 import { ErrorInterceptor, JwtInterceptor } from '@/helpers';
-import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatExpansionModule } from '@angular/material';
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -37,6 +37,7 @@ export const MY_FORMAT: MatDateFormats = {
     HttpClientModule,
     LayoutModule,
     SnackBarMessageModule,
+    MatExpansionModule, // For Home Page
     ...fromContent.modules
   ],
   declarations: [AppComponent, ...fromPages.components],
