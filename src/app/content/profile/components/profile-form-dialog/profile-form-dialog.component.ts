@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BggGame, Country, Profile } from '@/models';
-import { BoardGameGeekService, CountryService, ProfileService, SnackBarService } from '@/services';
+import { AlertService, BoardGameGeekService, CountryService, ProfileService } from '@/services';
 import moment from 'moment';
 import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -32,22 +32,23 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   /**
    * Creates an instance of ProfileFormDialogComponent.
    *
+   * @param {Profile} profile
    * @param {MatDialogRef<ProfileFormDialogComponent>} dialogRef
    * @param {FormBuilder} fb
-   * @param {ProfileService} profileService
-   * @param {CountryService} countryService
+   * @param {AlertService} alertService
    * @param {BoardGameGeekService} boardGameGeekService
-   * @param {SnackBarService} snackBarService
+   * @param {CountryService} countryService
+   * @param {ProfileService} profileService
    * @memberof ProfileFormDialogComponent
    */
   constructor(
     @Inject(MAT_DIALOG_DATA) private profile: Profile,
     private dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
-    private profileService: ProfileService,
-    private countryService: CountryService,
+    private alertService: AlertService,
     private boardGameGeekService: BoardGameGeekService,
-    private snackBarService: SnackBarService
+    private countryService: CountryService,
+    private profileService: ProfileService
   ) {
     this.today = new Date();
     this.createForm();
@@ -176,12 +177,12 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
         .subscribe(
           (profileSaved) => {
             console.log('profile saved', profileSaved);
-            this.snackBarService.open('success-save-profile');
+            this.alertService.open('success-save-profile');
             this.dialogRef.close(profileSaved);
           },
           (error) => {
             console.log('ERROR saving profile', error);
-            this.snackBarService.open('error-save-profile');
+            this.alertService.open('error-save-profile');
           }
         );
     }
@@ -215,7 +216,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
         (error) => {
           this.isLoadingBggGames = false;
           console.log('ERROR get games', error);
-          this.snackBarService.open('error-bgg-profile');
+          this.alertService.open('error-bgg-profile');
         }
       );
   }

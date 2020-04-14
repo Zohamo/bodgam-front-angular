@@ -7,5 +7,4 @@ export * from './geocoding.service';
 export * from './geolocation.service';
 export * from './location.service';
 export * from './profile.service';
-export * from './snack-bar.service';
 export * from './user.service';

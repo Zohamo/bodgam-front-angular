@@ -6,10 +6,10 @@ import { AppConfig } from '@/config';
 @Injectable({ providedIn: 'root' })
 export class AlertService {
   /**
-   * Creates an instance of SnackBarService.
+   * Creates an instance of AlertService.
    *
    * @param {MatSnackBar} snackBar
-   * @memberof SnackBarService
+   * @memberof AlertService
    */
   constructor(private snackBar: MatSnackBar) {}
 
