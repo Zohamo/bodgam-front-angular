@@ -1,3 +1,31 @@
+@import 'src/assets/scss/_variables';
+
+::ng-deep .form-profile .mat-horizontal-stepper-header-container {
+  margin-bottom: 1rem;
+  .mat-step-label {
+    display: flex;
+    flex-direction: column;
+    color: $accent !important;
+    .step-title {
+      text-transform: uppercase;
+    }
+    fa-icon {
+      font-size: 2rem;
+    }
+  }
+}
+
+.btn-group-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-submit {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.25rem;
+}
+
 .btn-visibility-container {
   display: flex;
   justify-content: center;

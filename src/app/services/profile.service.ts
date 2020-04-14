@@ -54,8 +54,12 @@ export class ProfileService {
    * @memberof ProfileService
    */
   private updateValue(value: Profile): Profile {
-    this.currentProfileSubject.next(value);
-    return value;
+    if (value) {
+      this.currentProfileSubject.next(value);
+      return value;
+    }
+    console.log('profile update', value, this.value);
+    return this.value;
   }
 
   /**

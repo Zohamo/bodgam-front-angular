@@ -1,161 +1,218 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" class="form-profile" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title class="color-primary">
+    <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
+    {{ fv.name }}
+  </h2>
+
   <mat-dialog-content>
-    <section class="row">
-      <!-- Name -->
-      <mat-form-field class="col-md-4">
-        <input matInput placeholder="Pseudo" i18n-placeholder formControlName="name" required />
-      </mat-form-field>
-    </section>
+    <mat-horizontal-stepper #stepper labelPosition="bottom">
+      <!-- Details -->
 
-    <h5 i18n>Un peu de vous</h5>
+      <mat-step state="about">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Informations personnelles</span>
+          <fa-icon [icon]="faInfoCircle"></fa-icon>
+        </ng-template>
 
-    <section class="row">
-      <!-- Gender -->
-      <mat-form-field class="col-md-4">
-        <mat-label i18n>Je suis</mat-label>
-        <mat-select matNativeControl formControlName="gender">
-          <mat-option [value]="'OTHER'" i18n>Autre</mat-option>
-          <mat-option [value]="'FEMALE'" i18n>Femme</mat-option>
-          <mat-option [value]="'MALE'" i18n>Homme</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <!-- Birthdate -->
-      <mat-form-field class="col-md-3">
-        <input
-          matInput
-          [matDatepicker]="picker"
-          [max]="today"
-          placeholder="Date de naissance"
-          i18n-placeholder
-          formControlName="birthdate"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('birthdate')">
-          <app-button-visibility
-            class="btn-visibility"
-            [visible]="profileForm.value.privacy.birthdate"
-          ></app-button-visibility>
-        </button>
-      </div>
-    </section>
+        <section class="row">
+          <!-- Name -->
+          <mat-form-field class="col-md-4">
+            <input matInput placeholder="Pseudo" i18n-placeholder="" formControlName="name" required />
+          </mat-form-field>
 
-    <h5 i18n>Contact</h5>
+          <!-- Gender -->
 
-    <section class="row">
-      <!-- Email -->
-      <mat-form-field class="col-md-3">
-        <input matInput type="email" formControlName="email" placeholder="Courriel" i18n-placeholder email required />
-      </mat-form-field>
-      <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('email')">
-          <app-button-visibility
-            class="btn-visibility"
-            [visible]="profileForm.value.privacy.email"
-          ></app-button-visibility>
-        </button>
-      </div>
-      <!-- Phone -->
-      <mat-form-field class="col-md-3">
-        <input matInput type="phone" placeholder="Téléphone" i18n-placeholder formControlName="phoneNumber" />
-      </mat-form-field>
-      <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('phoneNumber')">
-          <app-button-visibility
-            class="btn-visibility"
-            [visible]="profileForm.value.privacy.phoneNumber"
-          ></app-button-visibility>
-        </button>
-      </div>
-    </section>
+          <mat-form-field class="col-md-4">
+            <mat-label i18n="">Je suis</mat-label>
+            <mat-select matNativeControl formControlName="gender">
+              <mat-option [value]="'OTHER'" i18n="">Autre</mat-option>
+              <mat-option [value]="'FEMALE'" i18n="">Femme</mat-option>
+              <mat-option [value]="'MALE'" i18n="">Homme</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-    <h5 i18n>Où êtes-vous&nbsp;?</h5>
+          <!-- Birthdate -->
 
-    <section class="row">
-      <!-- District -->
-      <mat-form-field class="col-md-4">
-        <input matInput placeholder="Quartier" i18n-placeholder formControlName="district" />
-      </mat-form-field>
-      <!-- City -->
-      <mat-form-field class="col-md-4">
-        <input matInput placeholder="Ville" i18n-placeholder formControlName="city" />
-      </mat-form-field>
-      <!-- Country -->
-      <mat-form-field class="col-md-4">
-        <mat-label i18n>Pays</mat-label>
-        <mat-select matNativeControl formControlName="country" required>
-          <mat-option *ngFor="let country of countries" [value]="country.isoCode" i18n>
-            {{ country?.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </section>
+          <mat-form-field class="col-md-3">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [max]="today"
+              placeholder="Date de naissance"
+              i18n-placeholder=""
+              formControlName="birthdate"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="col-md-1 btn-visibility-container">
+            <button type="button" mat-button color="accent" (click)="onToggleValue(fc.privacy.get('birthdate'))">
+              <app-button-visibility class="btn-visibility" [visible]="fv.privacy.birthdate"></app-button-visibility>
+            </button>
+          </div>
+        </section>
 
-    <h5 i18n>Board Game Geek</h5>
+        <h5 i18n="">Contact</h5>
 
-    <p i18n>
-      Entrez votre pseudo BGG afin de pouvoir récupérer votre liste de jeux&nbsp;! Si ce n'est pas encore fait, nous
-      vous invitons à visiter
-      <a href="https://boardgamegeek.com/">boardgamegeek.com</a>
-      .
-    </p>
-    <section class="row">
-      <!-- BGG Name -->
-      <mat-form-field class="col-md-4">
-        <input matInput placeholder="Pseudo BGG" i18n-placeholder formControlName="bggName" />
-      </mat-form-field>
-      <button
-        mat-button
-        type="button"
-        color="primary"
-        class="col-md-3"
-        (click)="onGetBggGames()"
-        [disabled]="profileForm.value.bggName?.length < 3 || isLoadingBggGames"
-      >
-        <fa-icon [icon]="faSearch"></fa-icon>
-        <span i18n>Rechercher</span>
-      </button>
-      <div class="col-md-1 btn-visibility-container">
-        <button type="button" mat-button color="accent" (click)="onSwitchControlValue('bggName')">
-          <app-button-visibility
-            class="btn-visibility"
-            [visible]="profileForm.value.privacy.bggName"
-          ></app-button-visibility>
-        </button>
-      </div>
-    </section>
+        <section class="row">
+          <!-- Email -->
 
-    <!-- BGG Games's list -->
+          <mat-form-field class="col-md-3">
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Courriel"
+              i18n-placeholder
+              email
+              required
+            />
+          </mat-form-field>
+          <div class="col-md-1 btn-visibility-container">
+            <button type="button" mat-button color="accent" (click)="onToggleValue(fc.privacy.get('email'))">
+              <app-button-visibility class="btn-visibility" [visible]="fv.privacy.email"></app-button-visibility>
+            </button>
+          </div>
 
-    <div *ngIf="games || isLoadingBggGames">
-      <app-spinner *ngIf="isLoadingBggGames" [message]="'BoardGameGeek'"></app-spinner>
-      <div *ngIf="!isLoadingBggGames">
-        <p>Liste de vos jeux&nbsp;:</p>
-        <div class="imgs-container">
-          <figure *ngFor="let game of games">
-            <a [attr.href]="'https://boardgamegeek.com/boardgame/' + game.gameId">
-              <img src="{{ game.thumbnail }}" title="{{ game.name }}" alt="{{ game.name }}" />
-            </a>
-          </figure>
+          <!-- Phone -->
+
+          <mat-form-field class="col-md-3">
+            <input matInput type="phone" placeholder="Téléphone" i18n-placeholder="" formControlName="phoneNumber" />
+          </mat-form-field>
+          <div class="col-md-1 btn-visibility-container">
+            <button type="button" mat-button color="accent" (click)="onToggleValue(fc.privacy.get('phoneNumber'))">
+              <app-button-visibility class="btn-visibility" [visible]="fv.privacy.phoneNumber"></app-button-visibility>
+            </button>
+          </div>
+
+          <!-- Website -->
+
+          <mat-form-field class="col-md-3">
+            <input matInput placeholder="Site web" i18n-placeholder="" formControlName="website" />
+          </mat-form-field>
+          <div class="col-md-1 btn-visibility-container">
+            <button type="button" mat-button color="accent" (click)="onToggleValue(fc.privacy.get('website'))">
+              <app-button-visibility class="btn-visibility" [visible]="fv.privacy.website"></app-button-visibility>
+            </button>
+          </div>
+        </section>
+
+        <div class="btn-group-nav">
+          <button type="button" class="ml-auto" mat-button matStepperNext>
+            <fa-icon [icon]="faChevronRight"></fa-icon>
+          </button>
         </div>
-      </div>
-    </div>
+      </mat-step>
+
+      <!-- Location -->
+
+      <mat-step state="location">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Lieu de résidence</span>
+          <fa-icon [icon]="faBuilding"></fa-icon>
+        </ng-template>
+
+        <section>
+          <section class="row">
+            <!-- District -->
+            <mat-form-field class="col-md-4">
+              <input matInput placeholder="Quartier" i18n-placeholder formControlName="district" />
+            </mat-form-field>
+            <!-- City -->
+            <mat-form-field class="col-md-4">
+              <input matInput placeholder="Ville" i18n-placeholder formControlName="city" />
+            </mat-form-field>
+            <!-- Country -->
+            <mat-form-field class="col-md-4">
+              <mat-label i18n="">Pays</mat-label>
+              <mat-select matNativeControl formControlName="country" required>
+                <mat-option *ngFor="let country of countries" [value]="country.isoCode" i18n="">
+                  {{ country?.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </section>
+        </section>
+
+        <div class="btn-group-nav">
+          <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+          <button type="button" mat-button matStepperNext><fa-icon [icon]="faChevronRight"></fa-icon></button>
+        </div>
+      </mat-step>
+
+      <!-- Games -->
+
+      <mat-step state="games">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Jeux</span>
+          <fa-icon [icon]="faDice"></fa-icon>
+        </ng-template>
+
+        <h5 i18n="">Board Game Geek</h5>
+
+        <p i18n="">
+          Entrez votre pseudo BGG afin de pouvoir récupérer votre liste de jeux&nbsp;! Si ce n'est pas encore fait, nous
+          vous invitons à le faire sur
+          <a href="https://boardgamegeek.com/">boardgamegeek.com</a>
+          .
+        </p>
+        <section class="row">
+          <!-- BGG Name -->
+          <mat-form-field class="col-md-4">
+            <input matInput placeholder="Pseudo BGG" i18n-placeholder formControlName="bggName" />
+          </mat-form-field>
+          <button
+            mat-button
+            type="button"
+            color="primary"
+            class="col-md-3"
+            (click)="onGetBggGames()"
+            [disabled]="fv.bggName?.length < 3 || isLoadingBggGames"
+          >
+            <fa-icon [icon]="faSearch"></fa-icon>
+            <span i18n="">Rechercher</span>
+          </button>
+          <div class="col-md-1 btn-visibility-container">
+            <button type="button" mat-button color="accent" (click)="onToggleValue(fc.privacy.get('bggName'))">
+              <app-button-visibility class="btn-visibility" [visible]="fv.privacy.bggName"></app-button-visibility>
+            </button>
+          </div>
+        </section>
+
+        <!-- BGG Games's list -->
+
+        <div *ngIf="games || isLoadingBggGames">
+          <app-spinner *ngIf="isLoadingBggGames" [message]="'BoardGameGeek'"></app-spinner>
+          <div *ngIf="!isLoadingBggGames">
+            <p>Liste de vos jeux&nbsp;:</p>
+            <div class="imgs-container">
+              <figure *ngFor="let game of games">
+                <a [attr.href]="'https://boardgamegeek.com/boardgame/' + game.gameId">
+                  <img src="{{ game.thumbnail }}" title="{{ game.name }}" alt="{{ game.name }}" />
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group-nav">
+          <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
   </mat-dialog-content>
 
   <!-- Action buttons -->
 
   <div mat-dialog-actions>
-    <p *ngIf="!profileForm.valid" i18n>* champs obligatoires</p>
+    <p *ngIf="profileForm.invalid" i18n="">* champs obligatoires</p>
     <button mat-stroked-button type="button" color="primary" (click)="onClose()" i18n="">
       Annuler
     </button>
-    <button mat-raised-button type="button" color="primary" [disabled]="!profileForm.valid" (click)="onSubmit()">
+    <button mat-raised-button type="button" color="primary" [disabled]="profileForm.invalid" (click)="onSubmit()">
       <fa-icon *ngIf="profileForm.valid" [icon]="faCheck"></fa-icon>
-      <fa-icon *ngIf="!profileForm.valid" [icon]="faTimesCircle"></fa-icon>
-      <span *ngIf="!this.profile.id" i18n>Créer</span>
-      <span *ngIf="this.profile.id" i18n>Modifier</span>
+      <fa-icon *ngIf="profileForm.invalid" [icon]="faTimesCircle"></fa-icon>
+      <span i18n="">Modifier</span>
     </button>
   </div>
 </form>

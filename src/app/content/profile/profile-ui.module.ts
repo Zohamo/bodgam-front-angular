@@ -14,6 +14,7 @@ import {
   MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
+  MatStepperModule,
   MatTableModule
 } from '@angular/material';
 
@@ -36,6 +37,7 @@ import {
     MatPaginatorModule,
     MatSelectModule,
     MatSidenavModule,
+    MatStepperModule,
     MatTableModule
   ],
   exports: [
@@ -55,6 +57,7 @@ import {
     MatPaginatorModule,
     MatSelectModule,
     MatSidenavModule,
+    MatStepperModule,
     MatTableModule
   ]
 })

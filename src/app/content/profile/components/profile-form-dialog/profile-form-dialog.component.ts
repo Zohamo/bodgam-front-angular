@@ -1,23 +1,28 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  faBuilding,
+  faCheck,
+  faChevronLeft,
+  faChevronRight,
+  faDice,
+  faInfoCircle,
+  faSearch,
+  faTimesCircle,
+  faUserCircle
+} from '@fortawesome/free-solid-svg-icons';
 import { BggGame, Country, Profile } from '@/models';
 import { AlertService, BoardGameGeekService, CountryService, ProfileService } from '@/services';
 import moment from 'moment';
-import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
-
-// UI
-import { faCheck, faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile-form-dialog',
   templateUrl: './profile-form-dialog.component.html',
   styleUrls: ['./profile-form-dialog.component.scss']
 })
-export class ProfileFormDialogComponent implements OnInit, OnDestroy {
-  private destroy$: Subject<boolean> = new Subject<boolean>();
-
+export class ProfileFormDialogComponent implements OnInit {
   public profileForm: FormGroup;
   public today: Date;
   public countries: Country[];
@@ -25,9 +30,15 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   public isLoadingBggGames: boolean;
 
   // Font Awesome
+  faBuilding = faBuilding;
   faCheck = faCheck;
-  faTimesCircle = faTimesCircle;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  faDice = faDice;
+  faInfoCircle = faInfoCircle;
   faSearch = faSearch;
+  faTimesCircle = faTimesCircle;
+  faUserCircle = faUserCircle;
 
   /**
    * Creates an instance of ProfileFormDialogComponent.
@@ -42,7 +53,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * @memberof ProfileFormDialogComponent
    */
   constructor(
-    @Inject(MAT_DIALOG_DATA) private profile: Profile,
+    @Inject(MAT_DIALOG_DATA) public profile: Profile,
     private dialogRef: MatDialogRef<ProfileFormDialogComponent>,
     private fb: FormBuilder,
     private alertService: AlertService,
@@ -83,16 +94,6 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Unsubscribe before component is destroyed
-   *
-   * @memberof ProfileFormDialogComponent
-   */
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
-
-  /**
    * Initialize the form
    *
    * @private
@@ -111,13 +112,37 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
       birthdate: [],
       bggName: [],
       phoneNumber: [],
+      website: [],
       privacy: this.fb.group({
         email: ['', Validators.required],
         phoneNumber: ['', Validators.required],
         birthdate: ['', Validators.required],
-        bggName: ['', Validators.required]
+        bggName: ['', Validators.required],
+        website: ['', Validators.required]
       })
     });
+  }
+
+  /**
+   * Convenience getter for easy access to form fields
+   *
+   * @readonly
+   * @type {{ [key: string]: AbstractControl }}
+   * @memberof ProfileFormDialogComponent
+   */
+  get fc(): { [key: string]: AbstractControl } {
+    return this.profileForm.controls;
+  }
+
+  /**
+   * Convenience getter for easy access to form value
+   *
+   * @readonly
+   * @type {*}
+   * @memberof ProfileFormDialogComponent
+   */
+  get fv(): any {
+    return this.profileForm.value;
   }
 
   /**
@@ -140,11 +165,13 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
         birthdate: this.profile.birthdate ? moment(this.profile.birthdate).format() : null,
         bggName: this.profile.bggName,
         phoneNumber: this.profile.phoneNumber,
+        website: this.profile.website,
         privacy: {
           email: this.profile.privacy.email,
           phoneNumber: this.profile.privacy.phoneNumber,
           birthdate: this.profile.privacy.birthdate,
-          bggName: this.profile.privacy.bggName
+          bggName: this.profile.privacy.bggName,
+          website: this.profile.privacy.website
         }
       });
     }
@@ -159,7 +186,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    */
   private prepareSaveEntity(): Profile {
     const profileForm = this.profileForm.value;
-    profileForm.birthdate = moment(profileForm.birthdate).toDate();
+    profileForm.birthdate = moment(profileForm.birthdate).format('YYYY-MM-DD');
     return profileForm;
   }
 
@@ -169,23 +196,24 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
    * @memberof ProfileFormDialogComponent
    */
   public onSubmit(): void {
-    if (this.profileForm.valid) {
-      console.log('profileForm', this.prepareSaveEntity());
-      this.profileService
-        .saveProfile(this.prepareSaveEntity())
-        .pipe(first())
-        .subscribe(
-          (profileSaved) => {
-            console.log('profile saved', profileSaved);
-            this.alertService.open('success-save-profile');
-            this.dialogRef.close(profileSaved);
-          },
-          (error) => {
-            console.log('ERROR saving profile', error);
-            this.alertService.open('error-save-profile');
-          }
-        );
+    if (this.profileForm.invalid) {
+      return;
     }
+    console.log('profileForm', this.prepareSaveEntity());
+    this.profileService
+      .saveProfile(this.prepareSaveEntity())
+      .pipe(first())
+      .subscribe(
+        (profileSaved) => {
+          console.log('profile saved', profileSaved);
+          this.alertService.open('success-save-profile');
+          this.dialogRef.close(profileSaved);
+        },
+        (error) => {
+          console.log('ERROR saving profile', error);
+          this.alertService.open('error-save-profile');
+        }
+      );
   }
 
   /**
@@ -205,7 +233,7 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   public onGetBggGames(): void {
     this.isLoadingBggGames = true;
     this.boardGameGeekService
-      .getCollection(this.profileForm.value.bggName)
+      .getCollection(this.fv.bggName)
       .pipe(first())
       .subscribe(
         (games) => {
@@ -222,31 +250,13 @@ export class ProfileFormDialogComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * On click switches the control value
+   * OnEvent toggle a boolean control's value
    *
-   * @param {string} control
+   * @param {AbstractControl} control
    * @memberof ProfileFormDialogComponent
    */
-  public onSwitchControlValue(control: string): void {
-    switch (control) {
-      case 'email':
-        this.profileForm.patchValue({ privacy: { email: !this.profileForm.value.privacy.email } });
-        break;
-      case 'phoneNumber':
-        this.profileForm.patchValue({
-          privacy: { phoneNumber: !this.profileForm.value.privacy.phoneNumber }
-        });
-        break;
-      case 'birthdate':
-        this.profileForm.patchValue({
-          privacy: { birthdate: !this.profileForm.value.privacy.birthdate }
-        });
-        break;
-      case 'bggName':
-        this.profileForm.patchValue({
-          privacy: { bggName: !this.profileForm.value.privacy.bggName }
-        });
-        break;
-    }
+  public onToggleValue(control: AbstractControl): void {
+    control.patchValue(!control.value);
+    console.log('control', this.fv.privacy);
   }
 }
