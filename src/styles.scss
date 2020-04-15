@@ -202,6 +202,11 @@ a {
  */
 
 .page-title,
+.mat-dialog-title {
+  color: $primary;
+}
+
+.page-title,
 .mat-dialog-title,
 .mat-tab-label-content {
   .ng-fa-icon {

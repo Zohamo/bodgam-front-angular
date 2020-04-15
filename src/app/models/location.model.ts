@@ -1,4 +1,5 @@
 import { LocationItem } from './location-item.model';
+import { GeoCoordinates } from './geo-coordinates.model';
 
 export class Location extends LocationItem {
   // Coordinates
@@ -14,10 +15,11 @@ export class Location extends LocationItem {
 
   constructor() {
     super();
+    const coords: GeoCoordinates = new GeoCoordinates();
     // Coordinates
-    this.latitude = null;
-    this.longitude = null;
-    this.accuracy = null;
+    this.latitude = coords.latitude;
+    this.longitude = coords.longitude;
+    this.accuracy = coords.accuracy;
     // Address
     this.address1 = '';
     this.address2 = '';

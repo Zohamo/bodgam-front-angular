@@ -2,20 +2,12 @@
   <!-- HEADER -->
 
   <mat-card-header>
-    <!-- Header : Date -->
-
-    <div class="date">
-      <app-event-date [date]="event?.startDatetime"></app-event-date>
-    </div>
-
     <!-- Header : Title -->
 
-    <div class="title">
-      <mat-card-title>
-        <h2>{{ event.title }}</h2>
-      </mat-card-title>
-      <mat-card-subtitle *ngIf="event.description !== ''" [innerHTML]="event.description"></mat-card-subtitle>
-    </div>
+    <mat-card-title>
+      <h2 class="page-title">{{ event.title }}</h2>
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="event.description !== ''" [innerHTML]="event.description"></mat-card-subtitle>
   </mat-card-header>
 
   <!-- CONTENT -->

@@ -29,7 +29,6 @@ export class MapComponent implements AfterViewInit {
 
   private coords: GeoCoordinates = new GeoCoordinates();
   @Input() set coordinates(coordinates: GeoCoordinates) {
-    console.log('coordinates', coordinates);
     if (coordinates) {
       this.coords = coordinates;
       if (this.map) {
@@ -113,7 +112,7 @@ export class MapComponent implements AfterViewInit {
    */
   private createMap(): void {
     if (!this.map && this.coords && this.coords.latitude && this.coords.longitude) {
-      console.log('create coords', this.coords);
+      console.log('createMap coords', this.coords);
       // Map creation
       this.map = L.map('map', {
         center: [this.coords.latitude, this.coords.longitude],

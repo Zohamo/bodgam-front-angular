@@ -1,3 +1,4 @@
 export const AppApi = {
-  GEOLOCATION: 'http://www.mapquestapi.com/geocoding/v1/'
+  BOARDGAMEGEEK: 'https://bgg-json.azurewebsites.net',
+  GEOLOCATION: 'https://www.mapquestapi.com/geocoding/v1/'
 };

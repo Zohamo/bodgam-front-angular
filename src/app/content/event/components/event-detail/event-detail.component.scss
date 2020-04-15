@@ -3,18 +3,5 @@
  */
 
 .mat-card-header {
-  align-items: center;
-  margin-bottom: 2rem;
   padding: 0.5rem 1rem;
-
-  ::ng-deep .mat-card-header-text {
-    display: none;
-  }
-  .title {
-    padding: 0.5rem 1rem;
-    .mat-card-title,
-    h2 {
-      margin-bottom: 0;
-    }
-  }
 }

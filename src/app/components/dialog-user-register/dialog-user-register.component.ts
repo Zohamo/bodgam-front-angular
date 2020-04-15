@@ -89,7 +89,6 @@ export class DialogUserRegisterComponent {
 
     if (this.registerForm.valid) {
       this.isLoading = true;
-      console.log('submit', this.prepareSaveEntity());
       this.userService
         .register(this.prepareSaveEntity())
         .pipe(first())

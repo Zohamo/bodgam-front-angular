@@ -174,6 +174,8 @@ export class ProfileFormDialogComponent implements OnInit {
           website: this.profile.privacy.website
         }
       });
+      this.fc.name.disable();
+      this.fc.email.disable();
     }
   }
 
@@ -185,9 +187,12 @@ export class ProfileFormDialogComponent implements OnInit {
    * @memberof ProfileFormDialogComponent
    */
   private prepareSaveEntity(): Profile {
-    const profileForm = this.profileForm.value;
-    profileForm.birthdate = moment(profileForm.birthdate).format('YYYY-MM-DD');
-    return profileForm;
+    return {
+      ...this.fv,
+      name: this.profile.name,
+      email: this.profile.email,
+      birthdate: this.fv.birthdate ? moment(this.fv.birthdate).format('YYYY-MM-DD') : null
+    };
   }
 
   /**

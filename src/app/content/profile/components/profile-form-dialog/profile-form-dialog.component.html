@@ -1,7 +1,7 @@
 <form [formGroup]="profileForm" class="form-profile" (ngSubmit)="onSubmit()">
   <h2 mat-dialog-title class="color-primary">
     <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
-    {{ fv.name }}
+    {{ profile.name }}
   </h2>
 
   <mat-dialog-content>
@@ -17,7 +17,7 @@
         <section class="row">
           <!-- Name -->
           <mat-form-field class="col-md-4">
-            <input matInput placeholder="Pseudo" i18n-placeholder="" formControlName="name" required />
+            <input matInput placeholder="Nom d'utilisateur" i18n-placeholder="" formControlName="name" required />
           </mat-form-field>
 
           <!-- Gender -->

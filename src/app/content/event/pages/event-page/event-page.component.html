@@ -1,6 +1,10 @@
 <app-event-detail
-  *ngIf="event$ | async as event"
+  *ngIf="event$ | async as event; else loading"
   [eventDetail]="event"
   [userId]="userId"
   (deleteEvent)="deleteEvent($event)"
 ></app-event-detail>
+
+<ng-template #loading>
+  <app-spinner [message]="'Évènement'"></app-spinner>
+</ng-template>

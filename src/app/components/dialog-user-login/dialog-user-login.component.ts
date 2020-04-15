@@ -70,7 +70,6 @@ export class DialogUserLoginComponent {
 
     if (this.loginForm.valid) {
       this.isSubmitted = true;
-      console.log('submit', this.f.email.value, this.f.password.value);
       this.userService
         .login(this.f.email.value, this.f.password.value)
         .pipe(first())

@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '@env';
-import { User } from '@/models';
+import { User, Profile } from '@/models';
 import { AlertService } from './alert.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,12 @@ export class UserService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private alertService: AlertService, private http: HttpClient, private router: Router) {
+  constructor(
+    private alertService: AlertService,
+    private http: HttpClient,
+    private profileService: ProfileService,
+    private router: Router
+  ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }

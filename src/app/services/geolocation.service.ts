@@ -20,7 +20,7 @@ export class GeolocationService {
         },
         (error) => {
           console.log('geolocation ERROR', error);
-          reject(error);
+          // reject(error);
         }
       );
     });
