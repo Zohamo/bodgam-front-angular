@@ -1,9 +1,14 @@
 .main-footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-top: 25px;
   padding: 1rem 2rem;
+  font-size: 0.8rem;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 
   .ng-fa-icon {
     font-size: 3rem;
