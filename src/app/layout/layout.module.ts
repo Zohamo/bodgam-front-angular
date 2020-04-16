@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
 import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
 import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -25,8 +26,8 @@ import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-b
     MatTooltipModule,
     RouterModule
   ],
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent],
   entryComponents: [DialogUserLoginComponent, DialogUserRegisterComponent, SnackBarMessageComponent],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent, FooterComponent]
 })
 export class LayoutModule {}

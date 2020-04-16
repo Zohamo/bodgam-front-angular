@@ -1,7 +1,4 @@
 export const AppConfig = {
-  TITLE: 'BodGam',
-  VERSION: '0.1.0.1',
-
   // Leaflet map
   MAP_CIRCLE_COLOR: '#edd137',
   MAP_CIRCLE_OPACITY: 0.5,

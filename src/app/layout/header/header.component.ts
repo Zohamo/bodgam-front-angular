@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
 import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
-import { AppConfig } from '@/config';
+import { AppInfo } from '@/config';
 import { User } from '@/models';
 import { UserService } from '@/services';
 import { Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  public title = AppConfig.TITLE;
+  public title = AppInfo.TITLE;
   public user: User;
   public isAuth = false;
 

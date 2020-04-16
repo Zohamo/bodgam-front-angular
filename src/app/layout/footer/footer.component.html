@@ -1,0 +1,14 @@
+<footer class="main-footer">
+  <p class="color-grey" i18n="">Current version&nbsp;: {{ version }}</p>
+
+  <a [routerLink]="['/']">
+    <fa-icon [icon]="faDungeon"></fa-icon>
+  </a>
+
+  <p class="text-right" i18n="">
+    {{ title }} &copy;{{ startYear }}-{{ currentYear }}
+    <br />
+    by
+    <a [href]="author.url">{{ author.name }}</a>
+  </p>
+</footer>

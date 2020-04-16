@@ -1,0 +1,11 @@
+.main-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  padding: 1rem 2rem;
+
+  .ng-fa-icon {
+    font-size: 3rem;
+  }
+}
