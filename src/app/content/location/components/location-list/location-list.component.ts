@@ -42,7 +42,6 @@ export class LocationListComponent implements OnInit {
 
   private locations: LocationItem[];
   @Input() set setLocations(locations: LocationItem[]) {
-    console.log('Input locations', locations);
     if (locations) {
       this.locations = locations;
       this.dataSource = new MatTableDataSource(locations);
@@ -81,12 +80,12 @@ export class LocationListComponent implements OnInit {
   /**
    * Open the dialog to display a location
    *
-   * @param {number} locationId
+   * @param {LocationItem} location
    * @memberof LocationListComponent
    */
-  public openLocationDetailDialog(locationId: number): void {
+  public openLocationDetailDialog(location: LocationItem): void {
     this.dialog.open(LocationDetailDialogComponent, {
-      data: { id: locationId }
+      data: { id: location.id, name: location.name }
     });
   }
 
@@ -97,7 +96,6 @@ export class LocationListComponent implements OnInit {
    * @memberof LocationListComponent
    */
   public openLocationFormDialog(locationId: number): void {
-    console.log('locationId', locationId);
     const dialogRef = this.dialog.open(LocationFormDialogComponent, {
       data: { id: locationId },
       panelClass: 'panel-location'

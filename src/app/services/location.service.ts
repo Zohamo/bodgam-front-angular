@@ -57,7 +57,7 @@ export class LocationService {
     return !id
       ? of(new Location())
       : this.value && this.value.id === id
-      ? this.currentLocation
+      ? of(this.value)
       : this.http.get<Location>(`${environment.apiPath}/locations/${id}`).pipe(
           map((locationRes) => {
             this.currentLocationSubject.next(locationRes);

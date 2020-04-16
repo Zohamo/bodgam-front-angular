@@ -85,6 +85,13 @@ button .ng-fa-icon {
  * Display
  */
 
+.flex-centered {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .flex-spacer {
   flex: 1 1 auto;
 }

@@ -22,7 +22,7 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <td mat-cell *matCellDef="let location">
-      <button mat-button type="button" color="primary" (click)="openLocationDetailDialog(location.id)">
+      <button mat-button type="button" color="primary" (click)="openLocationDetailDialog(location)">
         {{ location.name }}
       </button>
     </td>

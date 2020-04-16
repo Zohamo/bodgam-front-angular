@@ -1,9 +1,11 @@
 <h2 mat-dialog-title>
   <fa-icon [icon]="faBuilding"></fa-icon>
-  <span>{{ location.name }}</span>
+  <span>{{ data.name }}</span>
 </h2>
 
-<div mat-dialog-content>
+<app-spinner [message]="'Lieu'" *ngIf="isLoading"></app-spinner>
+
+<div mat-dialog-content *ngIf="!isLoading">
   <mat-tab-group backgroundColor="accent">
     <!-- Map -->
 

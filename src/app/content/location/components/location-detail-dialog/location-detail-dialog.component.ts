@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { faBuilding, faInfoCircle, faMap } from '@fortawesome/free-solid-svg-icons';
 import { GeoCoordinates, Location } from '@/models';
-import { LocationService, CountryService } from '@/services';
+import { LocationService, CountryService, AlertService } from '@/services';
 import { Subject, forkJoin } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -20,6 +20,7 @@ export class LocationDetailDialogComponent implements OnDestroy {
   public address: string;
   public coords: GeoCoordinates = new GeoCoordinates();
   public triggerCenterMap = false;
+  public isLoading = true;
 
   // Font Awesome
   faBuilding = faBuilding;
@@ -36,25 +37,27 @@ export class LocationDetailDialogComponent implements OnDestroy {
    */
   constructor(
     public dialogRef: MatDialogRef<LocationDetailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { id: number; name: string },
     private locationService: LocationService,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private alertService: AlertService
   ) {
     forkJoin(locationService.getLocation(data.id), countryService.getCountries())
       .pipe(first())
       .subscribe(
         ([location, countries]) => {
+          this.isLoading = false;
           if (location) {
             this.location = location;
             if (location.country && countries && countries.length) {
               this.location.country = countries.find((country) => this.location.country === country.isoCode).name;
             }
-            this.buildAddress();
             this.buildCoords();
           }
         },
         (error) => {
           console.log('ERROR getting location', error);
+          alertService.open('error');
         }
       );
   }
@@ -67,19 +70,6 @@ export class LocationDetailDialogComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-  }
-
-  /**
-   * Build the address to display
-   *
-   * @private
-   * @memberof LocationDetailDialogComponent
-   */
-  private buildAddress(): void {
-    const sep = ', ';
-    this.address = `${this.location.address1}${this.location.address1 && this.location.district ? sep : ''}${
-      this.location.district
-    } ${this.location.zipCode} ${this.location.city}${sep}${this.location.country}`.trim();
   }
 
   /**
