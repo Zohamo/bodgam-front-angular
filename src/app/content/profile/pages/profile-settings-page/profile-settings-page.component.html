@@ -1,4 +1,4 @@
-<ng-container *ngIf="profile$ | async as profile">
+<ng-container *ngIf="profile$ | async as profile; else loading">
   <app-profile-privacy-form
     [profilePrivacy]="profile.privacy"
     (saveProfilePrivacy)="saveProfilePrivacy($event)"
@@ -6,3 +6,7 @@
 
   <app-profile-settings (deleteProfile)="deleteProfile()"></app-profile-settings>
 </ng-container>
+
+<ng-template #loading>
+  <app-spinner [message]="'Paramètres du profil'"></app-spinner>
+</ng-template>

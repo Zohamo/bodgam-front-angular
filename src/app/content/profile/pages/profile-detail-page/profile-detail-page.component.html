@@ -1,4 +1,8 @@
-<div *ngIf="profile$ | async as profile" class="row">
+<div *ngIf="profile$ | async as profile; else loading" class="row">
   <app-profile-ratings [profileRatings]="profile?.ratings" class="col-md-7"></app-profile-ratings>
   <app-profile-detail [profile]="profile" [isAdmin]="profile.id === userId" class="col-md-5"></app-profile-detail>
 </div>
+
+<ng-template #loading>
+  <app-spinner [message]="'Profil'"></app-spinner>
+</ng-template>
