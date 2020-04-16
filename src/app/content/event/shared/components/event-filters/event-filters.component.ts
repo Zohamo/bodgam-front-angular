@@ -50,9 +50,34 @@ export class EventFiltersComponent {
     this.filteredEvents$.emit(
       combineLatest(this.events$, this.filter$).pipe(
         map(([events, filterString]) =>
-          events.filter((event) => event.title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1)
+          events.filter((event: EventBg) => {
+            return [
+              event.title,
+              event.host.name,
+              event.location.district,
+              event.location.city,
+              event.location.country
+            ].find((param) => {
+              if (this.isStringFound(filterString, param)) {
+                return true;
+              }
+            });
+          })
         )
       )
     );
+  }
+
+  /**
+   * Search if "search" exists in "data".
+   *
+   * @private
+   * @param {string} search
+   * @param {string} data
+   * @returns {boolean}
+   * @memberof EventFiltersComponent
+   */
+  private isStringFound(search: string, data: string): boolean {
+    return data ? data.toLowerCase().indexOf(search.toLowerCase()) !== -1 : false;
   }
 }
