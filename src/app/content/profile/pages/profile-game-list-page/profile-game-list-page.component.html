@@ -1,6 +1,6 @@
 <div *ngIf="games$ | async as games; else loading">
   <app-game-list *ngIf="games" [games]="games"></app-game-list>
-  <p *ngIf="!games" i18n>Aucun jeu n'a été trouvé.</p>
+  <p *ngIf="!games || !games.length" class="text-center comment" i18n="">Aucun jeu n'a été trouvé.</p>
 </div>
 
 <ng-template #loading>

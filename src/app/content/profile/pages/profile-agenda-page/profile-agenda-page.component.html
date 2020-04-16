@@ -6,6 +6,10 @@
   ></app-event-filters>
 </div>
 
-<div class="py-3" *ngIf="filteredEvents$ | async as events">
+<div class="py-3" *ngIf="filteredEvents$ | async as events; else loading">
   <app-event-list [events]="events"></app-event-list>
 </div>
+
+<ng-template #loading>
+  <app-spinner [message]="'Agenda'"></app-spinner>
+</ng-template>
