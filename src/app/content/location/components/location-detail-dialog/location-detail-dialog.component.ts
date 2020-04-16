@@ -1,8 +1,8 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { faBuilding, faInfoCircle, faMap } from '@fortawesome/free-solid-svg-icons';
-import { GeoCoordinates, Location } from '@/models';
+import { GeoCoordinates, Location, Country } from '@/models';
 import { LocationService, CountryService, AlertService } from '@/services';
-import { Subject, forkJoin } from 'rxjs';
+import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 // UI
@@ -17,6 +17,7 @@ export class LocationDetailDialogComponent implements OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   public location: Location;
+  public country: Country;
   public address: string;
   public coords: GeoCoordinates = new GeoCoordinates();
   public triggerCenterMap = false;
@@ -42,22 +43,23 @@ export class LocationDetailDialogComponent implements OnDestroy {
     private countryService: CountryService,
     private alertService: AlertService
   ) {
-    forkJoin(locationService.getLocation(data.id), countryService.getCountries())
+    this.locationService
+      .getLocation(data.id)
       .pipe(first())
       .subscribe(
-        ([location, countries]) => {
-          this.isLoading = false;
+        (location: Location) => {
           if (location) {
-            this.location = location;
-            if (location.country && countries && countries.length) {
-              this.location.country = countries.find((country) => this.location.country === country.isoCode).name;
+            if (location.country) {
+              this.country = this.countryService.getCountry(location.country);
             }
+            this.location = location;
             this.buildCoords();
           }
+          this.isLoading = false;
         },
         (error) => {
           console.log('ERROR getting location', error);
-          alertService.open('error');
+          this.alertService.open('error');
         }
       );
   }

@@ -11,6 +11,7 @@ import {
   faVenus
 } from '@fortawesome/free-solid-svg-icons';
 import { Profile } from '@/models';
+import { CountryService } from '@/services';
 import moment from 'moment';
 import { first } from 'rxjs/operators';
 
@@ -45,7 +46,7 @@ export class ProfileDetailComponent {
    * @param {MatDialog} dialog
    * @memberof ProfileDetailComponent
    */
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private countryService: CountryService) {}
 
   /**
    * Format the birthdate for display
@@ -58,6 +59,17 @@ export class ProfileDetailComponent {
     return moment(birthdate)
       .locale('fr')
       .format('D MMMM YYYY');
+  }
+
+  /**
+   * Call CountryService to get the country's name from the isoCode.
+   *
+   * @param {string} isoCode
+   * @returns {string}
+   * @memberof ProfileDetailComponent
+   */
+  public getCountryName(isoCode: string): string {
+    return this.countryService.getCountry(isoCode).name;
   }
 
   /**

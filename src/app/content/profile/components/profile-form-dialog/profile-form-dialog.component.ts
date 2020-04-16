@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
@@ -22,7 +22,7 @@ import { first } from 'rxjs/operators';
   templateUrl: './profile-form-dialog.component.html',
   styleUrls: ['./profile-form-dialog.component.scss']
 })
-export class ProfileFormDialogComponent implements OnInit {
+export class ProfileFormDialogComponent {
   public profileForm: FormGroup;
   public today: Date;
   public countries: Country[];
@@ -62,35 +62,9 @@ export class ProfileFormDialogComponent implements OnInit {
     private profileService: ProfileService
   ) {
     this.today = new Date();
+    this.countries = this.countryService.getCountries();
     this.createForm();
-  }
-
-  /**
-   * A lifecycle hook that is called after Angular has initialized all data-bound properties
-   *
-   * @memberof ProfileFormDialogComponent
-   */
-  ngOnInit(): void {
     this.populateForm();
-
-    this.countryService
-      .getCountries()
-      .pipe(first())
-      .subscribe(
-        (countries) => {
-          console.log('countries', countries);
-          if (countries) {
-            this.countries = countries;
-            this.profileForm.get('country').enable();
-            this.profileForm.patchValue({
-              country: this.profile.country || 'FR'
-            });
-          }
-        },
-        (error) => {
-          console.log('ERROR countries', error);
-        }
-      );
   }
 
   /**
@@ -106,7 +80,7 @@ export class ProfileFormDialogComponent implements OnInit {
       name: ['', Validators.required],
       district: [],
       city: [],
-      country: [{ value: '', disabled: !this.countries }, Validators.required],
+      country: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
       gender: [],
       birthdate: [],

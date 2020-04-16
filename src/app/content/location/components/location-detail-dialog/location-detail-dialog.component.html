@@ -57,8 +57,8 @@
               <span *ngIf="location.city">{{ location.city }}</span>
               <br />
             </ng-container>
-            <ng-container *ngIf="location.country">
-              {{ location.country }}
+            <ng-container *ngIf="country?.name || location.country">
+              {{ country?.name || location.country }}
             </ng-container>
           </address>
         </div>

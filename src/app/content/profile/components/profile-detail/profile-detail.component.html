@@ -14,37 +14,37 @@
     </ng-container>
     <!-- Birthdate -->
     <ng-container *ngIf="profile?.birthdate">
-      <p i18n>{{ formatBirthdate(profile.birthdate) }}</p>
+      <p i18n="">{{ formatBirthdate(profile.birthdate) }}</p>
     </ng-container>
   </section>
   <!-- Email -->
   <section *ngIf="profile?.email" class="profile-email">
     <fa-icon [icon]="faEnvelope"></fa-icon>
-    <p i18n>{{ profile.email }}</p>
+    <p i18n="">{{ profile.email }}</p>
   </section>
   <!-- Phone Number -->
   <section *ngIf="profile?.phoneNumber" class="profile-phone-number">
     <fa-icon [icon]="faMobileAlt"></fa-icon>
-    <p i18n>{{ profile.phoneNumber }}</p>
+    <p i18n="">{{ profile.phoneNumber }}</p>
   </section>
   <!-- Location -->
   <section *ngIf="profile?.district || profile?.city || profile?.country" class="profile-location">
     <fa-icon [icon]="faMapMarked"></fa-icon>
     <p>
-      <span *ngIf="profile.district" class="profile-district mr-1" i18n>{{ profile.district }},</span>
-      <span *ngIf="profile.city" class="profile-city mr-1" i18n>{{ profile.city }},</span>
-      <span *ngIf="profile.country" class="profile-country" i18n>{{ profile.country }}</span>
+      <span *ngIf="profile.district" class="profile-district mr-1" i18n="">{{ profile.district }},</span>
+      <span *ngIf="profile.city" class="profile-city mr-1" i18n="">{{ profile.city }},</span>
+      <span *ngIf="profile.country" class="profile-country" i18n="">{{ getCountryName(profile.country) }}</span>
     </p>
   </section>
   <!-- WWW -->
   <section *ngIf="profile?.bggName || profile?.website" class="profile-www">
     <fa-icon [icon]="faGlobe"></fa-icon>
-    <p *ngIf="profile.bggName" i18n>
+    <p *ngIf="profile.bggName" i18n="">
       <em>Board Game Geek</em>
       <br />
       <a href="https://boardgamegeek.com/user/{{ profile.bggName }}">{{ profile.bggName }}</a>
     </p>
-    <p *ngIf="profile.website" i18n>
+    <p *ngIf="profile.website" i18n="">
       <em>Website</em>
       <br />
       <a href="{{ profile.website }}">{{ shortWebsite(profile.website) }}</a>

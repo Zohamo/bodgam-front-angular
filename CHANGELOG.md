@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Loading Spinners
 - Footer
 
+### Changed
+
+- refactor Country's list
+
 ### Fixed
 
 - get Location (call n+1)

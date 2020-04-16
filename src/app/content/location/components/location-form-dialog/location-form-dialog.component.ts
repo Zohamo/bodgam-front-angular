@@ -21,7 +21,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Country, Geocode, GeocodeResultLocation, GeoCoordinates, Location } from '@/models';
 import { AlertService, CountryService, GeocodingService, LocationService } from '@/services';
-import { forkJoin, Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { MatStepper } from '@angular/material';
 
@@ -81,24 +80,23 @@ export class LocationFormDialogComponent {
     private alertService: AlertService
   ) {
     this.createForm();
+    this.countries = this.countryService.getCountries();
 
-    forkJoin(this.locationService.getLocation(data.id), this.countryService.getCountries())
+    this.locationService
+      .getLocation(data.id)
       .pipe(first())
-      .subscribe(([location, countries]) => {
-        console.log('location', location);
-        console.log('countries', countries);
-        this.location = location;
-        this.countries = countries;
-        this.isLoading = false;
-
-        this.populateForm();
-
-        this.mapCircleRadius = this.location.accuracy;
-        this.coords = {
-          accuracy: this.location.accuracy,
-          latitude: this.location.latitude,
-          longitude: this.location.longitude
-        };
+      .subscribe((location: Location) => {
+        if (location) {
+          this.location = location;
+          this.populateForm();
+          this.mapCircleRadius = location.accuracy;
+          this.coords = {
+            accuracy: location.accuracy,
+            latitude: location.latitude,
+            longitude: location.longitude
+          };
+          this.isLoading = false;
+        }
       });
   }
 
