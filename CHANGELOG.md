@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Footer
 - more search fields in Event search filter
 - confirm dialog on delete Event
+- include API folder in build
 
 ### Changed
 
