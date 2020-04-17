@@ -1,4 +1,27 @@
 <ng-container [ngSwitch]="data.message">
+  <!-- Event -->
+
+  <ng-container *ngSwitchCase="'delete-event'">
+    <h2 mat-dialog-title class="danger" i18n=""></h2>
+
+    <mat-dialog-content>
+      <p i18n="">
+        Êtes-vous sur(e) de vouloir supprimer l'évènement &ldquo;
+        <strong>{{ data.name }}</strong>
+        &rdquo; &nbsp;?
+      </p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button color="primary" (click)="onClose()">
+        <span i18n="">Annuler</span>
+      </button>
+      <button mat-button color="warn" (click)="onConfirm()">
+        <span i18n="">Supprimer</span>
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+
   <!-- Location -->
 
   <ng-container *ngSwitchCase="'delete-location'">

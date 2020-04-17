@@ -1,12 +1,15 @@
 <a *ngFor="let event of events; trackBy: eventTrackBy" [routerLink]="['/events', event.id]">
-  <mat-card class="d-flex">
+  <mat-card class="d-flex align-items-center">
     <!-- Date -->
     <div class="event-startDate">
       <app-event-date [date]="event?.startDatetime"></app-event-date>
     </div>
 
     <!-- Title -->
-    <h3 class="event-title color-primary">{{ event?.title }}</h3>
+    <div class="event-title">
+      <h3 class="color-primary mb-0">{{ event?.title }}</h3>
+      <p *ngIf="event?.description" class="comment mb-0">{{ event?.description }}</p>
+    </div>
 
     <!-- Details -->
     <div class="event-details">

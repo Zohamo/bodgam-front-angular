@@ -19,10 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Loading Spinners
 - Footer
 - more search fields in Event search filter
+- confirm dialog on delete Event
 
 ### Changed
 
 - refactor Country's list
+- display Event list
 
 ### Fixed
 

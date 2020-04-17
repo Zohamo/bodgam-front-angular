@@ -1,4 +1,4 @@
-<app-spinner *ngIf="isLoading"></app-spinner>
+<app-spinner class="flex-centered" *ngIf="isLoading"></app-spinner>
 
 <ng-container *ngIf="!isLoading">
   <form [formGroup]="locationForm" class="form-location" (ngSubmit)="onSubmit()">

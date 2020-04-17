@@ -1,7 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { EventBg } from '@/models';
 import { EventService } from '@/services';
+import { DialogConfirmComponent } from '@/components/dialog-confirm/dialog-confirm.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -37,9 +39,10 @@ export class EventDetailComponent {
    * Creates an instance of EventDetailComponent.
    *
    * @param {EventService} eventService
+   * @param {MatDialog} dialog
    * @memberof EventDetailComponent
    */
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private dialog: MatDialog) {}
 
   /**
    * Define if the User can access the full Location
@@ -61,8 +64,14 @@ export class EventDetailComponent {
    * @memberof EventDetailComponent
    */
   public onDeleteEvent(event: EventBg): void {
-    if (this.userId === event.host.id) {
-      this.deleteEvent.emit(event.id);
-    }
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      data: { message: 'delete-event', name: event.title }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.deleteEvent.emit(event.id);
+      }
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EventBg } from '@/models';
 import { AlertService, EventService, UserService } from '@/services';
 import { Observable } from 'rxjs';
@@ -18,16 +18,20 @@ export class EventPageComponent {
    * Creates an instance of EventPageComponent.
    *
    * @param {ActivatedRoute} route
+   * @param {AlertService} alertService
    * @param {EventService} eventService
+   * @param {UserService} userService
+   * @param {Router} router
    * @memberof EventPageComponent
    */
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
     private eventService: EventService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
-    userService.currentUser$.subscribe((user) => {
+    this.userService.currentUser$.subscribe((user) => {
       this.userId = user ? user.id : null;
       this.getEvent();
     });
@@ -56,6 +60,7 @@ export class EventPageComponent {
       (res) => {
         console.log('DELETE EVENT', res);
         this.alertService.open('success-delete-event');
+        this.router.navigate(['/events']);
       },
       (error) => {
         console.log('ERROR DELETE EVENT', error);
