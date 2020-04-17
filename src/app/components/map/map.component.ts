@@ -4,6 +4,21 @@ import { GeoCoordinates, NavigatorGeolocationPosition } from '@/models';
 import { GeolocationService } from '@/services';
 import * as L from 'leaflet';
 
+const iconRetinaUrl = AppConfig.MAP_ICONS_URL.iconRetina;
+const iconUrl = AppConfig.MAP_ICONS_URL.icon;
+const shadowUrl = AppConfig.MAP_ICONS_URL.shadow;
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+L.Marker.prototype.options.icon = iconDefault;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -144,7 +159,6 @@ export class MapComponent implements AfterViewInit {
     this.coords.longitude = longitude;
     console.log('onclick coords', this.coords);
     this.draw();
-    this.resetViewMap();
     this.sendPositionCoords.emit(this.coords);
   }
 

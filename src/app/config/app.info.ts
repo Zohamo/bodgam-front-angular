@@ -1,6 +1,6 @@
 export const AppInfo = {
   TITLE: 'BodGam',
-  VERSION: '0.1.0.7',
+  VERSION: '0.1.0.8',
   AUTHOR: { name: 'Mathias Mille', url: 'https://mathiasmille.fr' },
   STARTYEAR: '2018'
 };

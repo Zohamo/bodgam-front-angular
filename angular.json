@@ -22,7 +22,17 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.svg", "src/.htaccess", "src/api", "src/assets"],
+            "assets": [
+              "src/favicon.svg",
+              "src/.htaccess",
+              "src/api",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./assets/icons"
+              }
+            ],
             "styles": ["src/styles.scss", "node_modules/leaflet/dist/leaflet.css"],
             "scripts": [],
             "es5BrowserSupport": true

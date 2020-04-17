@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - get Location (call n+1)
+- display marker icon on map
 
 ## [0.1.0] - 2020-04-15
 
