@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { faFlask, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +10,9 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent {
+  faFlask = faFlask;
+  faHeart = faHeart;
+
   url =
     'https://docs.google.com/forms/d/e/1FAIpQLSfgHYc3rQqpYwsXbIAG40oG-i2iw7Rkdr-WSjwHOJJn--tsiw/viewform?usp=pp_url';
   urlSafe: SafeResourceUrl;

@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - refactor Country's list
 - display Event list
+- edit Home page content
 
 ### Fixed
 

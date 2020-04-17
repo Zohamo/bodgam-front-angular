@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LayoutModule } from '@/layout/layout.module';
 import { SnackBarMessageModule } from './components';
 import * as fromContent from './content';
@@ -37,6 +38,7 @@ export const MY_FORMAT: MatDateFormats = {
     HttpClientModule,
     LayoutModule,
     SnackBarMessageModule,
+    FontAwesomeModule, // For Home Page
     MatExpansionModule, // For Home Page
     ...fromContent.modules
   ],
