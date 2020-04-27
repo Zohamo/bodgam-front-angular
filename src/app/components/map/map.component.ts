@@ -138,6 +138,16 @@ export class MapComponent implements AfterViewInit {
       L.tileLayer(AppConfig.MAP_TILES_URL, { attribution: AppConfig.MAP_TILES_ATTRIBUTION }).addTo(this.map);
 
       if (this.isEditable) {
+        // Draw
+        const drawnItems = new L.FeatureGroup();
+        this.map.addLayer(drawnItems);
+        const drawControl = new L.Control.Draw({
+          edit: {
+            featureGroup: drawnItems
+          }
+        });
+        this.map.addControl(drawControl);
+
         // OnClick
         this.map.on('click', (event: { latlng: { lat: number; lng: number } }) => {
           this.onClickMap(event.latlng.lat, event.latlng.lng);
