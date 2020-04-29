@@ -1,7 +1,7 @@
 <ng-container *ngIf="profile$ | async as profile">
-  <h2 class="color-primary mb-3">
+  <h2 class="page-title mb-3">
     <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
-    {{ profile?.name }}
+    <span class="font-fascinate">{{ profile?.name }}</span>
   </h2>
 
   <mat-sidenav-container>

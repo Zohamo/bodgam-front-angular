@@ -7,6 +7,7 @@ import {
   faCaretDown,
   faClipboardList,
   faDungeon,
+  faGlobe,
   faMapMarked,
   faSignInAlt,
   faSignOutAlt,
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   faCaretDown = faCaretDown;
   faClipboardList = faClipboardList;
   faDungeon = faDungeon;
+  faGlobe = faGlobe;
   faMapMarked = faMapMarked;
   faSignInAlt = faSignInAlt;
   faSignOutAlt = faSignOutAlt;
