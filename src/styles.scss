@@ -13,7 +13,12 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.font-alt {
+  font-family: 'Major Mono Display' !important;
 }
 
 /**
@@ -207,6 +212,15 @@ a {
 /**
  * Typography
  */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Major Mono Display' !important;
+}
 
 .page-title,
 .mat-dialog-title {

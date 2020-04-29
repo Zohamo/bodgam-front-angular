@@ -24,6 +24,21 @@
     &:hover {
       background-color: $header-back-color-hover;
     }
+
+    figure {
+      position: relative;
+      margin: 0 0.618rem 0 0;
+      .ng-fa-icon {
+        margin: 0;
+        font-size: 36px;
+      }
+      svg.icon-meeple {
+        position: absolute;
+        top: 1px;
+        left: 2px;
+        width: 32px;
+      }
+    }
   }
 }
 

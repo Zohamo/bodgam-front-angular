@@ -24,3 +24,10 @@ $bodgam-front-theme: mat-light-theme($bodgam-front-primary, $bodgam-front-accent
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($bodgam-front-theme);
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Montserrat, sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+@include angular-material-typography($custom-typography);
