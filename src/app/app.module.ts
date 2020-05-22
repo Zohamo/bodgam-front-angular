@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LayoutModule } from '@/layout/layout.module';
-import { SnackBarMessageModule } from './components';
+import { SnackBarMessageModule, EmailVerificationModule } from './components';
 import * as fromContent from './content';
 
 // Declarations
@@ -35,6 +35,7 @@ export const MY_FORMAT: MatDateFormats = {
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    EmailVerificationModule,
     HttpClientModule,
     LayoutModule,
     SnackBarMessageModule,

@@ -1,0 +1,46 @@
+<app-spinner *ngIf="isLoading" class="flex-centered"></app-spinner>
+
+<div *ngIf="!isLoading && !isEmailVerified" class="text-center">
+  <div class="border-bottom pb-5 mb-5">
+    <h1 class="color-warn display-1 my-5"><fa-icon [icon]="faExclamationTriangle"></fa-icon></h1>
+
+    <p i18n="">Un problème est survenu lors de la vérification de votre courriel.</p>
+
+    <p i18n="" class="strong">
+      Dans un premier temps, veuillez réessayer de cliquer sur le lien qui vous a été envoyé.
+    </p>
+  </div>
+
+  <div class="border-bottom pb-5 mb-5">
+    <p i18n="">Si le problème persiste, nous pouvons vous envoyer un autre courriel de confirmation&nbsp;:</p>
+
+    <form [formGroup]="resendEmailForm" (ngSubmit)="onSubmit()">
+      <div class="d-flex justify-content-center align-items-center">
+        <mat-form-field class="flex-grow-1 mr-3" style="max-width: 300px">
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            email
+            placeholder="Courriel"
+            i18n-placeholder=""
+            required
+          />
+        </mat-form-field>
+
+        <!-- Action buttons -->
+
+        <button mat-raised-button color="primary" [disabled]="isSubmitted" (click)="onSubmit()">
+          <fa-icon [icon]="faPaperPlane"></fa-icon>
+          <span i18n="">Envoyer un autre courriel</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <p class="comment" i18n="">
+    Si le problème persiste encore, merci de
+    <a [routerLink]="['/contact']">nous contacter</a>
+    .
+  </p>
+</div>

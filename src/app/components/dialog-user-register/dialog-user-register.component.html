@@ -1,3 +1,5 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
 <form *ngIf="!isLoading" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <h1 mat-dialog-title i18n="">Créer un compte</h1>
@@ -60,3 +62,5 @@
     </button>
   </div>
 </form>
+
+<ng-template #emailRegisterConfirm></ng-template>

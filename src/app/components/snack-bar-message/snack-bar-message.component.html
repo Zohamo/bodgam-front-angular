@@ -81,8 +81,21 @@
   <p *ngSwitchCase="'error-delete-profile'" i18n="">Un problème est survenu lors de la suppression de votre profil.</p>
 
   <!-- Register -->
-  <p *ngSwitchCase="'success-register'" i18n="">Votre compte a été créé avec succès.</p>
+  <p *ngSwitchCase="'success-register'" i18n="">
+    Votre compte a été créé avec succès. Merci de valider votre courriel en cliquant sur le lien qui vous a été envoyé .
+  </p>
   <p *ngSwitchCase="'error-register'" i18n="">Un problème est survenu lors de la création de votre compte.</p>
+  <p *ngSwitchCase="'success-email-verified'" i18n="">Votre courriel a bien été vérifié.</p>
+  <p *ngSwitchCase="'success-email-verification-resent'" i18n="">Un courriel de vérification vous a été renvoyé.</p>
+  <p *ngSwitchCase="'error-email-verification-resent'" i18n="">
+    Un problème est survenu lors de l'envoi du courriel de vérification.
+  </p>
+  <p *ngSwitchCase="'error-email-not-found'" i18n="">
+    Aucun utilisateur avec ce courriel n'a été trouvé.
+  </p>
+  <p *ngSwitchCase="'error-email-already-verified'" i18n="">
+    Ce courriel a déjà été vérifié.
+  </p>
 
   <!-- default -->
   <p *ngSwitchCase="'error'" i18n="">Une erreur est survenue, merci de réessayer.</p>

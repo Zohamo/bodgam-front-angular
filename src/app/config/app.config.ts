@@ -14,5 +14,5 @@ export const AppConfig = {
   MAP_TILES_URL: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
   // Material Snack Bar
-  SNACK_BAR_DURATION: 3 * 1000
+  SNACK_BAR_DURATION: 5 * 1000
 };

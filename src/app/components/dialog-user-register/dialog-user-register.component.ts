@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { MustMatch } from '@/helpers';
-import { User } from '@/models';
-import { AlertService, UserService } from '@/services';
+import { User, Email } from '@/models';
+import { AlertService, EmailService, UserService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -16,6 +16,8 @@ export class DialogUserRegisterComponent {
   public registerForm: FormGroup;
   public isLoading = false;
   public isSubmitted = false;
+
+  @ViewChild('emailRegisterConfirm', { read: ViewContainerRef }) emailRegisterConfirm: ViewContainerRef;
 
   // UI
   faCheck = faCheck;
@@ -34,7 +36,8 @@ export class DialogUserRegisterComponent {
     private dialogRef: MatDialogRef<DialogUserRegisterComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private emailService: EmailService
   ) {
     this.createForm();
   }
@@ -89,19 +92,27 @@ export class DialogUserRegisterComponent {
 
     if (this.registerForm.valid) {
       this.isLoading = true;
-      this.userService
-        .register(this.prepareSaveEntity())
-        .pipe(first())
-        .subscribe(
-          (user) => {
-            this.alertService.open('success-register');
-            this.dialogRef.close();
-          },
-          (error) => {
-            this.alertService.open('error-register');
-            this.isLoading = false;
-          }
-        );
+      const user: User = Object.assign({}, this.prepareSaveEntity());
+
+      this.emailService
+        .buildRegisterConfirmEmail(this.emailRegisterConfirm, user)
+        .subscribe((verificationEmail: Email) => {
+          user.verificationEmail = verificationEmail;
+
+          this.userService
+            .register(user)
+            .pipe(first())
+            .subscribe(
+              (userResponse: User) => {
+                this.alertService.open('success-register');
+                this.dialogRef.close();
+              },
+              (error) => {
+                this.alertService.open('error-register');
+                this.isLoading = false;
+              }
+            );
+        });
     }
   }
 

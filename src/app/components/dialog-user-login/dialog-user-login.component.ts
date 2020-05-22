@@ -42,7 +42,7 @@ export class DialogUserLoginComponent {
    *
    * @memberof DialogUserLoginComponent
    */
-  createForm(): void {
+  private createForm(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]

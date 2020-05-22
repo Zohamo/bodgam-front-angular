@@ -24,7 +24,7 @@ export class AdminGuard implements CanActivate {
    * @memberof AdminGuard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.userService.id === parseInt(route.parent.params.id, 10)) {
+    if (this.userService.id === +route.parent.params.id) {
       return true;
     }
 

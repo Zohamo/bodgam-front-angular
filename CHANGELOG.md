@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Email Verification on Register
+
 ## [0.1.1] - 2020-04-17
 
 ### Added

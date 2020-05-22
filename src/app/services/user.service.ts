@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '@env';
-import { User, Profile } from '@/models';
+import { User, Profile, Email } from '@/models';
 import { AlertService } from './alert.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -88,7 +88,29 @@ export class UserService {
   }
 
   /**
-   * Calls the API to authenticate a user and receives a JWT
+   * Call the API to check if User's email has been verified.
+   *
+   * @param {number} [userId=this.id]
+   * @returns {Observable<boolean>}
+   * @memberof UserService
+   */
+  public isUserEmailVerified(userId: number = this.id): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiPath}/user/${userId}/email/verified`);
+  }
+
+  /**
+   * Call the API to resend the verification email.
+   *
+   * @param {Email} email
+   * @returns {Observable<boolean>}
+   * @memberof UserService
+   */
+  public resendVerificationEmail(email: Email): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.apiPath}/email/resend`, email);
+  }
+
+  /**
+   * Call the API to authenticate a user and receives a JWT.
    *
    * @param {string} email
    * @param {string} password

@@ -9,6 +9,7 @@ export * from './geocode/geocode.model';
 export * from './navigator/navigator-geolocation-position-coords.model';
 export * from './navigator/navigator-geolocation-position.model';
 export * from './country.model';
+export * from './email.model';
 export * from './event-bg.model';
 export * from './event-subscription.model';
 export * from './event-subscription-groups.model';
