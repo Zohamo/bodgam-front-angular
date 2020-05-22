@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Email Verification on Register
+- Fonts, Logo & site name
 
 ## [0.1.1] - 2020-04-17
 
