@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Profile, ProfilePrivacy } from '@/models';
-import { AlertService, ProfileService, UserService } from '@/services';
+import { AlertService, ProfileService, AuthService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
@@ -21,15 +21,15 @@ export class ProfileSettingsPageComponent implements OnDestroy {
    *
    * @param {AlertService} alertService
    * @param {ProfileService} profileService
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @memberof ProfileSettingsPageComponent
    */
   constructor(
     private alertService: AlertService,
     private profileService: ProfileService,
-    private userService: UserService
+    private authService: AuthService
   ) {
-    this.userId = userService.id;
+    this.userId = authService.id;
     this.profile$ = profileService.currentProfile$;
     this.profile$.pipe(takeUntil(this.destroy$)).subscribe((profile: Profile) => {
       if (profile && profile.id) {
@@ -49,7 +49,7 @@ export class ProfileSettingsPageComponent implements OnDestroy {
   }
 
   /**
-   * Call UserService to edit the profile's privacy.
+   * Call AuthService to edit the profile's privacy.
    *
    * @param {ProfilePrivacy} privacy
    * @memberof ProfileSettingsPageComponent
@@ -71,20 +71,20 @@ export class ProfileSettingsPageComponent implements OnDestroy {
   }
 
   /**
-   * Call UserService to delete the user and profile.
+   * Call AuthService to delete the user and profile.
    *
    * @memberof ProfileSettingsPageComponent
    */
   public deleteProfile(): void {
-    if (this.userService.id === this.profileId) {
-      this.userService
+    if (this.authService.id === this.profileId) {
+      this.authService
         .deleteUser(this.profileId)
         .pipe(first())
         .subscribe(
           (response) => {
             console.log('deleteProfile OK', response);
             this.alertService.open('success-delete-profile');
-            this.userService.logout();
+            this.authService.logout();
           },
           (error: HttpErrorResponse) => {
             console.log('deleteProfile ERROR', error);

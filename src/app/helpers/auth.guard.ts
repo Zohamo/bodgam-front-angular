@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
 import { User } from '@/models';
-import { AlertService, UserService } from '@/services';
+import { AlertService, AuthService } from '@/services';
 
 // UI
 import { MatDialog } from '@angular/material';
@@ -14,12 +14,12 @@ export class AuthGuard implements CanActivate {
   /**
    * Creates an instance of AuthGuard.
    *
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @param {AlertService} alertService
    * @param {MatDialog} dialog
    * @memberof AuthGuard
    */
-  constructor(private userService: UserService, private alertService: AlertService, private dialog: MatDialog) {}
+  constructor(private authService: AuthService, private alertService: AlertService, private dialog: MatDialog) {}
 
   /**
    * Can Activate if the user is authenticated
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     console.log('AuthGuard route', route);
 
-    if (this.userService.value) {
+    if (this.authService.value) {
       return true;
     }
 

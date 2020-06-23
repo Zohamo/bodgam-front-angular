@@ -6,30 +6,29 @@ import { AlertService, AuthService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-dialog-user-login',
-  templateUrl: './dialog-user-login.component.html',
-  styleUrls: ['./dialog-user-login.component.scss']
+  selector: 'app-password-forgot-dialog',
+  templateUrl: './password-forgot-dialog.component.html',
+  styleUrls: ['./password-forgot-dialog.component.scss']
 })
-export class DialogUserLoginComponent {
-  public loginForm: FormGroup;
+export class PasswordForgotDialogComponent {
+  public forgotPasswordForm: FormGroup;
   public isLoading = false;
-  public isSubmitted = false;
 
   // Font Awesome
   faCheck = faCheck;
   faTimesCircle = faTimesCircle;
 
   /**
-   * Creates an instance of DialogUserLoginComponent.
+   * Creates an instance of PasswordForgotDialogComponent.
    *
-   * @param {MatDialogRef<DialogUserLoginComponent>} dialogRef
+   * @param {MatDialogRef<PasswordForgotDialogComponent>} dialogRef
    * @param {FormBuilder} formBuilder
    * @param {AuthService} authService
    * @param {AlertService} alertService
-   * @memberof DialogUserLoginComponent
+   * @memberof PasswordForgotDialogComponent
    */
   constructor(
-    private dialogRef: MatDialogRef<DialogUserLoginComponent>,
+    private dialogRef: MatDialogRef<PasswordForgotDialogComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private authService: AuthService
@@ -40,12 +39,11 @@ export class DialogUserLoginComponent {
   /**
    * Create form
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof PasswordForgotDialogComponent
    */
   private createForm(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+    this.forgotPasswordForm = this.formBuilder.group({
+      email: ['', Validators.required]
     });
   }
 
@@ -54,41 +52,30 @@ export class DialogUserLoginComponent {
    *
    * @readonly
    * @type {{ [key: string]: AbstractControl }}
-   * @memberof DialogUserLoginComponent
+   * @memberof PasswordForgotDialogComponent
    */
   get f(): { [key: string]: AbstractControl } {
-    return this.loginForm.controls;
-  }
-
-  /**
-   * Close this and open Forgot Password dialog
-   *
-   * @memberof DialogUserLoginComponent
-   */
-  public onForgotPassword(): void {
-    this.dialogRef.close({ forgotPassword: true });
+    return this.forgotPasswordForm.controls;
   }
 
   /**
    * Submit form
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof PasswordForgotDialogComponent
    */
   public onSubmit(): void {
-    this.isSubmitted = true;
-
-    if (this.loginForm.valid) {
-      this.isSubmitted = true;
+    if (this.forgotPasswordForm.valid) {
+      this.isLoading = true;
       this.authService
-        .login(this.f.email.value, this.f.password.value)
+        .resetPassword({ email: this.f.email.value })
         .pipe(first())
         .subscribe(
-          (user) => {
-            this.alertService.open('success-login');
+          (result) => {
+            this.alertService.open('success-reset-password');
             this.dialogRef.close();
           },
           (error) => {
-            this.alertService.open('error-login');
+            this.alertService.open('error-reset-password');
             this.isLoading = false;
           }
         );
@@ -98,7 +85,7 @@ export class DialogUserLoginComponent {
   /**
    * Close dialog
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof PasswordForgotDialogComponent
    */
   public onClose(): void {
     this.dialogRef.close();

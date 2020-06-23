@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
-import { UserService } from '@/services';
+import { AuthService } from '@/services';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,10 @@ export class AdminGuard implements CanActivate {
    * Creates an instance of AdminGuard.
    *
    * @param {AlertService} alertService
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @memberof AdminGuard
    */
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   /**
    * Can Activate if the user is authenticated
@@ -24,11 +24,11 @@ export class AdminGuard implements CanActivate {
    * @memberof AdminGuard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.userService.id === +route.parent.params.id) {
+    if (this.authService.id === +route.parent.params.id) {
       return true;
     }
 
-    this.router.navigate(['/404']);
+    this.router.navigate(['error', 401]);
     return false;
   }
 }

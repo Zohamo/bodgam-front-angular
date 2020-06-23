@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center align-items-center mb-4">
+  <h2 class="display-2 mr-5">{{ code }}</h2>
+
+  <ng-container *ngIf="message" [ngSwitch]="message">
+    <h3 *ngSwitchCase="'PASSWORD_RESET_TOKEN_EXPIRED'" i18n="">
+      Votre code de réinitialisation de mot de passe a expiré.
+    </h3>
+    <h3 *ngSwitchCase="'PASSWORD_RESET_TOKEN_INVALID'" i18n="">
+      Votre code de réinitialisation de mot de passe est invalide.
+    </h3>
+    <h3 *ngSwitchDefault>
+      {{ message }}
+    </h3>
+  </ng-container>
+
+  <ng-container *ngIf="!message" [ngSwitch]="code">
+    <h3 *ngSwitchCase="'404'" i18n="">
+      La page que vous cherchez n'existe pas&nbsp;!
+    </h3>
+  </ng-container>
+</div>
+
+<img
+  src="https://media3.giphy.com/media/mEahVAkKjt0VL2o5Jk/giphy.gif"
+  alt=""
+  class="d-block mx-auto"
+  style="width: 80%; height: auto;"
+/>

@@ -15,11 +15,12 @@ import {
   faUsers,
   faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
+import { PasswordForgotDialogComponent } from '@/auth/components';
 import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
 import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
 import { AppInfo } from '@/config';
 import { User } from '@/models';
-import { UserService } from '@/services';
+import { AuthService } from '@/services';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -54,10 +55,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Creates an instance of HeaderComponent.
    *
    * @param {MatDialog} dialog
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @memberof HeaderComponent
    */
-  constructor(private dialog: MatDialog, private userService: UserService) {}
+  constructor(private dialog: MatDialog, private authService: AuthService) {}
 
   /**
    * A lifecycle hook that is called after Angular has initialized all data-bound properties
@@ -65,7 +66,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   ngOnInit(): void {
-    this.userSubscription = this.userService.currentUser$.subscribe((user) => {
+    this.userSubscription = this.authService.currentUser$.subscribe((user: User) => {
       this.user = user;
       this.isAuth = Boolean(user);
     });
@@ -88,7 +89,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onRegister(): void {
-    this.dialog.open(DialogUserRegisterComponent);
+    const dialogRef = this.dialog.open(DialogUserRegisterComponent);
+
+    dialogRef.afterClosed().subscribe((res: { hasAccount: boolean }) => {
+      if (res && res.hasAccount) {
+        this.onLogin();
+      }
+    });
   }
 
   /**
@@ -97,7 +104,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onLogin(): void {
-    this.dialog.open(DialogUserLoginComponent);
+    const dialogRef = this.dialog.open(DialogUserLoginComponent);
+
+    dialogRef.afterClosed().subscribe((res: { forgotPassword: boolean }) => {
+      if (res && res.forgotPassword) {
+        this.dialog.open(PasswordForgotDialogComponent);
+      }
+    });
   }
 
   /**
@@ -106,6 +119,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onLogout(): void {
-    this.userService.logout();
+    this.authService.logout();
   }
 }

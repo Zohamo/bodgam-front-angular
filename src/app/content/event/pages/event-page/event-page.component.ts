@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EventBg } from '@/models';
-import { AlertService, EventService, UserService } from '@/services';
+import { AlertService, EventService, AuthService } from '@/services';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ export class EventPageComponent {
    * @param {ActivatedRoute} route
    * @param {AlertService} alertService
    * @param {EventService} eventService
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @param {Router} router
    * @memberof EventPageComponent
    */
@@ -28,10 +28,10 @@ export class EventPageComponent {
     private route: ActivatedRoute,
     private alertService: AlertService,
     private eventService: EventService,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {
-    this.userService.currentUser$.subscribe((user) => {
+    this.authService.currentUser$.subscribe((user) => {
       this.userId = user ? user.id : null;
       this.getEvent();
     });

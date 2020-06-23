@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { faExclamationTriangle, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { AlertService, UserService } from '@/services';
+import { AlertService, AuthService } from '@/services';
 import { Subject } from 'rxjs';
 import { switchMap, takeUntil, first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -26,7 +26,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
    * Creates an instance of EmailVerificationComponent.
    *
    * @param {AlertService} alertService
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @param {ActivatedRoute} route
    * @param {Router} router
    * @memberof EmailVerificationComponent
@@ -34,7 +34,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -48,7 +48,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.route.paramMap
-      .pipe(switchMap((params: ParamMap) => this.userService.isUserEmailVerified(+params.get('id'))))
+      .pipe(switchMap((params: ParamMap) => this.authService.isUserEmailVerified(+params.get('id'))))
       .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
         console.log('isUserEmailVerified response', response);
@@ -93,8 +93,8 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // this.isSubmitted = true;
-    this.userService
+    this.isSubmitted = true;
+    this.authService
       .resendVerificationEmail(this.resendEmailForm.value)
       .pipe(first())
       .subscribe(
@@ -108,6 +108,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
           }
         },
         (error) => {
+          this.isSubmitted = false;
           switch (error) {
             case 'Not Found':
               this.alertService.open('error-email-not-found');

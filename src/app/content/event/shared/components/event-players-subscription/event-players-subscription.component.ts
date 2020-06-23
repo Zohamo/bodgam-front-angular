@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { faQuestion, faThumbsDown, faThumbsUp, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { EventBg, EventSubscription } from '@/models';
-import { AlertService, EventSubscriptionService, UserService } from '@/services';
+import { AlertService, EventSubscriptionService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({

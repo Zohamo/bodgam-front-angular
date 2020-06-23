@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminGuard } from '@/helpers';
-import { PageNotFoundComponent } from '@/pages';
+import { ErrorPageComponent } from '@/pages';
 
 import {
   ProfileAgendaPageComponent,
@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: 'settings', component: ProfileSettingsPageComponent, canActivate: [AdminGuard] }
     ]
   },
-  { path: 'player/**', component: PageNotFoundComponent }
+  { path: 'player/**', component: ErrorPageComponent }
 ];
 
 @NgModule({

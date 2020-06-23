@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 // Declarations
 import { HeaderComponent } from './header/header.component';
 // Entry Components
+import { PasswordForgotDialogComponent } from '@/auth/components';
 import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
 import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
 import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
@@ -27,7 +28,12 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule
   ],
   declarations: [HeaderComponent, FooterComponent],
-  entryComponents: [DialogUserLoginComponent, DialogUserRegisterComponent, SnackBarMessageComponent],
+  entryComponents: [
+    DialogUserLoginComponent,
+    DialogUserRegisterComponent,
+    PasswordForgotDialogComponent,
+    SnackBarMessageComponent
+  ],
   exports: [HeaderComponent, FooterComponent]
 })
 export class LayoutModule {}

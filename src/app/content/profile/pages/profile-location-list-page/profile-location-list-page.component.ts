@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { LocationItem, Profile, EventBg } from '@/models';
-import { AlertService, LocationService, ProfileService, UserService } from '@/services';
+import { AlertService, LocationService, ProfileService, AuthService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, first } from 'rxjs/operators';
 import { LocationFormDialogComponent } from '@/content/location/components';
@@ -32,14 +32,14 @@ export class ProfileLocationListPageComponent implements OnDestroy {
     private alertService: AlertService,
     private locationService: LocationService,
     private profileService: ProfileService,
-    private userService: UserService,
+    private authService: AuthService,
     private dialog: MatDialog
   ) {
     profileService.currentProfile$.pipe(takeUntil(this.destroy$)).subscribe((profile: Profile) => {
       if (profile && profile.id) {
         this.profileId = profile.id;
         this.locations$ = locationService.getLocations(profile.id);
-        this.userService.currentUser$.subscribe((user) => {
+        this.authService.currentUser$.subscribe((user) => {
           if (user) {
             this.isAdmin = profile.id === user.id;
           }

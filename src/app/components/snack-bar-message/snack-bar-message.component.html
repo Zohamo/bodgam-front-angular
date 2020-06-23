@@ -74,6 +74,18 @@
   <p *ngSwitchCase="'must-login'" i18n="">Veuillez vous connecter.</p>
   <p *ngSwitchCase="'success-logout'" i18n="">Vous êtes maintenant déconnecté(e). A bientôt !</p>
 
+  <!-- Password -->
+  <p *ngSwitchCase="'success-change-password'" i18n="">Votre mot de passe a bien été modifié.</p>
+  <p *ngSwitchCase="'error-change-password'" i18n="">
+    Un problème est survenu lors de la modification de votre mot de passe.
+  </p>
+  <p *ngSwitchCase="'success-reset-password'" i18n="">
+    Un courriel vous a été envoyé afin de réinitialiser votre mot de passe.
+  </p>
+  <p *ngSwitchCase="'error-reset-password'" i18n="">
+    Un problème est survenu lors de la réinitialisation de votre mot de passe.
+  </p>
+
   <!-- Profile -->
   <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>
   <p *ngSwitchCase="'error-save-profile'" i18n="">Un problème est survenu lors de la mise à jour de votre profil.</p>

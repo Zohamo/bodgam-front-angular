@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCalendarAlt, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 import { EventBg, User } from '@/models';
-import { EventService, UserService, AlertService } from '@/services';
+import { EventService, AuthService, AlertService } from '@/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -29,10 +29,10 @@ export class EventListPageComponent {
     public alertService: AlertService,
     private eventService: EventService,
     private router: Router,
-    private userService: UserService
+    private authService: AuthService
   ) {
     this.events$ = eventService.getEvents();
-    userService.currentUser$.subscribe((user) => {
+    authService.currentUser$.subscribe((user) => {
       if (user) {
         this.user = user;
       }

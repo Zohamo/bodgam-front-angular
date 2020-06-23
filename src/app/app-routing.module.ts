@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent, PageNotFoundComponent } from './pages';
+import { ErrorPageComponent, HomePageComponent } from './pages';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: '404', component: PageNotFoundComponent },
+  { path: 'error/:code', component: ErrorPageComponent },
+  { path: 'error/:code/:message', component: ErrorPageComponent },
   { path: 'user/:id/email/verified', component: EmailVerificationComponent }
 ];
 

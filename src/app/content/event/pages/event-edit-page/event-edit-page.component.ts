@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EventBg, LocationItem } from '@/models';
-import { AlertService, UserService, EventService, LocationService } from '@/services';
+import { AlertService, AuthService, EventService, LocationService } from '@/services';
 import { Observable, of, Subject } from 'rxjs';
 import { switchMap, takeUntil, first } from 'rxjs/operators';
 
@@ -28,7 +28,7 @@ export class EventEditPageComponent implements OnDestroy {
    * Creates an instance of EventEditPageComponent.
    *
    * @param {AlertService} alertService
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @param {EventService} eventService
    * @param {LocationService} locationService
    * @param {ActivatedRoute} route
@@ -37,7 +37,7 @@ export class EventEditPageComponent implements OnDestroy {
    */
   constructor(
     public alertService: AlertService,
-    private userService: UserService,
+    private authService: AuthService,
     private eventService: EventService,
     private locationService: LocationService,
     private route: ActivatedRoute,
@@ -119,7 +119,7 @@ export class EventEditPageComponent implements OnDestroy {
    */
   private getLocations(): void {
     this.locationService
-      .getLocations(this.userService.id)
+      .getLocations(this.authService.id)
       .pipe(first())
       .subscribe((locations) => {
         this.userLocations = locations ? locations : [];

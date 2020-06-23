@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { MustMatch } from '@/helpers';
 import { User, Email } from '@/models';
-import { AlertService, EmailService, UserService } from '@/services';
+import { AlertService, EmailService, AuthService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -28,7 +28,7 @@ export class DialogUserRegisterComponent {
    *
    * @param {MatDialogRef<DialogUserRegisterComponent>} dialogRef
    * @param {FormBuilder} formBuilder
-   * @param {UserService} userService
+   * @param {AuthService} authService
    * @param {AlertService} alertService
    * @memberof DialogUserRegisterComponent
    */
@@ -36,7 +36,7 @@ export class DialogUserRegisterComponent {
     private dialogRef: MatDialogRef<DialogUserRegisterComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private userService: UserService,
+    private authService: AuthService,
     private emailService: EmailService
   ) {
     this.createForm();
@@ -73,6 +73,15 @@ export class DialogUserRegisterComponent {
   }
 
   /**
+   * Close this and open Login dialog
+   *
+   * @memberof DialogUserRegisterComponent
+   */
+  public onHasAccount(): void {
+    this.dialogRef.close({ hasAccount: true });
+  }
+
+  /**
    * Prepare the entity before submit
    *
    * @returns {User}
@@ -99,7 +108,7 @@ export class DialogUserRegisterComponent {
         .subscribe((verificationEmail: Email) => {
           user.verificationEmail = verificationEmail;
 
-          this.userService
+          this.authService
             .register(user)
             .pipe(first())
             .subscribe(
