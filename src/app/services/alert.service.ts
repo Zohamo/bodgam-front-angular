@@ -20,9 +20,9 @@ export class AlertService {
    * @param {*} [input]
    * @memberof AlertService
    */
-  public open(message: string, input?: any): void {
+  public open(message: string, data?: any, type?: any): void {
     this.snackBar.openFromComponent(SnackBarMessageComponent, {
-      data: { message, input },
+      data: { message, data, type },
       duration: AppConfig.SNACK_BAR_DURATION
     });
   }

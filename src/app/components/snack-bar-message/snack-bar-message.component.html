@@ -1,66 +1,106 @@
-<ng-container [ngSwitch]="data.message">
+<ng-container [ngSwitch]="alert.message">
   <!-- BGG -->
-  <p *ngSwitchCase="'error-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
+
+  <ng-container *ngSwitchCase="'bgg-user'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'error'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
+    </ng-container>
+  </ng-container>
 
   <!-- Event -->
-  <p *ngSwitchCase="'success-delete-event'" i18n="">Votre évènement a été supprimé avec succès.</p>
-  <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
-  <p *ngSwitchCase="'error-delete-event'" i18n="">Un problème est survenu lors de la suppression de votre évènement.</p>
-  <p *ngSwitchCase="'error-save-event'" i18n="">Un problème est survenu lors de la sauvegarde de votre évènement.</p>
+
+  <ng-container *ngSwitchCase="'event-delete'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'success'" i18n="">Votre évènement a été supprimé avec succès.</p>
+      <p *ngSwitchCase="'error'" i18n="">Un problème est survenu lors de la suppression de votre évènement.</p>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'event-save'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'success'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
+      <p *ngSwitchCase="'error'" i18n="">Un problème est survenu lors de la sauvegarde de votre évènement.</p>
+    </ng-container>
+  </ng-container>
 
   <!-- Event Administration-->
-  <p *ngSwitchCase="'success-event-administration-accept'" i18n="">
-    <span class="color-primary">{{ data.input }}</span>
-    a bien été accepté.
-  </p>
-  <p *ngSwitchCase="'success-event-administration-refuse'" i18n="">
-    <span class="color-primary">{{ data.input }}</span>
-    a bien été refusé.
-  </p>
-  <p *ngSwitchCase="'error-event-administration-accept'" i18n="">
-    Un problème est survenu lors de l'acceptation de
-    <span class="color-primary">{{ data.input }}</span>
-    .
-  </p>
-  <p *ngSwitchCase="'error-event-administration-refuse'" i18n="">
-    Un problème est survenu lors du refus de
-    <span class="color-primary">{{ data.input }}</span>
-    .
-  </p>
+
+  <ng-container *ngSwitchCase="'event-administration-accept'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'success'" i18n="">
+        <span class="color-primary">{{ alert.data }}</span>
+        a bien été accepté.
+      </p>
+      <p *ngSwitchCase="'error'" i18n="">
+        Un problème est survenu lors de l'acceptation de
+        <span class="color-primary">{{ alert.data }}</span>
+        .
+      </p>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'event-administration-refuse'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'success'" i18n="">
+        <span class="color-primary">{{ alert.data }}</span>
+        a bien été refusé.
+      </p>
+      <p *ngSwitchCase="'error'" i18n="">
+        Un problème est survenu lors du refus de
+        <span class="color-primary">{{ alert.data }}</span>
+        .
+      </p>
+    </ng-container>
+  </ng-container>
 
   <!-- Event Subscription -->
-  <p *ngSwitchCase="'success-event-subscription'" i18n="">
-    Votre inscription à cet évènement a été bien été prise en compte.
-  </p>
-  <p *ngSwitchCase="'error-event-subscription'" i18n="">
-    Un problème est survenu lors de votre inscription à cet évènement.
-  </p>
-  <p *ngSwitchCase="'success-event-unsubscription'" i18n="">
-    Votre désinscription à cet évènement a été bien été prise en compte.
-  </p>
-  <p *ngSwitchCase="'error-event-unsubscription'" i18n="">
-    Un problème est survenu lors de votre désinscription à cet évènement.
-  </p>
+
+  <ng-container *ngSwitchCase="'event-subscription'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'success'" i18n="">Votre inscription à cet évènement a été bien été prise en compte.</p>
+      <p *ngSwitchCase="'error'" i18n="">Un problème est survenu lors de votre inscription à cet évènement.</p>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'event-unsubscription'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'success'" i18n="">Votre désinscription à cet évènement a été bien été prise en compte.</p>
+      <p *ngSwitchCase="'error'" i18n="">Un problème est survenu lors de votre désinscription à cet évènement.</p>
+    </ng-container>
+  </ng-container>
 
   <!-- Geocode -->
-  <p *ngSwitchCase="'error-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
-  <p *ngSwitchCase="'error-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
+
+  <ng-container *ngSwitchCase="'geocode'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'error'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'geocode'">
+    <ng-container [ngSwitch]="alert.type">
+      <p *ngSwitchCase="'error'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
+    </ng-container>
+  </ng-container>
+
+  <p *ngSwitchCase="'error-geocode'" i18n=""></p>
+  <p *ngSwitchCase="'error-reverse-geocode'" i18n=""></p>
 
   <!-- Location -->
   <p *ngSwitchCase="'success-save-location'" i18n="">
     Votre lieu
-    <span class="color-primary">{{ data.input }}</span>
+    <span class="color-primary">{{ alert.data }}</span>
     a été sauvegardé avec succès.
   </p>
   <p *ngSwitchCase="'error-save-location'" i18n="">Un problème est survenu lors de la sauvegarde de votre lieu.</p>
   <p *ngSwitchCase="'success-delete-location'" i18n="">
     Votre lieu
-    <span class="color-primary">{{ data.input }}</span>
+    <span class="color-primary">{{ alert.data }}</span>
     a été supprimé avec succès.
   </p>
   <p *ngSwitchCase="'error-delete-location'" i18n="">
     Un problème est survenu lors de la suppression de votre lieu
-    <span class="color-primary">{{ data.input }}</span>
+    <span class="color-primary">{{ alert.data }}</span>
     .
   </p>
 
