@@ -15,7 +15,7 @@ import {
 } from './pages';
 
 const routes: Routes = [
-  { path: 'players', component: ProfileListPageComponent, canActivate: [AuthGuard] },
+  { path: 'players', component: ProfileListPageComponent },
   {
     path: 'player/:id',
     component: ProfileLayoutComponent,

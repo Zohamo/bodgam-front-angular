@@ -66,7 +66,7 @@ export class UserLoginDialogComponent {
    * @memberof UserLoginDialogComponent
    */
   public onForgotPassword(): void {
-    this.dialogRef.close({ forgotPassword: true });
+    this.dialogRef.close({ openDialog: 'password-forgot' });
   }
 
   /**

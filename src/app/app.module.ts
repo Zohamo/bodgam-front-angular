@@ -19,6 +19,11 @@ import * as fromPages from './pages';
 // Providers
 import { ErrorInterceptor, JwtInterceptor } from '@/helpers';
 import { MatDateFormats, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatExpansionModule } from '@angular/material';
+import {
+  PasswordForgotDialogComponent,
+  UserLoginDialogComponent,
+  UserRegisterDialogComponent
+} from '@/auth/components';
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -46,6 +51,7 @@ export const MY_FORMAT: MatDateFormats = {
     ...fromContent.modules
   ],
   declarations: [AppComponent, ...fromPages.components],
+  entryComponents: [PasswordForgotDialogComponent, UserLoginDialogComponent, UserRegisterDialogComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

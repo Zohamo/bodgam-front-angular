@@ -22,7 +22,7 @@ import {
 } from '@/auth/components';
 import { AppInfo } from '@/config';
 import { User } from '@/models';
-import { AuthService } from '@/services';
+import { AuthService, DialogService } from '@/services';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -56,11 +56,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   /**
    * Creates an instance of HeaderComponent.
    *
-   * @param {MatDialog} dialog
    * @param {AuthService} authService
+   * @param {MatDialog} dialog
+   * @param {DialogService} dialogService
    * @memberof HeaderComponent
    */
-  constructor(private dialog: MatDialog, private authService: AuthService) {}
+  constructor(private authService: AuthService, private dialog: MatDialog, private dialogService: DialogService) {}
 
   /**
    * Called after Angular has initialized all data-bound properties
@@ -91,13 +92,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onRegister(): void {
-    const dialogRef = this.dialog.open(UserRegisterDialogComponent);
-
-    dialogRef.afterClosed().subscribe((res: { hasAccount: boolean }) => {
-      if (res && res.hasAccount) {
-        this.onLogin();
-      }
-    });
+    this.dialogService.open('user-register');
   }
 
   /**
@@ -106,13 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onLogin(): void {
-    const dialogRef = this.dialog.open(UserLoginDialogComponent);
-
-    dialogRef.afterClosed().subscribe((res: { forgotPassword: boolean }) => {
-      if (res && res.forgotPassword) {
-        this.dialog.open(PasswordForgotDialogComponent);
-      }
-    });
+    this.dialogService.open('user-login');
   }
 
   /**

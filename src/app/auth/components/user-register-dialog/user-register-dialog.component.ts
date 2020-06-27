@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { MustMatch } from '@/helpers';
 import { User, Email } from '@/models';
-import { AlertService, EmailService, AuthService } from '@/services';
+import { AlertService, EmailService, AuthService, DialogService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -78,7 +78,7 @@ export class UserRegisterDialogComponent {
    * @memberof UserRegisterDialogComponent
    */
   public onHasAccount(): void {
-    this.dialogRef.close({ hasAccount: true });
+    this.dialogRef.close({ openDialog: 'login' });
   }
 
   /**
