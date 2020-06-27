@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogUserLoginComponent } from './dialog-user-login.component';
+import { UserLoginDialogComponent } from './user-login-dialog.component';
 
-describe('DialogUserLoginComponent', () => {
-  let component: DialogUserLoginComponent;
-  let fixture: ComponentFixture<DialogUserLoginComponent>;
+describe('UserLoginDialogComponent', () => {
+  let component: UserLoginDialogComponent;
+  let fixture: ComponentFixture<UserLoginDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogUserLoginComponent ]
+      declarations: [ UserLoginDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogUserLoginComponent);
+    fixture = TestBed.createComponent(UserLoginDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

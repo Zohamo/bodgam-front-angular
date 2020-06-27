@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminGuard } from '@/helpers';
+import { AdminGuard, AuthGuard } from '@/helpers';
 import { ErrorPageComponent } from '@/pages';
 
 import {
@@ -15,7 +15,7 @@ import {
 } from './pages';
 
 const routes: Routes = [
-  { path: 'players', component: ProfileListPageComponent },
+  { path: 'players', component: ProfileListPageComponent, canActivate: [AuthGuard] },
   {
     path: 'player/:id',
     component: ProfileLayoutComponent,
