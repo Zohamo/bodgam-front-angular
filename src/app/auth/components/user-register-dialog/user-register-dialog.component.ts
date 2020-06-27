@@ -8,11 +8,11 @@ import { AlertService, EmailService, AuthService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-dialog-user-register',
-  templateUrl: './dialog-user-register.component.html',
-  styleUrls: ['./dialog-user-register.component.scss']
+  selector: 'app-user-register-dialog',
+  templateUrl: './user-register-dialog.component.html',
+  styleUrls: ['./user-register-dialog.component.scss']
 })
-export class DialogUserRegisterComponent {
+export class UserRegisterDialogComponent {
   public registerForm: FormGroup;
   public isLoading = false;
   public isSubmitted = false;
@@ -24,16 +24,16 @@ export class DialogUserRegisterComponent {
   faTimesCircle = faTimesCircle;
 
   /**
-   * Creates an instance of DialogUserRegisterComponent.
+   * Creates an instance of UserRegisterDialogComponent.
    *
-   * @param {MatDialogRef<DialogUserRegisterComponent>} dialogRef
+   * @param {MatDialogRef<UserRegisterDialogComponent>} dialogRef
    * @param {FormBuilder} formBuilder
    * @param {AuthService} authService
    * @param {AlertService} alertService
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   constructor(
-    private dialogRef: MatDialogRef<DialogUserRegisterComponent>,
+    private dialogRef: MatDialogRef<UserRegisterDialogComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private authService: AuthService,
@@ -45,7 +45,7 @@ export class DialogUserRegisterComponent {
   /**
    * Create form
    *
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   private createForm(): void {
     this.registerForm = this.formBuilder.group(
@@ -66,7 +66,7 @@ export class DialogUserRegisterComponent {
    *
    * @readonly
    * @type {{ [key: string]: AbstractControl }}
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   get f(): { [key: string]: AbstractControl } {
     return this.registerForm.controls;
@@ -75,7 +75,7 @@ export class DialogUserRegisterComponent {
   /**
    * Close this and open Login dialog
    *
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   public onHasAccount(): void {
     this.dialogRef.close({ hasAccount: true });
@@ -85,7 +85,7 @@ export class DialogUserRegisterComponent {
    * Prepare the entity before submit
    *
    * @returns {User}
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   private prepareSaveEntity(): User {
     return this.registerForm.value;
@@ -94,7 +94,7 @@ export class DialogUserRegisterComponent {
   /**
    * Submit form
    *
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   public onSubmit() {
     this.isSubmitted = true;
@@ -128,7 +128,7 @@ export class DialogUserRegisterComponent {
   /**
    * Close dialog
    *
-   * @memberof DialogUserRegisterComponent
+   * @memberof UserRegisterDialogComponent
    */
   public onClose(): void {
     this.dialogRef.close();

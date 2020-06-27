@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { faFlask, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
+import { UserRegisterDialogComponent } from '@/auth/components';
 
 @Component({
   selector: 'app-home-page',
@@ -27,6 +27,6 @@ export class HomePageComponent {
    * @memberof HomePageComponent
    */
   public onRegister(): void {
-    this.dialog.open(DialogUserRegisterComponent);
+    this.dialog.open(UserRegisterDialogComponent);
   }
 }

@@ -15,9 +15,11 @@ import {
   faUsers,
   faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
-import { PasswordForgotDialogComponent } from '@/auth/components';
-import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
-import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
+import {
+  PasswordForgotDialogComponent,
+  UserRegisterDialogComponent,
+  UserLoginDialogComponent
+} from '@/auth/components';
 import { AppInfo } from '@/config';
 import { User } from '@/models';
 import { AuthService } from '@/services';
@@ -61,7 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, private authService: AuthService) {}
 
   /**
-   * A lifecycle hook that is called after Angular has initialized all data-bound properties
+   * Called after Angular has initialized all data-bound properties
    *
    * @memberof HeaderComponent
    */
@@ -89,7 +91,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onRegister(): void {
-    const dialogRef = this.dialog.open(DialogUserRegisterComponent);
+    const dialogRef = this.dialog.open(UserRegisterDialogComponent);
 
     dialogRef.afterClosed().subscribe((res: { hasAccount: boolean }) => {
       if (res && res.hasAccount) {
@@ -104,7 +106,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   public onLogin(): void {
-    const dialogRef = this.dialog.open(DialogUserLoginComponent);
+    const dialogRef = this.dialog.open(UserLoginDialogComponent);
 
     dialogRef.afterClosed().subscribe((res: { forgotPassword: boolean }) => {
       if (res && res.forgotPassword) {
@@ -114,7 +116,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Event fot user logout
+   * Event for user logout
    *
    * @memberof HeaderComponent
    */

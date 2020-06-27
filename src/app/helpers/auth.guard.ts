@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
-import { User } from '@/models';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
+import { UserRegisterDialogComponent } from '@/auth/components';
 import { AlertService, AuthService } from '@/services';
 
 // UI
@@ -19,7 +18,12 @@ export class AuthGuard implements CanActivate {
    * @param {MatDialog} dialog
    * @memberof AuthGuard
    */
-  constructor(private authService: AuthService, private alertService: AlertService, private dialog: MatDialog) {}
+  constructor(
+    private authService: AuthService,
+    private alertService: AlertService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   /**
    * Can Activate if the user is authenticated
@@ -37,7 +41,8 @@ export class AuthGuard implements CanActivate {
     }
 
     this.alertService.open('must-login');
-    this.dialog.open(DialogUserLoginComponent);
+    // WARNING in Circular dependency :
+    // this.dialog.open(UserRegisterDialogComponent);
     return false;
   }
 }

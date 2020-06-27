@@ -1,39 +1,27 @@
 import { NgModule } from '@angular/core';
 // Imports
 import { CommonModule } from '@angular/common';
-import { DialogUserLoginModule, DialogUserRegisterModule } from '@/components';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { LayoutUiModule } from './layout-ui.module';
 import { RouterModule } from '@angular/router';
 // Declarations
-import { HeaderComponent } from './header/header.component';
+import * as fromComponents from './components';
 // Entry Components
-import { PasswordForgotDialogComponent } from '@/auth/components';
-import { DialogUserLoginComponent } from '@/components/dialog-user-login/dialog-user-login.component';
-import { DialogUserRegisterComponent } from '@/components/dialog-user-register/dialog-user-register.component';
+import {
+  PasswordForgotDialogComponent,
+  UserLoginDialogComponent,
+  UserRegisterDialogComponent
+} from '@/auth/components';
 import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
-import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    DialogUserLoginModule,
-    DialogUserRegisterModule,
-    FontAwesomeModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  declarations: [HeaderComponent, FooterComponent],
+  imports: [CommonModule, LayoutUiModule, RouterModule],
+  declarations: [...fromComponents.components],
   entryComponents: [
-    DialogUserLoginComponent,
-    DialogUserRegisterComponent,
     PasswordForgotDialogComponent,
+    UserLoginDialogComponent,
+    UserRegisterDialogComponent,
     SnackBarMessageComponent
   ],
-  exports: [HeaderComponent, FooterComponent]
+  exports: [...fromComponents.components]
 })
 export class LayoutModule {}

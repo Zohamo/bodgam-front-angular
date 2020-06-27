@@ -6,11 +6,11 @@ import { AlertService, AuthService } from '@/services';
 import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-dialog-user-login',
-  templateUrl: './dialog-user-login.component.html',
-  styleUrls: ['./dialog-user-login.component.scss']
+  selector: 'app-user-login-dialog',
+  templateUrl: './user-login-dialog.component.html',
+  styleUrls: ['./user-login-dialog.component.scss']
 })
-export class DialogUserLoginComponent {
+export class UserLoginDialogComponent {
   public loginForm: FormGroup;
   public isLoading = false;
   public isSubmitted = false;
@@ -20,16 +20,16 @@ export class DialogUserLoginComponent {
   faTimesCircle = faTimesCircle;
 
   /**
-   * Creates an instance of DialogUserLoginComponent.
+   * Creates an instance of UserLoginDialogComponent.
    *
-   * @param {MatDialogRef<DialogUserLoginComponent>} dialogRef
+   * @param {MatDialogRef<UserLoginDialogComponent>} dialogRef
    * @param {FormBuilder} formBuilder
    * @param {AuthService} authService
    * @param {AlertService} alertService
-   * @memberof DialogUserLoginComponent
+   * @memberof UserLoginDialogComponent
    */
   constructor(
-    private dialogRef: MatDialogRef<DialogUserLoginComponent>,
+    private dialogRef: MatDialogRef<UserLoginDialogComponent>,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private authService: AuthService
@@ -40,7 +40,7 @@ export class DialogUserLoginComponent {
   /**
    * Create form
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof UserLoginDialogComponent
    */
   private createForm(): void {
     this.loginForm = this.formBuilder.group({
@@ -54,7 +54,7 @@ export class DialogUserLoginComponent {
    *
    * @readonly
    * @type {{ [key: string]: AbstractControl }}
-   * @memberof DialogUserLoginComponent
+   * @memberof UserLoginDialogComponent
    */
   get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
@@ -63,7 +63,7 @@ export class DialogUserLoginComponent {
   /**
    * Close this and open Forgot Password dialog
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof UserLoginDialogComponent
    */
   public onForgotPassword(): void {
     this.dialogRef.close({ forgotPassword: true });
@@ -72,7 +72,7 @@ export class DialogUserLoginComponent {
   /**
    * Submit form
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof UserLoginDialogComponent
    */
   public onSubmit(): void {
     this.isSubmitted = true;
@@ -98,7 +98,7 @@ export class DialogUserLoginComponent {
   /**
    * Close dialog
    *
-   * @memberof DialogUserLoginComponent
+   * @memberof UserLoginDialogComponent
    */
   public onClose(): void {
     this.dialogRef.close();

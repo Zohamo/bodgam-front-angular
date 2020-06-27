@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LayoutModule } from '@/layout/layout.module';
-import { SnackBarMessageModule, EmailVerificationModule } from './components';
+import { SnackBarMessageModule } from './components';
 import * as fromContent from './content';
 
 // Declarations
@@ -37,13 +37,12 @@ export const MY_FORMAT: MatDateFormats = {
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    EmailVerificationModule,
     HttpClientModule,
+    AuthModule,
     LayoutModule,
     SnackBarMessageModule,
     FontAwesomeModule, // For Home Page
     MatExpansionModule, // For Home Page
-    AuthModule,
     ...fromContent.modules
   ],
   declarations: [AppComponent, ...fromPages.components],
