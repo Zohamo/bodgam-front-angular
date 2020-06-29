@@ -1,4 +1,4 @@
-import { Email } from './email.model';
+import { NotificationEmail } from './notification-email.model';
 
 export class User {
   id?: number;
@@ -6,5 +6,5 @@ export class User {
   email: string;
   password?: string;
   token?: string;
-  verificationEmail?: Email; // TODO : change to "notification"
+  verificationEmail?: NotificationEmail;
 }

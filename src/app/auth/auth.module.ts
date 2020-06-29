@@ -7,10 +7,12 @@ import { AuthUiModule } from './auth-ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Declarations
 import * as fromComponents from './components';
+import * as fromEmails from './emails';
 import * as fromPages from './pages';
 
 @NgModule({
   imports: [CommonModule, AuthRoutingModule, AuthUiModule, FormsModule, ReactiveFormsModule],
-  declarations: [...fromComponents.components, ...fromPages.components]
+  declarations: [...fromComponents.components, ...fromEmails.components, ...fromPages.components],
+  entryComponents: [...fromEmails.components]
 })
 export class AuthModule {}

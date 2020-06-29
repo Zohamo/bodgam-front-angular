@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { MatDialogRef } from '@angular/material';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { MustMatch } from '@/helpers';
-import { User, Email } from '@/models';
+import { User, NotificationEmail } from '@/models';
 import { AlertService, EmailService, AuthService } from '@/services';
 import { first } from 'rxjs/operators';
 
@@ -17,7 +17,8 @@ export class UserRegisterDialogComponent {
   public isLoading = false;
   public isSubmitted = false;
 
-  @ViewChild('emailRegisterConfirm', { read: ViewContainerRef }) emailRegisterConfirm: ViewContainerRef;
+  @ViewChild('emailRegistrationConfirmation', { read: ViewContainerRef })
+  emailRegistrationConfirmation: ViewContainerRef;
 
   // UI
   faCheck = faCheck;
@@ -104,8 +105,8 @@ export class UserRegisterDialogComponent {
       const user: User = Object.assign({}, this.prepareSaveEntity());
 
       this.emailService
-        .buildRegisterConfirmEmail(this.emailRegisterConfirm, user)
-        .subscribe((verificationEmail: Email) => {
+        .getRegistrationConfirmation(this.emailRegistrationConfirmation, user)
+        .subscribe((verificationEmail: NotificationEmail) => {
           user.verificationEmail = verificationEmail;
 
           this.authService

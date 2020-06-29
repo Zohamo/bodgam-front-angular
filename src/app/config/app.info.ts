@@ -1,6 +1,8 @@
 export const AppInfo = {
-  TITLE: 'Bodgam',
-  VERSION: '0.1.1.4',
   AUTHOR: { name: 'Mathias Mille', url: 'https://mathiasmille.fr' },
-  STARTYEAR: '2018'
+  EMAIL_CONTACT: 'mathias.mille@gmail.com',
+  STARTYEAR: '2018',
+  TITLE: 'Bodgam',
+  URL: 'https://bodgam.com/',
+  VERSION: '0.1.1.4'
 };
