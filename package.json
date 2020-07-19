@@ -1,6 +1,12 @@
 {
   "name": "bodgam",
-  "version": "0.2.0",
+  "version": "0.2.2",
+  "description": "Huge Meeple Collider.",
+  "author": "Mathias Mille <mathias.mille@gmail.com> (https://mathiasmille.com)",
+  "keywords": [
+    "board game",
+    "events"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

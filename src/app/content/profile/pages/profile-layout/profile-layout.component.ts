@@ -10,7 +10,7 @@ import {
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { Profile } from '@/models';
-import { ProfileService, AuthService } from '@/services';
+import { ProfileService, UserService } from '@/services';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -38,14 +38,14 @@ export class ProfileLayoutComponent {
    *
    * @param {ActivatedRoute} route
    * @param {ProfileService} profileService
-   * @param {AuthService} authService
+   * @param {UserService} userService
    * @memberof ProfileLayoutComponent
    */
-  constructor(private route: ActivatedRoute, private profileService: ProfileService, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private profileService: ProfileService, private userService: UserService) {
     this.profile$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.profileId = +params.get('id');
-        this.isAdmin = this.authService.id === this.profileId;
+        this.isAdmin = this.userService.id === this.profileId;
         this.profileService.getProfile(this.profileId).subscribe();
         return this.profileService.currentProfile$;
       })

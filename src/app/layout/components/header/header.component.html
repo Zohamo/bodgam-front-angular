@@ -21,7 +21,7 @@
       <span>Évènements</span>
     </a>
     <span class="flex-spacer"></span>
-    <ng-container *ngIf="!isAuth">
+    <ng-container *ngIf="!user">
       <a (click)="onRegister()">
         <fa-icon [icon]="faUserPlus"></fa-icon>
         <span>Créer un compte</span>
@@ -31,7 +31,7 @@
         <span>Connexion</span>
       </a>
     </ng-container>
-    <ng-container *ngIf="isAuth">
+    <ng-container *ngIf="user">
       <!--  <a
         class="h5 disabled"
         matTooltip="Notifications&#13;(fonctionnalité à venir)"
@@ -81,6 +81,16 @@
           <span>Déconnexion</span>
         </a>
       </mat-menu>
+      <a
+        *ngIf="isAdmin"
+        class="h5"
+        [routerLink]="['/administration']"
+        matTooltip="Administration"
+        matTooltipClass="icon-tooltip"
+        i18n-matTooltip=""
+      >
+        <fa-icon [icon]="faBolt" class="ml-1"></fa-icon>
+      </a>
     </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>

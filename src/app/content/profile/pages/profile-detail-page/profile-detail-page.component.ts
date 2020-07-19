@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Profile } from '@/models';
 import { Observable } from 'rxjs';
-import { ProfileService, AuthService } from '@/services';
+import { ProfileService, UserService } from '@/services';
 
 @Component({
   selector: 'app-profile-detail-page',
@@ -18,8 +18,8 @@ export class ProfileDetailPageComponent {
    * @param {ProfileService} profileService
    * @memberof ProfileDetailPageComponent
    */
-  constructor(private profileService: ProfileService, private authService: AuthService) {
-    this.userId = authService.id;
+  constructor(private profileService: ProfileService, private userService: UserService) {
+    this.userId = userService.id;
     this.profile$ = profileService.currentProfile$;
   }
 

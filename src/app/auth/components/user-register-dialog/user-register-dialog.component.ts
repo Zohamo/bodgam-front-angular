@@ -103,25 +103,19 @@ export class UserRegisterDialogComponent {
       this.isLoading = true;
       const user: User = Object.assign({}, this.prepareSaveEntity());
 
-      this.emailService
-        .buildRegisterConfirmEmail(this.emailRegisterConfirm, user)
-        .subscribe((verificationEmail: Email) => {
-          user.verificationEmail = verificationEmail;
-
-          this.authService
-            .register(user)
-            .pipe(first())
-            .subscribe(
-              (userResponse: User) => {
-                this.alertService.open('success-register');
-                this.dialogRef.close();
-              },
-              (error) => {
-                this.alertService.open('error-register');
-                this.isLoading = false;
-              }
-            );
-        });
+      this.authService
+        .register(user)
+        .pipe(first())
+        .subscribe(
+          (userResponse: User) => {
+            this.alertService.open('success-register');
+            this.dialogRef.close();
+          },
+          (error) => {
+            this.alertService.open('error-register');
+            this.isLoading = false;
+          }
+        );
     }
   }
 

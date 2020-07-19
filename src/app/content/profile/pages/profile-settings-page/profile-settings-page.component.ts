@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Profile, ProfilePrivacy } from '@/models';
-import { AlertService, ProfileService, AuthService } from '@/services';
+import { AlertService, AuthService, ProfileService, UserService } from '@/services';
 import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
@@ -20,16 +20,18 @@ export class ProfileSettingsPageComponent implements OnDestroy {
    * Creates an instance of ProfileSettingsPageComponent.
    *
    * @param {AlertService} alertService
-   * @param {ProfileService} profileService
    * @param {AuthService} authService
+   * @param {ProfileService} profileService
+   * @param {UserService} userService
    * @memberof ProfileSettingsPageComponent
    */
   constructor(
     private alertService: AlertService,
+    private authService: AuthService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private userService: UserService
   ) {
-    this.userId = authService.id;
+    this.userId = userService.id;
     this.profile$ = profileService.currentProfile$;
     this.profile$.pipe(takeUntil(this.destroy$)).subscribe((profile: Profile) => {
       if (profile && profile.id) {
@@ -49,7 +51,7 @@ export class ProfileSettingsPageComponent implements OnDestroy {
   }
 
   /**
-   * Call AuthService to edit the profile's privacy.
+   * Call ProfileService to edit the profile's privacy.
    *
    * @param {ProfilePrivacy} privacy
    * @memberof ProfileSettingsPageComponent
@@ -71,13 +73,13 @@ export class ProfileSettingsPageComponent implements OnDestroy {
   }
 
   /**
-   * Call AuthService to delete the user and profile.
+   * Call UserService to delete the user and profile.
    *
    * @memberof ProfileSettingsPageComponent
    */
   public deleteProfile(): void {
-    if (this.authService.id === this.profileId) {
-      this.authService
+    if (this.userService.id === this.profileId) {
+      this.userService
         .deleteUser(this.profileId)
         .pipe(first())
         .subscribe(

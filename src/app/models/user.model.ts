@@ -6,5 +6,6 @@ export class User {
   email: string;
   password?: string;
   token?: string;
+  role?: string;
   verificationEmail?: Email; // TODO : change to "notification"
 }

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@package": ["package.json"],
       "@env": ["src/environments/environment"],
       "@/*": ["src/app/*"]
     },

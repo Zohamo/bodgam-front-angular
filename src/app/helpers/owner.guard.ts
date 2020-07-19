@@ -5,26 +5,26 @@ import { UserService } from '@/services';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class OwnerGuard implements CanActivate {
   /**
-   * Creates an instance of AdminGuard.
+   * Creates an instance of OwnerGuard.
    *
    * @param {AlertService} alertService
    * @param {AuthService} authService
-   * @memberof AdminGuard
+   * @memberof OwnerGuard
    */
   constructor(private router: Router, private userService: UserService) {}
 
   /**
-   * Can Activate if the User is Super Admin
+   * Can Activate if the user is authenticated
    *
    * @param {ActivatedRouteSnapshot} route
    * @param {RouterStateSnapshot} state
    * @returns {boolean}
-   * @memberof AdminGuard
+   * @memberof OwnerGuard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.userService.isAdmin) {
+    if (this.userService.id === +route.parent.params.id) {
       return true;
     }
 

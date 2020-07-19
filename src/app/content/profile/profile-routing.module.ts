@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminGuard, AuthGuard } from '@/helpers';
+import { AuthGuard, OwnerGuard } from '@/helpers';
 import { ErrorPageComponent } from '@/pages';
 
 import {
@@ -22,11 +22,11 @@ const routes: Routes = [
     data: { name: 'read' },
     children: [
       { path: '', component: ProfileDetailPageComponent },
-      { path: 'agenda', component: ProfileAgendaPageComponent, canActivate: [AdminGuard] },
+      { path: 'agenda', component: ProfileAgendaPageComponent, canActivate: [OwnerGuard] },
       { path: 'events', component: ProfileEventListPageComponent },
       { path: 'games', component: ProfileGameListPageComponent },
       { path: 'locations', component: ProfileLocationListPageComponent },
-      { path: 'settings', component: ProfileSettingsPageComponent, canActivate: [AdminGuard] }
+      { path: 'settings', component: ProfileSettingsPageComponent, canActivate: [OwnerGuard] }
     ]
   },
   { path: 'player/**', component: ErrorPageComponent }

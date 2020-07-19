@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {
+  faBolt,
   faCalendarAlt,
   faCalendarCheck,
   faCalendarPlus,
@@ -22,7 +23,7 @@ import {
 } from '@/auth/components';
 import { AppInfo } from '@/config';
 import { User } from '@/models';
-import { AuthService } from '@/services';
+import { AuthService, UserService } from '@/services';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -33,12 +34,13 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   public title = AppInfo.TITLE;
   public user: User;
-  public isAuth = false;
+  public isAdmin = false;
 
   // Subscriptions
   public userSubscription: Subscription;
 
   // Font Awesome
+  faBolt = faBolt;
   faCalendarAlt = faCalendarAlt;
   faCalendarCheck = faCalendarCheck;
   faCalendarPlus = faCalendarPlus;
@@ -56,11 +58,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   /**
    * Creates an instance of HeaderComponent.
    *
-   * @param {MatDialog} dialog
    * @param {AuthService} authService
+   * @param {MatDialog} dialog
+   * @param {UserService} userService
    * @memberof HeaderComponent
    */
-  constructor(private dialog: MatDialog, private authService: AuthService) {}
+  constructor(private authService: AuthService, private dialog: MatDialog, private userService: UserService) {}
 
   /**
    * Called after Angular has initialized all data-bound properties
@@ -68,9 +71,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @memberof HeaderComponent
    */
   ngOnInit(): void {
-    this.userSubscription = this.authService.currentUser$.subscribe((user: User) => {
+    this.userSubscription = this.userService.currentUser$.subscribe((user: User) => {
       this.user = user;
-      this.isAuth = Boolean(user);
+      this.isAdmin = this.userService.isAdmin;
     });
   }
 

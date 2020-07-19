@@ -36,8 +36,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Handle http errors : service
 - change location representation : with GeoCoordinates
 - generic CRUD
-- NEW EVENT : SET DEFAULT LOCATION !!!
 - AlertService : add type parameter (success, error, ...) for custom css
 - implement ngx-pwa/local-storage module (https://medium.com/@cyrilletuzi/angular-2-async-local-storage-fd8609fa84e0)
-- tooltips (privacy, icons)
-- PROFILE : implement details, comments, ratings, enum gender, confirm password
+- PROFILE : implement details, comments, ratings, enum gender

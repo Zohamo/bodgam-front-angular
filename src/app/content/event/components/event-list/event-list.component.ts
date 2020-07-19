@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { faBuilding, faUsers, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { EventBg } from '@/models';
-import { AlertService, AuthService, EventService } from '@/services';
+import { AlertService, EventService, UserService } from '@/services';
 
 @Component({
   selector: 'app-event-list',
@@ -26,16 +26,16 @@ export class EventListComponent {
    * Creates an instance of EventListComponent.
    *
    * @param {AlertService} alertService
-   * @param {AuthService} authService
    * @param {EventService} eventService
+   * @param {UserService} userService
    * @memberof EventListComponent
    */
   constructor(
     private alertService: AlertService,
-    private authService: AuthService,
-    private eventService: EventService
+    private eventService: EventService,
+    private userService: UserService
   ) {
-    this.userId = this.authService.id;
+    this.userId = this.userService.id;
   }
 
   /**

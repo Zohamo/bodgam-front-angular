@@ -7,6 +7,12 @@ import { AlertService } from './alert.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+/**
+ * Manage the authentication with JWT.
+ *
+ * @export
+ * @class AuthService
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -56,18 +62,7 @@ export class AuthService {
   }
 
   /**
-   * Get current user id
-   *
-   * @readonly
-   * @type {number}
-   * @memberof AuthService
-   */
-  public get id(): number {
-    return this.currentUserSubject.value ? this.currentUserSubject.value.id : null;
-  }
-
-  /**
-   * Store user details and jwt token in local storage to keep user logged in between page refreshes
+   * Store user details and JWT in local storage to keep User logged when page refreshes
    *
    * @private
    * @param {User} user
@@ -80,12 +75,12 @@ export class AuthService {
 
   /***************************************************************************
    *
-   * USER CRUD
+   * REGISTER & LOGIN/OUT
    *
    ***************************************************************************/
 
   /**
-   * Calls the API to register a new user and receives a JWT
+   * Call the API to register a new user and receive a JWT
    *
    * @param {User} user
    * @returns {Observable<User>}
@@ -99,34 +94,6 @@ export class AuthService {
       })
     );
   }
-
-  /**
-   * Call the API to change the password value.
-   *
-   * @param {{ oldPassword: string; newPassword: string }} passwords
-   * @returns {Observable<boolean>}
-   * @memberof AuthService
-   */
-  public editUser(passwords: { oldPassword: string; newPassword: string }): Observable<boolean> {
-    return this.http.post<boolean>(`${environment.apiPath}/password/change`, passwords);
-  }
-
-  /**
-   * Calls the API to delete the User/Profile
-   *
-   * @param {number} id
-   * @returns {Observable<string>}
-   * @memberof AuthService
-   */
-  public deleteUser(id: number): Observable<string> {
-    return this.http.delete<string>(`${environment.apiPath}/user/${id}`);
-  }
-
-  /***************************************************************************
-   *
-   * LOGIN/OUT
-   *
-   ***************************************************************************/
 
   /**
    * Call the API to authenticate a user and receives a JWT.
@@ -167,11 +134,11 @@ export class AuthService {
   /**
    * Call the API to check if User's email has been verified.
    *
-   * @param {number} [userId=this.id]
+   * @param {number} [userId=this.value.id]
    * @returns {Observable<boolean>}
    * @memberof AuthService
    */
-  public isUserEmailVerified(userId: number = this.id): Observable<boolean> {
+  public isUserEmailVerified(userId: number = this.value.id): Observable<boolean> {
     return this.http.get<boolean>(`${environment.apiPath}/user/${userId}/email/verified`);
   }
 
