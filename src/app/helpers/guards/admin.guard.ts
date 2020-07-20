@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
   constructor(private router: Router, private userService: UserService) {}
 
   /**
-   * Can Activate if the User is Super Admin
+   * Can Activate if the User is Admin
    *
    * @param {ActivatedRouteSnapshot} route
    * @param {RouterStateSnapshot} state

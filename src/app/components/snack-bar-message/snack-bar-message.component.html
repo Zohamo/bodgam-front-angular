@@ -1,14 +1,17 @@
 <ng-container [ngSwitch]="data.message">
   <!-- BGG -->
+
   <p *ngSwitchCase="'error-bgg-user'" i18n="">Impossible de trouver votre profil sur BoardGameGeek.</p>
 
   <!-- Event -->
+
   <p *ngSwitchCase="'success-delete-event'" i18n="">Votre évènement a été supprimé avec succès.</p>
   <p *ngSwitchCase="'success-save-event'" i18n="">Votre évènement a été sauvegardé avec succès.</p>
   <p *ngSwitchCase="'error-delete-event'" i18n="">Un problème est survenu lors de la suppression de votre évènement.</p>
   <p *ngSwitchCase="'error-save-event'" i18n="">Un problème est survenu lors de la sauvegarde de votre évènement.</p>
 
   <!-- Event Administration-->
+
   <p *ngSwitchCase="'success-event-administration-accept'" i18n="">
     <span class="color-primary">{{ data.input }}</span>
     a bien été accepté.
@@ -29,6 +32,7 @@
   </p>
 
   <!-- Event Subscription -->
+
   <p *ngSwitchCase="'success-event-subscription'" i18n="">
     Votre inscription à cet évènement a été bien été prise en compte.
   </p>
@@ -43,10 +47,12 @@
   </p>
 
   <!-- Geocode -->
+
   <p *ngSwitchCase="'error-geocode'" i18n="">Impossible de trouver la position sur la carte depuis l'adresse.</p>
   <p *ngSwitchCase="'error-reverse-geocode'" i18n="">Impossible de récupérer l'adresse depuis la carte.</p>
 
   <!-- Location -->
+
   <p *ngSwitchCase="'success-save-location'" i18n="">
     Votre lieu
     <span class="color-primary">{{ data.input }}</span>
@@ -65,6 +71,7 @@
   </p>
 
   <!-- Login -->
+
   <p *ngSwitchCase="'success-login'" i18n="">Vous êtes maintenant connecté(e).</p>
   <p *ngSwitchCase="'error-login'" i18n="">
     Un problème est survenu lors de votre connexion,
@@ -75,6 +82,7 @@
   <p *ngSwitchCase="'success-logout'" i18n="">Vous êtes maintenant déconnecté(e). A bientôt !</p>
 
   <!-- Password -->
+
   <p *ngSwitchCase="'success-change-password'" i18n="">Votre mot de passe a bien été modifié.</p>
   <p *ngSwitchCase="'error-change-password'" i18n="">
     Un problème est survenu lors de la modification de votre mot de passe.
@@ -87,12 +95,14 @@
   </p>
 
   <!-- Profile -->
+
   <p *ngSwitchCase="'success-save-profile'" i18n="">Votre profil a été mis à jour avec succès.</p>
   <p *ngSwitchCase="'error-save-profile'" i18n="">Un problème est survenu lors de la mise à jour de votre profil.</p>
   <p *ngSwitchCase="'success-delete-profile'" i18n="">Votre profil a été supprimé avec succès.</p>
   <p *ngSwitchCase="'error-delete-profile'" i18n="">Un problème est survenu lors de la suppression de votre profil.</p>
 
   <!-- Register -->
+
   <p *ngSwitchCase="'success-register'" i18n="">
     Votre compte a été créé avec succès. Merci de valider votre courriel en cliquant sur le lien qui vous a été envoyé .
   </p>
@@ -109,7 +119,21 @@
     Ce courriel a déjà été vérifié.
   </p>
 
+  <!-- User -->
+
+  <p *ngSwitchCase="'success-delete-user'" i18n="">
+    L'utilisateur
+    <span class="color-primary">{{ data.input }}</span>
+    a été supprimé avec succès.
+  </p>
+  <p *ngSwitchCase="'error-delete-user'" i18n="">
+    Un problème est survenu lors de la suppression de l''utilisateur
+    <span class="color-primary">{{ data.input }}</span>
+    .
+  </p>
+
   <!-- default -->
+
   <p *ngSwitchCase="'error'" i18n="">Une erreur est survenue, merci de réessayer.</p>
   <p *ngSwitchDefault i18n="">Effectué</p>
 </ng-container>

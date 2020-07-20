@@ -6,7 +6,7 @@
 
     <mat-dialog-content>
       <p i18n="">
-        Êtes-vous sur(e) de vouloir supprimer l'évènement &ldquo;
+        Êtes-vous sûr(e) de vouloir supprimer l'évènement &ldquo;
         <strong>{{ data.name }}</strong>
         &rdquo; &nbsp;?
       </p>
@@ -29,7 +29,7 @@
 
     <mat-dialog-content>
       <p i18n="">
-        Êtes-vous sur(e) de vouloir supprimer &ldquo;
+        Êtes-vous sûr(e) de vouloir supprimer &ldquo;
         <strong>{{ data.name }}</strong>
         &rdquo; &nbsp;?
       </p>
@@ -49,7 +49,7 @@
 
   <ng-container *ngSwitchCase="'delete-profile'">
     <h2 mat-dialog-title class="danger" i18n="">
-      Êtes-vous sur(e) de vouloir supprimer votre compte&nbsp;?
+      Êtes-vous sûr(e) de vouloir supprimer votre compte&nbsp;?
     </h2>
 
     <mat-dialog-content>
@@ -74,6 +74,29 @@
       </button>
       <button mat-button color="warn" (click)="onConfirm()">
         <span i18n="">Supprimer votre profil</span>
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+
+  <!-- User -->
+
+  <ng-container *ngSwitchCase="'delete-user'">
+    <h2 mat-dialog-title class="danger" i18n=""></h2>
+
+    <mat-dialog-content>
+      <p i18n="">
+        Êtes-vous sûr(e) de vouloir supprimer l'utilisateur &ldquo;
+        <strong>{{ data.name }}</strong>
+        &rdquo; &nbsp;?
+      </p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button color="primary" (click)="onClose()">
+        <span i18n="">Annuler</span>
+      </button>
+      <button mat-button color="warn" (click)="onConfirm()">
+        <span i18n="">Supprimer</span>
       </button>
     </mat-dialog-actions>
   </ng-container>

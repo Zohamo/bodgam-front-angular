@@ -1,0 +1,12 @@
+<div class="py-3" *ngIf="profiles$ | async as profiles; else loading">
+  <app-admin-user-list
+    [profilesList]="profiles"
+    [countryList]="countries"
+    (deleteUser)="deleteUser($event)"
+    [deletedUserId]="deletedUserId"
+  ></app-admin-user-list>
+</div>
+
+<ng-template #loading>
+  <app-spinner [message]="'Profils'"></app-spinner>
+</ng-template>

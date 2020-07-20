@@ -1,0 +1,35 @@
+<h2 class="page-title mb-3">
+  <fa-icon [icon]="faUserShield"></fa-icon>
+  <span class="font-fascinate">Administration</span>
+</h2>
+
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side">
+    <nav class="nav-admin">
+      <ul>
+        <li>
+          <a [routerLink]="['/administration', 'tools']">
+            <span class="icon-container">
+              <fa-icon [icon]="faTools"></fa-icon>
+            </span>
+            <span i18n="">Tools</span>
+          </a>
+        </li>
+        <li *ngIf="isSuperAdmin">
+          <a [routerLink]="['/administration', 'users']">
+            <span class="icon-container">
+              <fa-icon [icon]="faUsersCog"></fa-icon>
+            </span>
+            <span i18n="">Utilisateurs</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

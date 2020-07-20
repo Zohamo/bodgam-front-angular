@@ -86,6 +86,17 @@ export class UserService {
    * @type {boolean}
    * @memberof UserService
    */
+  public get isSuperAdmin(): boolean {
+    return this.value && this.value.role && this.value.role === 'SUPER_ADMIN';
+  }
+
+  /**
+   * Get current User value
+   *
+   * @readonly
+   * @type {boolean}
+   * @memberof UserService
+   */
   public get isAdmin(): boolean {
     return this.value && this.value.role && (this.value.role === 'ADMIN' || this.value.role === 'SUPER_ADMIN');
   }

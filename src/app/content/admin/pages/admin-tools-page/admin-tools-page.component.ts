@@ -1,31 +1,28 @@
 import { Component } from '@angular/core';
+import { AdminService } from '@/services';
 import { first } from 'rxjs/operators';
-import { AdminService, AuthService } from '@/services';
 
 @Component({
-  selector: 'app-admin-page',
-  templateUrl: './admin-page.component.html',
-  styleUrls: ['./admin-page.component.scss']
+  selector: 'app-admin-tools-page',
+  templateUrl: './admin-tools-page.component.html',
+  styleUrls: ['./admin-tools-page.component.scss']
 })
-export class AdminPageComponent {
-  public isPinged = false;
-  public isPingLoading = false;
+export class AdminToolsPageComponent {
   public pingResult: boolean;
   public pingError: string;
 
   /**
-   * Creates an instance of AdminPageComponent.
+   * Creates an instance of AdminToolsPageComponent.
    *
    * @param {AdminService} adminService
-   * @param {AuthService} authService
-   * @memberof AdminPageComponent
+   * @memberof AdminToolsPageComponent
    */
-  constructor(private adminService: AdminService, private authService: AuthService) {}
+  constructor(private adminService: AdminService) {}
 
   /**
    * Call the AdminService to send/receive a ping.
    *
-   * @memberof AdminPageComponent
+   * @memberof AdminToolsPageComponent
    */
   public sendPing(): void {
     this.pingResult = null;

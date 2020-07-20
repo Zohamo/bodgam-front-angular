@@ -14,6 +14,8 @@ export class ProfileListComponent implements OnInit {
   public dataSource: MatTableDataSource<ProfileItem>;
   public isSetCountryNames = false;
 
+  // View Children
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -36,7 +38,7 @@ export class ProfileListComponent implements OnInit {
   }
 
   /**
-   * A lifecycle hook that is called after Angular has initialized all data-bound properties
+   * Called after Angular has initialized all data-bound properties
    *
    * @memberof ProfileListComponent
    */
@@ -65,7 +67,7 @@ export class ProfileListComponent implements OnInit {
    * @param {Country[]} countries
    * @memberof ProfileListComponent
    */
-  setCountryNames(countries: Country[]): void {
+  private setCountryNames(countries: Country[]): void {
     if (this.profiles && !this.isSetCountryNames) {
       this.profiles.forEach((profile: Profile) => {
         const countryFound = countries.find((country) => {
@@ -76,7 +78,6 @@ export class ProfileListComponent implements OnInit {
         }
       });
       this.isSetCountryNames = true;
-      console.log('profiles', this.profiles);
     }
   }
 }

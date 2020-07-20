@@ -1,0 +1,48 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Rechercher" i18n-placeholder />
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="w-100">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+    <td mat-cell *matCellDef="let profile">
+      <a [routerLink]="['/player', profile.id]">{{ profile.name }}</a>
+    </td>
+  </ng-container>
+
+  <!-- District Column -->
+  <ng-container matColumnDef="district">
+    <th mat-header-cell *matHeaderCellDef i18n>Quartier</th>
+    <td mat-cell *matCellDef="let profile">{{ profile.district }}</td>
+  </ng-container>
+
+  <!-- City Column -->
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef i18n>Ville</th>
+    <td mat-cell *matCellDef="let profile">{{ profile.city }}</td>
+  </ng-container>
+
+  <!-- Country Column -->
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef i18n>Pays</th>
+    <td mat-cell *matCellDef="let profile">
+      <ng-container *ngIf="countries">{{ profile.country }}</ng-container>
+    </td>
+  </ng-container>
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef i18n></th>
+    <td mat-cell *matCellDef="let profile">
+      <button mat-button type="button" color="warn" (click)="onDelete(profile)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let profile; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
