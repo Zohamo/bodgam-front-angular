@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Docs and Infos
 
+### Fixed
+
+- Email verification
+
 ## [0.2.0] - 2020-07-04
 
 ### Added
