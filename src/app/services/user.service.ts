@@ -80,7 +80,7 @@ export class UserService {
   }
 
   /**
-   * Get current User value
+   * Is the User a super administrator
    *
    * @readonly
    * @type {boolean}
@@ -91,7 +91,7 @@ export class UserService {
   }
 
   /**
-   * Get current User value
+   * Is the User an administrator
    *
    * @readonly
    * @type {boolean}
@@ -99,6 +99,17 @@ export class UserService {
    */
   public get isAdmin(): boolean {
     return this.value && this.value.role && (this.value.role === 'ADMIN' || this.value.role === 'SUPER_ADMIN');
+  }
+
+  /**
+   * Is the User's email verified
+   *
+   * @readonly
+   * @type {boolean}
+   * @memberof UserService
+   */
+  public get hasEmailVerified(): boolean {
+    return this.value && this.value.emailVerified;
   }
 
   /***************************************************************************
@@ -125,6 +136,6 @@ export class UserService {
    * @memberof UserService
    */
   public deleteUser(id: number): Observable<string> {
-    return this.http.delete<string>(`${environment.apiPath}/user/${id}`);
+    return this.http.delete<string>(`${environment.apiPath}/users/${id}`);
   }
 }

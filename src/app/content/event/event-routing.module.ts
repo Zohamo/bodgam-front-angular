@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '@/helpers';
 import { EventEditPageComponent, EventListPageComponent, EventPageComponent } from './pages';
 
 const routes: Routes = [
@@ -7,14 +8,16 @@ const routes: Routes = [
   {
     path: 'events/create',
     component: EventEditPageComponent,
-    data: { name: 'create' }
+    data: { name: 'create' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'events/edit/:id',
     component: EventEditPageComponent,
-    data: { name: 'edit' }
+    data: { name: 'edit' },
+    canActivate: [AuthGuard]
   },
-  { path: 'events/:id', component: EventPageComponent }
+  { path: 'events/:id', component: EventPageComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

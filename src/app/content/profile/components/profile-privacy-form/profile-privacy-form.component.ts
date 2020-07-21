@@ -92,7 +92,6 @@ export class ProfilePrivacyFormComponent {
    */
   public onSubmit(): void {
     if (this.profilePrivacyForm.valid) {
-      console.log('profilePrivacyForm', this.prepareSaveEntity());
       this.saveProfilePrivacy.emit(this.prepareSaveEntity());
     }
   }

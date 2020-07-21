@@ -58,7 +58,6 @@ export class ProfileService {
       this.currentProfileSubject.next(value);
       return value;
     }
-    console.log('profile update', value, this.value);
     return this.value;
   }
 
@@ -93,10 +92,9 @@ export class ProfileService {
    * @memberof ProfileService
    */
   public saveProfile(profile: Profile): Observable<Profile> {
-    return (profile.id
-      ? this.http.put<Profile>(`${environment.apiPath}/profiles/${profile.id}`, profile)
-      : this.http.post<Profile>(`${environment.apiPath}/profiles`, profile)
-    ).pipe(map((profileRes) => this.updateValue(profileRes)));
+    return this.http
+      .put<Profile>(`${environment.apiPath}/profiles/${profile.id}`, profile)
+      .pipe(map((profileRes) => this.updateValue(profileRes)));
   }
 
   /**
@@ -108,22 +106,11 @@ export class ProfileService {
    * @memberof ProfileService
    */
   public saveProfilePrivacy(profileId: number, privacy: ProfilePrivacy): Observable<ProfilePrivacy> {
-    return this.http.put<ProfilePrivacy>(`${environment.apiPath}/profile/${profileId}/privacy`, privacy).pipe(
+    return this.http.put<ProfilePrivacy>(`${environment.apiPath}/profiles/${profileId}/privacy`, privacy).pipe(
       map((privacyRes) => {
         this.currentProfileSubject.next(Object.assign(this.value, { privacy: privacyRes }));
         return privacyRes;
       })
     );
-  }
-
-  /**
-   * Call the BackEnd to delete a profile
-   *
-   * @param {number} id
-   * @returns {Observable<Profile>}
-   * @memberof ProfileService
-   */
-  public deleteProfile(id: number): Observable<Profile> {
-    return this.http.delete<Profile>(`${environment.apiPath}/profiles/${id}`);
   }
 }

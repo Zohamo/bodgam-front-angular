@@ -125,7 +125,7 @@
             <!-- Country -->
             <mat-form-field class="col-md-4">
               <mat-label i18n="">Pays</mat-label>
-              <mat-select matNativeControl formControlName="country" required>
+              <mat-select matNativeControl formControlName="country">
                 <mat-option *ngFor="let country of countries" [value]="country.isoCode" i18n="">
                   {{ country?.name }}
                 </mat-option>

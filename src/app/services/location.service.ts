@@ -42,7 +42,7 @@ export class LocationService {
    */
   public getLocations(profileId?: number): Observable<LocationItem[]> {
     return profileId
-      ? this.http.get<LocationItem[]>(`${environment.apiPath}/profile/${profileId}/locations`)
+      ? this.http.get<LocationItem[]>(`${environment.apiPath}/profiles/${profileId}/locations`)
       : this.http.get<LocationItem[]>(`${environment.apiPath}/locations`);
   }
 
@@ -74,7 +74,7 @@ export class LocationService {
    * @memberof LocationService
    */
   public getLocationEvents(id: number): Observable<EventBg[]> {
-    return this.http.get<EventBg[]>(`${environment.apiPath}/location/${id}/events`);
+    return this.http.get<EventBg[]>(`${environment.apiPath}/locations/${id}/events`);
   }
 
   /**

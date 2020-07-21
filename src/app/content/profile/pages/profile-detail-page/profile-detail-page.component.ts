@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
-import { Profile } from '@/models';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { Profile, User } from '@/models';
+import { Observable, Subject } from 'rxjs';
 import { ProfileService, UserService } from '@/services';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-detail-page',
   templateUrl: './profile-detail-page.component.html',
   styleUrls: ['./profile-detail-page.component.scss']
 })
-export class ProfileDetailPageComponent {
+export class ProfileDetailPageComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   public userId: number;
   public profile$: Observable<Profile>;
 
@@ -19,8 +21,22 @@ export class ProfileDetailPageComponent {
    * @memberof ProfileDetailPageComponent
    */
   constructor(private profileService: ProfileService, private userService: UserService) {
-    this.userId = userService.id;
+    this.userService.currentUser$.pipe(takeUntil(this.destroy$)).subscribe((user: User) => {
+      if (user) {
+        this.userId = user.id;
+      }
+    });
     this.profile$ = profileService.currentProfile$;
+  }
+
+  /**
+   * Unsubscribe before component is destroyed
+   *
+   * @memberof ProfileDetailPageComponent
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   /**

@@ -18,7 +18,7 @@ export class EmailVerificationPageComponent implements OnInit, OnDestroy {
   public resendEmailForm: FormGroup;
   public isSubmitted: boolean;
 
-  // Font Awesome
+  // UI
   faExclamationTriangle = faExclamationTriangle;
   faPaperPlane = faPaperPlane;
 
@@ -31,7 +31,6 @@ export class EmailVerificationPageComponent implements OnInit, OnDestroy {
    * @param {Router} router
    * @memberof EmailVerificationPageComponent
    */
-
   constructor(
     private alertService: AlertService,
     private formBuilder: FormBuilder,
@@ -47,7 +46,6 @@ export class EmailVerificationPageComponent implements OnInit, OnDestroy {
    *
    * @memberof EmailVerificationPageComponent
    */
-
   ngOnInit(): void {
     this.route.paramMap
       .pipe(switchMap((params: ParamMap) => this.authService.isUserEmailVerified(+params.get('id'))))
@@ -75,7 +73,6 @@ export class EmailVerificationPageComponent implements OnInit, OnDestroy {
    *
    * @memberof EmailVerificationPageComponent
    */
-
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
@@ -87,7 +84,6 @@ export class EmailVerificationPageComponent implements OnInit, OnDestroy {
    * @private
    * @memberof EmailVerificationPageComponent
    */
-
   private createForm(): void {
     this.resendEmailForm = this.formBuilder.group({
       email: ['', Validators.required]
@@ -99,7 +95,6 @@ export class EmailVerificationPageComponent implements OnInit, OnDestroy {
    *
    * @memberof EmailVerificationPageComponent
    */
-
   public onSubmit(): void {
     if (this.resendEmailForm.invalid) {
       return;

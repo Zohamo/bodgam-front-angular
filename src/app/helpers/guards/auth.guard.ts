@@ -13,12 +13,12 @@ export class AuthGuard implements CanActivate {
   /**
    * Creates an instance of AuthGuard.
    *
-   * @param {AuthService} authService
    * @param {AlertService} alertService
+   * @param {AuthService} authService
    * @param {MatDialog} dialog
    * @memberof AuthGuard
    */
-  constructor(private authService: AuthService, private alertService: AlertService, private dialog: MatDialog) {}
+  constructor(private alertService: AlertService, private authService: AuthService, private dialog: MatDialog) {}
 
   /**
    * Can Activate if the user is authenticated
@@ -30,12 +30,15 @@ export class AuthGuard implements CanActivate {
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.value) {
-      return true;
+      if (this.authService.value.emailVerified) {
+        return true;
+      }
+      this.alertService.open('must-verify-email');
+    } else {
+      this.alertService.open('must-login');
+      // WARNING in Circular dependency :
+      // this.dialog.open(UserRegisterDialogComponent);
     }
-
-    this.alertService.open('must-login');
-    // WARNING in Circular dependency :
-    // this.dialog.open(UserRegisterDialogComponent);
     return false;
   }
 }

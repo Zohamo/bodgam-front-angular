@@ -1,4 +1,4 @@
-<ng-container *ngIf="profile$ | async as profile">
+<ng-container *ngIf="profile$ | async as profile; else loading">
   <h2 class="page-title mb-3">
     <fa-icon *ngIf="!profile?.avatar" [icon]="faUserCircle"></fa-icon>
     <span class="font-fascinate">{{ profile?.name }}</span>
@@ -24,7 +24,7 @@
               <span i18n="">Jeux</span>
             </a>
           </li>
-          <li *ngIf="isAdmin">
+          <li *ngIf="userIsOwner">
             <a [routerLink]="['/player', profileId, 'agenda']">
               <span class="icon-container">
                 <fa-icon [icon]="faCalendarCheck"></fa-icon>
@@ -32,7 +32,7 @@
               <span i18n="">Agenda</span>
             </a>
           </li>
-          <li>
+          <li *ngIf="userHasEmailVerified">
             <a [routerLink]="['/player', profileId, 'events']">
               <span class="icon-container">
                 <fa-icon [icon]="faCalendarAlt"></fa-icon>
@@ -40,7 +40,7 @@
               <span i18n="">Évènements</span>
             </a>
           </li>
-          <li>
+          <li *ngIf="userHasEmailVerified">
             <a [routerLink]="['/player', profileId, 'locations']">
               <span class="icon-container">
                 <fa-icon [icon]="faMapMarked"></fa-icon>
@@ -48,7 +48,7 @@
               <span i18n="">Lieux</span>
             </a>
           </li>
-          <li *ngIf="isAdmin">
+          <li *ngIf="userIsOwner">
             <a [routerLink]="['/player', profileId, 'settings']">
               <span class="icon-container">
                 <fa-icon [icon]="faCogs"></fa-icon>
@@ -67,3 +67,7 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>

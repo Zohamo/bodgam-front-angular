@@ -1,6 +1,11 @@
 <div *ngIf="profile$ | async as profile; else loading" class="row">
-  <app-profile-ratings [profileRatings]="profile?.ratings" class="col-md-7"></app-profile-ratings>
-  <app-profile-detail [profile]="profile" [isAdmin]="profile.id === userId" class="col-md-5"></app-profile-detail>
+  <!-- <app-profile-ratings [profileRatings]="profile?.ratings" class="col-md-7"></app-profile-ratings>
+  <app-profile-detail [profile]="profile" [isAdmin]="profile.id === userId" class="col-md-5"></app-profile-detail> -->
+  <app-profile-detail
+    [profile]="profile"
+    [userIsOwner]="profile.id === userId"
+    class="offset-md-2 col-md-10"
+  ></app-profile-detail>
 </div>
 
 <ng-template #loading>

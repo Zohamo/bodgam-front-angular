@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - User roles
 - Admin interface
+- Restrict pages to users with email verified
 
 ### Changed
 

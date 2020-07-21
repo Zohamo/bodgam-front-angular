@@ -81,7 +81,7 @@ export class EventService {
    */
   public getEvents(profileId?: number): Observable<EventBg[]> {
     return (profileId
-      ? this.http.get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/events`)
+      ? this.http.get<EventBg[]>(`${environment.apiPath}/profiles/${profileId}/events`)
       : this.http.get<EventBg[]>(`${environment.apiPath}/events`)
     ).pipe(map((events) => events.map((event) => this.eventFormatter(event))));
   }
@@ -95,7 +95,7 @@ export class EventService {
    */
   public getEventsSubscribed(profileId: number): Observable<EventBg[]> {
     return this.http
-      .get<EventBg[]>(`${environment.apiPath}/profile/${profileId}/subscriptions`)
+      .get<EventBg[]>(`${environment.apiPath}/profiles/${profileId}/subscriptions`)
       .pipe(map((events) => events.map((event) => this.eventFormatter(event))));
   }
 

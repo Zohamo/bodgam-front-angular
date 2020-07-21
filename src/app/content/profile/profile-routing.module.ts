@@ -13,6 +13,7 @@ import {
   ProfileListPageComponent,
   ProfileSettingsPageComponent
 } from './pages';
+import { OwnerOrAuthGuard } from '@/helpers/guards/owner-or-auth.guard';
 
 const routes: Routes = [
   { path: 'players', component: ProfileListPageComponent, canActivate: [AuthGuard] },
@@ -20,6 +21,7 @@ const routes: Routes = [
     path: 'player/:id',
     component: ProfileLayoutComponent,
     data: { name: 'read' },
+    canActivate: [OwnerOrAuthGuard],
     children: [
       { path: '', component: ProfileDetailPageComponent },
       { path: 'agenda', component: ProfileAgendaPageComponent, canActivate: [OwnerGuard] },

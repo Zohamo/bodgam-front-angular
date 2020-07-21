@@ -23,7 +23,7 @@ import { ProfileFormDialogComponent } from '../profile-form-dialog/profile-form-
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent {
-  // Font Awesome
+  // UI
   faEnvelope = faEnvelope;
   faGenderless = faGenderless;
   faGlobe = faGlobe;
@@ -38,7 +38,7 @@ export class ProfileDetailComponent {
    */
 
   @Input() profile: Profile;
-  @Input() isAdmin: boolean;
+  @Input() userIsOwner: boolean;
 
   /**
    * Creates an instance of ProfileDetailComponent.
@@ -101,7 +101,7 @@ export class ProfileDetailComponent {
    * @memberof ProfileDetailComponent
    */
   public openProfileFormDialog(profileId: number): void {
-    if (this.isAdmin) {
+    if (this.userIsOwner) {
       const dialogRef = this.dialog.open(ProfileFormDialogComponent, {
         data: this.profile
       });

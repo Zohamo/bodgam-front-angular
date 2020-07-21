@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
-import { UserService } from '@/services';
+import { UserService, AuthService } from '@/services';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +9,14 @@ export class OwnerGuard implements CanActivate {
   /**
    * Creates an instance of OwnerGuard.
    *
-   * @param {AlertService} alertService
+   * @param {Router} router
    * @param {AuthService} authService
    * @memberof OwnerGuard
    */
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   /**
-   * Can Activate if the user is authenticated
+   * Can Activate if the user is the owner of the ressource.
    *
    * @param {ActivatedRouteSnapshot} route
    * @param {RouterStateSnapshot} state
@@ -24,7 +24,7 @@ export class OwnerGuard implements CanActivate {
    * @memberof OwnerGuard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.userService.id === +route.parent.params.id) {
+    if (this.authService.value && this.authService.value.id === +route.parent.params.id) {
       return true;
     }
 

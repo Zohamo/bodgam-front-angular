@@ -9,10 +9,10 @@ import {
   faUser,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
-import { Profile } from '@/models';
+import { Profile, User } from '@/models';
 import { ProfileService, UserService } from '@/services';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-layout',
@@ -22,9 +22,10 @@ import { switchMap } from 'rxjs/operators';
 export class ProfileLayoutComponent {
   public profileId: number;
   public profile$: Observable<Profile>;
-  public isAdmin: boolean = null;
+  public userIsOwner: boolean;
+  public userHasEmailVerified: boolean;
 
-  // Font Awesome
+  // UI
   faCalendarAlt = faCalendarAlt;
   faCalendarCheck = faCalendarCheck;
   faCogs = faCogs;
@@ -45,8 +46,16 @@ export class ProfileLayoutComponent {
     this.profile$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.profileId = +params.get('id');
-        this.isAdmin = this.userService.id === this.profileId;
-        this.profileService.getProfile(this.profileId).subscribe();
+        this.userService.currentUser$.subscribe((user: User) => {
+          if (user) {
+            this.userIsOwner = user.id === this.profileId;
+            this.userHasEmailVerified = user.emailVerified;
+          }
+        });
+        this.profileService
+          .getProfile(this.profileId)
+          .pipe(first())
+          .subscribe();
         return this.profileService.currentProfile$;
       })
     );

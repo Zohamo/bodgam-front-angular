@@ -34,7 +34,8 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   public title = AppInfo.TITLE;
   public user: User;
-  public isAdmin = false;
+  public userIsAdmin: boolean;
+  public userHasEmailVerified: boolean;
 
   // Subscriptions
   public userSubscription: Subscription;
@@ -72,8 +73,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.userSubscription = this.userService.currentUser$.subscribe((user: User) => {
-      this.user = user;
-      this.isAdmin = this.userService.isAdmin;
+      if (user) {
+        this.user = user;
+        this.userIsAdmin = this.userService.isAdmin;
+        this.userHasEmailVerified = this.userService.hasEmailVerified;
+      }
     });
   }
 

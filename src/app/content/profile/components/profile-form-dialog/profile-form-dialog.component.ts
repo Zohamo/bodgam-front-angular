@@ -80,7 +80,7 @@ export class ProfileFormDialogComponent {
       name: ['', Validators.required],
       district: [],
       city: [],
-      country: ['', Validators.required],
+      country: [],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
       gender: [],
       birthdate: [],
