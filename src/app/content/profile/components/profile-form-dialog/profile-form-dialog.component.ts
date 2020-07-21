@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
+  faAddressCard,
   faBuilding,
   faCheck,
   faChevronLeft,
@@ -29,7 +30,8 @@ export class ProfileFormDialogComponent {
   public games: BggGame[];
   public isLoadingBggGames: boolean;
 
-  // Font Awesome
+  // UI
+  faAddressCard = faAddressCard;
   faBuilding = faBuilding;
   faCheck = faCheck;
   faChevronLeft = faChevronLeft;
@@ -77,16 +79,17 @@ export class ProfileFormDialogComponent {
     this.profileForm = this.fb.group({
       id: [],
       userId: [],
-      name: ['', Validators.required],
-      district: [],
-      city: [],
+      name: ['', [Validators.required, Validators.maxLength(128)]],
+      district: ['', Validators.maxLength(64)],
+      city: ['', Validators.maxLength(64)],
       country: [],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
       gender: [],
       birthdate: [],
-      bggName: [],
-      phoneNumber: [],
-      website: [],
+      description: ['', Validators.maxLength(2048)],
+      bggName: ['', Validators.maxLength(128)],
+      phoneNumber: ['', Validators.maxLength(48)],
+      website: ['', Validators.maxLength(128)],
       privacy: this.fb.group({
         email: ['', Validators.required],
         phoneNumber: ['', Validators.required],
@@ -137,6 +140,7 @@ export class ProfileFormDialogComponent {
         email: this.profile.email,
         gender: this.profile.gender,
         birthdate: this.profile.birthdate ? moment(this.profile.birthdate).format() : null,
+        description: this.profile.description,
         bggName: this.profile.bggName,
         phoneNumber: this.profile.phoneNumber,
         website: this.profile.website,
@@ -184,12 +188,10 @@ export class ProfileFormDialogComponent {
       .pipe(first())
       .subscribe(
         (profileSaved) => {
-          console.log('profile saved', profileSaved);
           this.alertService.open('success-save-profile');
           this.dialogRef.close(profileSaved);
         },
         (error) => {
-          console.log('ERROR saving profile', error);
           this.alertService.open('error-save-profile');
         }
       );
@@ -217,12 +219,10 @@ export class ProfileFormDialogComponent {
       .subscribe(
         (games) => {
           this.isLoadingBggGames = false;
-          console.log('games', games);
           this.games = games;
         },
         (error) => {
           this.isLoadingBggGames = false;
-          console.log('ERROR get games', error);
           this.alertService.open('error-bgg-profile');
         }
       );

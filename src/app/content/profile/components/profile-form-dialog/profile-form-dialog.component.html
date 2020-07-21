@@ -88,7 +88,11 @@
           <!-- Website -->
 
           <mat-form-field class="col-md-3">
-            <input matInput placeholder="Site web" i18n-placeholder="" formControlName="website" />
+            <input matInput placeholder="Site web" i18n-placeholder="" formControlName="website" [maxLength]="128" />
+            <mat-hint align="end">
+              {{ fv.website?.length || 0 }}/128
+              <span i18n="">caractères</span>
+            </mat-hint>
           </mat-form-field>
           <div class="col-md-1 btn-visibility-container">
             <button type="button" mat-button color="accent" (click)="onToggleValue(fc.privacy.get('website'))">
@@ -104,6 +108,38 @@
         </div>
       </mat-step>
 
+      <!-- Description -->
+
+      <mat-step state="location">
+        <ng-template matStepLabel>
+          <span class="step-title" i18n="">Presentation</span>
+          <fa-icon [icon]="faAddressCard"></fa-icon>
+        </ng-template>
+
+        <section class="row">
+          <mat-form-field class="col-12">
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              #descriptionAutosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="4"
+              placeholder="Description"
+              formControlName="description"
+              [maxLength]="2048"
+            ></textarea>
+            <mat-hint align="end">
+              {{ fv.description?.length || 0 }}/2048
+              <span i18n="">caractères</span>
+            </mat-hint>
+          </mat-form-field>
+        </section>
+
+        <div class="btn-group-nav">
+          <button type="button" mat-button matStepperPrevious><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+          <button type="button" mat-button matStepperNext><fa-icon [icon]="faChevronRight"></fa-icon></button>
+        </div>
+      </mat-step>
+
       <!-- Location -->
 
       <mat-step state="location">
@@ -116,11 +152,19 @@
           <section class="row">
             <!-- District -->
             <mat-form-field class="col-md-4">
-              <input matInput placeholder="Quartier" i18n-placeholder formControlName="district" />
+              <input matInput placeholder="Quartier" i18n-placeholder formControlName="district" [maxLength]="64" />
+              <mat-hint align="end">
+                {{ fv.district?.length || 0 }}/64
+                <span i18n="">caractères</span>
+              </mat-hint>
             </mat-form-field>
             <!-- City -->
             <mat-form-field class="col-md-4">
-              <input matInput placeholder="Ville" i18n-placeholder formControlName="city" />
+              <input matInput placeholder="Ville" i18n-placeholder formControlName="city" [maxLength]="64" />
+              <mat-hint align="end">
+                {{ fv.city?.length || 0 }}/64
+                <span i18n="">caractères</span>
+              </mat-hint>
             </mat-form-field>
             <!-- Country -->
             <mat-form-field class="col-md-4">
@@ -159,7 +203,7 @@
         <section class="row">
           <!-- BGG Name -->
           <mat-form-field class="col-md-4">
-            <input matInput placeholder="Pseudo BGG" i18n-placeholder formControlName="bggName" />
+            <input matInput placeholder="Pseudo BGG" i18n-placeholder formControlName="bggName" [maxLength]="128" />
           </mat-form-field>
           <button
             mat-button

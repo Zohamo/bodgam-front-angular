@@ -14,6 +14,7 @@ export class Profile extends ProfileItem {
   email: string;
   gender: string;
   birthdate: string;
+  description: string;
   bggName: string;
   phoneNumber: string;
   website: string;
@@ -26,6 +27,7 @@ export class Profile extends ProfileItem {
     this.email = '';
     this.gender = null;
     this.birthdate = null;
+    this.description = '';
     this.bggName = '';
     this.phoneNumber = '';
     this.website = '';
