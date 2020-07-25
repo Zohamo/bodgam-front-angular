@@ -31,7 +31,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnDestroy {
   public title = AppInfo.TITLE;
   public user: User;
   public userIsAdmin: boolean;
@@ -64,20 +64,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * @param {UserService} userService
    * @memberof HeaderComponent
    */
-  constructor(private authService: AuthService, private dialog: MatDialog, private userService: UserService) {}
-
-  /**
-   * Called after Angular has initialized all data-bound properties
-   *
-   * @memberof HeaderComponent
-   */
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private dialog: MatDialog, private userService: UserService) {
     this.userSubscription = this.userService.currentUser$.subscribe((user: User) => {
-      if (user) {
-        this.user = user;
-        this.userIsAdmin = this.userService.isAdmin;
-        this.userHasEmailVerified = this.userService.hasEmailVerified;
-      }
+      this.user = user;
+      this.userIsAdmin = this.userService.isAdmin;
+      this.userHasEmailVerified = this.userService.hasEmailVerified;
     });
   }
 
