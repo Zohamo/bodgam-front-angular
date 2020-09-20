@@ -16,6 +16,7 @@ export * from './event-subscription-groups.model';
 export * from './geo-coordinates.model';
 export * from './location-item.model';
 export * from './location.model';
+export * from './notification-bg.model';
 export * from './password-reset.model';
 export * from './profile-item.model';
 export * from './profile-privacy.model';

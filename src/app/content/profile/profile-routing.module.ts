@@ -11,6 +11,7 @@ import {
   ProfileLocationListPageComponent,
   ProfileLayoutComponent,
   ProfileListPageComponent,
+  ProfileNotificationsPageComponent,
   ProfileSettingsPageComponent
 } from './pages';
 import { OwnerOrAuthGuard } from '@/helpers/guards/owner-or-auth.guard';
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'events', component: ProfileEventListPageComponent },
       { path: 'games', component: ProfileGameListPageComponent },
       { path: 'locations', component: ProfileLocationListPageComponent },
+      { path: 'notifications', component: ProfileNotificationsPageComponent },
       { path: 'settings', component: ProfileSettingsPageComponent, canActivate: [OwnerGuard] }
     ]
   },

@@ -1,0 +1,9 @@
+<div *ngFor="let notification of notifications; trackBy: notificationTrackBy" class="mb-2">
+  <a
+    [routerLink]="[notification.link]"
+    [ngClass]="{ 'color-grey': !!notification.readAt }"
+    (mouseenter)="!notification.readAt ? onRead(notification.id) : ''"
+  >
+    <app-notification [notification]="notification"></app-notification>
+  </a>
+</div>

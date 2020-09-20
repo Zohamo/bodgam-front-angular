@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
+  faBell,
   faCalendarAlt,
   faCalendarCheck,
   faCogs,
@@ -26,6 +27,7 @@ export class ProfileLayoutComponent {
   public userHasEmailVerified: boolean;
 
   // UI
+  faBell = faBell;
   faCalendarAlt = faCalendarAlt;
   faCalendarCheck = faCalendarCheck;
   faCogs = faCogs;

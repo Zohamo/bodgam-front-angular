@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import {
+  faBell,
   faBolt,
   faCalendarAlt,
   faCalendarCheck,
   faCalendarPlus,
   faCaretDown,
-  faClipboardList,
   faDungeon,
   faGlobe,
   faMapMarked,
@@ -22,9 +23,11 @@ import {
   UserLoginDialogComponent
 } from '@/auth/components';
 import { AppInfo } from '@/config';
-import { User } from '@/models';
-import { AuthService, UserService } from '@/services';
+import { NotificationBg, User } from '@/models';
+import { AuthService, UserService, NotificationService, PusherService } from '@/services';
 import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
+import moment from 'moment';
 
 @Component({
   selector: 'app-header',
@@ -37,16 +40,19 @@ export class HeaderComponent implements OnDestroy {
   public userIsAdmin: boolean;
   public userHasEmailVerified: boolean;
 
+  // Notifications
+  public notifications: NotificationBg[] = [];
+
   // Subscriptions
   public userSubscription: Subscription;
 
   // Font Awesome
+  faBell = faBell;
   faBolt = faBolt;
   faCalendarAlt = faCalendarAlt;
   faCalendarCheck = faCalendarCheck;
   faCalendarPlus = faCalendarPlus;
   faCaretDown = faCaretDown;
-  faClipboardList = faClipboardList;
   faDungeon = faDungeon;
   faGlobe = faGlobe;
   faMapMarked = faMapMarked;
@@ -62,14 +68,39 @@ export class HeaderComponent implements OnDestroy {
    * @param {AuthService} authService
    * @param {MatDialog} dialog
    * @param {UserService} userService
+   * @param {NotificationService} notificationService
+   * @param {PusherService} pusherService
    * @memberof HeaderComponent
    */
-  constructor(private authService: AuthService, private dialog: MatDialog, private userService: UserService) {
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private userService: UserService,
+    private notificationService: NotificationService,
+    private pusherService: PusherService,
+    private router: Router
+  ) {
     this.userSubscription = this.userService.currentUser$.subscribe((user: User) => {
       this.user = user;
       this.userIsAdmin = this.userService.isAdmin;
       this.userHasEmailVerified = this.userService.hasEmailVerified;
+      if (user) {
+        // Subscription to pusher's notifications
+        this.pusherService.subscribeToChannel('user-notifications', [`user-${user.id}`], (notification) => {
+          console.log('pusherService.subscribeToChannel', notification);
+          this.notifications.unshift(notification);
+        });
+      }
     });
+
+    // Get the notifications list
+    this.notificationService
+      .getUserUnreadNotifications()
+      .pipe(first())
+      .subscribe((notifications: NotificationBg[]) => {
+        console.log('notificationService.getNotifications', notifications);
+        this.notifications = notifications || [];
+      });
   }
 
   /**

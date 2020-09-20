@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 // Imports
 import { CommonModule } from '@angular/common';
-import { LayoutUiModule } from './layout-ui.module';
 import { RouterModule } from '@angular/router';
+import { LayoutUiModule } from './layout-ui.module';
 // Declarations
 import * as fromComponents from './components';
 // Entry Components
@@ -14,13 +14,13 @@ import {
 import { SnackBarMessageComponent } from '@/components/snack-bar-message/snack-bar-message.component';
 
 @NgModule({
-  imports: [CommonModule, LayoutUiModule, RouterModule],
+  imports: [CommonModule, RouterModule, LayoutUiModule],
   declarations: [...fromComponents.components],
   entryComponents: [
     PasswordForgotDialogComponent,
+    SnackBarMessageComponent,
     UserLoginDialogComponent,
-    UserRegisterDialogComponent,
-    SnackBarMessageComponent
+    UserRegisterDialogComponent
   ],
   exports: [...fromComponents.components]
 })

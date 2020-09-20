@@ -7,11 +7,11 @@ import { AdminUiModule } from './admin-ui.module';
 import * as fromComponents from './components';
 import * as fromPages from './pages';
 // Entry Components
-import { PingComponent } from './components';
+import { PingComponent, PushComponent } from './components';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, AdminUiModule],
   declarations: [...fromComponents.components, ...fromPages.components],
-  entryComponents: [PingComponent]
+  entryComponents: [PingComponent, PushComponent]
 })
 export class AdminModule {}

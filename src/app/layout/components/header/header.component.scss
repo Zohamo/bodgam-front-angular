@@ -14,6 +14,10 @@
       align-items: center;
     }
   }
+  .mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+    right: 5px;
+    top: 5px;
+  }
 
   a {
     height: 100%;
@@ -60,4 +64,11 @@ a {
 ::ng-deep .icon-tooltip {
   background: $primary;
   font-size: 1rem;
+}
+
+/**
+ * Notifications
+ */
+::ng-deep .mat-menu-panel.notifications-menu {
+  max-width: none;
 }

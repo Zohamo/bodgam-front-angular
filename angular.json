@@ -31,10 +31,11 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images/",
                 "output": "./assets/icons"
-              }
+              },
+              "src/manifest.json"
             ],
             "styles": ["src/styles.scss", "node_modules/leaflet/dist/leaflet.css"],
-            "scripts": [],
+            "scripts": ["node_modules/pusher-js/dist/web/pusher.min.js"],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -60,7 +61,35 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
             }
           }
         },
@@ -90,7 +119,7 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "assets": ["src/favicon.svg", "src/assets"]
+            "assets": ["src/favicon.svg", "src/assets", "src/manifest.json"]
           }
         },
         "lint": {

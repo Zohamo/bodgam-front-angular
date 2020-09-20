@@ -12,6 +12,7 @@
       </figure>
       <h1 class="font-alt" style="font-size: 2rem;">BODGAM</h1>
     </a>
+    <!-- Navigation -->
     <a [routerLink]="['/players']">
       <fa-icon [icon]="faUsers"></fa-icon>
       <span>Joueurs</span>
@@ -21,6 +22,7 @@
       <span>Évènements</span>
     </a>
     <span class="flex-spacer"></span>
+    <!-- Register / Login -->
     <ng-container *ngIf="!user">
       <a (click)="onRegister()">
         <fa-icon [icon]="faUserPlus"></fa-icon>
@@ -31,17 +33,22 @@
         <span>Connexion</span>
       </a>
     </ng-container>
+
     <ng-container *ngIf="user">
-      <!--  <a
-        class="h5 disabled"
-        matTooltip="Notifications&#13;(fonctionnalité à venir)"
-        matTooltipClass="icon-tooltip"
-        i18n-matTooltip=""
-        disabled
-      >
-        <fa-icon [icon]="faClipboardList" class="mx-1"></fa-icon>
-      </a> -->
+      <!-- Shortcuts -->
+
       <ng-container *ngIf="userHasEmailVerified">
+        <a
+          class="h5"
+          [matBadge]="notifications.length ? notifications.length : ''"
+          matBadgeColor="accent"
+          [routerLink]="['/player', user.id, 'notifications']"
+          matTooltip="Notifications"
+          matTooltipClass="icon-tooltip"
+          i18n-matTooltip=""
+        >
+          <fa-icon [icon]="faBell" class="mx-1"></fa-icon>
+        </a>
         <a
           class="h5"
           [routerLink]="['/events', 'create']"
@@ -61,6 +68,9 @@
           <fa-icon [icon]="faCalendarCheck" class="mx-1"></fa-icon>
         </a>
       </ng-container>
+
+      <!-- Profile -->
+
       <button mat-button class="ml-2 h-100" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
         {{ user.name }}
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
@@ -83,6 +93,8 @@
           <span>Déconnexion</span>
         </a>
       </mat-menu>
+
+      <!-- Admin -->
       <a
         *ngIf="userIsAdmin"
         class="h5"

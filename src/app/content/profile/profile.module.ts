@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventModule } from '../event/event.module';
 import { GameModule } from '../game/game.module';
 import { LocationModule } from '../location/location.module';
+import { NotificationModule } from '@/components';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileUiModule } from './profile-ui.module';
 // Declarations
@@ -22,6 +23,7 @@ import { ProfileFormDialogComponent } from './components';
     EventModule,
     GameModule,
     LocationModule,
+    NotificationModule,
     ProfileRoutingModule,
     ProfileUiModule
   ],

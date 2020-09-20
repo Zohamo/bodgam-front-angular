@@ -22,6 +22,16 @@ export class AdminService {
    * @memberof AdminService
    */
   public ping(): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.apiPath}/ping`);
+    return this.http.get<boolean>(`${environment.apiPath}/admin/ping`);
+  }
+
+  /**
+   * Call the API to push a notification.
+   *
+   * @returns {Observable<boolean>}
+   * @memberof AdminService
+   */
+  public push(data: any): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.apiPath}/admin/push`, data);
   }
 }

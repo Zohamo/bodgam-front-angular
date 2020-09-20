@@ -5,6 +5,7 @@ import { ProfileGameListPageComponent } from './profile-game-list-page/profile-g
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { ProfileListPageComponent } from './profile-list-page/profile-list-page.component';
 import { ProfileLocationListPageComponent } from './profile-location-list-page/profile-location-list-page.component';
+import { ProfileNotificationsPageComponent } from './profile-notifications-page/profile-notifications-page.component';
 import { ProfileSettingsPageComponent } from './profile-settings-page/profile-settings-page.component';
 
 export const components: any[] = [
@@ -15,6 +16,7 @@ export const components: any[] = [
   ProfileLayoutComponent,
   ProfileListPageComponent,
   ProfileLocationListPageComponent,
+  ProfileNotificationsPageComponent,
   ProfileSettingsPageComponent
 ];
 
@@ -25,4 +27,5 @@ export * from './profile-game-list-page/profile-game-list-page.component';
 export * from './profile-layout/profile-layout.component';
 export * from './profile-list-page/profile-list-page.component';
 export * from './profile-location-list-page/profile-location-list-page.component';
+export * from './profile-notifications-page/profile-notifications-page.component';
 export * from './profile-settings-page/profile-settings-page.component';
