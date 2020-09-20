@@ -9,5 +9,7 @@ export * from './event-subscription.service';
 export * from './geocoding.service';
 export * from './geolocation.service';
 export * from './location.service';
+export * from './notification.service';
 export * from './profile.service';
+export * from './pusher.service';
 export * from './user.service';

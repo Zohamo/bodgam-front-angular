@@ -1,0 +1,21 @@
+<section class="d-flex justify-content-center align-items-center">
+  <button mat-raised-button color="primary" (click)="onPush()" class="mr-3">
+    <fa-icon [icon]="faHandPointUp"></fa-icon>
+    <span i18n="">Push</span>
+  </button>
+  <ng-container *ngIf="isPushed">
+    <fa-icon *ngIf="isPushLoading" [icon]="faSpinner" size="2x" [pulse]="true"></fa-icon>
+    <ng-container *ngIf="!isPushLoading">
+      <div *ngIf="pushResult">
+        <fa-icon [icon]="faLightbulb" [styles]="{ stroke: 'green', color: 'green' }"></fa-icon>
+        <span class="ml-2">200 OK!</span>
+        <em class="ml-2">{{ pushCount }} ms</em>
+      </div>
+      <div *ngIf="!pushResult" class="color-warn">
+        <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        <span class="ml-2">{{ pushError }}</span>
+        <em class="ml-2">{{ pushCount }} ms</em>
+      </div>
+    </ng-container>
+  </ng-container>
+</section>

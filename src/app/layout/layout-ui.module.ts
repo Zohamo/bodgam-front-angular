@@ -1,9 +1,32 @@
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import {
+  MatBadgeModule,
+  MatButtonModule,
+  MatIconModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from '@angular/material';
 
 @NgModule({
-  imports: [FontAwesomeModule, MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule],
-  exports: [FontAwesomeModule, MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule]
+  imports: [
+    FontAwesomeModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule
+  ],
+  exports: [
+    FontAwesomeModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule
+  ]
 })
 export class LayoutUiModule {}

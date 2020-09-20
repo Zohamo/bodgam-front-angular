@@ -69,14 +69,7 @@ export class EventPlayersSubscriptionComponent {
    * @memberof EventPlayersSubscriptionComponent
    */
   private prepareSubscription(hasConfirmed: boolean): EventSubscription {
-    let eventSubscription = Object.assign({}, this.event.subscription, { isAccepted: null });
-    this.event.subscription
-      ? (eventSubscription.hasConfirmed = hasConfirmed)
-      : (eventSubscription = new EventSubscription(this.event.id, this.userId, hasConfirmed));
-    if (eventSubscription.isAccepted) {
-      eventSubscription.isAccepted = null;
-    }
-    return eventSubscription;
+    return new EventSubscription(this.event.id, this.userId, hasConfirmed);
   }
 
   /**

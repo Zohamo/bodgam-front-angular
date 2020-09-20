@@ -1,0 +1,28 @@
+<a
+  *ngFor="let notification of notifications; trackBy: notificationTrackBy"
+  mat-menu-item
+  [routerLink]="notification.link"
+>
+  <ng-container [ngSwitch]="notification.type">
+    <ng-container *ngSwitchCase="'UserEventSubscription'">
+      <div *ngIf="notification.data.isAccepted === null">
+        <strong>{{ notification.data.user.name }}</strong>
+        souhaite participer à
+        <strong>{{ notification.data.event.title }}</strong>
+        .
+      </div>
+      <div *ngIf="notification.data.isAccepted === false">
+        <strong>{{ notification.data.event.host.name }}</strong>
+        a refusé votre inscription à
+        <strong>{{ notification.data.event.title }}</strong>
+        .
+      </div>
+      <div *ngIf="notification.data.isAccepted === true">
+        <strong>{{ notification.data.event.host.name }}</strong>
+        a accepté votre inscription à
+        <strong>{{ notification.data.event.title }}</strong>
+        .
+      </div>
+    </ng-container>
+  </ng-container>
+</a>

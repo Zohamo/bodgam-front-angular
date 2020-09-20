@@ -12,6 +12,7 @@
       </figure>
       <h1 class="font-alt" style="font-size: 2rem;">BODGAM</h1>
     </a>
+    <!-- Navigation -->
     <a [routerLink]="['/players']">
       <fa-icon [icon]="faUsers"></fa-icon>
       <span>Joueurs</span>
@@ -21,6 +22,7 @@
       <span>Évènements</span>
     </a>
     <span class="flex-spacer"></span>
+    <!-- Register / Login -->
     <ng-container *ngIf="!user">
       <a (click)="onRegister()">
         <fa-icon [icon]="faUserPlus"></fa-icon>
@@ -31,16 +33,29 @@
         <span>Connexion</span>
       </a>
     </ng-container>
+
     <ng-container *ngIf="user">
-      <!--  <a
-        class="h5 disabled"
-        matTooltip="Notifications&#13;(fonctionnalité à venir)"
+      <!-- Notifications -->
+
+      <button
+        mat-button
+        class="h5 ml-2 h-100"
+        [matBadge]="notifications.length ? notifications.length : ''"
+        matBadgeColor="accent"
+        [matMenuTriggerFor]="notificationsMenu"
+        matTooltip="Notifications"
         matTooltipClass="icon-tooltip"
         i18n-matTooltip=""
-        disabled
+        aria-label="icon-button with a menu"
       >
-        <fa-icon [icon]="faClipboardList" class="mx-1"></fa-icon>
-      </a> -->
+        <fa-icon [icon]="faBell"></fa-icon>
+      </button>
+      <mat-menu class="notifications-menu" #notificationsMenu="matMenu">
+        <app-notifications *ngIf="notifications.length" [notifications]="notifications"></app-notifications>
+      </mat-menu>
+
+      <!-- Shortcuts -->
+
       <ng-container *ngIf="userHasEmailVerified">
         <a
           class="h5"
@@ -61,6 +76,9 @@
           <fa-icon [icon]="faCalendarCheck" class="mx-1"></fa-icon>
         </a>
       </ng-container>
+
+      <!-- Profile -->
+
       <button mat-button class="ml-2 h-100" [matMenuTriggerFor]="userMenu" aria-label="icon-button with a menu">
         {{ user.name }}
         <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
@@ -83,6 +101,8 @@
           <span>Déconnexion</span>
         </a>
       </mat-menu>
+
+      <!-- Admin -->
       <a
         *ngIf="userIsAdmin"
         class="h5"

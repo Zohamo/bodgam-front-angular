@@ -1,1 +1,4 @@
-<app-ping [pingRes]="pingResult" [pingErr]="pingError" (sendPing)="sendPing()"></app-ping>
+<div class="d-flex justify-content-center align-items-center">
+  <app-ping [pingRes]="pingResult" [pingErr]="pingError" (sendPing)="sendPing()"></app-ping>
+  <app-push class="d-block ml-5" [pushRes]="pushResult" [pushErr]="pushError" (sendPush)="sendPush()"></app-push>
+</div>

@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { faExclamationTriangle, faLightbulb, faSpinner, faTableTennis } from '@fortawesome/free-solid-svg-icons';
-import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 
 @Component({
   selector: 'app-ping',
