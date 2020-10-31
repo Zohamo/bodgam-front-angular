@@ -24,7 +24,7 @@ export class EventDetailComponent {
 
   @Input() userId: number;
 
-  @Input() set eventDetail(event: EventBg) {
+  @Input() set setEvent(event: EventBg) {
     this.event = event;
     this.setShowLocation();
   }
@@ -45,12 +45,13 @@ export class EventDetailComponent {
   constructor(private eventService: EventService, private dialog: MatDialog) {}
 
   /**
-   * Define if the User can access the full Location
+   * Define if the User can access the full Location.
    *
    * @memberof EventDetailComponent
    */
   public setShowLocation(): void {
     this.showLocation =
+      this.event.location &&
       !this.event.location.deleted_at &&
       (this.event.location.isPublic ||
         this.event.host.id === this.userId ||

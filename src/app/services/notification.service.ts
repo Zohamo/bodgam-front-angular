@@ -64,14 +64,21 @@ export class NotificationService {
    * @memberof NotificationService
    */
   public convert(notification: any): NotificationBg {
+    // TODO : shouldn't make that condition
+    // but some issues from backEnd ('original' key) forced me to do so
+    // after a player (un)subscribes to an event
+    // for BackEnd's "event->original" is different than the 'original' key of event !!?
+    if (notification.data.original) {
+      notification.data = notification.data.original;
+    }
     return this.addLink({
       id: notification.id,
-      createdAt: moment(notification.created_at).format('LLLL'),
-      updatedAt: notification.updated_at,
-      readAt: notification.read_at,
-      type: notification.type.split('\\')[2],
-      notifiableId: notification.notifiable_id,
-      notifiableType: notification.notifiable_type.split('\\')[1],
+      createdAt: notification.created_at ? moment(notification.created_at).format('LLLL') : null,
+      updatedAt: notification.updated_at || null,
+      readAt: notification.read_at || null,
+      type: notification.type ? notification.type.split('\\')[2] : null,
+      notifiableId: notification.notifiable_id || null,
+      notifiableType: notification.notifiable_type ? notification.notifiable_type.split('\\')[1] : null,
       data: typeof notification.data === 'string' ? JSON.parse(notification.data) : notification.data
     });
   }

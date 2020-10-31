@@ -64,10 +64,6 @@ export class ProfileNotificationsPageComponent implements OnDestroy {
       this.notifications = newArray;
       console.log('newArray', newArray);
       console.log('notifications', this.notifications);
-
-      /* const updateItem = this.notifications.find((notification) => notification.id === notificationId);
-      // const index = this.notifications.indexOf(updateItem);
-      this.notifications[index] = notificationRead; */
     });
   }
 }

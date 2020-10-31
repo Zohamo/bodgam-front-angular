@@ -1,5 +1,6 @@
 import { NotificationBg } from '@/models';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-notifications',
@@ -9,6 +10,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ProfileNotificationsComponent {
   @Input() notifications: NotificationBg[];
   @Output() readNotification = new EventEmitter<string>();
+
+  constructor(private router: Router) {}
 
   /**
    * TrackBy the notifications's list.
@@ -20,6 +23,10 @@ export class ProfileNotificationsComponent {
    */
   public notificationTrackBy(index: number, item: any): number | null {
     return item ? item.id : null;
+  }
+
+  public onNavigate(url: any[]) {
+    this.router.navigate(url);
   }
 
   /**

@@ -1,0 +1,10 @@
+@import 'src/assets/scss/_variables';
+
+.notification-item {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  margin-bottom: 0.5rem;
+  &:hover {
+    background-color: $accent;
+  }
+}

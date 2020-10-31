@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
 import { EventBg } from '@/models';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, concat } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PusherService } from './pusher.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,20 @@ import { map } from 'rxjs/operators';
 export class EventService {
   private currentEventSubject: BehaviorSubject<EventBg>;
   public currentEvent: Observable<EventBg>;
+
   /**
    * Creates an instance of EventService.
    *
    * @param {HttpClient} http
    * @memberof EventService
    */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private pusherService: PusherService) {
     this.currentEventSubject = new BehaviorSubject<EventBg>(new EventBg());
     this.currentEvent = this.currentEventSubject.asObservable();
   }
 
   /**
-   * Get current Event observable
+   * Get current Event observable.
    *
    * @readonly
    * @type {Observable<EventBg>}
@@ -34,7 +36,7 @@ export class EventService {
   }
 
   /**
-   * Get current Event value
+   * Get current Event value.
    *
    * @readonly
    * @type {EventBg}
@@ -45,7 +47,7 @@ export class EventService {
   }
 
   /**
-   * Update the Event observable value from the API result.
+   * Updates the Event observable value from the API result.
    *
    * @private
    * @param {EventBg} value
@@ -58,7 +60,7 @@ export class EventService {
   }
 
   /**
-   * Format the Event model received
+   * Formats the Event model received.
    *
    * @private
    * @param {EventBg} event
@@ -73,7 +75,7 @@ export class EventService {
   }
 
   /**
-   * Call the API to get all events.
+   * Calls the API to get all events.
    *
    * @param {number} [profileId]
    * @returns {Observable<EventBg[]>}
@@ -87,7 +89,7 @@ export class EventService {
   }
 
   /**
-   * Call the API to get the events the user has subscribed to.
+   * Calls the API to get the events the user has subscribed to.
    *
    * @param {number} profileId
    * @returns {Observable<EventBg[]>}
@@ -100,20 +102,21 @@ export class EventService {
   }
 
   /**
-   * Call the API to get one Event
+   * Calls the API to get one Event and subscribes to Pusher to receive the event's notifications.
    *
    * @param {number} id
    * @returns {Observable<EventBg>}
    * @memberof EventService
    */
   public getEvent(id: number): Observable<EventBg> {
-    return this.http
-      .get<EventBg>(`${environment.apiPath}/events/${id}`)
-      .pipe(map((eventRes) => this.updateValue(eventRes)));
+    return concat(
+      this.http.get<EventBg>(`${environment.apiPath}/events/${id}`).pipe(map((eventRes) => this.updateValue(eventRes))),
+      this.pusherService.subscribeToChannelObs('event-notifications', [`event-${id}`])
+    );
   }
 
   /**
-   * Call the API to save an Event
+   * Calls the API to save an Event.
    *
    * @param {EventBg} event
    * @returns {Observable<EventBg>}
@@ -127,7 +130,7 @@ export class EventService {
   }
 
   /**
-   * Call the API to delete an Event
+   * Calls the API to delete an Event.
    *
    * @param {number} id
    * @returns {Observable<EventBg>}

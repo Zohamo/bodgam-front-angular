@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class EventPlayersSubscriptionComponent {
   public eventSubscription: EventSubscription;
-  public subscriptionStatus: 'accepted' | 'refused' | 'pending' | 'not-confirmed' | '';
+  public subscriptionStatus: 'accepted' | 'refused' | 'pending' | 'not-confirmed' | '' = '';
 
   // Font Awesome
   faQuestion = faQuestion;
@@ -28,8 +28,16 @@ export class EventPlayersSubscriptionComponent {
   public event: EventBg;
   @Input() set setEvent(event: EventBg) {
     if (event) {
-      this.event = event;
-      this.setSubscriptionStatus();
+      if (this.event && event.subscription !== this.event.subscription) {
+        this.eventSubscriptionService.get(this.event.id, this.userId).subscribe((subscription: EventSubscription) => {
+          event.subscription = subscription;
+          this.event = event;
+          this.setSubscriptionStatus(subscription);
+        });
+      } else {
+        this.event = event;
+        this.setSubscriptionStatus(event.subscription);
+      }
     }
   }
 
@@ -43,25 +51,27 @@ export class EventPlayersSubscriptionComponent {
   constructor(private alertService: AlertService, private eventSubscriptionService: EventSubscriptionService) {}
 
   /**
-   * Set the subscription status
+   * Sets the subscription status.
    *
    * @private
+   * @param {EventSubscription} subscription
    * @memberof EventPlayersSubscriptionComponent
    */
-  private setSubscriptionStatus(): void {
-    this.subscriptionStatus = !this.event.subscription
-      ? ''
-      : this.event.subscription.isAccepted === true
-      ? 'accepted'
-      : this.event.subscription.isAccepted === false
-      ? 'refused'
-      : this.event.subscription.hasConfirmed
-      ? 'pending'
-      : 'not-confirmed';
+  private setSubscriptionStatus(subscription: EventSubscription): void {
+    if (subscription && Object.keys(subscription).length) {
+      this.subscriptionStatus =
+        subscription.isAccepted === true
+          ? 'accepted'
+          : subscription.isAccepted === false
+          ? 'refused'
+          : subscription.hasConfirmed
+          ? 'pending'
+          : 'not-confirmed';
+    }
   }
 
   /**
-   * Prepare the EventSubscription entity before subscribe.
+   * Prepares the EventSubscription entity before subscription.
    *
    * @private
    * @param {boolean} hasConfirmed
@@ -73,7 +83,7 @@ export class EventPlayersSubscriptionComponent {
   }
 
   /**
-   * On event, call EventSubscriptionService to subscribe.
+   * On event, calls EventSubscriptionService to subscribe the user to the event.
    *
    * @param {boolean} hasConfirmed
    * @memberof EventPlayersSubscriptionComponent
@@ -84,20 +94,18 @@ export class EventPlayersSubscriptionComponent {
       .pipe(first())
       .subscribe(
         (subscriptionRes: EventSubscription) => {
-          console.log('SUBSCRIPTION OK', subscriptionRes);
           this.event.subscription = subscriptionRes;
-          this.setSubscriptionStatus();
+          this.setSubscriptionStatus(subscriptionRes);
           this.alertService.open('success-event-subscription');
         },
         (error) => {
-          console.log('SUBSCRIPTION ERROR', error);
           this.alertService.open('error-event-subscription');
         }
       );
   }
 
   /**
-   * On event, call EventSubscriptionService to unsubscribe.
+   * On event, calls EventSubscriptionService to unsubscribe the user to the event.
    *
    * @memberof EventPlayersSubscriptionComponent
    */
@@ -107,13 +115,11 @@ export class EventPlayersSubscriptionComponent {
       .pipe(first())
       .subscribe(
         (result) => {
-          console.log('UNSUBSCRIPTION OK', result);
           this.event.subscription = null;
-          this.setSubscriptionStatus();
+          this.subscriptionStatus = '';
           this.alertService.open('success-event-unsubscription');
         },
         (error) => {
-          console.log('UNSUBSCRIPTION ERROR', error);
           this.alertService.open('error-event-unsubscription');
         }
       );

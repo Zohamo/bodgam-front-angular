@@ -17,7 +17,19 @@ export class EventSubscriptionService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Save a User's Subscription to an Event.
+   * Get a User's Subscription to an Event.
+   *
+   * @param {number} eventId
+   * @param {number} userId
+   * @returns {Observable<EventSubscription>}
+   * @memberof EventSubscriptionService
+   */
+  public get(eventId: number, userId: number): Observable<EventSubscription> {
+    return this.http.get<EventSubscription>(`${environment.apiPath}/events/${eventId}/users/${userId}/subscription`);
+  }
+
+  /**
+   * Saves a User's Subscription to an Event.
    *
    * @param {EventSubscription} eventSubscription
    * @returns {Observable<EventSubscription>}
@@ -31,7 +43,7 @@ export class EventSubscriptionService {
   }
 
   /**
-   * Delete a User's Subscription to an Event.
+   * Deletes a User's Subscription to an Event.
    *
    * @param {number} eventId
    * @param {number} userId

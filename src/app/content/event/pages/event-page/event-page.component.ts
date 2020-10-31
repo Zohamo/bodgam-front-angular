@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EventBg } from '@/models';
-import { AlertService, EventService, AuthService } from '@/services';
+import { AlertService, EventService, AuthService, PusherService } from '@/services';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -11,7 +11,9 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./event-page.component.scss']
 })
 export class EventPageComponent {
+  public eventId$: Observable<number>;
   public event$: Observable<EventBg>;
+  public event: EventBg;
   public userId: number;
 
   /**
@@ -33,24 +35,15 @@ export class EventPageComponent {
   ) {
     this.authService.currentUser$.subscribe((user) => {
       this.userId = user ? user.id : null;
-      this.getEvent();
+
+      this.event$ = this.route.paramMap.pipe(
+        switchMap((params: ParamMap) => this.eventService.getEvent(+params.get('id')))
+      );
     });
   }
 
   /**
-   * Calls the EventService to get an event by its id
-   *
-   * @private
-   * @memberof EventPageComponent
-   */
-  private getEvent(): void {
-    this.event$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.eventService.getEvent(+params.get('id')))
-    );
-  }
-
-  /**
-   * Call the EventService to delete the Event
+   * Calls the EventService to delete an Event.
    *
    * @param {number} eventId
    * @memberof EventPageComponent
@@ -58,12 +51,10 @@ export class EventPageComponent {
   public deleteEvent(eventId: number): void {
     this.eventService.deleteEvent(eventId).subscribe(
       (res) => {
-        console.log('DELETE EVENT', res);
         this.alertService.open('success-delete-event');
         this.router.navigate(['/events']);
       },
       (error) => {
-        console.log('ERROR DELETE EVENT', error);
         this.alertService.open('error-delete-event');
       }
     );

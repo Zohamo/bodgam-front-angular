@@ -77,34 +77,31 @@ export class HeaderComponent implements OnDestroy {
     private dialog: MatDialog,
     private userService: UserService,
     private notificationService: NotificationService,
-    private pusherService: PusherService,
-    private router: Router
+    private pusherService: PusherService
   ) {
     this.userSubscription = this.userService.currentUser$.subscribe((user: User) => {
       this.user = user;
       this.userIsAdmin = this.userService.isAdmin;
       this.userHasEmailVerified = this.userService.hasEmailVerified;
       if (user) {
+        // Get the notifications list
+        this.notificationService
+          .getUserUnreadNotifications()
+          .pipe(first())
+          .subscribe((notifications: NotificationBg[]) => {
+            this.notifications = notifications || [];
+          });
+
         // Subscription to pusher's notifications
         this.pusherService.subscribeToChannel('user-notifications', [`user-${user.id}`], (notification) => {
-          console.log('pusherService.subscribeToChannel', notification);
           this.notifications.unshift(notification);
         });
       }
     });
-
-    // Get the notifications list
-    this.notificationService
-      .getUserUnreadNotifications()
-      .pipe(first())
-      .subscribe((notifications: NotificationBg[]) => {
-        console.log('notificationService.getNotifications', notifications);
-        this.notifications = notifications || [];
-      });
   }
 
   /**
-   * Unsubscribe before component is destroyed
+   * Unsubscribes before component is destroyed.
    *
    * @memberof HeaderComponent
    */
@@ -115,7 +112,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   /**
-   * Event to register new user
+   * On event, registers a new user.
    *
    * @memberof HeaderComponent
    */
@@ -130,7 +127,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   /**
-   * Event for user login
+   * On event, signs in user.
    *
    * @memberof HeaderComponent
    */
@@ -145,7 +142,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   /**
-   * Event for user logout
+   * On event, signs out user.
    *
    * @memberof HeaderComponent
    */

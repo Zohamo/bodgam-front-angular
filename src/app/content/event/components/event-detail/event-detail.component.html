@@ -14,16 +14,10 @@
 
   <mat-card-content>
     <app-event-players class="event-section players" [event]="event" [userId]="userId"></app-event-players>
-    <app-event-timeslot
-      class="event-section timeslot"
-      [startDatetime]="event?.startDatetime"
-      [endDatetime]="event?.endDatetime"
-    ></app-event-timeslot>
-    <app-event-location
-      class="event-section location"
-      [location]="event.location"
-      [showLocation]="showLocation"
-    ></app-event-location>
+    <app-event-timeslot class="event-section timeslot" [startDatetime]="event?.startDatetime"
+      [endDatetime]="event?.endDatetime"></app-event-timeslot>
+    <app-event-location class="event-section location" [location]="event.location" [showLocation]="showLocation">
+    </app-event-location>
   </mat-card-content>
 
   <!-- Action Buttons -->

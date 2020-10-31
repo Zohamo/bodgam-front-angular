@@ -1,24 +1,37 @@
 <small *ngIf="notification.createdAt" class="text-right">{{ notification.createdAt }}</small>
 
 <ng-container [ngSwitch]="notification.type">
+  <!-- Event Subscriptions -->
   <ng-container *ngSwitchCase="'UserEventSubscription'">
-    <div *ngIf="notification.data.isAccepted === null">
+    <div *ngIf="notification.data.hasConfirmed === null">
       <strong>{{ notification.data.user.name }}</strong>
-      souhaite participer à
+      ne viendra finalement pas à
       <strong>{{ notification.data.event.title }}</strong>
       .
     </div>
-    <div *ngIf="notification.data.isAccepted === false">
-      <strong>{{ notification.data.event.host.name }}</strong>
-      a refusé votre inscription à
-      <strong>{{ notification.data.event.title }}</strong>
-      .
-    </div>
-    <div *ngIf="notification.data.isAccepted === true">
-      <strong>{{ notification.data.event.host.name }}</strong>
-      a accepté votre inscription à
-      <strong>{{ notification.data.event.title }}</strong>
-      .
-    </div>
+    <ng-container *ngIf="notification.data.hasConfirmed !== null">
+      <div *ngIf="notification.data.isAccepted === null">
+        <strong>{{ notification.data.user.name }}</strong>
+        souhaite participer à
+        <strong>{{ notification.data.event.title }}</strong>
+        .
+      </div>
+      <div *ngIf="notification.data.isAccepted === false">
+        <strong>{{ notification.data.event.host.name }}</strong>
+        a refusé votre inscription à
+        <strong>{{ notification.data.event.title }}</strong>
+        .
+      </div>
+      <div *ngIf="notification.data.isAccepted === true">
+        <strong>{{ notification.data.event.host.name }}</strong>
+        a accepté votre inscription à
+        <strong>{{ notification.data.event.title }}</strong>
+        .
+      </div>
+    </ng-container>
   </ng-container>
 </ng-container>
+
+<!-- <h4 mat-line>{{folder.name}}</h4>
+<p mat-line> {{folder.updated | date}} </p>
+<p mat-line> {{folder.message}} </p> -->
